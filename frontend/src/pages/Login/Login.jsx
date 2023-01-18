@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
-import Wave from "../../components/Canvas/Wave/Wave"
 import { emailValidation, passwordValidation } from "../../utils/validation"
 import styles from "./Login.module.css"
 import LoginLogo from "./LoginLogo"
@@ -78,7 +77,6 @@ function Login() {
 
   return (
     <div className={`${styles["page"]}`}>
-      <Wave canvasHeight={1000} canvasWidth={1000} />
       <form
         onSubmit={onSubmitHandler}
         className={`${styles["form-container"]}`}
