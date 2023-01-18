@@ -17,10 +17,7 @@ function App() {
         <Route path={`/room`} element={<RoomPage />}>
           <Route path={`/room/result`} element={<RoomResult />} />
         </Route>
-        <Route path={`/profile`} element={<ProfilePage />}>
-          <Route path={`/profile/info`} element={<UserInfo />} />
-          <Route path={`/profile/graph`} element={<GraphInfo />} />
-        </Route>
+        <Route path={`/profile/:infoType`} element={<ProfilePage />}></Route>
       </Routes>
     </div>
   )
