@@ -13,7 +13,7 @@ const numCheck = /[0-9]/
 /**
  * 특문 체크용
  */
-const speCheck = /[\[\]`~!@#$%^&*|\\'";:/?]/gi
+const speCheck = /[~!@#$%^&*()_+|<>?:{}\[\]\\'"]/
 
 /**
  * @설명 ID 값을 받아서 유효성을 object 형태로 반환. object 내에는 status, message 값 제시.
@@ -57,7 +57,6 @@ function passwordValidation(val) {
         "PW의 길이가 유효하지 않습니다. 8자 이상 16자 이하의 값을 입력해주세요.",
     }
   } else if (val.search(/\s/) !== -1) {
-    console.log(val.search(/\s/))
     return {
       status: false,
       message: "PW에 공백은 허용되지 않습니다. 공백을 제외하고 입력 해주세요.",

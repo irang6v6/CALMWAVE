@@ -1,0 +1,47 @@
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  border-radius: 100%;
+  background-color: rgba(230, 246, 255);
+  width: 48vh;
+  height: 48vh;
+  box-shadow: 3px 10px 5px 3px rgba(2, 45, 82, 0.2);
+}
+.logo-calm {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(2, 45, 82);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+}
+.logo-wave {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(59, 123, 177);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(2, 45, 82, 0.5);
+}
+.logo-img {
+  display: block;
+  width: auto;
+  height: 25vh;
+  transition: 0.5s;
+}
+
+.logo-calm:hover {
+  transform: translate(0, -10px);
+  cursor: pointer;
+}
+.logo-wave:hover {
+  transform: translate(0, -10px);
+  cursor: pointer;
+}
+.logo-img:hover {
+  transform: translate(0, -15px);
+  cursor: pointer;
+}
