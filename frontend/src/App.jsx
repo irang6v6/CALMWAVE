@@ -6,14 +6,14 @@ import ProfilePage from "./pages/Profile/ProfilePage"
 import UserInfo from "./pages/Profile/Info/UserInfo"
 import GraphInfo from "./pages/Profile/GraphInfo/GraphInfo"
 import RoomResult from "./pages/Room/RoomResult/RoomResult"
-import SignPage from "./pages/Sign/SignPage"
+import SignParentPage from "./pages/Sign/SignParentPage"
 
 function App() {
   return (
     <div className="App">
       <Routes>
         <Route path={`/`} element={<HomePage />} />
-        <Route path={`/sign`} element={<SignPage />} />
+        <Route path={`/sign`} element={<SignParentPage />} />
         <Route path={`/room`} element={<RoomPage />}>
           <Route path={`/room/result`} element={<RoomResult />} />
         </Route>

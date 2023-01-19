@@ -1,4 +1,4 @@
-import { useWave } from "../../../hooks/canvas/useWave"
+import { useWave } from "../../../hooks/custom/useWave"
 import { LightSource } from "./WaveBackground"
 import { Point } from "./WavePoint"
 

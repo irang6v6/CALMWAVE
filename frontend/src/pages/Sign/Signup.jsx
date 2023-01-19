@@ -1,9 +1,233 @@
-function Signup() {
+import { useEffect } from "react"
+import { useRef, useState } from "react"
+import {
+  emailValidation,
+  nicknameValidation,
+  passwordValidation,
+} from "../../utils/validation"
+import styles from "./Signup.module.css"
+
+function Signup(props) {
+  const [userNickname, setUserNickname] = useState("")
+  const [useremail, setUseremail] = useState("")
+  const [userpassword, setUserpassword] = useState("")
+  const [userpassword2, setUserpassword2] = useState("")
+
+  const [onNicknameTouched, setOnNicknameTouched] = useState(false)
+  const [onEmailTouched, setOnEmailTouched] = useState(false)
+  const [onPasswordTouched, setOnPasswordTouched] = useState(false)
+  const [onPassword2Touched, setOnPassword2Touched] = useState(false)
+
+  const [nickRef, emailRef, passwordRef, passwordRef2] = [
+    useRef(),
+    useRef(),
+    useRef(),
+    useRef(),
+  ]
+
+  const [nickIsValid, setNickIsValid] = useState(true)
+  const [emailIsValid, setEmailIsValid] = useState(true)
+  const [passwordIsValid, setPasswordIsValid] = useState(true)
+  const [password2IsValid, setPassword2IsValid] = useState(true)
+
+  const [nicknameClasses, setNicknameClasses] = useState(
+    `${styles["form-input"]}`
+  )
+  const [emailClasses, setEmailClasses] = useState(`${styles["form-input"]}`)
+  const [passwordClasses, setPasswordClasses] = useState(
+    `${styles["form-input"]}`
+  )
+  const [password2Classes, setPassword2Classes] = useState(
+    `${styles["form-input"]}`
+  )
+
+  useEffect(
+    function () {
+      setNickIsValid(() => nicknameValidation(userNickname).status)
+      if (nickIsValid) {
+        setNicknameClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
+      } else if (!onNicknameTouched) {
+        setNicknameClasses(() => `${styles["form-input"]}`)
+      } else if (onNicknameTouched) {
+        setNicknameClasses(() => `${styles["form-input"]} ${styles["invalid"]}`)
+      }
+    },
+    [onNicknameTouched, userNickname, nickIsValid]
+  )
+  useEffect(
+    function () {
+      setEmailIsValid(() => emailValidation(useremail).status)
+      if (emailIsValid) {
+        setEmailClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
+      } else if (!onEmailTouched) {
+        setEmailClasses(() => `${styles["form-input"]}`)
+      } else if (onEmailTouched) {
+        setEmailClasses(() => `${styles["form-input"]} ${styles["invalid"]}`)
+      }
+    },
+    [onEmailTouched, useremail, emailIsValid]
+  )
+  useEffect(
+    function () {
+      setPasswordIsValid(() => passwordValidation(userpassword).status)
+      if (passwordIsValid) {
+        setPasswordClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
+      } else if (!onPasswordTouched) {
+        setPasswordClasses(() => `${styles["form-input"]}`)
+      } else if (onPasswordTouched) {
+        setPasswordClasses(() => `${styles["form-input"]} ${styles["invalid"]}`)
+      }
+    },
+    [onPasswordTouched, userpassword, passwordIsValid]
+  )
+  useEffect(
+    function () {
+      if (!userpassword2) {
+        setPassword2Classes(() => `${styles["form-input"]}`)
+        return
+      }
+      setPassword2IsValid(() => userpassword === userpassword2)
+      if (password2IsValid) {
+        setPassword2Classes(() => `${styles["form-input"]} ${styles["valid"]}`)
+      } else if (!onPassword2Touched) {
+        setPassword2Classes(() => `${styles["form-input"]}`)
+      } else if (onPassword2Touched) {
+        setPassword2Classes(
+          () => `${styles["form-input"]} ${styles["invalid"]}`
+        )
+      }
+    },
+    [onPassword2Touched, userpassword2, password2IsValid, userpassword]
+  )
+
+  const onSubmitHandler = function (event) {
+    // Axios 요청
+    event.preventDefault()
+    props.onSignup()
+    // 성공적으로 회원가입 시
+    props.onLogin()
+    // 회원가입 실패 시
+  }
+  const toggleToLogin = function (event) {
+    event.preventDefault()
+    props.onLogin()
+  }
+
+  const onInputNicknameHandler = function () {
+    if (nickRef.current.value.length > 8) {
+      return
+    }
+    setUserNickname(() => nickRef.current.value)
+  }
+  const onInputEmailHandler = function () {
+    setUseremail(() => emailRef.current.value)
+  }
+  const onInputPasswordHandler = function () {
+    if (passwordRef.current.value.length > 16) {
+      return
+    }
+    setUserpassword(() => passwordRef.current.value)
+  }
+  const onInputPasssword2Handler = function () {
+    if (passwordRef2.current.value.length > 16) {
+      return
+    }
+    setUserpassword2(() => passwordRef2.current.value)
+  }
+
+  const toggleNicknameTouched = function () {
+    setOnNicknameTouched((val) => true)
+  }
+  const toggleEmailTouched = function () {
+    setOnEmailTouched((val) => true)
+  }
+  const togglePasswordTouched = function () {
+    setOnPasswordTouched((val) => true)
+  }
+  const togglePassword2Touched = function () {
+    setOnPassword2Touched((val) => true)
+  }
+
   return (
-    <>
-      <div>가입</div>
-      <div>가입</div>
-      <div>가입</div>
-    </>
+    <div className={`${styles["page"]}`}>
+      <form
+        className={`${styles["form-container"]}`}
+        onSubmit={onSubmitHandler}
+      >
+        <div className={`input-container`}>
+          <div className={`${styles["label-container"]}`}>
+            <br />
+            <label htmlFor="signup-nn" className={`${styles["form-label"]}`}>
+              닉네임
+            </label>
+            <br />
+            <span
+              className={`${styles["change-button"]}`}
+              onClick={toggleToLogin}
+            >
+              로그인
+            </span>
+          </div>
+          <input
+            ref={nickRef}
+            type="text"
+            id="signup-nn"
+            className={nicknameClasses}
+            onChange={onInputNicknameHandler}
+            onBlur={toggleNicknameTouched}
+            maxLength="8"
+            placeholder="2~8자로 적어주세요."
+          />
+          <br />
+          <label htmlFor="signup-email" className={`${styles["form-label"]}`}>
+            이메일
+          </label>
+          <br />
+          <input
+            ref={emailRef}
+            type="email"
+            id="signup-email"
+            className={emailClasses}
+            onChange={onInputEmailHandler}
+            onBlur={toggleEmailTouched}
+            placeholder="이메일을 입력해주세요."
+          />
+          <br />
+          <label htmlFor="signup-pw" className={`${styles["form-label"]}`}>
+            비밀번호
+          </label>
+          <br />
+          <input
+            ref={passwordRef}
+            type="password"
+            id="signup-pw"
+            className={passwordClasses}
+            onChange={onInputPasswordHandler}
+            onBlur={togglePasswordTouched}
+            maxLength="16"
+            placeholder="영어, 특수문자, 숫자가 반드시 포함된 8~16자야 합니다."
+          />
+          <br />
+          <label htmlFor="signup-pw2" className={`${styles["form-label"]}`}>
+            비밀번호 확인
+          </label>
+          <br />
+          <input
+            ref={passwordRef2}
+            type="password"
+            id="signup-pw2"
+            className={password2Classes}
+            onChange={onInputPasssword2Handler}
+            onBlur={togglePassword2Touched}
+            maxLength="16"
+            placeholder="비밀번호와 일치해야 합니다."
+          />
+          <br />
+        </div>
+        <button className={`${styles["form-button"]}`}>회원 가입</button>
+      </form>
+    </div>
   )
 }
+
+export default Signup
