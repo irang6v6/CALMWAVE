@@ -1,0 +1,74 @@
+.sign-container {
+  outline: 0;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.book {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  background-color: #fff;
+  width: 100%;
+}
+
+.page1 {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  transition: 1s;
+  position: fixed;
+  z-index: 0;
+  transform: rotateY(0);
+  visibility: visible;
+}
+.page1.flipped {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  z-index: -20;
+  position: fixed;
+  transition: 1s;
+  transform: rotateY(180deg);
+  visibility: hidden;
+}
+.page2 {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  z-index: -20;
+  position: fixed;
+  transition: 1s;
+  transform: rotateY(180deg);
+  visibility: hidden;
+}
+.page2.flipped {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  z-index: 0;
+  position: fixed;
+  transition: 1s;
+  transform: rotateY(0);
+  visibility: visible;
+}
+
+@keyframes turning {
+  to {
+    transform: rotateY(180deg);
+  }
+}

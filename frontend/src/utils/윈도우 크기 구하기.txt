@@ -1,0 +1,19 @@
+function getSize() {
+  return {
+    width: window.innerWidth || document.body.clientWidh,
+    height: window.innerHeight || document.body.clientHeight,
+  }
+}
+const [windowSize, setWindowSize] = useState(getSize)
+
+useEffect(function () {
+  function handleResize() {
+    setWindowSize(() => getSize())
+  }
+  window.addEventListener("resize", handleResize)
+  return () => window.removeEventListener("resize", handleResize)
+}, [])
+
+windowSize.height
+windowSize.width
+두개로 호출.

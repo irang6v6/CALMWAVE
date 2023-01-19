@@ -1,0 +1,188 @@
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  box-sizing: border-box;
+  border-radius: 100%;
+  background-color: rgba(230, 246, 255);
+  width: 48vh;
+  height: 48vh;
+  box-shadow: 3px 10px 5px 3px rgba(2, 45, 82, 0.2);
+}
+.logo-img {
+  display: block;
+  width: auto;
+  height: 25vh;
+  transition: 0.5s;
+}
+/* .logo-calm:hover {
+  transform: translate(0, -10px) scale(103%);
+  cursor: pointer;
+}
+.logo-wave:hover {
+  transform: translate(0, -10px) scale(103%);
+  cursor: pointer;
+} */
+.logo-img:hover {
+  transform: translate(0, -15px) scale(103%);
+  cursor: pointer;
+}
+
+/* .logo-calm-c {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(2, 45, 82);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin: 1px 1px 0px 1px;
+
+  animation-name: toktok;
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+.logo-calm-a {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(2, 45, 82);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin: 1px 1px 0px 1px;
+
+  animation-name: toktok;
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: 0.5s;
+}
+.logo-calm-l {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(2, 45, 82);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin: 1px 1px 0px 1px;
+
+  animation-name: toktok;
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: 1s;
+}
+.logo-calm-m {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(2, 45, 82);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  margin: 1px 1px 0px 1px;
+
+  animation-name: toktok;
+  animation-duration: 1.8s;
+  animation-delay: 0;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: 1.5s;
+}
+
+.logo-wave-w {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(59, 123, 177);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(2, 45, 82, 0.5);
+  margin: 1px 1px 0px 1px;
+
+  animation-name: toktok;
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: 2s;
+}
+.logo-wave-a {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(59, 123, 177);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(2, 45, 82, 0.5);
+  margin: 1px 1px 0px 1px;
+
+  animation-name: toktok;
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: 2.5s;
+}
+.logo-wave-v {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(59, 123, 177);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(2, 45, 82, 0.5);
+  margin: 1px 1px 0px 1px;
+
+  animation-name: toktok;
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: 3s;
+}
+.logo-wave-e {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(59, 123, 177);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(2, 45, 82, 0.5);
+  margin: 1px 1px 0px 1px;
+
+  animation-name: toktok;
+  animation-duration: 1.8s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-delay: 3.5s;
+} */
+
+.logo-calm {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(2, 45, 82);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+
+  animation-name: toktok;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+.logo-wave {
+  font-family: "Love Ya Like A Sister", cursive;
+  font-size: 4.5rem;
+  color: rgb(59, 123, 177);
+  transition: 0.5s;
+  display: inline-block;
+  text-shadow: 1px 1px 2px rgba(2, 45, 82, 0.5);
+  cursor: pointer;
+
+  animation-name: toktok;
+  animation-duration: 1s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes toktok {
+  to {
+    transform: translate(0, -11px) scale(103%);
+  }
+}

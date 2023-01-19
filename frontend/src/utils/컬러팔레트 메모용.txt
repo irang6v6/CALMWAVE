@@ -1,0 +1,195 @@
+컬러 팔레트
+
+하늘색 sky
+곤색 
+남색
+회색
+누런흰색
+노랑
+
+웨일 팔레트
+민트
+밝은민트
+짙은 남색
+푸른 검은색
+
+경고창 팔레트
+짙은 회색
+짙은 파랑
+짙은 빨강
+짙은 보라 
+
+# calm wave
+
+cw-skyblue
+#99D6EA
+#A4DBED
+#ADDEEE
+#B8E3F1
+#C2E6F2
+#CCEBF5
+#D6EFF7
+#E1F3F9
+#EBF7FB
+#F5FBFD
+
+cw-darkblue
+#6798C0
+#77A3C7
+#85ADCD
+#95B7D3
+#A4C1D9
+#B3CCE0
+#C2D6E6
+#D2E1ED
+#E1EAF2
+#F0F5F9
+
+cw-indigo
+#1D58A4
+#3469AE
+#4A79B6
+#618BC0
+#779BC8
+#8EACD2
+#A5BCDB
+#BCCDE4
+#D2DEED
+#E9EFF6
+
+cw-grey
+#E6E6E6
+#E9E9E9
+#EBEBEB
+#EEEEEE
+#F0F0F0
+#F3F3F3
+#F5F5F5
+#F8F8F8
+#FAFAFA
+#FDFDFD
+
+cw-paleyellow
+#FFFDF7           10
+#FFFEF8             9
+#FFFDF9              8
+#FFFEFA              7 == 6
+#FFFEFB                5
+#FFFEFC               4
+#FFFFFD               3 == 2, 1==#fff
+
+cw-yellow
+#FDD85D
+#FDE07D
+#FEDC6E
+#FEE48E
+#FEE89E
+#FEECAE
+#FEEFBE
+#FFF4CF
+#FFF7DF
+#FFFCEF
+
+
+# whale
+
+wb-mint
+#4CE6B8
+#5EE9C0
+#70EBC6
+#82EECE
+#94F0D4
+#A6F3DC
+#B7F5E3
+#CAF8EA
+#DBFAF1
+#EEFDF8
+
+wb-bright mint
+#D2FAF0
+#D7FBF2
+#DBFBF3
+#E0FCF5
+#E4FCF6
+#E9FDF8
+#EDFDF9
+#F2FEFB
+#F6FEFC
+#FBFFFE
+
+wb-nightsky
+#071F56
+#203667
+#394C78
+#526389
+#6A799A
+#838FAB
+#9CA5BB
+#B5BCCD
+#CDD2DD
+#E7E9EF
+
+wb-darkblue
+#03103C
+#1D2850
+#354063
+#4F5877
+#68708A
+#81889E
+#9A9FB1
+#B4B8C5
+#CDCFD8
+#E6E8EC
+
+
+
+
+# system
+
+sys-grey
+#443E3E
+#585252
+#6D6767
+#817C7C
+#969292
+#AAA9A9
+#BEBEBE
+#D3D3D3
+#F4F4F4
+#FCFCFC
+
+sys-blue
+#00324E
+#004C77
+#0066A0
+#0080C8
+#049CF1
+#31B5FF
+#5EC5FF
+#8BD5FF
+#B9E5FF
+#E6F6FF
+
+sys-Red
+#5D0001
+#7F0002
+#A10709
+#C31417
+#E52528
+#FF383B
+#FF6567
+#FF9193
+#FFBEBF
+#FFEBEB
+
+sys-purple
+#210D5A
+#32187C
+#46279E
+#5D3AC0
+#7650E2
+#8F68FF
+#A88AFF
+#C1ACFF
+#DACEFF
+#F4F0FF
