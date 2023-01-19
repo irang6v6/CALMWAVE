@@ -2,14 +2,10 @@ import { useEffect, useState } from "react"
 import Login from "./Login"
 import styles from "./SignPage.module.css"
 import Signup from "./Signup"
-import Wave from "../../components/Canvas/Wave/Wave"
-import { useRef } from "react"
-import { useCustomWidthHeight } from "../../hooks/custom/useCustomWidthHeight"
 import LoginLogo from "./LoginLogo"
 
-function SignPage() {
+function SignPage({ pageRef }) {
   const [loginOrSignup, setLoginOrSignup] = useState(true)
-  const pageBox = useRef(null)
 
   const [page1Class, setPage1Class] = useState(`${styles["page1"]}`)
   const [page2Class, setPage2Class] = useState(`${styles["page2"]}`)
@@ -38,7 +34,7 @@ function SignPage() {
   }
 
   return (
-    <div className={`${styles["sign-container"]}`}>
+    <div ref={pageRef} className={`${styles["sign-container"]}`}>
       <LoginLogo />
       <div className={`${styles["book"]}`}>
         <div className={page1Class}>

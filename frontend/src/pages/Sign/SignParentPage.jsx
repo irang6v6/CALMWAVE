@@ -2,10 +2,13 @@ import { useEffect, useState } from "react"
 import Wave from "../../components/Canvas/Wave/Wave"
 import SignPage from "./SignPage"
 import styles from "./SignParentPage.module.css"
+import { useCustomWidthHeight } from "../../hooks/custom/useCustomWidthHeight"
+import { useRef } from "react"
 
 function SignParentPage() {
   const [canvasWidth, setCanvasWidth] = useState(0)
   const [canvasHeight, setCanvasHeight] = useState(0)
+  const pageRef = useRef(null)
   /* eslint-disable */
   useEffect(
     function () {
@@ -14,13 +17,13 @@ function SignParentPage() {
     },
     [window.innerHeight, window.innerWidth]
   )
-  // useCustomWidthHeight(pageBox) //, setCanvasWidth, setCanvasHeight
+  useCustomWidthHeight(pageRef) //, setCanvasWidth, setCanvasHeight
   return (
     <>
       <div className={`${styles["wave-container"]}`}>
         <Wave canvasHeight={canvasHeight} canvasWidth={canvasWidth} />
       </div>
-      <SignPage />
+      <SignPage pageRef={pageRef} />
     </>
   )
 }
