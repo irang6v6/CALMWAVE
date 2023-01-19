@@ -110,7 +110,6 @@ function passwordValidation(val) {
 }
 
 function nicknameValidation(val) {
-  console.log(val)
   if (val.trim().length === 0) {
     return { status: false, message: "닉네임은 필수 입력란입니다." }
   }
