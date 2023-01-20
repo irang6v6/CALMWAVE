@@ -18,8 +18,8 @@ export class SecondWaveBackground {
       this.centerY,
       gradientRadius
     )
-    gradient.addColorStop(0, "rgb(74, 121, 182)") // 그라데이션 중앙색 느낌
-    gradient.addColorStop(1, "rgb(230, 246, 255, 0.4)") // 그라데이션 끝 색
+    gradient.addColorStop(0, "rgb(71, 121, 100)") // 그라데이션 중앙색 느낌
+    gradient.addColorStop(1, "rgba(230, 246, 255, 0.4)") // 그라데이션 끝 색
     ctx.fillStyle = gradient
     ctx.arc(this.centerX, this.centerY, gradientRadius, 0, PI2)
     ctx.fill()
