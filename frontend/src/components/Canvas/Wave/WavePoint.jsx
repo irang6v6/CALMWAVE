@@ -1,3 +1,4 @@
+// 이것은 공들이 직접 위치 이동을 해야한다. 그래서 애니메이션을 준것.
 import { PI2 } from "./WaveBackground"
 
 export class Point {

@@ -1,3 +1,4 @@
+// 이것도 애니메이션 이동이 필요해서 클래스로 만들어두고 지속적으로 변형 시킨 것이다.
 export const PI2 = Math.PI * 2
 export const EULER_NUMBER = Math.E
 

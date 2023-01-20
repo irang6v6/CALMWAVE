@@ -1,0 +1,63 @@
+
+
+EachWave Class
+
+ctx : 인자로 받을 것
+
+K : 변수
+F : 변수
+
+SPEED : 속도
+NOISE : 노이즈?
+PHASE : 페이즈?
+WIDTH : 너비
+HEIGHT : 높이
+MAX : 최고 높이
+canvasWidth : 너비
+canvasHeight : 높이
+run : 실행 여부
+
+getAttenuation() : 감쇠값.
+deawLine() : 선 그리기
+
+clear() : 상자 채우기
+draw() : 3개를 그리고 requestAnimationFrame 해서 draw 시킨다. frame도 주고.
+
+start() : draw() 실행
+stop() : clear() 실행
+
+setNoise : NOISE를 조절한다.
+setSpeed : SPEED를 좆어한다.
+set : setNoise와 setSpeed를 실행시켜주는 함수.
+
+SW : 웨이브 클래스. width와 height을 받는다. height가 실행되는 높이.
+
+optimiztionResize : timer를 줘서 움직이게 한다.
+
+
+
+drawLine()
+ctx.moveTo : 이동
+ctx.beginPath() : 이동 시작
+ctx.strokeStyle : 색상 조정
+ctx.lineWidth : 가로 길이
+x : WIDTH에 특정 수를 곱해서 생성
+y : HEIGHT에 특정 값ㅇ르 곱해서 생성
+F : 주어진 값 혹은 기본 값.
+K : 
+noise : 기본 노이즈 혹은 노이즈 * 최대 높이값
+for문 : 0.01 단위로 순회하면서 x, y값 만들기
+
+ctx로 x, y로 라인을 그려준다.
+ctx.lineTo(WIDTH, HEIGHT) : 너비 높이로 그려준다.
+ctx.lineTo(0, HEIGHT) : 아래로 색칠해준다.
+ctx.fillStyle : 무슨 색으로 칠 할지 정해준다.
+ctx.fill() : 색칠한다.
+
+
+
+
+
+
+
+
