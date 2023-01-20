@@ -1,4 +1,5 @@
-import SecondWave from "../components/Canvas/SecondWave/SecondWave"
+// import SecondWave from "../components/Canvas/SecondWave/SecondWave"
+import Wave from "../components/Canvas/Wave/Wave"
 
 function TestPage() {
   return (
@@ -7,7 +8,7 @@ function TestPage() {
       <div>테스트</div>
       <div>테스트</div>
       <div>테스트</div>
-      <SecondWave canvasWidth={1200} canvasHeight={900} />
+      <Wave canvasHeight={1000} canvasWidth={1200} />
     </>
   )
 }

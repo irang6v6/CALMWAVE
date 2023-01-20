@@ -1,4 +1,4 @@
-import { useWave } from "../../../hooks/custom/useWave"
+import { useCanvas } from "../../../hooks/custom/useCanvas"
 import { LightSource } from "./WaveBackground"
 import { Point } from "./WavePoint"
 
@@ -40,7 +40,7 @@ function Wave({ canvasWidth, canvasHeight }) {
     }
   }
 
-  const canvasRef = useWave(canvasWidth, canvasHeight, animate)
+  const canvasRef = useCanvas(canvasWidth, canvasHeight, animate)
 
   return <canvas ref={canvasRef} />
 }

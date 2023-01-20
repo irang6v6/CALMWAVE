@@ -1,4 +1,4 @@
-import { useSecondWave } from "../../../hooks/custom/useSecondWave"
+import { useCanvas } from "../../../hooks/custom/useCanvas"
 import { EachWave } from "./EachWave"
 // import { SecondWaveBackground } from "./SecondWaveBackground"
 
@@ -21,11 +21,11 @@ function SecondWave({
   const animate = function (ctx) {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight)
     fillBackground(ctx)
-    wave1.drawLine(ctx, FstColor, 0.022, 1.3, 1.47)
-    wave2.drawLine(ctx, SndColor, 0.017, 1, 1.46)
-    wave3.drawLine(ctx, TrdColor, 0.01, 1.5, 1.44)
+    wave1.drawLine(ctx, FstColor, 0.022, 1.25, 1.47) // drawLine 인자는 ctx 고정, prop받은 색상, 파도 속도, 굴곡 갯수, 파도 중심 라인 위치
+    wave2.drawLine(ctx, SndColor, 0.017, 1.1, 1.46)
+    wave3.drawLine(ctx, TrdColor, 0.01, 1.4, 1.44)
   }
-  const canvasRef = useSecondWave(canvasWidth, canvasHeight, animate)
+  const canvasRef = useCanvas(canvasWidth, canvasHeight, animate)
   return <canvas ref={canvasRef} />
 }
 
