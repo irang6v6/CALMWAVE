@@ -27,9 +27,9 @@ function SignParentPage() {
           canvasHeight={canvasHeight}
           canvasWidth={canvasWidth}
           background={`rgb(255, 255, 255)`}
-          FstColor={`rgba(76, 230, 184, 0.85)`}
-          SndCOlor={`rgba(153, 214, 234, 0.85)`}
-          TrdColor={`rgba(29, 88, 164, 0.85)`}
+          FstColor={`rgba(76, 230, 184, 0.88)`}
+          SndColor={`rgba(153, 214, 234, 0.7)`}
+          TrdColor={`rgba(29, 88, 164, 0.66)`}
         />
         {/* <Wave canvasHeight={canvasHeight} canvasWidth={canvasWidth} /> */}
       </div>
