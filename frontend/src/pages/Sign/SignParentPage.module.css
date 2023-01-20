@@ -5,4 +5,8 @@
   outline: none;
   position: fixed;
   z-index: -10;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
