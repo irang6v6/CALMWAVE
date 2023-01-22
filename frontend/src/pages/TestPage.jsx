@@ -3,6 +3,7 @@ import DiagonalWave from "../components/Canvas/DiagonalWave/DiagonalWave"
 import Wave from "../components/Canvas/Wave/Wave"
 import SecondWave from "../components/Canvas/SecondWave/SecondWave"
 import { useState, useRef, useEffect } from "react"
+import Rain from "../components/Canvas/Rain/Rain"
 
 function TestPage() {
   const [canvasWidth, setCanvasWidth] = useState(0)
@@ -20,22 +21,28 @@ function TestPage() {
     <>
       <div>테스트</div>
       <div>테스트</div>
+      {/* {background, canvasWidth, canvasHeight} */}
+      <Rain
+        background={`rgba(29, 88, 164, 0.66)`}
+        canvasHeight={canvasHeight}
+        canvasWidth={canvasWidth}
+      />
       <DiagonalWave
-        canvasHeight={900}
-        canvasWidth={1300}
+        canvasWidth={canvasWidth}
+        canvasHeight={canvasHeight}
         leftColor={`rgba(255, 255, 255, 1)`}
         rightColor={`rgba(29, 88, 164, 0.66)`}
       />
       <SecondWave
-        canvasHeight={canvasHeight}
         canvasWidth={canvasWidth}
+        canvasHeight={canvasHeight}
         background={`rgba(255, 255, 255, 1)`}
         FstColor={`rgba(76, 230, 184, 0.88)`}
         SndColor={`rgba(153, 214, 234, 0.7)`}
         TrdColor={`rgba(29, 88, 164, 0.66)`}
         innerColor={`rgb(168, 138, 255)`}
       />
-      <Wave canvasHeight={1000} canvasWidth={1200} />
+      <Wave canvasHeight={canvasHeight} canvasWidth={canvasWidth} />
     </>
   )
 }

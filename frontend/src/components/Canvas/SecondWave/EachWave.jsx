@@ -41,6 +41,7 @@ export class EachWave {
     ctx.lineTo(0, this.canvasHeight)
     ctx.fillStyle = color
     ctx.fill()
+    ctx.closePath()
   }
 
   drawBackground(ctx, innerColor, outerColor) {
@@ -59,7 +60,7 @@ export class EachWave {
     ctx.fillStyle = gradient
     ctx.arc(this.centerX, this.centerY, gradientRadius, 0, PI2)
     ctx.fill()
-    ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
+    // ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
   }
 
   animate(ctx) {}
