@@ -2,13 +2,13 @@
 import DiagonalWave from "../components/Canvas/DiagonalWave/DiagonalWave"
 import Wave from "../components/Canvas/Wave/Wave"
 import SecondWave from "../components/Canvas/SecondWave/SecondWave"
-import { useState, useRef, useEffect } from "react"
 import Rain from "../components/Canvas/Rain/Rain"
+import { useState, useEffect } from "react"
+import someImg from "../assets/calmwave.png"
 
 function TestPage() {
   const [canvasWidth, setCanvasWidth] = useState(0)
   const [canvasHeight, setCanvasHeight] = useState(0)
-  const pageRef = useRef(null)
   /* eslint-disable */
   useEffect(
     function () {
@@ -21,7 +21,9 @@ function TestPage() {
     <>
       <div>테스트</div>
       <div>테스트</div>
-      {/* {background, canvasWidth, canvasHeight} */}
+      <div style={{ display: "none" }}>
+        <img src={someImg} id={`test-logo`} />
+      </div>
       <Rain
         background={`rgba(29, 88, 164, 0.66)`}
         canvasHeight={canvasHeight}
