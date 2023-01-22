@@ -1,3 +1,6 @@
+export const PI2 = Math.PI * 2
+export const EULER_NUMBER = Math.E
+
 export class EachWave {
   constructor(canvasWidth, canvasHeight) {
     this.K = 0.5
@@ -11,11 +14,13 @@ export class EachWave {
     this.canvasWidth = canvasWidth
     this.canvasHeight = canvasHeight
     this.ATTENUATION = 1
+    this.centerX = canvasWidth / 2
+    this.centerY = canvasHeight / 1.88
+    this.radius =
+      canvasWidth / 48 > 48 ? 48 : canvasWidth / 48 < 24 ? 24 : canvasWidth / 48
   }
 
   drawLine(ctx, color, speed, att, plce) {
-    // ctx, color, speed, att
-
     this.PHASE = (this.PHASE + speed) % (Math.PI * 64)
     ctx.moveTo(0, 0)
     ctx.beginPath()
@@ -36,6 +41,25 @@ export class EachWave {
     ctx.lineTo(0, this.canvasHeight)
     ctx.fillStyle = color
     ctx.fill()
+  }
+
+  drawBackground(ctx, innerColor, outerColor) {
+    // 안쪽 색이 color1 바깥쪽이 color2
+    const gradientRadius = this.radius * 20 // 그라데이션 범위
+    const gradient = ctx.createRadialGradient(
+      this.centerX,
+      this.centerY,
+      0,
+      this.centerX,
+      this.centerY,
+      gradientRadius
+    )
+    gradient.addColorStop(0, innerColor) // 그라데이션 중앙색
+    gradient.addColorStop(1, outerColor) // 그라데이션 끝 색
+    ctx.fillStyle = gradient
+    ctx.arc(this.centerX, this.centerY, gradientRadius, 0, PI2)
+    ctx.fill()
+    ctx.fillRect(0, 0, this.canvasWidth, this.canvasHeight)
   }
 
   animate(ctx) {}

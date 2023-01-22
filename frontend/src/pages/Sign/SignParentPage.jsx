@@ -22,16 +22,15 @@ function SignParentPage() {
   return (
     <>
       <div className={`${styles["wave-container"]}`}>
-        {/* background, FstColor, SndColor, TrdColor */}
         <SecondWave
           canvasHeight={canvasHeight}
           canvasWidth={canvasWidth}
-          background={`rgb(255, 255, 255)`}
+          background={`rgba(255, 255, 255, 1)`}
           FstColor={`rgba(76, 230, 184, 0.88)`}
           SndColor={`rgba(153, 214, 234, 0.7)`}
           TrdColor={`rgba(29, 88, 164, 0.66)`}
+          innerColor={`rgb(134, 197, 255)`}
         />
-        {/* <Wave canvasHeight={canvasHeight} canvasWidth={canvasWidth} /> */}
       </div>
       <SignPage pageRef={pageRef} />
     </>
