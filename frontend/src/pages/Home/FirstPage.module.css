@@ -1,88 +1,83 @@
-body{
-    margin: 0;
-    padding: 0;
-    outline: 0;
+body {
+  margin: 0;
+  padding: 0;
+  outline: 0;
 }
 
-.container{
-    width: 100%;
-    height: 100%;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.container {
+  width: 100%;
+  height: 100%;
+  background-color: rgb(255, 255, 255);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.inner{
-    width: 80%;
-    height: 70%;
-    /* border: 1px solid #000; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.inner {
+  width: 80%;
+  height: 70%;
+  /* border: 1px solid #000; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.left-box{
-    width: 50%;
-    height: 70%;
-    text-align: center;
+.left-box {
+  width: 50%;
+  height: 70%;
+  text-align: center;
 }
 
-.turtle-img{
-    width: 80%;
+.turtle-img {
+  width: 80%;
 }
 
-.right-box{
-    width: 50%;
-    height: 70%;
-    /* border: 1px solid #000; */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.right-box {
+  width: 50%;
+  height: 70%;
+  /* border: 1px solid #000; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.text-box{
-    width: 90%;
-    /* border: 1px solid #000; */
+.text-box {
+  width: 90%;
+  /* border: 1px solid #000; */
 }
 
-.text-box h1{
-    font-size: 2.5rem;
+.text-box h1 {
+  font-size: 2.5rem;
 }
 
-.text-box p{
-    font-size: 1.5rem;
+.text-box p {
+  font-size: 1.5rem;
 }
-
-
 
 /* Button */
 
-.btn-wrap{
-    /* border: 1px solid #000; */
+.btn-wrap {
+  /* border: 1px solid #000; */
 }
 
 .btn-wrap div {
-    display: inline-block;
-    cursor : pointer;
-    border: none;
-    border-radius: 50px;
-    padding: 2%;
-    white-space: nowrap;
-    /* border: 1px solid #000; */
-    width: 15%;
-    text-align: center;
-    background-color: #86C5FF;
-    color: #fff;
-    margin: 0 10px 0 10px;
-    
-  }
-  
-.start-btn{
-
+  display: inline-block;
+  cursor: pointer;
+  border: none;
+  border-radius: 50px;
+  padding: 2%;
+  white-space: nowrap;
+  /* border: 1px solid #000; */
+  width: 15%;
+  text-align: center;
+  background-color: #86c5ff;
+  color: #fff;
+  margin: 0 10px 0 10px;
 }
 
-.btn-wrap div:hover{
-    background-color: #0084ff;
+.start-btn {
+}
 
+.btn-wrap div:hover {
+  background-color: #0084ff;
 }

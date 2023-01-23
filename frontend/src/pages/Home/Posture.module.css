@@ -1,45 +1,45 @@
-.container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100vw;
-    height: 100%;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100%;
 }
 
-.inner{
-    width: 80%;
-    height: 70%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    /* border: 1px solid #000; */
+.inner {
+  width: 80%;
+  height: 70%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid #000; */
 }
 
-.left-box{
-    width: 50%;
-    text-align: center;
+.left-box {
+  width: 50%;
+  text-align: center;
 }
 
-.right-box{
-    width: 50%;
-    text-align: center;
+.right-box {
+  width: 50%;
+  text-align: center;
 }
 
-.alert-box{
-    /* border: 1px solid #000; */
-    padding: 2%;
-    text-align: center;
-    width: 80%;
-    border-radius: 30px;
-    background-color: #FDC921;
-    margin: 0 auto;
+.alert-box {
+  /* border: 1px solid #000; */
+  padding: 2%;
+  text-align: center;
+  width: 80%;
+  border-radius: 30px;
+  background-color: #fdc921;
+  margin: 0 auto;
 }
 
-.alert-box p{
-    font-size: 1.5rem;
+.alert-box p {
+  font-size: 1.5rem;
 }
 
-.turtle-img{
-    width: 60%;
-    margin-top: 80px;
+.turtle-img {
+  width: 60%;
+  margin-top: 80px;
 }

@@ -1,19 +1,19 @@
 .routecontainer3 {
-    /* padding-top: 30px; */
-    text-align: center;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    height: 100%;
-    background-color: rgb(229, 248, 255);
-    /* margin-top: 60px; */
-    /* border: 1px solid #000; */
+  /* padding-top: 30px; */
+  text-align: center;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  background-color: rgb(229, 248, 255);
+  /* margin-top: 60px; */
+  /* border: 1px solid #000; */
 }
 
-.infoBox3{
-    margin-top: 60px;
-    /* background-color: rgb(255, 255, 255); */
-    /* width: 90%; */
-    /* border-radius: 30px; */
-    /* padding-top: 30px; */
+.infoBox3 {
+  margin-top: 60px;
+  /* background-color: rgb(255, 255, 255); */
+  /* width: 90%; */
+  /* border-radius: 30px; */
+  /* padding-top: 30px; */
 }

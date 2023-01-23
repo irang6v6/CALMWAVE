@@ -9,17 +9,17 @@ import Posture from "./Posture"
 import Stretching from "./Streching"
 import Stress from "./Stress"
 
-function HomePage() { 
+function HomePage() {
   return (
     <div className={`${styles["container"]}`}>
-      <NavBar/>
-      <FirstPage/>
-      <SecondPage/>
-      <WorkTime/>
-      <TodoList/>
-      <Posture/>
-      <Stretching/>
-      <Stress/>
+      <NavBar />
+      <FirstPage />
+      <SecondPage />
+      <WorkTime />
+      <TodoList />
+      <Posture />
+      <Stretching />
+      <Stress />
       {/* <div className={`${styles["intro-page"]}`}>
         <div className={`${styles["left-box"]}`}>
           <img className={`${styles["logoImg"]}`} src={logoImg} alt="logoimg"></img>
@@ -31,4 +31,3 @@ function HomePage() {
   )
 }
 export default HomePage
- 

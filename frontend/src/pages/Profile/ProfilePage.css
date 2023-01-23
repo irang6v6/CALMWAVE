@@ -1,98 +1,95 @@
 body {
-    margin: 0;
-    padding: 0;
-    outline: 0;
-    /* background-color: rgb(224, 224, 224); */
-  }
-  
-  .App {
-    margin: 0 auto;
-    padding: 0;
-    outline: 0;
-    width: 100vw;
-    /* height: 100vh; */
-  }
-  
-  /* .App-header{
+  margin: 0;
+  padding: 0;
+  outline: 0;
+  /* background-color: rgb(224, 224, 224); */
+}
+
+.App {
+  margin: 0 auto;
+  padding: 0;
+  outline: 0;
+  width: 100vw;
+  /* height: 100vh; */
+}
+
+/* .App-header{
     width: 70vw;
     background-color: #90c0ff;
   } */
-  
-  /* .logoimg{
+
+/* .logoimg{
     width: 80%;
     margin: 30px 0 100px 0;
   } */
-  
-  .container{
-    width: 100%;
-    /* height: 100vh; */
-    background-color: rgb(224, 224, 224);
-    /* border: 5px solid #000; */
-    display: flex;
-    justify-content: center;
-  }
-  
-  .inner{
-    display: flex;
-    width: 70vw;
-    height: 100vh;
-    
-    /* background-color: pink; */
-    /* background: linear-gradient(#90c0ff, rgb(246, 246, 255)) */
-  }
-  
-  .content-box{
-    display: flex;
-    /* height: 100%; */
-  }
-  
-  .mypageRouter{
-    background-color: #75b1ff;
-    text-align: center;
-    width: 15vw;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    /* padding-top: 30px; */
-    /* position:absolute; */
-  }
-  
-  
-  
-  .right-box{
-    /* border: 1px solid #000; */
-    width: 85vw;
-    height: 100%;
-    background-color: #fff;
-    overflow: scroll;
-  }
-  
-  .router {
-    /* margin-bottom: 60px; */
-    color: rgb(0, 0, 0);
-    /* border-radius: 50px; */
-    display: inline-block;
-    width: 100%;
-    height: 80px;
-    line-height: 80px;
-    text-decoration: none
-  }
-  
-  /* .router-selector{
+
+.container {
+  width: 100%;
+  /* height: 100vh; */
+  background-color: rgb(224, 224, 224);
+  /* border: 5px solid #000; */
+  display: flex;
+  justify-content: center;
+}
+
+.inner {
+  display: flex;
+  width: 70vw;
+  height: 100vh;
+
+  /* background-color: pink; */
+  /* background: linear-gradient(#90c0ff, rgb(246, 246, 255)) */
+}
+
+.content-box {
+  display: flex;
+  /* height: 100%; */
+}
+
+.mypageRouter {
+  background-color: #75b1ff;
+  text-align: center;
+  width: 15vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  /* padding-top: 30px; */
+  /* position:absolute; */
+}
+
+.right-box {
+  /* border: 1px solid #000; */
+  width: 85vw;
+  height: 100%;
+  background-color: #fff;
+  overflow: scroll;
+}
+
+.router {
+  /* margin-bottom: 60px; */
+  color: rgb(0, 0, 0);
+  /* border-radius: 50px; */
+  display: inline-block;
+  width: 100%;
+  height: 80px;
+  line-height: 80px;
+  text-decoration: none;
+}
+
+/* .router-selector{
     width: 100%;
     border: 1px solid #000;
     height: 60px;
     line-height: 60px;
   } */
-  
-  .router:hover {
-    background-color: #fff;
-    color: black;
-  }
-  
-  
-  .router.active {
-    background-color: #fff;
-    color: black;
-    /* font-weight: bold; */
-  }
+
+.router:hover {
+  background-color: #fff;
+  color: black;
+}
+
+.router.active {
+  background-color: #fff;
+  color: black;
+  /* font-weight: bold; */
+}
