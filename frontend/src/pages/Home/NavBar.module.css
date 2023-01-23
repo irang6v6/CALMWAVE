@@ -1,10 +1,4 @@
-body {
-  margin: 0;
-  padding: 0;
-  outline: 0;
-}
-
-header {
+.header-container {
   position: fixed;
   width: 100vw;
   display: flex;
@@ -26,7 +20,7 @@ header {
 
 .menu-box {
   display: flex;
-  justify-content: end;
+  justify-content: flex-end;
   align-items: center;
   /* margin-right: 30px; */
   width: 50%;

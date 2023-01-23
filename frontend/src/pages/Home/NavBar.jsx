@@ -4,7 +4,7 @@ import logoImg from "../../assets/calmwave.png"
 
 function NavBar() {
   return (
-    <header>
+    <div className={`${styles["header-container"]}`}>
       <div className={`${styles["logo-box"]}`}>
         <a href="#none">
           <img
@@ -14,13 +14,12 @@ function NavBar() {
           />
         </a>
       </div>
-
       <div className={`${styles["menu-box"]}`}>
         <a href="#none">HOME</a>
         <a href="#none">LOGIN</a>
         <a href="#none">SIGNUP</a>
       </div>
-    </header>
+    </div>
   )
 }
 export default NavBar
