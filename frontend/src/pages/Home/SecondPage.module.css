@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 60%;
+    background-color: rgb(243, 243, 243);
+    text-align: center;
+}
+
+.container h2{
+    line-height: 200%
+}
