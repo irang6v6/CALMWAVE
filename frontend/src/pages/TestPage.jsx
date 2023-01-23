@@ -6,6 +6,7 @@ import Rain from "../components/Canvas/Rain/Rain"
 import { useState, useEffect } from "react"
 import someImg from "../assets/calmwave.png"
 import NightSky from "../components/Canvas/NightSky/NightSky"
+import Earth from "../components/Canvas/Earth/Earth"
 
 function TestPage() {
   const [canvasWidth, setCanvasWidth] = useState(0)
@@ -25,6 +26,11 @@ function TestPage() {
       <div style={{ display: "none" }}>
         <img src={someImg} id={`test-logo`} />
       </div>
+      <Earth
+        canvasWidth={canvasWidth}
+        canvasHeight={canvasHeight}
+        background={`rgba(32, 38, 38, 1) `}
+      />
       <NightSky
         canvasWidth={canvasWidth}
         canvasHeight={canvasHeight}
