@@ -1,0 +1,39 @@
+.container{
+    width: 100vw;
+    height: 100%;
+    background-color: #EBF7FB;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.inner{
+    width: 80%;
+    height: 70%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* border: 1px solid #000; */
+}
+
+.img-wrap{
+    text-align: center;
+}
+
+.img-wrap img{
+    width: 60%;
+}
+
+.text-wrap{
+    text-align: center;
+    margin-top: 40px;
+}
+
+.text-wrap h1{
+    font-size: 2rem;
+}
+
+.text-wrap p{
+    font-size: 1.5rem;
+}
