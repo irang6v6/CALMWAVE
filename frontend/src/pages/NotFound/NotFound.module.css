@@ -1,0 +1,28 @@
+.canvas-container {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  position: fixed;
+  z-index: -10;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.page-container {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.message {
+  font-size: 3rem;
+  font-weight: 600;
+}
