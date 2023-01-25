@@ -1,38 +1,14 @@
-import React, { useState } from "react"
+import React from "react"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
 import styles from "./RoomPage.module.css"
 import TodoColumn from "../../components/UI/TodoColumn"
 import TodoCard from "../../components/UI/TodoCard"
+import { useSelector } from "react-redux"
+import HandleTodo from "../../components/UI/HandleTodo"
 
 export const RoomPage = () => {
-  const [progress, setProgress] = useState(true)
-  const [todos, setTodos] = useState([
-    { id: 1, name: "알고리즘", column: "To do" },
-    { id: 2, name: "React", column: "To do" },
-    { id: 3, name: "Redux", column: "To do" },
-  ])
-
-  const moveCardHandler = (dragItem, hoverId) => {
-    const dragTodo = todos.filter((todo) => todo.id === dragItem.id)[0]
-    const dragTodoIndex = todos.indexOf(dragTodo)
-    const hoverTodo = todos.filter(
-      (todo) => todo.id === hoverId)[0]
-    const hoverTodoIndex = todos.indexOf(hoverTodo)
-    if (dragTodo) {
-      setTodos((prevState) => {
-        const coppiedStateArray = [...prevState]
-
-        // remove item by "hoverIndex" and put "dragItem" instead
-        const prevTodo = coppiedStateArray.splice(hoverTodoIndex, 1, dragTodo)
-
-        // remove item by "dragIndex" and put "prevItem" instead
-        coppiedStateArray.splice(dragTodoIndex, 1, prevTodo[0])
-
-        return coppiedStateArray
-      })
-    }
-  }
+  const todos = useSelector(state => state.todos.todos)
 
   const alignTodosInColumn = (columnName) => {
     return todos
@@ -41,28 +17,26 @@ export const RoomPage = () => {
         <TodoCard
           key={todo.id}
           id={todo.id}
-          name={todo.name}
+          title={todo.title}
           currentColumn={todo.column}
-          progress={progress}
-          setTodos={setTodos}
-          setProgress={setProgress}
+          description={todo.description}
           index={index}
-          moveCardHandler={moveCardHandler}
         />
       ))
   }
 
   return (
     <>
+      <HandleTodo></HandleTodo>
       <div className={`${styles["container"]}`}>
         <DndProvider backend={HTML5Backend}>
-          <TodoColumn title="To do" className={`bg-cw-indigo-7`} progress={progress}>
+          <TodoColumn title="To do" className={`bg-cw-indigo-7`}>
             {alignTodosInColumn("To do")}
           </TodoColumn>
-          <TodoColumn title="In Progress" className={`bg-cw-yellow-5`} progress={progress}>
+          <TodoColumn title="In Progress" className={`bg-cw-yellow-5`}>
             {alignTodosInColumn("In Progress")}
           </TodoColumn>
-          <TodoColumn title="Done" className={`bg-wb-mint-4`} progress={progress}>
+          <TodoColumn title="Done" className={`bg-wb-mint-4`}>
             {alignTodosInColumn("Done")}
           </TodoColumn>
         </DndProvider>

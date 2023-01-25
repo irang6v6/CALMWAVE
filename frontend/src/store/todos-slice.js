@@ -6,49 +6,54 @@ const initialState = {
       id: 1,
       title: "일1",
       description: "설명1",
-      workType: "",
+      column: "To do",
     },
     {
       id: 2,
       title: "일2",
       description: "설명2",
-      workType: "",
+      column: "To do",
     },
     {
       id: 3,
       title: "일3",
       description: "설명3",
-      workType: "",
+      column: "To do",
     },
     {
       id: 4,
       title: "일4",
       description: "설명4",
-      workType: "",
+      column: "To do",
     },
     {
       id: 5,
       title: "일5",
       description: "설명5",
-      workType: "",
+      column: "To do",
     },
   ],
-  nowWorking: false, // 일을 하고 있는지? 에 대한 boolean 값
+  onProgress: false, // 일을 하고 있는지? 에 대한 boolean 값
 }
 
-const exSlice = createSlice({
+const todosSlice = createSlice({
   name: "todo",
   initialState,
   reducers: {
-    toggleWorking(state, action) {
-      state.nowWorking = !state.nowWorking
+    setProgress(state, action) {
+      state.onProgress = action.payload
     },
     changeTodos(state, action) {
+      console.log(action.payload)
+      state.todos = action.payload
       // {workType, itemId} : column 종류, 해당 아이템 id unique 값
       // action.payload.workType //
     },
+    addTodo(state, action) {
+      state.todos.push(action.payload)
+    }
   },
 })
 
-export const exActions = exSlice.actions
-export default exSlice.reducer
+export const todoActions = todosSlice.actions
+export default todosSlice.reducer

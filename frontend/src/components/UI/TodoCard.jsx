@@ -1,26 +1,49 @@
 import { useRef } from "react"
 import { useDrag, useDrop } from "react-dnd"
 import styles from "./TodoCard.module.css"
+import { useSelector, useDispatch } from "react-redux"
+import { todoActions } from "../../store/todos-slice"
+
 
 export default function TodoCard({
   id,
-  name,
+  title,
   index,
-  currentColumn,
-  moveCardHandler,
-  setTodos,
-  setProgress,
-  progress,
+  description,
+  currentColumn,ap
 }) {
+  const todos = useSelector(state => state.todos.todos)
+  const dispatch = useDispatch()
+
+  const moveCardHandler = (dragItem, hoverId) => {
+    const dragTodo = todos.filter((todo) => todo.id === dragItem.id)[0]
+    const dragTodoIndex = todos.indexOf(dragTodo)
+    const hoverTodo = todos.filter(
+      (todo) => todo.id === hoverId)[0]
+    const hoverTodoIndex = todos.indexOf(hoverTodo)
+    if (dragTodo) { 
+      const coppiedStateArray = [...todos]
+
+      // remove item by "hoverIndex" and put "dragItem" instead
+      const prevTodo = coppiedStateArray.splice(hoverTodoIndex, 1, dragTodo)
+
+      // remove item by "dragIndex" and put "prevItem" instead
+      coppiedStateArray.splice(dragTodoIndex, 1, prevTodo[0])
+
+      dispatch(todoActions.changeTodos(coppiedStateArray)) 
+    }
+  }
+
   const changeTodoColumn = (currentTodo, columnName) => {
-    setTodos((prevState) => {
-      return prevState.map((e) => {
+    const prevState = todos
+    dispatch(todoActions.changeTodos(
+      prevState.map((e) => {
         return {
           ...e,
           column: e.id === currentTodo.id ? columnName : e.column,
         }
       })
-    })
+    ))
   }
   const ref = useRef(null)
   const [, drop] = useDrop({
@@ -68,24 +91,22 @@ export default function TodoCard({
 
   const [{ isDragging }, drag] = useDrag({
     type: "Todo",
-    item: { index, name, currentColumn, id },
+    item: { index, title, currentColumn, id },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult()
-      setProgress(() => {
-        if (dropResult) {
-          if (dropResult.name === "In Progress") {
-            return false
-          } else if (item.currentColumn === "In Progress") {
-            return true
-          }
+      if (dropResult) {
+        if (dropResult.title === "In Progress") {
+          dispatch(todoActions.setProgress(true))
+        } else if (item.currentColumn === "In Progress") {
+          dispatch(todoActions.setProgress(false))
         }
-        return progress
-      })
-      if (dropResult && dropResult.name === "In Progress") {
+      }
+
+      if (dropResult && dropResult.title === "In Progress") {
         changeTodoColumn(item, "In Progress")
-      } else if (dropResult && dropResult.name === "Done") {
+      } else if (dropResult && dropResult.title === "Done") {
         changeTodoColumn(item, "Done")
-      } else if (dropResult && dropResult.name === "To do") {
+      } else if (dropResult && dropResult.title === "To do") {
         changeTodoColumn(item, "To do")
       }
     },
@@ -108,8 +129,8 @@ export default function TodoCard({
           : `${styles["ongoing"]} bg-cw-yellow-10`
       }
     >
-      <h3>{name}</h3>
-      <h3>We will drag this</h3>
+      <span>{title}</span>
+      <span>{description}</span>
     </div>
   )
 }

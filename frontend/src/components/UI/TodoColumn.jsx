@@ -1,14 +1,16 @@
 import { useDrop } from "react-dnd"
+import { useSelector } from "react-redux"
 import styles from "./TodoColumn.module.css"
-export default function TodoColumn({ children, className, title, progress }) {
-  const canMoveTodo = (title) => {
-    return (title !== "In Progress") || (progress)
-  }
+export default function TodoColumn({ children, className, title}) {
+  const progress = useSelector(state => state.todos.onProgress)
 
+  const canMoveTodo = (title) => {
+    return (title !== "In Progress") || (!progress)
+  }
   const [ , drop] = useDrop({
     accept: "Todo",
     canDrop: () => canMoveTodo(title),
-    drop: () => ({ name: title }),
+    drop: () => ({ title: title }),
   })
 
 
