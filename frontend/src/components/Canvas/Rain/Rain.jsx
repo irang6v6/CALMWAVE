@@ -7,7 +7,7 @@ function Rain({ background, canvasWidth, canvasHeight }) {
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
   }
   const rains = []
-  for (let i = 0; i < 19; i++) {
+  for (let i = 0; i < 38; i++) {
     rains.push(new RainDrop(canvasWidth, canvasHeight))
   }
 

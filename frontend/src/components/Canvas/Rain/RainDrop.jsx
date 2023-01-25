@@ -28,7 +28,7 @@ export class RainDrop {
     ctx.fill()
 
     if (this.y > this.canvasHeight) {
-      this.y = 0
+      this.y = -50
       this.x = Math.random() * this.canvasWidth + 50
       this.linearSpeed = this.newSpeed()
     }
