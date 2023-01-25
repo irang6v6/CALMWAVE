@@ -62,7 +62,11 @@ body {
   width: 85vw;
   height: 100%;
   background-color: #fff;
-  overflow: scroll;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+.right-box::-webkit-scrollbar {
+  display: none;
 }
 
 .router {

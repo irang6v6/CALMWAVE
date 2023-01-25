@@ -1,5 +1,5 @@
 import React from "react"
-import "./ProfilePage.css"
+import styles from "./ProfilePage.module.css"
 import { useParams } from "react-router-dom"
 import SideNav from "./SideNav/SideNav"
 import UserInfo from "./Info/UserInfo"
@@ -11,21 +11,17 @@ function ProfilePage() {
   const { infoType } = useParams()
 
   return (
-    // <BrowserRouter>
-    <div className="App">
-      <div className="container">
-        <div className="inner">
-          <SideNav />
-          <div className="right-box">
-            {infoType === "userinfo" && <UserInfo />}
-            {infoType === "graph" && <GraphInfo />}
-            {infoType === "router3" && <Router3 />}
-            {infoType === "router4" && <Router4 />}
-          </div>
+    <div className={`${styles["container"]}`}>
+      <div className={`${styles["inner"]}`}>
+        <SideNav infoType={infoType} />
+        <div className={`${styles["right-box"]}`}>
+          {(infoType === "userinfo" || infoType === undefined) && <UserInfo />}
+          {infoType === "graph" && <GraphInfo />}
+          {infoType === "router3" && <Router3 />}
+          {infoType === "router4" && <Router4 />}
         </div>
       </div>
     </div>
-    // </BrowserRouter>
   )
 }
 

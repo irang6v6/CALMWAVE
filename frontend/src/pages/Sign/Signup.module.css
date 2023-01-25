@@ -10,7 +10,7 @@
 
 .input-container {
   width: 100%;
-  margin: 10px 0px 10px 0px;
+  margin: 6px 0px 6px 0px;
   /* display: flex;
   flex-direction: column;
   justify-content: center; */
@@ -28,20 +28,20 @@
 
 .form-label {
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   transition: 0.4s;
   margin: 10px 0 0 0;
 }
 .form-input {
   box-sizing: border-box;
   width: 28vw;
-  margin: 5px 5px 5px 5px;
+  margin: 3px 3px 3px 3px;
   padding: 9px 11px 9px 11px;
   transition: 0.4s;
   border-color: #817c7c;
   border-radius: 8px;
   border-style: solid;
-  font-size: 1rem;
+  font-size: 0.9rem;
   background-color: rgba(255, 255, 255, 0.8);
 }
 .form-input.invalid {
@@ -97,11 +97,12 @@
 }
 
 .change-button {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 600;
   margin-left: auto;
   transition: 0.2s;
   transform: translate(0, 6px);
+  color: rgb(2, 45, 82);
 }
 .change-button:hover {
   cursor: pointer;

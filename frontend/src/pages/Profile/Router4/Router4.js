@@ -1,9 +1,9 @@
-import "./Router4.css"
+import styles from "./Router4.module.css"
 
 const Router4 = () => {
   return (
-    <div className="routecontainer4">
-      <div className="infoBox4">
+    <div className={`${styles["routecontainer4"]}`}>
+      <div className={`${styles["infoBox4"]}`}>
         <h3> 4번 페이지입니다. </h3>
       </div>
     </div>

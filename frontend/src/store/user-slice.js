@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
   token: "tokenExample",
+  isLogin: false,
   userNickname: "AnnonymousUser",
   stretchingIntervalTime: 50,
   OAuthType: "",
@@ -21,8 +22,8 @@ const initialState = {
   deathCount: 12,
 }
 
-const exSlice = createSlice({
-  name: "ex",
+const UserSlice = createSlice({
+  name: "user",
   initialState,
   reducers: {
     updateStretchingIntervalTime(state, action) {
@@ -45,8 +46,11 @@ const exSlice = createSlice({
     updateMaximunWorkTime(state, action) {
       state.maximumWorkTime = action.payload.maximumWorkTime
     },
+    updateLogin(state, action) {
+      state.isLogin = !state.isLogin
+    },
   },
 })
 
-export const exActions = exSlice.actions
-export default exSlice.reducer
+export const userActions = UserSlice.actions
+export default UserSlice.reducer

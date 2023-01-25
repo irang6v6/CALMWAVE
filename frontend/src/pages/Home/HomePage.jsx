@@ -1,6 +1,5 @@
 import styles from "./HomePage.module.css"
 import React from "react"
-import NavBar from "./NavBar"
 import FirstPage from "./FirstPage"
 import SecondPage from "./SecondPage"
 import WorkTime from "./WorkTime"
@@ -8,6 +7,7 @@ import TodoList from "./TodoList"
 import Posture from "./Posture"
 import Stretching from "./Streching"
 import Stress from "./Stress"
+import NavBar from "../../components/NavBar/NavBar"
 
 function HomePage() {
   return (

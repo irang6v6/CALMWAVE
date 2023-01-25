@@ -51,6 +51,17 @@ function Login(props) {
     [onPasswordTouched, passwordIsValid]
   )
 
+  const resetState = function () {
+    emailRef.current.value = ""
+    setUserEmail(() => emailRef.current.value)
+    passwordRef.current.value = ""
+    setUserPassword(() => passwordRef.current.value)
+    setOnEmailTouched(false)
+    setOnPasswordTouched(false)
+    setEmailIsValid(false)
+    setPasswordIsValid(false)
+  }
+
   const onSubmitHandler = function (event) {
     event.preventDefault()
     props.onLogin()
@@ -76,6 +87,7 @@ function Login(props) {
   const toggleToSignup = function (event) {
     event.preventDefault()
     props.onSignup()
+    resetState()
   }
 
   return (
