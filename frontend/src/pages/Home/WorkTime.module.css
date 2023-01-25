@@ -1,0 +1,38 @@
+.container {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner {
+  display: flex;
+  width: 80%;
+  height: 70%;
+  justify-content: center;
+  align-items: center;
+  /* border: 1px solid #000; */
+}
+
+.text-wrap {
+  width: 50%;
+  text-align: center;
+  margin-left: 30px;
+}
+
+.text-wrap h1 {
+  font-size: 2rem;
+}
+
+.text-wrap p {
+  font-size: 1.5rem;
+}
+
+.img-wrap {
+  width: 50%;
+  text-align: center;
+}
+
+.img-wrap img {
+  width: 80%;
+}

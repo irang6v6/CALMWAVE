@@ -1,9 +1,9 @@
-import { useWave } from "../../../hooks/custom/useWave"
+import { useCanvas } from "../../../hooks/custom/useCanvas"
 import { LightSource } from "./WaveBackground"
 import { Point } from "./WavePoint"
 
 function Wave({ canvasWidth, canvasHeight }) {
-  const fillBaackground = function (ctx) {
+  const fillBackground = function (ctx) {
     ctx.fillStyle = "rgb(230, 246, 255)" // 배경색
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
   }
@@ -26,7 +26,7 @@ function Wave({ canvasWidth, canvasHeight }) {
   const animate = function (ctx) {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight)
 
-    fillBaackground(ctx)
+    fillBackground(ctx)
     lightSource.drawRadialGradientBehindLightSource(ctx)
     lightSource.drawLightSource(ctx)
 
@@ -40,7 +40,7 @@ function Wave({ canvasWidth, canvasHeight }) {
     }
   }
 
-  const canvasRef = useWave(canvasWidth, canvasHeight, animate)
+  const canvasRef = useCanvas(canvasWidth, canvasHeight, animate)
 
   return <canvas ref={canvasRef} />
 }

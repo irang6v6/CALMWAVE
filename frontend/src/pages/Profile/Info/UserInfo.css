@@ -1,42 +1,41 @@
 .routecontainer1 {
-    /* padding-top: 30px; */
-    text-align: center;
-    width: 100%;
-    display: flex;
-    flex-direction:column;
-    /* height: 100%; */
-    background-color: rgb(255, 255, 255);
-    /* overflow: scroll; */
-    /* padding-top: 60px; */
-    /* margin-top: 60px; */
-    /* border: 1px solid #000; */
-    /* background-color: rgb(187, 71, 71); */
+  /* padding-top: 30px; */
+  text-align: center;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  /* height: 100%; */
+  background-color: rgb(255, 255, 255);
+  /* overflow: scroll; */
+  /* padding-top: 60px; */
+  /* margin-top: 60px; */
+  /* border: 1px solid #000; */
+  /* background-color: rgb(187, 71, 71); */
 }
 
-.infoBox{
-    /* margin-top: 60px; */
-    /* background-color: rgb(255, 254, 228); */
-    width: 85%;
-    height: 300px;
-    border-radius: 36px;
-    background-color: rgba(3, 16, 60, 0.8);
-    color: white;
-    margin: 0 auto;
-    /* border-radius: 30px; */
-    margin-top: 60px;
-    margin-bottom: 60px;
+.infoBox {
+  /* margin-top: 60px; */
+  /* background-color: rgb(255, 254, 228); */
+  width: 85%;
+  height: 300px;
+  border-radius: 36px;
+  background-color: rgba(3, 16, 60, 0.8);
+  color: white;
+  margin: 0 auto;
+  /* border-radius: 30px; */
+  margin-top: 60px;
+  margin-bottom: 60px;
 }
 
-.info-Box{
-    width: 80%;
-    height: 700px;
-    /* border: 1px solid #000; */
-    background-color: #FEFFD7;
-    margin: 0 auto;
+.info-Box {
+  width: 80%;
+  height: 700px;
+  /* border: 1px solid #000; */
+  background-color: #feffd7;
+  margin: 0 auto;
 }
 
-.userInfoEdit{
-    color: white;
-    text-decoration: none;
-
+.userInfoEdit {
+  color: white;
+  text-decoration: none;
 }

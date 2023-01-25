@@ -7,6 +7,8 @@ import ProfilePage from "./pages/Profile/ProfilePage"
 // import GraphInfo from "./pages/Profile/GraphInfo/GraphInfo"
 import RoomResult from "./pages/Room/RoomResult/RoomResult"
 import SignParentPage from "./pages/Sign/SignParentPage"
+import TestPage from "./pages/TestPage"
+import NotFound from "./pages/NotFound/NotFound"
 
 function App() {
   return (
@@ -17,12 +19,13 @@ function App() {
         <Route path={`/room`} element={<RoomPage />}>
           <Route path={`/room/result`} element={<RoomResult />} />
         </Route>
-        <Route path={`/profile`} element={<ProfilePage />}/>
-        <Route path={`/profile/:infoType`} element={<ProfilePage />}/>
+        <Route path={`/profile`} element={<ProfilePage />} />
+        <Route path={`/profile/:infoType`} element={<ProfilePage />} />
+        <Route path={`test`} element={<TestPage />} />
+        <Route path={`*`} element={<NotFound />} />
       </Routes>
     </div>
   )
 }
 
 export default App
-
