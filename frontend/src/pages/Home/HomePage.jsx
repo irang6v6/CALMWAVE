@@ -9,7 +9,7 @@ import Stretching from "./Streching"
 import Stress from "./Stress"
 import NavBar from "../../components/NavBar/NavBar"
 import Wave from "../../components/Canvas/Wave/Wave"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect } from "react" //
 import { useCustomWidthHeight } from "../../hooks/custom/useCustomWidthHeight"
 function HomePage() {
   const [canvasWidth, setCanvasWidth] = useState(0)
@@ -27,8 +27,8 @@ function HomePage() {
   return (
     <>
       <NavBar />
-      <div className={`${styles["container"]}`}>
-        <div ref={pageRef} className={`${styles["wave-container"]}`}>
+      <div ref={pageRef} className={`${styles["container"]}`}>
+        <div className={`${styles["wave-container"]}`}>
           <Wave
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}

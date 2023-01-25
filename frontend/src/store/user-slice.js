@@ -1,7 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-  token: "tokenExample",
+  userId: 0,
+  accessToken: "tokenExample",
+  refreshToken: "tokenExample",
   isLogin: false,
   userNickname: "기본 값 닉네임",
   description: "기본 자기 소개",
