@@ -56,7 +56,11 @@ function TestPage() {
         TrdColor={`rgba(29, 88, 164, 0.66)`}
         innerColor={`rgb(168, 138, 255)`}
       />
-      <Wave canvasHeight={canvasHeight} canvasWidth={canvasWidth} />
+      <Wave
+        canvasHeight={canvasHeight}
+        canvasWidth={canvasWidth}
+        background={`rgba(31, 31, 36)`}
+      />
     </>
   )
 }

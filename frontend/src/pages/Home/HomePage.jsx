@@ -8,12 +8,33 @@ import Posture from "./Posture"
 import Stretching from "./Streching"
 import Stress from "./Stress"
 import NavBar from "../../components/NavBar/NavBar"
-
+import Wave from "../../components/Canvas/Wave/Wave"
+import { useRef, useState, useEffect } from "react"
+import { useCustomWidthHeight } from "../../hooks/custom/useCustomWidthHeight"
 function HomePage() {
+  const [canvasWidth, setCanvasWidth] = useState(0)
+  const [canvasHeight, setCanvasHeight] = useState(0)
+  const pageRef = useRef(null)
+  /* eslint-disable */
+  useEffect(
+    function () {
+      setCanvasHeight(window.innerHeight)
+      setCanvasWidth(window.innerWidth)
+    },
+    [window.innerHeight, window.innerWidth]
+  )
+  useCustomWidthHeight(pageRef)
   return (
     <>
       <NavBar />
       <div className={`${styles["container"]}`}>
+        <div ref={pageRef} className={`${styles["wave-container"]}`}>
+          <Wave
+            canvasWidth={canvasWidth}
+            canvasHeight={canvasHeight}
+            background={`rgba(31, 31, 36)`}
+          />
+        </div>
         <FirstPage />
         <SecondPage />
         <WorkTime />

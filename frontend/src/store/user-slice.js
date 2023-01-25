@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit"
 const initialState = {
   token: "tokenExample",
   isLogin: false,
-  userNickname: "AnnonymousUser",
+  userNickname: "기본 값 닉네임",
+  description: "기본 자기 소개",
   stretchingIntervalTime: 50,
   OAuthType: "",
   OAuthSub: "",

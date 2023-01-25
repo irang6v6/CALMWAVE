@@ -7,3 +7,8 @@
   scrollbar-width: none;
   /* border: solid 2px black; */
 }
+
+.wave-container {
+  position: absolute;
+  z-index: -10;
+}

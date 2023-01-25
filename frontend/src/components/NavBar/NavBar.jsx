@@ -4,6 +4,7 @@ import logoImg from "../../assets/calmwave.png"
 import { NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { userActions } from "../../store/user-slice"
+import NavUserShortcut from "./NavUserShortcut/NavUserShortcut"
 
 function NavBar() {
   const isLogin = useSelector((state) => state.user.isLogin)
@@ -31,7 +32,7 @@ function NavBar() {
             LOGIN SIGNUP
           </NavLink>
         ) : (
-          <div>ㅎㅇ</div>
+          <NavUserShortcut className={`${styles["navbar-item"]}`} />
         )}
         <div onClick={toggleLogin}>인앤아웃</div>
 
