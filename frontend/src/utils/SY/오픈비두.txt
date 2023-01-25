@@ -1,0 +1,7 @@
+기존 세션에서 1인 세션이기 때문에 publisher를 제외하고 불필요한 변수를 삭제하였다
+
+추후에 도움될 수 있는 기능
+- switchCamera - 모바일 혹은 여러 캠이 있는 환경에서 필요
+-getNicknameTag - 캠에 이름표를 다는 기능으로 추후에 활용 가능성
+
+docker run -p 4443:4443 --rm -e OPENVIDU_SECRET=MY_SECRET openvidu/openvidu-dev:2.25.0
