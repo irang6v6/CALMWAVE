@@ -15,6 +15,14 @@ function HomePage() {
   const [canvasWidth, setCanvasWidth] = useState(0)
   const [canvasHeight, setCanvasHeight] = useState(0)
   const pageRef = useRef(null)
+  const secondRef = useRef(null)
+  const [worktimeRef, todoRef, postureRef, stretchRef, stressRef] = [
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+    useRef(null),
+  ]
   /* eslint-disable */
   useEffect(
     function () {
@@ -24,6 +32,27 @@ function HomePage() {
     [window.innerHeight, window.innerWidth]
   )
   useCustomWidthHeight(pageRef)
+  const goUp = function () {
+    pageRef.current.scrollIntoView({ behavior: "smooth" })
+  }
+  const goSecond = function () {
+    secondRef.current.scrollIntoView({ behavior: "smooth" })
+  }
+  const goWorkTime = function () {
+    worktimeRef.current.scrollIntoView({ behavior: "smooth" })
+  }
+  const goTodo = function () {
+    todoRef.current.scrollIntoView({ behavior: "smooth" })
+  }
+  const goPosture = function () {
+    postureRef.current.scrollIntoView({ behavior: "smooth" })
+  }
+  const goStreching = function () {
+    stretchRef.current.scrollIntoView({ behavior: "smooth" })
+  }
+  const goStress = function () {
+    stressRef.current.scrollIntoView({ behavior: "smooth" })
+  }
   return (
     <>
       <NavBar />
@@ -36,13 +65,16 @@ function HomePage() {
             // background={`rgba(31, 31, 36)`}
           />
         </div>
-        <FirstPage />
-        <SecondPage />
-        <WorkTime />
-        <TodoList />
-        <Posture />
-        <Stretching />
-        <Stress />
+        <FirstPage goNext={goSecond} />
+        <SecondPage refVal={secondRef} goNext={goWorkTime} />
+        <WorkTime refVal={worktimeRef} goNext={goTodo} />
+        <TodoList refVal={todoRef} goNext={goPosture} />
+        <Posture refVal={postureRef} goNext={goStreching} />
+        <Stretching refVal={stretchRef} goNext={goStress} />
+        <Stress refVal={stressRef} />
+        <div className={`${styles["go-up"]}`} onClick={goUp}>
+          위로!
+        </div>
         {/* <div className={`${styles["intro-page"]}`}>
         <div className={`${styles["left-box"]}`}>
           <img className={`${styles["logoImg"]}`} src={logoImg} alt="logoimg"></img>

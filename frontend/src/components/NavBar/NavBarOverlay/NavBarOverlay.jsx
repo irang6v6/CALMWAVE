@@ -4,7 +4,9 @@ import styles from "./NavBarOverlay.module.css"
 
 function NavBarOverlay(props) {
   // const [isVisible, setIsVisible] = useState(false)
-  const [dropboxClasses, setDropboxclasses] = useState("")
+  const [dropboxClasses, setDropboxclasses] = useState(
+    `${styles["dropbox-container"]}`
+  )
   useEffect(
     function () {
       const classes = props.isVisible

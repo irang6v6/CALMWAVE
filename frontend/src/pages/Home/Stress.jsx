@@ -2,9 +2,9 @@ import styles from "./Stress.module.css"
 import React from "react"
 import angry from "../../assets/angry.png"
 
-function Stress() {
+function Stress(props) {
   return (
-    <div className={`${styles["container"]}`}>
+    <div ref={props.refVal} className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
         <h1>스트레스 관리</h1>
         <div className={`${styles["img-wrap"]}`}>

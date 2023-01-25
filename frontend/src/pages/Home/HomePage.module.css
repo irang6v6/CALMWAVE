@@ -14,3 +14,16 @@
   overflow: hidden;
   z-index: -10;
 }
+
+.go-up {
+  position: fixed;
+  z-index: 22;
+  top: 90vh;
+  left: 90vw;
+  border-radius: 8px;
+  background-color: aquamarine;
+  padding: 15px;
+}
+.go-up:hover {
+  cursor: pointer;
+}

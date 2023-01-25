@@ -2,7 +2,7 @@ import styles from "./FirstPage.module.css"
 import React from "react"
 import turtleImg from "../../assets/blueturtle.png"
 
-function FirstPage() {
+function FirstPage(props) {
   return (
     <div className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
@@ -30,6 +30,9 @@ function FirstPage() {
             </div>
           </div>
         </div>
+      </div>
+      <div className={`${styles["go-down"]}`} onClick={props.goNext}>
+        한 칸 아래로!
       </div>
     </div>
   )

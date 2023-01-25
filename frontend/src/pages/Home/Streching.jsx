@@ -1,9 +1,9 @@
 import styles from "./Stretching.module.css"
 import React from "react"
 
-function Stretching() {
+function Stretching(props) {
   return (
-    <div className={`${styles["container"]}`}>
+    <div ref={props.refVal} className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
         <div className={`${styles["left-box"]}`}>
           <div className={`${styles["stretching-timeset"]}`}>
@@ -36,6 +36,9 @@ function Stretching() {
             </div>
           </div>
         </div>
+      </div>
+      <div className={`${styles["go-down"]}`} onClick={props.goNext}>
+        한 칸 아래로!
       </div>
     </div>
   )

@@ -3,9 +3,9 @@ import React from "react"
 import turtleneck from "../../assets/turtleneck.png"
 import cuteturtle from "../../assets/cuteturtle.png"
 
-function Posture() {
+function Posture(props) {
   return (
-    <div className={`${styles["container"]}`}>
+    <div ref={props.refVal} className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
         <div className={`${styles["left-box"]}`}>
           <div className={`${styles["alert-box"]}`}>
@@ -28,6 +28,9 @@ function Posture() {
             alt="임시이미지"
           />
         </div>
+      </div>
+      <div className={`${styles["go-down"]}`} onClick={props.goNext}>
+        한 칸 아래로!
       </div>
     </div>
   )
