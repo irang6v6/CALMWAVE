@@ -6,20 +6,19 @@ import TodoColumn from "../../components/UI/TodoColumn"
 import TodoCard from "../../components/UI/TodoCard"
 
 export const RoomPage = () => {
+  const [progress, setProgress] = useState(true)
   const [todos, setTodos] = useState([
     { id: 1, name: "알고리즘", column: "To do" },
     { id: 2, name: "React", column: "To do" },
     { id: 3, name: "Redux", column: "To do" },
   ])
 
-  const moveCardHandler = (dragItem, hoverColumnIndex) => {
+  const moveCardHandler = (dragItem, hoverId) => {
     const dragTodo = todos.filter((todo) => todo.id === dragItem.id)[0]
     const dragTodoIndex = todos.indexOf(dragTodo)
     const hoverTodo = todos.filter(
-      (todo) => todo.column === dragItem.currentColumn
-    )[hoverColumnIndex]
+      (todo) => todo.id === hoverId)[0]
     const hoverTodoIndex = todos.indexOf(hoverTodo)
-
     if (dragTodo) {
       setTodos((prevState) => {
         const coppiedStateArray = [...prevState]
@@ -44,7 +43,9 @@ export const RoomPage = () => {
           id={todo.id}
           name={todo.name}
           currentColumn={todo.column}
+          progress={progress}
           setTodos={setTodos}
+          setProgress={setProgress}
           index={index}
           moveCardHandler={moveCardHandler}
         />
@@ -55,13 +56,13 @@ export const RoomPage = () => {
     <>
       <div className={`${styles["container"]}`}>
         <DndProvider backend={HTML5Backend}>
-          <TodoColumn title="To do" className={`bg-cw-indigo-7`}>
+          <TodoColumn title="To do" className={`bg-cw-indigo-7`} progress={progress}>
             {alignTodosInColumn("To do")}
           </TodoColumn>
-          <TodoColumn title="In Progress" className={`bg-cw-yellow-5`}>
+          <TodoColumn title="In Progress" className={`bg-cw-yellow-5`} progress={progress}>
             {alignTodosInColumn("In Progress")}
           </TodoColumn>
-          <TodoColumn title="Done" className={`bg-wb-mint-4`}>
+          <TodoColumn title="Done" className={`bg-wb-mint-4`} progress={progress}>
             {alignTodosInColumn("Done")}
           </TodoColumn>
         </DndProvider>

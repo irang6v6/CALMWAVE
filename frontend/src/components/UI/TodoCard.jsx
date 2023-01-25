@@ -9,6 +9,8 @@ export default function TodoCard({
   currentColumn,
   moveCardHandler,
   setTodos,
+  setProgress,
+  progress,
 }) {
   const changeTodoColumn = (currentTodo, columnName) => {
     setTodos((prevState) => {
@@ -29,6 +31,7 @@ export default function TodoCard({
       }
       const dragIndex = item.index
       const hoverIndex = index
+      const hoverId = id
       // Don't replace items with themselves
       if (dragIndex === hoverIndex) {
         return
@@ -54,7 +57,7 @@ export default function TodoCard({
         return
       }
       // Time to actually perform the action
-      moveCardHandler(item, hoverIndex)
+      moveCardHandler(item, hoverId)
       // Note: we're mutating the monitor item here!
       // Generally it's better to avoid mutations,
       // but it's good here for the sake of performance
@@ -68,6 +71,16 @@ export default function TodoCard({
     item: { index, name, currentColumn, id },
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult()
+      setProgress(() => {
+        if (dropResult) {
+          if (dropResult.name === "In Progress") {
+            return false
+          } else if (item.currentColumn === "In Progress") {
+            return true
+          }
+        }
+        return progress
+      })
       if (dropResult && dropResult.name === "In Progress") {
         changeTodoColumn(item, "In Progress")
       } else if (dropResult && dropResult.name === "Done") {
