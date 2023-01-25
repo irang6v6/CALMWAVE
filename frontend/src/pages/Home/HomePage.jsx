@@ -32,7 +32,8 @@ function HomePage() {
           <Wave
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
-            background={`rgba(31, 31, 36)`}
+            background={`rgba(255, 255, 255, 0.8)`}
+            // background={`rgba(31, 31, 36)`}
           />
         </div>
         <FirstPage />

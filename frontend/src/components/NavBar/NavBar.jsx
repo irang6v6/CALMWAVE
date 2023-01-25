@@ -1,16 +1,22 @@
 import styles from "./NavBar.module.css"
-import React from "react"
+import React, { useState } from "react"
 import logoImg from "../../assets/calmwave.png"
 import { NavLink } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { userActions } from "../../store/user-slice"
 import NavUserShortcut from "./NavUserShortcut/NavUserShortcut"
+import NavBarOverlay from "./NavBarOverlay/NavBarOverlay"
 
 function NavBar() {
   const isLogin = useSelector((state) => state.user.isLogin)
   const dispatch = useDispatch()
+  const [userShortcutMouseIn, setUserShortcutMouseIn] = useState(false)
   const toggleLogin = function () {
     dispatch(userActions.updateLogin())
+  }
+  const toggleUserShortcutMouseIn = function () {
+    setUserShortcutMouseIn((val) => !val)
+    console.log("??")
   }
   return (
     <div className={`${styles["header-container"]}`}>
@@ -32,7 +38,13 @@ function NavBar() {
             LOGIN SIGNUP
           </NavLink>
         ) : (
-          <NavUserShortcut className={`${styles["navbar-item"]}`} />
+          <div
+            onMouseEnter={toggleUserShortcutMouseIn}
+            onMouseLeave={toggleUserShortcutMouseIn}
+          >
+            <NavUserShortcut className={`${styles["navbar-item"]}`} />
+            <NavBarOverlay isVisible={userShortcutMouseIn} />
+          </div>
         )}
         <div onClick={toggleLogin}>인앤아웃</div>
 

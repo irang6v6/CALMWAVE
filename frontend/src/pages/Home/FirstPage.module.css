@@ -16,7 +16,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 36px;
-  background-color: rgba(255, 255, 255, 0.5);
+  /* background-color: rgba(255, 255, 255, 0.5); */
   transform: translateY(25px);
 }
 

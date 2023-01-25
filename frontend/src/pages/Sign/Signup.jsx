@@ -134,6 +134,7 @@ function Signup(props) {
   }
 
   const onInputNicknameHandler = function () {
+    console.log(nickRef)
     if (nickRef.current.value.length > 8) {
       return
     }

@@ -1,0 +1,18 @@
+.dropbox-container {
+  box-sizing: border-box;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  padding: 8px 15px 8px 15px;
+  transition: 0.5s;
+  transform: translateY(0px) translateX(-15px);
+  visibility: hidden;
+  opacity: 0;
+}
+
+.dropbox-container.ishover {
+  opacity: 1;
+  visibility: visible;
+  z-index: 15;
+  transform: translateY(13px) translateX(-15px);
+}

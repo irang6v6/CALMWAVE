@@ -1,18 +1,20 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import CwLogoImg from "../../../assets/calmWave2.png"
 import styles from "./SideNav.module.css"
 
 function SideNav(props) {
-  console.log(props)
+  const navigate = useNavigate()
+  const pushHome = function () {
+    navigate(`/mini/profile`)
+  }
   return (
     <div className={`${styles["mypageRouter"]}`}>
-      <a href="/profile">
-        <img
-          className={`${styles["logoimg"]}`}
-          src={CwLogoImg}
-          alt="calmwave logo"
-        />
-      </a>
+      <img
+        className={`${styles["logoimg"]}`}
+        src={CwLogoImg}
+        alt="calmwave logo"
+        onClick={pushHome}
+      />
       <NavLink
         to={`/profile/userinfo` || `/profile`}
         className={({ isActive }) =>
