@@ -1,17 +1,17 @@
-import "./UserInfo.css"
+import styles from "./UserInfo.module.css"
 
 function UserInfo() {
   return (
-    <div className="routecontainer1">
-      <div className="infoBox">
+    <div className={`${styles[`routercontainer1`]}`}>
+      <div className={`${styles[`infoBox`]}`}>
         <h3> My Profile </h3>
         <h1> Haneejo </h1>
-        <a href="#none" className="userInfoEdit">
+        <a href="#none" className={`${styles[`userInfoEdit`]}`}>
           회원정보 수정
         </a>
       </div>
 
-      <div className="info-Box">
+      <div className={`${styles["info-Box"]}`}>
         <h3> 어쩌구 저쩌궁 </h3>
       </div>
     </div>

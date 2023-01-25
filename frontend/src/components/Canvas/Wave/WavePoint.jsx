@@ -8,7 +8,7 @@ export class Point {
     this.CENTER_LINE = canvasHeight / 2.2 // 싸인 그래프 높이
     this.VELOCITY = 0.006
     this.AMPLITUDE = canvasHeight / 7.7 // 파고 높이 조정
-    this.POINT_RADIUS = 7
+    this.POINT_RADIUS = 5
     // canvasWidth / 600 < 3.5
     //   ? 3.5
     //   : canvasWidth / 600 < 2.5

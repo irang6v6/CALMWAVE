@@ -2,9 +2,9 @@ import styles from "./TodoList.module.css"
 import React from "react"
 import todoList from "../../assets/todolist.png"
 
-function TodoList() {
+function TodoList(props) {
   return (
-    <div className={`${styles["container"]}`}>
+    <div ref={props.refVal} className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
         <div className={`${styles["img-wrap"]}`}>
           <img src={todoList} alt="임시이미지" />
@@ -19,6 +19,9 @@ function TodoList() {
             업무 누적 시간을 한 눈에 확인할 수 있어요{" "}
           </p>
         </div>
+      </div>
+      <div className={`${styles["go-down"]}`} onClick={props.goNext}>
+        한 칸 아래로!
       </div>
     </div>
   )

@@ -100,6 +100,25 @@ function Signup(props) {
     [onPassword2Touched, userpassword2, password2IsValid, userpassword]
   )
 
+  const resetState = function () {
+    nickRef.current.value = ""
+    setUserNickname(() => nickRef.current.value)
+    emailRef.current.value = ""
+    setUseremail(() => emailRef.current.value)
+    passwordRef.current.value = ""
+    setUserpassword(() => passwordRef.current.value)
+    passwordRef2.current.value = ""
+    setUserpassword2(() => passwordRef2.current.value)
+    setOnNicknameTouched(false)
+    setOnEmailTouched(false)
+    setOnPasswordTouched(false)
+    setOnPassword2Touched(false)
+    setNickIsValid(false)
+    setEmailIsValid(false)
+    setPasswordIsValid(false)
+    setPassword2IsValid(false)
+  }
+
   const onSubmitHandler = function (event) {
     // Axios 요청
     event.preventDefault()
@@ -111,9 +130,11 @@ function Signup(props) {
   const toggleToLogin = function (event) {
     event.preventDefault()
     props.onLogin()
+    resetState()
   }
 
   const onInputNicknameHandler = function () {
+    console.log(nickRef)
     if (nickRef.current.value.length > 8) {
       return
     }

@@ -27,10 +27,10 @@ function SignPage({ pageRef }) {
     setLoginOrSignup((val) => !val)
   }
   const loginHandler = function () {
-    console.log("로그인!")
+    console.log("로그인! axios 요청 가야함!")
   }
   const signupHandler = function () {
-    console.log("회원가입!")
+    console.log("회원가입! axios 요청 가야함!")
   }
 
   return (
