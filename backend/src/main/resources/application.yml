@@ -16,6 +16,8 @@ spring:
     url: jdbc:mysql://localhost:3306/calmwave?serverTimezone=Asia/Seoul&useUnicode=true&characterEncoding=utf8
     username: cos
     password: cos1234
+  profiles:
+    include: oauth
 
   jpa:
     hibernate:
@@ -28,5 +30,16 @@ spring:
   logging.level:
     org.hibernate.SQL: debug
   #  org.hibernate.type: trace
+
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 492158022289-hi74phr5f2jrhr0qbgs9u48umqj4a6i2.apps.googleusercontent.com
+            client-secret: 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
+            scope:
+              - email
+              - profile
 
 

@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
 
         //principalDetailsService에 loadUserByUsername이 실행됨
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getUsername(), loginRequestDto.getPassword());
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(), loginRequestDto.getPassword());
         Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
         //log출력을 위한 로직
@@ -77,8 +77,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                     newRefreshToken, principalDetails.getUsername()));
         }
 
-        response.addHeader("AccessToken", "Bearer " + accessToken);
-        response.addHeader("RefreshToken", "Bearer " + refreshTokenRepository.findByUsername(principalDetails.getUsername()).get().getRefreshToken());
+        response.addHeader("AccessToken", accessToken);
+        response.addHeader("RefreshToken", refreshTokenRepository.findByUsername(principalDetails.getUsername()).get().getRefreshToken());
+        response.addHeader("userId",principalDetails.getUser().getId()+"");
 
     }
 }

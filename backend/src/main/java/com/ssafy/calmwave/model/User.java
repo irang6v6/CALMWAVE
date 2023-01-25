@@ -1,12 +1,10 @@
 package com.ssafy.calmwave.model;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.time.LocalDate;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,6 +13,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,10 +26,23 @@ public class User {
     private int stretchingIntervalMin;
     @CreationTimestamp
     @Column(name = "date_registered")
-    private LocalDate dateRegistered;
+    private Timestamp dateRegistered;
     private int quit;
     private String password;
     private String role;
+    private String provider;
+
+    @Builder
+    public User(String email, String nickname, int stretchingIntervalMin, int quit, String password, String role, String provider) {
+        this.username = email;
+        this.nickname = nickname;
+        this.stretchingIntervalMin = stretchingIntervalMin;
+        this.quit = quit;
+        this.password = password;
+        this.role = role;
+        this.provider = provider;
+    }
+
 
     public List<String> getRoleList() {
         if (this.role.length() > 0) {

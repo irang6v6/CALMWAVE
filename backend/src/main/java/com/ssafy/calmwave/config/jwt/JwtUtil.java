@@ -14,11 +14,12 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtUtil {
 
-    static final int AccessTokenTimeLimit = 60000 * 1;
-    static final int RefreshTokenTimeLimit = 60000 * 60 * 24 * 7;
+    public static final int AccessTokenTimeLimit = 60000 * 60 * 24 * 7;
+    public static final int RefreshTokenTimeLimit = 60000 * 60 * 24 * 7;
 
     // 토큰 검증
-    public static Boolean tokenValidation(String token,String secret) {
+    public static Boolean tokenValidation(String secret,String token) {
+        System.out.println(token);
         try {
             System.out.println("토큰 검증 시도");
             String username = JWT.require(Algorithm.HMAC512(secret)).build().verify(token).getClaim("username").asString();
@@ -37,6 +38,6 @@ public class JwtUtil {
                 .withClaim("id", id)
                 .withClaim("username", username)
                 .sign(Algorithm.HMAC512(secret));
-        return token;
+        return "Bearer "+token;
     }
 }
