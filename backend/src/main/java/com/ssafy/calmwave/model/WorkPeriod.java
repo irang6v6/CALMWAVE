@@ -26,7 +26,7 @@ public class WorkPeriod {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private com.ssafy.calmwave.User user;
+    private User user;
 
     @Column(name = "start_time", nullable = false)
     private Instant startTime;
@@ -50,7 +50,7 @@ public class WorkPeriod {
         this.work = work;
     }
 
-    public com.ssafy.calmwave.User getUser() {
+    public User getUser() {
         return user;
     }
 

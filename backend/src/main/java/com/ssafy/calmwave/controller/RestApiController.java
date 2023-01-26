@@ -36,7 +36,7 @@ public class RestApiController {
         if (findUser == null) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             user.setRole("ROLE_USER");
-            user.setQuit(0);
+            user.setDeleted((Byte.parseByte("0")));
             user.setStretchingIntervalMin(50);
             userRepository.save(user);
             resultMap.put("result", "ok");

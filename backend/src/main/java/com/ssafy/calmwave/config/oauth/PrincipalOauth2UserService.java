@@ -49,7 +49,7 @@ public class PrincipalOauth2UserService extends DefaultOAuth2UserService {
                     .email(email)
                     .role(role)
                     .provider(provider)
-                    .quit(0)
+                    .quit(Byte.parseByte("0"))
                     .nickname(username)
                     .stretchingIntervalMin(50)
                     .build();

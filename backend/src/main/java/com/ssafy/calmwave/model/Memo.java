@@ -24,7 +24,7 @@ public class Memo {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private com.ssafy.calmwave.User user;
+    private User user;
 
     public Long getId() {
         return id;
@@ -42,7 +42,7 @@ public class Memo {
         this.content = content;
     }
 
-    public com.ssafy.calmwave.User getUser() {
+    public User getUser() {
         return user;
     }
 

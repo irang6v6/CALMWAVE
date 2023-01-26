@@ -22,7 +22,7 @@ public class Posture {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
-    private com.ssafy.calmwave.User user;
+    private User user;
 
     @Column(name = "dtype", nullable = false, length = 1)
     private String dtype;
@@ -38,7 +38,7 @@ public class Posture {
         this.id = id;
     }
 
-    public com.ssafy.calmwave.User getUser() {
+    public User getUser() {
         return user;
     }
 
