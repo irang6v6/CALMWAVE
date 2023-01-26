@@ -22,10 +22,12 @@
 
 .text-wrap h1 {
   font-size: 2rem;
+  color: white;
 }
 
 .text-wrap p {
   font-size: 1.5rem;
+  color: white;
 }
 
 .img-wrap {

@@ -88,8 +88,20 @@ function Signup(props) {
   )
   useEffect(
     function () {
-      if (!userpassword2) {
+      if (userpassword2.trim().length === 0 && !onPassword2Touched) {
         setPassword2Classes(() => `${styles["form-input"]}`)
+        return
+      }
+      if (userpassword2.trim().length === 0 && onPassword2Touched) {
+        setPassword2Classes(
+          () => `${styles["form-input"]} ${styles["invalid"]}`
+        )
+        return
+      }
+      if (!passwordIsValid) {
+        setPassword2Classes(
+          () => `${styles["form-input"]} ${styles["invalid"]}`
+        )
         return
       }
       setPassword2IsValid(() => userpassword === userpassword2)
@@ -103,7 +115,13 @@ function Signup(props) {
         )
       }
     },
-    [onPassword2Touched, userpassword2, password2IsValid, userpassword]
+    [
+      onPassword2Touched,
+      userpassword2,
+      password2IsValid,
+      userpassword,
+      passwordIsValid,
+    ]
   )
 
   const resetState = function () {
@@ -125,23 +143,33 @@ function Signup(props) {
     setPassword2IsValid(false)
   }
 
-  const onSubmitHandler = function (event) {
-    // Axios 요청
+  const onSubmitHandler = async function (event) {
     event.preventDefault()
-    const status = props.onSignup(useremail, userpassword, userNickname)
-    console.log(status)
-    // 성공적으로 회원가입 시
-    // props.onLogin() // 로그인 창으로 넘겨주기
-    // 회원가입 실패 시
+    // 유효성에 따라 return 해줄지 적어야 함.
+    if (nickIsValid && emailIsValid && passwordIsValid && password2IsValid) {
+      const status = props.onSignup(
+        useremail,
+        userpassword,
+        userNickname,
+        resetState
+      )
+      console.log(status)
+
+      // 성공적으로 회원가입 시
+      // props.onLogin() // 로그인 창으로 넘겨주기
+      // 회원가입 실패 시
+    } else {
+      console.log("유효하지 않음~")
+    }
   }
   const toggleToLogin = function (event) {
     event.preventDefault()
+    // 유효성에 따라 return 해줄지 적어야 함.
     props.onLogin()
     resetState()
   }
 
   const onInputNicknameHandler = function () {
-    console.log(nickRef)
     if (nickRef.current.value.length > 8) {
       return
     }
