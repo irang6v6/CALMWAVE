@@ -44,13 +44,17 @@ const todosSlice = createSlice({
       state.onProgress = action.payload
     },
     changeTodos(state, action) {
-      console.log(action.payload)
       state.todos = action.payload
       // {workType, itemId} : column 종류, 해당 아이템 id unique 값
       // action.payload.workType //
     },
-    addTodo(state, action) {
-      state.todos.push(action.payload)
+    // addTodo(state, action) {
+    //   state.todos.push(action.payload)
+    // }
+    deleteTodo(state, action) {
+      const id = action.payload
+      console.log(id)
+      state.todos = state.todos.filter((todo) => todo.id !== id)
     }
   },
 })

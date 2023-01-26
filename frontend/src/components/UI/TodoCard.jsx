@@ -10,10 +10,14 @@ export default function TodoCard({
   title,
   index,
   description,
-  currentColumn,ap
+  currentColumn,
 }) {
   const todos = useSelector(state => state.todos.todos)
   const dispatch = useDispatch()
+
+  const deleteTodo = () => {
+    dispatch(todoActions.deleteTodo(id))
+  } 
 
   const moveCardHandler = (dragItem, hoverId) => {
     const dragTodo = todos.filter((todo) => todo.id === dragItem.id)[0]
@@ -131,6 +135,7 @@ export default function TodoCard({
     >
       <span>{title}</span>
       <span>{description}</span>
+      <button onClick={deleteTodo} className={`${styles["deleteButton"]}`}>X</button>
     </div>
   )
 }
