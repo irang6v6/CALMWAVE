@@ -27,7 +27,7 @@ export default function HandleTodo(props) {
 
   const dispatch = useDispatch()
   const submitTodo = () => {
-    const prevState = todos
+    const prevState = [...todos]
     const nowId = parseInt(id)
     if ( prevState.find(e => e.id === nowId) ){
       console.log("YES")

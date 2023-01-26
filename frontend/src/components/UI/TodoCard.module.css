@@ -7,6 +7,8 @@
   align-items: center;
   border-radius: 5px;
   margin: 3% 3% 3% 3%;
+  position: relative;
+
 }
 
 .ongoing {
@@ -18,4 +20,18 @@
   align-items: center;
   border-radius: 5px;
   margin: 4% 4% 4% 4%;
+  position: relative;
+
 }
+
+.deleteButton {
+  background-color: inherit;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  position: absolute;
+  top: 3%;
+  right: 3%;
+}
+
+
