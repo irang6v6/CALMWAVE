@@ -29,13 +29,23 @@ public class RestApiController {
     }
 
     @PostMapping("/join")
-    public String join(@RequestBody User user) {
-        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-        user.setRole("ROLE_USER");
-        user.setQuit(0);
-        user.setStretchingIntervalMin(50);
-        userRepository.save(user);
-        return "회원가입완료";
+    public ResponseEntity<?> join(@RequestBody User user) {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        User findUser = userRepository.findByUsername(user.getUsername());
+        if (findUser == null) {
+            user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+            user.setRole("ROLE_USER");
+            user.setQuit(0);
+            user.setStretchingIntervalMin(50);
+            userRepository.save(user);
+            resultMap.put("result", "ok");
+            status = HttpStatus.ACCEPTED;
+        } else {
+            resultMap.put("result", "이미 회원에 등록된 이메일 주소입니다.");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
     /**

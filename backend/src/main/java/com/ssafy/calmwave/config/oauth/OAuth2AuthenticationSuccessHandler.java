@@ -24,9 +24,7 @@ import java.util.Optional;
 public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationSuccessHandler {
 
     private JwtUtil tokenProvider;
-
     private AppProperties appProperties;
-
     private HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
 
@@ -67,8 +65,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 
-        String accessToken = tokenProvider.createToken("calmdown",principal.getUser().getId(),principal.getUser().getUsername(),JwtUtil.AccessTokenTimeLimit);
-        String refreshToken = tokenProvider.createToken("calmdown",principal.getUser().getId(),principal.getUser().getUsername(),JwtUtil.RefreshTokenTimeLimit);
+        String accessToken = tokenProvider.createToken(principal.getUser().getId(),principal.getUser().getUsername(),JwtUtil.AccessTokenTimeLimit);
+        String refreshToken = tokenProvider.createToken(principal.getUser().getId(),principal.getUser().getUsername(),JwtUtil.RefreshTokenTimeLimit);
 
         return UriComponentsBuilder.fromUriString("http://localhost:3000/")
             .queryParam("AccessToken", accessToken)

@@ -3,6 +3,7 @@ package com.ssafy.calmwave.config.jwt;
 import com.ssafy.calmwave.config.auth.PrincipalDetails;
 import com.ssafy.calmwave.config.repository.RefreshTokenRepository;
 import com.ssafy.calmwave.dto.LoginRequestDto;
+import com.ssafy.calmwave.exception.NotFoundUserException;
 import com.ssafy.calmwave.model.RefreshToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -26,7 +27,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     private final RefreshTokenRepository refreshTokenRepository;
     private final AuthenticationManager authenticationManager;
 
-
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
                                                 HttpServletResponse response) throws AuthenticationException {
@@ -44,7 +44,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         }
 
         //principalDetailsService에 loadUserByUsername이 실행됨
-        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(), loginRequestDto.getPassword());
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(loginRequestDto.getUsername(), loginRequestDto.getPassword());
+        System.out.println(
+            "usernamePasswordAuthenticationToken = " + usernamePasswordAuthenticationToken);
         Authentication authentication = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
 
         //log출력을 위한 로직
@@ -60,11 +62,10 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
         System.out.println("로그인 성공, AccessToken을 발급합니다.");
 
-        String accessToken = JwtUtil.createToken(secret,principalDetails.getUser().getId(), principalDetails.getUsername(), JwtUtil.AccessTokenTimeLimit);
-        String newRefreshToken = JwtUtil.createToken(secret,principalDetails.getUser().getId(), principalDetails.getUsername(), JwtUtil.RefreshTokenTimeLimit);
+        String accessToken = JwtUtil.createToken(principalDetails.getUser().getId(), principalDetails.getUsername(), JwtUtil.AccessTokenTimeLimit);
+        String newRefreshToken = JwtUtil.createToken(principalDetails.getUser().getId(), principalDetails.getUsername(), JwtUtil.RefreshTokenTimeLimit);
 
         Optional<RefreshToken> refreshToken = refreshTokenRepository.findByUsername(principalDetails.getUsername());
-
 
         //DB에 refresh token 저장
         if (refreshToken.isPresent()) {
@@ -76,10 +77,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             refreshTokenRepository.save(new RefreshToken(
                     newRefreshToken, principalDetails.getUsername()));
         }
-
         response.addHeader("AccessToken", accessToken);
         response.addHeader("RefreshToken", refreshTokenRepository.findByUsername(principalDetails.getUsername()).get().getRefreshToken());
         response.addHeader("userId",principalDetails.getUser().getId()+"");
 
+    }
+
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request,
+        HttpServletResponse response, AuthenticationException failed)
+        throws IOException, ServletException {
+        System.out.println("JwtAuthenticationFilter.unsuccessfulAuthentication");
+        response.sendError(403,"유저를 찾을 수 없습니다.");
     }
 }

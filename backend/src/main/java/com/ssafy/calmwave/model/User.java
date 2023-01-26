@@ -1,5 +1,7 @@
 package com.ssafy.calmwave.model;
 
+import java.time.LocalDate;
+import java.util.Date;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -8,25 +10,22 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
-public class User {
+public class User extends BaseTime{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
     private long id;
-    @Column(name = "email")
     private String username;
     private String nickname;
     @Column(name = "stretching_interval_min")
     private int stretchingIntervalMin;
-    @CreationTimestamp
-    @Column(name = "date_registered")
-    private Timestamp dateRegistered;
     private int quit;
     private String password;
     private String role;

@@ -2,9 +2,7 @@ package com.ssafy.calmwave.config;
 
 import com.ssafy.calmwave.config.jwt.JwtAuthenticationFilter;
 import com.ssafy.calmwave.config.jwt.JwtAuthorizationFilter;
-import com.ssafy.calmwave.config.jwt.JwtUtil;
 import com.ssafy.calmwave.config.oauth.OAuth2AuthenticationSuccessHandler;
-import com.ssafy.calmwave.config.oauth.OAuth2SuccessHandler;
 import com.ssafy.calmwave.config.oauth.PrincipalOauth2UserService;
 import com.ssafy.calmwave.config.repository.RefreshTokenRepository;
 import com.ssafy.calmwave.config.repository.UserRepository;
@@ -17,7 +15,6 @@ import org.springframework.security.config.annotation.authentication.configurati
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.filter.CorsFilter;
 
@@ -30,7 +27,6 @@ public class SecurityConfig {
     private final UserRepository userRepository;
     private final RefreshTokenRepository refreshTokenRepository;
     private final PrincipalOauth2UserService principalOauth2UserService;
-    private final OAuth2SuccessHandler oAuth2SuccessHandler;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
 
     @Value("${my.secret}")

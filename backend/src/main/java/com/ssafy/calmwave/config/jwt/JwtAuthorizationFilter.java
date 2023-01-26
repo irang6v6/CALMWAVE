@@ -49,22 +49,20 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
         String username = null;
 
-        if (JwtUtil.tokenValidation(secret,a_token)) {
+        if (JwtUtil.tokenValidation(a_token)) {
             System.out.println("access토큰이 정상입니다...");
             username = JWT.require(Algorithm.HMAC512(secret)).build().verify(a_token).getClaim("username").asString();
 
             //continue
-        } else if (JwtUtil.tokenValidation(secret,r_token)) {
+        } else if (JwtUtil.tokenValidation(r_token)) {
             System.out.println("access토큰은 유효기간이 지났지만 refresh토큰이 유효합니다. DB와 비교합니다.");
             username = JWT.require(Algorithm.HMAC512(secret)).build().verify(r_token).getClaim("username").asString();
 
             if (refreshTokenRepository.findByUsername(username).get().getRefreshToken().equals(request.getHeader("RefreshToken"))) {
                 System.out.println("DB확인 완료. RefreshToken으로 AccessToken을 재발급합니다.");
                 long id = JWT.require(Algorithm.HMAC512(secret)).build().verify(r_token).getClaim("id").asLong();
-                response.addHeader("AccessToken", JwtUtil.createToken(secret,id, username, JwtUtil.AccessTokenTimeLimit));
+                response.addHeader("AccessToken", JwtUtil.createToken(id, username, JwtUtil.AccessTokenTimeLimit));
             } else {
-                System.out.println("DB에 저장된 RefreshToken: "+refreshTokenRepository.findByUsername(username).get().getRefreshToken());
-                System.out.println("User가 가진 RefreshToken: "+request.getHeader("RefreshToken"));
                 System.out.println("refreshToken이 DB에 없거나 다릅니다..");
                 response.sendError(500, "토큰 불일치, 재로그인 필요");
                 return;

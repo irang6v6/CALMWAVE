@@ -14,11 +14,12 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtUtil {
 
+    private static final String secret = "calmdown";
     public static final int AccessTokenTimeLimit = 60000 * 60 * 24 * 7;
     public static final int RefreshTokenTimeLimit = 60000 * 60 * 24 * 7;
 
     // 토큰 검증
-    public static Boolean tokenValidation(String secret,String token) {
+    public static Boolean tokenValidation(String token) {
         System.out.println(token);
         try {
             System.out.println("토큰 검증 시도");
@@ -31,7 +32,7 @@ public class JwtUtil {
         }
     }
 
-    public static String createToken(String secret,long id, String username, int time) {
+    public static String createToken(long id, String username, int time) {
         String token = JWT.create()
                 .withSubject(username)
                 .withExpiresAt(new Date(System.currentTimeMillis() + (time)))
