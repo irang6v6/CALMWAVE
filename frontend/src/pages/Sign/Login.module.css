@@ -64,6 +64,7 @@
   font-weight: 600;
   box-sizing: border-box;
   border-radius: 6px;
+  border: none;
   cursor: pointer;
   border-color: rgba(255, 255, 255, 0);
   background-color: rgba(253, 201, 33, 0.95);
@@ -134,4 +135,15 @@
 .social-image:hover {
   cursor: pointer;
   transform: scale(130%);
+}
+
+.button-container {
+  width: 15vw;
+  height: 50px;
+  margin: 0 0 12px 0;
+  box-sizing: border-box;
+  padding: 10px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

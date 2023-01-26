@@ -6,6 +6,12 @@ import {
   passwordValidation,
 } from "../../utils/validation"
 import styles from "./Signup.module.css"
+/* eslint-disable */
+import {
+  SpinnerStir,
+  SpinnerDots,
+  SpinnerCircle,
+} from "../../components/UI/Spinner"
 
 function Signup(props) {
   const [userNickname, setUserNickname] = useState("")
@@ -122,9 +128,10 @@ function Signup(props) {
   const onSubmitHandler = function (event) {
     // Axios 요청
     event.preventDefault()
-    props.onSignup()
+    const status = props.onSignup(useremail, userpassword, userNickname)
+    console.log(status)
     // 성공적으로 회원가입 시
-    props.onLogin()
+    // props.onLogin() // 로그인 창으로 넘겨주기
     // 회원가입 실패 시
   }
   const toggleToLogin = function (event) {
@@ -245,7 +252,13 @@ function Signup(props) {
           />
           <br />
         </div>
-        <button className={`${styles["form-button"]}`}>회원 가입</button>
+        <div className={`${styles["button-container"]}`}>
+          {props.isLoading ? (
+            <SpinnerDots />
+          ) : (
+            <button className={`${styles["form-button"]}`}>회원 가입</button>
+          )}
+        </div>
       </form>
     </div>
   )

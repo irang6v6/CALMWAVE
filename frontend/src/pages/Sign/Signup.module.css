@@ -73,6 +73,7 @@
   font-weight: 600;
   box-sizing: border-box;
   border-radius: 6px;
+  border: none;
   cursor: pointer;
   border-color: rgba(255, 255, 255, 0);
   background-color: rgba(253, 201, 33, 0.95);
@@ -108,4 +109,15 @@
   cursor: pointer;
   color: rgba(52, 105, 174);
   transform: scale(105%) translate(-1px, 5px);
+}
+
+.button-container {
+  width: 15vw;
+  height: 50px;
+  margin: 0 0 12px 0;
+  box-sizing: border-box;
+  padding: 10px 0 0 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

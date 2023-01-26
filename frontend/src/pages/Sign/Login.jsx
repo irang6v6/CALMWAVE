@@ -4,6 +4,12 @@ import styles from "./Login.module.css"
 import googleLogo from "../../assets/google_social.png"
 import kakaoLogo from "../../assets/kakao_social.png"
 import naverLogo from "../../assets/naver_social.png"
+/* eslint-disable */
+import {
+  SpinnerStir,
+  SpinnerDots,
+  SpinnerCircle,
+} from "../../components/UI/Spinner"
 
 function Login(props) {
   const [userEmail, setUserEmail] = useState("") // 입력 받는 이메일
@@ -64,7 +70,7 @@ function Login(props) {
 
   const onSubmitHandler = function (event) {
     event.preventDefault()
-    props.onLogin()
+    props.onLogin(userEmail, userPassword)
   }
 
   const onInputEmailHandler = function () {
@@ -136,7 +142,13 @@ function Login(props) {
           />
           <br />
         </div>
-        <button className={`${styles["form-button"]}`}>로그인</button>
+        <div className={`${styles["button-container"]}`}>
+          {props.isLoading ? (
+            <SpinnerDots />
+          ) : (
+            <button className={`${styles["form-button"]}`}>로그인</button>
+          )}
+        </div>
         <div className={`${styles["social-container"]}`}>
           <img
             alt="구글"
