@@ -7,6 +7,7 @@ import TodoList from "./TodoList"
 import Posture from "./Posture"
 import Stretching from "./Streching"
 import Stress from "./Stress"
+import LastPage from "./LastPage"
 import NavBar from "../../components/NavBar/NavBar"
 import Wave from "../../components/Canvas/Wave/Wave"
 import { useRef, useState, useEffect } from "react" //
@@ -16,7 +17,8 @@ function HomePage() {
   const [canvasHeight, setCanvasHeight] = useState(0)
   const pageRef = useRef(null)
   const secondRef = useRef(null)
-  const [worktimeRef, todoRef, postureRef, stretchRef, stressRef] = [
+  const [worktimeRef, todoRef, postureRef, stretchRef, stressRef, LastRef] = [
+    useRef(null),
     useRef(null),
     useRef(null),
     useRef(null),
@@ -53,6 +55,9 @@ function HomePage() {
   const goStress = function () {
     stressRef.current.scrollIntoView({ behavior: "smooth" })
   }
+  const goLast = function () {
+    LastRef.current.scrollIntoView({ behavior: "smooth" })
+  }
   return (
     <>
       <NavBar />
@@ -71,7 +76,8 @@ function HomePage() {
         <TodoList refVal={todoRef} goNext={goPosture} />
         <Posture refVal={postureRef} goNext={goStreching} />
         <Stretching refVal={stretchRef} goNext={goStress} />
-        <Stress refVal={stressRef} />
+        <Stress refVal={stressRef} goNext={goLast}/>
+        <LastPage refVal={LastRef}/>
         <div className={`${styles["go-up"]}`} onClick={goUp}>
           위로!
         </div>
