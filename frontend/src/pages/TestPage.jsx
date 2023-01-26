@@ -7,6 +7,7 @@ import { useState, useEffect } from "react"
 import someImg from "../assets/calmwave.png"
 import NightSky from "../components/Canvas/NightSky/NightSky"
 import Earth from "../components/Canvas/Earth/Earth"
+import SecondNightSky from "../components/Canvas/SecondNightSky/SecondNightsky"
 
 function TestPage() {
   const [canvasWidth, setCanvasWidth] = useState(0)
@@ -26,6 +27,11 @@ function TestPage() {
       <div style={{ display: "none" }}>
         <img src={someImg} id={`test-logo`} />
       </div>
+      <SecondNightSky
+        canvasWidth={canvasWidth}
+        canvasHeight={canvasHeight}
+        background={`rgba(32, 38, 38, 1) `}
+      />
       <Earth
         canvasWidth={canvasWidth}
         canvasHeight={canvasHeight}
