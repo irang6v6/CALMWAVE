@@ -70,6 +70,10 @@ function Login(props) {
 
   const onSubmitHandler = function (event) {
     event.preventDefault()
+    if (emailIsValid && passwordIsValid) {
+    } else {
+      console.log("유효하지 않음~")
+    }
     props.onLogin(userEmail, userPassword)
   }
 
@@ -94,6 +98,10 @@ function Login(props) {
     event.preventDefault()
     props.onSignup()
     resetState()
+  }
+
+  const googleLogin = function () {
+    props.googleLogin()
   }
 
   return (
@@ -154,6 +162,7 @@ function Login(props) {
             alt="구글"
             src={googleLogo}
             className={`${styles["social-image"]}`}
+            onClick={googleLogin}
           />
           <img
             alt="카카오"

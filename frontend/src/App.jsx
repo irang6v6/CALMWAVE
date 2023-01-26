@@ -9,6 +9,10 @@ import RoomResult from "./pages/Room/RoomResult/RoomResult"
 import SignParentPage from "./pages/Sign/SignParentPage"
 import TestPage from "./pages/TestPage"
 import NotFound from "./pages/NotFound/NotFound"
+// import axios from "axios"
+
+// axios.defaults.baseURL = ""
+// axios.defaults.transformRequest = []
 
 function App() {
   return (
