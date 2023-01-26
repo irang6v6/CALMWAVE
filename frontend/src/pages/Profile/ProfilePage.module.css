@@ -25,45 +25,46 @@ body {
 
 .container {
   width: 100%;
-  /* height: 100vh; */
-  background-color: rgb(224, 224, 224);
+  height: 100vh;
+  background-color: rgb(255, 255, 255);
   /* border: 5px solid #000; */
   display: flex;
   justify-content: center;
 }
 
 .inner {
-  display: flex;
-  width: 70vw;
-  height: 100vh;
+  /* display: flex; */
+  width: 100%;
+  margin-top: 3%;
+  /* height: 100vh; */
 
   /* background-color: pink; */
   /* background: linear-gradient(#90c0ff, rgb(246, 246, 255)) */
 }
 
-.content-box {
-  display: flex;
+/* .content-box { */
+  /* display: flex; */
   /* height: 100%; */
-}
+/* } */
 
-.mypageRouter {
-  background-color: #75b1ff;
+/* .mypageRouter { */
+  /* background-color: #75b1ff;
   text-align: center;
   width: 15vw;
   height: 100vh;
   display: flex;
-  flex-direction: column;
+  flex-direction: column; */
   /* padding-top: 30px; */
   /* position:absolute; */
-}
+/* } */
 
 .right-box {
   /* border: 1px solid #000; */
-  width: 85vw;
+  width: 100%;
   height: 100%;
   background-color: #fff;
-  overflow-y: scroll;
-  scrollbar-width: none;
+  /* overflow-y: scroll; */
+  /* scrollbar-width: none; */
 }
 .right-box::-webkit-scrollbar {
   display: none;
