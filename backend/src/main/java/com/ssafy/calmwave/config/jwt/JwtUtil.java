@@ -7,6 +7,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.Date;
 
 @Slf4j
@@ -35,7 +37,22 @@ public class JwtUtil {
     public static String createToken(long id, String username, int time) {
         String token = JWT.create()
                 .withSubject(username)
-                .withExpiresAt(new Date(System.currentTimeMillis() + (time)))
+                .withExpiresAt(Date.from(LocalDateTime.now()
+                        .plusMinutes(1)
+                        .atZone(ZoneId.systemDefault()).toInstant()))
+                .withClaim("id", id)
+                .withClaim("username", username)
+                .sign(Algorithm.HMAC512(secret));
+        return "Bearer"+token;
+    }
+
+    public static String createRefreshToken(long id, String username, int time) {
+        String token = JWT.create()
+                .withSubject(username)
+                .withAudience(username)
+                .withExpiresAt(Date.from(LocalDateTime.now()
+                        .plusMinutes(time)
+                        .atZone(ZoneId.systemDefault()).toInstant()))
                 .withClaim("id", id)
                 .withClaim("username", username)
                 .sign(Algorithm.HMAC512(secret));

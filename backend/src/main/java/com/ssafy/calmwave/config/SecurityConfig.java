@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,6 +27,7 @@ public class SecurityConfig {
     private final CorsFilter corsFilter;
     private final UserRepository userRepository;
     private final RefreshTokenRepository refreshTokenRepository;
+    private final RedisTemplate<String, String> redisTemplate;
     private final PrincipalOauth2UserService principalOauth2UserService;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
 
@@ -36,33 +38,33 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.csrf().disable();//브라우저간의 정보전달이 없기 때문에 꺼놔도 됨
         http.sessionManagement()
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //세션 안쓸게(JWT 쓸거니까)(stateless 서버)
-            .and()
-            .addFilter(corsFilter)
-            .formLogin().disable()
-            .httpBasic().disable()
-            .authorizeRequests()
-            .antMatchers("/api/v1/user/**")
-            .access("hasRole('ROLE_USER')")
-            .anyRequest().permitAll()
-            .and()
-            .addFilter(new JwtAuthenticationFilter(secret, refreshTokenRepository,
-                authenticationManager(http.getSharedObject(AuthenticationConfiguration.class))))
-            .addFilter(new JwtAuthorizationFilter(secret,
-                authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)),
-                userRepository, refreshTokenRepository))
-            .oauth2Login()
-            .userInfoEndpoint()
-            .userService(principalOauth2UserService)
-            .and()
-            .successHandler(oAuth2AuthenticationSuccessHandler);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //세션 안쓸게(JWT 쓸거니까)(stateless 서버)
+                .and()
+                .addFilter(corsFilter)
+                .formLogin().disable()
+                .httpBasic().disable()
+                .authorizeRequests()
+                .antMatchers("/api/v1/user/**")
+                .access("hasRole('ROLE_USER')")
+                .anyRequest().permitAll()
+                .and()
+                .addFilter(new JwtAuthenticationFilter(secret, refreshTokenRepository,
+                        authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisTemplate))
+                .addFilter(new JwtAuthorizationFilter(secret,
+                        authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)),
+                        userRepository, redisTemplate))
+                .oauth2Login()
+                .userInfoEndpoint()
+                .userService(principalOauth2UserService)
+                .and()
+                .successHandler(oAuth2AuthenticationSuccessHandler);
         return http.build();
     }
 
     @Bean
     public AuthenticationManager authenticationManager(
-        AuthenticationConfiguration authenticationConfiguration)
-        throws Exception {
+            AuthenticationConfiguration authenticationConfiguration)
+            throws Exception {
         return authenticationConfiguration.getAuthenticationManager();
     }
 

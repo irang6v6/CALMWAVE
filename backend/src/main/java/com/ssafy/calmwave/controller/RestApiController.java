@@ -1,10 +1,12 @@
 package com.ssafy.calmwave.controller;
 
+import com.ssafy.calmwave.config.jwt.JwtUtil;
 import com.ssafy.calmwave.config.repository.RefreshTokenRepository;
 import com.ssafy.calmwave.config.repository.UserRepository;
 import com.ssafy.calmwave.model.RefreshToken;
 import com.ssafy.calmwave.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequiredArgsConstructor
@@ -21,7 +24,8 @@ public class RestApiController {
 
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
     private final UserRepository userRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
+    private final RedisTemplate<String, String> redisTemplate;
+//    private final RefreshTokenRepository refreshTokenRepository;
 
     @GetMapping
     public String home() {
@@ -84,8 +88,7 @@ public class RestApiController {
         HttpStatus status;
         try {
             Optional<User> user = userRepository.findById(userid);
-            Optional<RefreshToken> refreshToken = refreshTokenRepository.findByUsername(user.get().getUsername());
-            refreshTokenRepository.deleteById(refreshToken.get().getId());
+            redisTemplate.delete("RefreshToken:" + user.get().getUsername());
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
