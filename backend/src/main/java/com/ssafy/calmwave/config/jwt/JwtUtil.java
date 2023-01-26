@@ -14,7 +14,7 @@ import java.util.Date;
 @RequiredArgsConstructor
 public class JwtUtil {
 
-    private static final String secret = "calmdown";
+    private static final String secret = "calmDown";
     public static final int AccessTokenTimeLimit = 60000 * 60 * 24 * 7;
     public static final int RefreshTokenTimeLimit = 60000 * 60 * 24 * 7;
 
@@ -39,6 +39,6 @@ public class JwtUtil {
                 .withClaim("id", id)
                 .withClaim("username", username)
                 .sign(Algorithm.HMAC512(secret));
-        return "Bearer "+token;
+        return "Bearer"+token;
     }
 }

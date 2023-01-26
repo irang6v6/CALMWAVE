@@ -5,6 +5,7 @@ import com.ssafy.calmwave.config.auth.PrincipalDetails;
 import com.ssafy.calmwave.config.repository.RefreshTokenRepository;
 import com.ssafy.calmwave.config.repository.UserRepository;
 import com.ssafy.calmwave.model.User;
+import javax.servlet.http.Cookie;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -44,8 +45,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             return;
         }
 
-        String a_token = request.getHeader("AccessToken").replace("Bearer ", "");
-        String r_token = request.getHeader("RefreshToken").replace("Bearer ", "");
+        String a_token = request.getHeader("AccessToken").replace("Bearer", "");
+        String r_token = request.getHeader("RefreshToken").replace("Bearer", "");
 
         String username = null;
 
@@ -61,7 +62,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             if (refreshTokenRepository.findByUsername(username).get().getRefreshToken().equals(request.getHeader("RefreshToken"))) {
                 System.out.println("DB확인 완료. RefreshToken으로 AccessToken을 재발급합니다.");
                 long id = JWT.require(Algorithm.HMAC512(secret)).build().verify(r_token).getClaim("id").asLong();
-                response.addHeader("AccessToken", JwtUtil.createToken(id, username, JwtUtil.AccessTokenTimeLimit));
+                String newAccessToken=JwtUtil.createToken(id,username,JwtUtil.AccessTokenTimeLimit);
+                response.addCookie(new Cookie("AccessToken",newAccessToken));
             } else {
                 System.out.println("refreshToken이 DB에 없거나 다릅니다..");
                 response.sendError(500, "토큰 불일치, 재로그인 필요");
