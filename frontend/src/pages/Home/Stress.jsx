@@ -16,6 +16,9 @@ function Stress(props) {
           표정이 너무 안 좋아요, 잠시 리프레쉬 시간을 가져보는 것이 어떤가요?
         </p>
       </div>
+      <div className={`${styles["go-down"]}`} onClick={props.goNext}>
+        한 칸 아래로!
+      </div>
     </div>
   )
 }

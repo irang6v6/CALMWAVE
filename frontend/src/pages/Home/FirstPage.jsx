@@ -1,6 +1,7 @@
 import styles from "./FirstPage.module.css"
 import React from "react"
 import turtleImg from "../../assets/blueturtle.png"
+import { NavLink } from "react-router-dom"
 
 function FirstPage(props) {
   return (
@@ -25,8 +26,8 @@ function FirstPage(props) {
               voluptatem dolorum, magni ipsa ducimus totam{" "}
             </p>
             <div className={`${styles["btn-wrap"]}`}>
-              <div className={`${styles["start-btn"]}`}>START</div>
-              <div className={`${styles["mypage-btn"]}`}>MYPAGE</div>
+              <div className={`${styles["start-btn"]}`}><NavLink to={`/room`}>START</NavLink></div>
+              <div className={`${styles["mypage-btn"]}`}><NavLink to={`/profile`}>MY PAGE</NavLink></div>
             </div>
           </div>
         </div>
