@@ -63,7 +63,7 @@ function HomePage() {
           <Wave
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
-            background={`rgba(255, 255, 255, 0.8)`}
+            background={`rgb(235, 247, 251)`}
             // background={`rgba(31, 31, 36)`}
           />
         </div>
