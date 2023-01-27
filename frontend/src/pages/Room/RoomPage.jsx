@@ -21,6 +21,7 @@ export const RoomPage = () => {
           currentColumn={todo.column}
           description={todo.description}
           index={index}
+          time={todo.time}
         />
       ))
   }

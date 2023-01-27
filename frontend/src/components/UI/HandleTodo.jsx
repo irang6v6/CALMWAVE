@@ -30,8 +30,6 @@ export default function HandleTodo(props) {
     const prevState = [...todos]
     const nowId = parseInt(id)
     if ( prevState.find(e => e.id === nowId) ){
-      console.log("YES")
-      console.log(idRef.current.value)
       dispatch(todoActions.changeTodos(
         prevState.map((e) => {
           return {
@@ -54,7 +52,6 @@ export default function HandleTodo(props) {
     idRef.current.value = ""
     titleRef.current.value = ""
     descriptionRef.current.value = ""
-    console.log(todos)
   }
   return (
     <>
