@@ -17,10 +17,12 @@ function NavBar() {
   }
   const toggleUserShortcutMouseIn = function () {
     setUserShortcutMouseIn((val) => !val)
-    console.log("??")
   }
   const pushHome = function () {
     navigate(`/`)
+  }
+  const pushProfile = function () {
+    navigate(`/profile`)
   }
   return (
     <div className={`${styles["header-container"]}`}>
@@ -45,7 +47,10 @@ function NavBar() {
             onMouseEnter={toggleUserShortcutMouseIn}
             onMouseLeave={toggleUserShortcutMouseIn}
           >
-            <NavUserShortcut className={`${styles["navbar-item"]}`} />
+            <NavUserShortcut
+              className={`${styles["navbar-item"]}`}
+              onClick={pushProfile}
+            />
             <NavBarOverlay isVisible={userShortcutMouseIn} />
           </div>
         )}

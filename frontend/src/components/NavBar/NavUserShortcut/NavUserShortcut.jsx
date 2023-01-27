@@ -6,7 +6,10 @@ function NavUserShortcut(props) {
   const userDescription = useSelector((state) => state.user.description)
 
   return (
-    <div className={`${props.className} ${styles["shortcut-container"]}`}>
+    <div
+      className={`${props.className} ${styles["shortcut-container"]}`}
+      onClick={props.onClick}
+    >
       <div>{userNickname}</div>
       <div>{userDescription}</div>
     </div>

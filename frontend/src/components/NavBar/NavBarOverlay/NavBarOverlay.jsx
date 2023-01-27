@@ -19,10 +19,18 @@ function NavBarOverlay(props) {
   // useEffect(function() {}, [props.menuList]) // 메뉴 리스트를 주면 호버메뉴를 만들어준다.
   return (
     <div className={` ${dropboxClasses}`}>
-      <NavLink to={`/profile/userinfo`}>내 정보</NavLink>
-      <NavLink to={`/profile/graph`}>그래프</NavLink>
-      <NavLink to={`/profile/router3`}>라우터3</NavLink>
-      <NavLink to={`/profile/router4`}>라우터4</NavLink>
+      <NavLink to={`/profile/userinfo`} className={`${styles["dropbox-item"]}`}>
+        내 정보
+      </NavLink>
+      <NavLink to={`/profile/graph`} className={`${styles["dropbox-item"]}`}>
+        그래프
+      </NavLink>
+      <NavLink to={`/profile/router3`} className={`${styles["dropbox-item"]}`}>
+        라우터3
+      </NavLink>
+      <NavLink to={`/profile/router4`} className={`${styles["dropbox-item"]}`}>
+        라우터4
+      </NavLink>
     </div>
   )
 }
