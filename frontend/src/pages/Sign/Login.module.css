@@ -68,7 +68,7 @@
   cursor: pointer;
   border-color: rgba(255, 255, 255, 0);
   background-color: rgba(253, 201, 33, 0.95);
-  transition: 0.4s;
+  transition: 0.5s;
   width: 15vw;
   margin: 8px auto 8px auto;
   padding: 10px 35px 10px 35px;
@@ -76,6 +76,21 @@
 
 .form-button:hover {
   transform: scale(105%);
+}
+.button-invalid {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: none;
+  border-color: rgba(255, 255, 255, 0);
+  background-color: rgba(222, 222, 222, 0.95);
+  transition: 0.5s;
+  width: 15vw;
+  margin: 8px 0 8px 0;
+  padding: 10px 35px 10px 35px;
+  pointer-events: none;
 }
 .input-container {
   width: 100%;

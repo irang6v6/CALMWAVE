@@ -23,12 +23,17 @@ function Login(props) {
   const [passwordClasses, setPasswordClasses] = useState(
     `${styles["form-input"]}`
   )
+  const [buttonClasses, setButtonClasses] = useState(
+    `${styles["button-invalid"]}`
+  )
   const [emailRef, passwordRef] = [useRef(), useRef()]
 
   useEffect(
     function () {
-      setEmailIsValid(() => emailValidation(userEmail).status)
-      if (emailIsValid) {
+      const { status: validStatus, message: validMessage } =
+        emailValidation(userEmail)
+      setEmailIsValid(() => validStatus)
+      if (validStatus) {
         setEmailClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
       } else if (!onEmailTouched) {
         setEmailClasses(() => `${styles["form-input"]}`)
@@ -36,17 +41,14 @@ function Login(props) {
         setEmailClasses(() => `${styles["form-input"]} ${styles["invalid"]}`)
       }
     },
-    [onEmailTouched, userEmail, emailIsValid]
+    [onEmailTouched, userEmail]
   )
   useEffect(
     function () {
-      setPasswordIsValid(() => passwordValidation(userPassword).status)
-    },
-    [userPassword]
-  )
-  useEffect(
-    function () {
-      if (passwordIsValid) {
+      const { status: validStatus, message: validMessage } =
+        passwordValidation(userPassword)
+      setPasswordIsValid(() => validStatus)
+      if (validStatus) {
         setPasswordClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
       } else if (!onPasswordTouched) {
         setPasswordClasses(() => `${styles["form-input"]}`)
@@ -54,7 +56,18 @@ function Login(props) {
         setPasswordClasses(() => `${styles["form-input"]} ${styles["invalid"]}`)
       }
     },
-    [onPasswordTouched, passwordIsValid]
+    [onPasswordTouched, userPassword]
+  )
+
+  useEffect(
+    function () {
+      if (emailIsValid && passwordIsValid) {
+        setButtonClasses(() => `${styles["form-button"]}`)
+      } else {
+        setButtonClasses(() => `${styles["button-invalid"]}`)
+      }
+    },
+    [emailIsValid, passwordIsValid]
   )
 
   const resetState = function () {
@@ -73,6 +86,7 @@ function Login(props) {
     if (emailIsValid && passwordIsValid) {
     } else {
       console.log("유효하지 않음~")
+      return
     }
     props.onLogin(userEmail, userPassword)
   }
@@ -154,7 +168,7 @@ function Login(props) {
           {props.isLoading ? (
             <SpinnerDots />
           ) : (
-            <button className={`${styles["form-button"]}`}>로그인</button>
+            <button className={buttonClasses}>로그인</button>
           )}
         </div>
         <div className={`${styles["social-container"]}`}>
