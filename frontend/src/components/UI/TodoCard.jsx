@@ -12,23 +12,23 @@ export default function TodoCard({
   currentColumn,
   time,
 }) {
-  const [startTime, ] = useState(Date.now())
+  const [startTime] = useState(Date.now())
   const [currentTime, setCurrentTime] = useState(Date.now())
-  const [running, ] = useState(currentColumn==="In Progress")
+  const [running] = useState(currentColumn === "In Progress")
   const todos = useSelector((state) => state.todos.todos)
   const dispatch = useDispatch()
 
   useEffect(() => {
     let interval
-        if (running) {
+    if (running) {
       interval = setInterval(() => {
-        setCurrentTime(Date.now());
-      }, 10);
+        setCurrentTime(Date.now())
+      }, 10)
     } else if (!running) {
-      clearInterval(interval);
+      clearInterval(interval)
     }
-    return () => clearInterval(interval);
-  }, [running]);
+    return () => clearInterval(interval)
+  }, [running])
 
   const deleteTodo = () => {
     dispatch(todoActions.deleteTodo(id))
@@ -118,7 +118,11 @@ export default function TodoCard({
       const dropResult = monitor.getDropResult()
       if (dropResult) {
         if (dropResult.title) {
-          changeTodoState(item.id, dropResult.title, time+currentTime-startTime)
+          changeTodoState(
+            item.id,
+            dropResult.title,
+            time + currentTime - startTime
+          )
           if (dropResult.title === "In Progress") {
             dispatch(todoActions.setProgress(true))
           } else if (
@@ -161,8 +165,17 @@ export default function TodoCard({
         </div>
       ) : (
         <div>
-          <span>{("0" + Math.floor(((time+currentTime-startTime) / 60000) % 60)).slice(-2)}:</span>
-          <span>{("0" + Math.floor(((time+currentTime-startTime) / 1000) % 60)).slice(-2)}</span>
+          <span>
+            {(
+              "0" + Math.floor(((time + currentTime - startTime) / 60000) % 60)
+            ).slice(-2)}
+            :
+          </span>
+          <span>
+            {(
+              "0" + Math.floor(((time + currentTime - startTime) / 1000) % 60)
+            ).slice(-2)}
+          </span>
         </div>
       )}
     </div>

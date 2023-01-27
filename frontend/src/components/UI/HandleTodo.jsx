@@ -43,10 +43,11 @@ export default function HandleTodo(props) {
       dispatch(todoActions.changeTodos(
         [...prevState,
         {
-        id: id,
+        id: nowId,
         title: title,
         description: description,
         column: "To do",
+        time: 0,
       }]))
     }
     idRef.current.value = ""
