@@ -5,7 +5,6 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-
 ### STS ###
 .apt_generated
 .classpath
@@ -23,6 +22,7 @@ bin/
 *.iws
 *.iml
 *.ipr
+*.yml
 out/
 !**/src/main/**/out/
 !**/src/test/**/out/
@@ -36,5 +36,3 @@ out/
 
 ### VS Code ###
 .vscode/
-application.yml
-!/.gitignore
