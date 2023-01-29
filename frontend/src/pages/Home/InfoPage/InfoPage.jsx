@@ -1,7 +1,7 @@
-import styles from "./SecondPage.module.css"
+import styles from "./InfoPage.module.css"
 import React from "react"
 
-function SecondPage(props) {
+function InfoPage(props) {
   return (
     <div ref={props.refVal} className={`${styles["container"]}`}>
       <h2>
@@ -17,4 +17,4 @@ function SecondPage(props) {
     </div>
   )
 }
-export default SecondPage
+export default InfoPage
