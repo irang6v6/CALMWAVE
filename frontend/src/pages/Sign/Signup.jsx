@@ -141,13 +141,19 @@ function Signup(props) {
   )
   useEffect(
     function () {
-      if (nickIsValid && emailIsValid && passwordIsValid && password2IsValid) {
+      if (
+        nickIsValid &&
+        emailIsValid &&
+        passwordIsValid &&
+        passwordRef2.current.value.trim().length !== 0 &&
+        password2IsValid
+      ) {
         setButtonClasses(() => `${styles["form-button"]}`)
       } else {
         setButtonClasses(() => `${styles["button-invalid"]}`)
       }
     },
-    [nickIsValid, emailIsValid, passwordIsValid, password2IsValid]
+    [nickIsValid, emailIsValid, passwordIsValid, password2IsValid, passwordRef2]
   )
 
   const resetState = function () {
