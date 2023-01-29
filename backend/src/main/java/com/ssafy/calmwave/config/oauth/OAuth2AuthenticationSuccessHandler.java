@@ -66,7 +66,7 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 
         String accessToken = tokenProvider.createToken(principal.getUser().getId(),principal.getUser().getUsername(),JwtUtil.AccessTokenTimeLimit);
-        String refreshToken = tokenProvider.createToken(principal.getUser().getId(),principal.getUser().getUsername(),JwtUtil.RefreshTokenTimeLimit);
+        String refreshToken = tokenProvider.createRefreshToken(principal.getUser().getId(),principal.getUser().getUsername(),JwtUtil.RefreshTokenTimeLimit);
 
         return UriComponentsBuilder.fromUriString("http://localhost:3000/")
             .queryParam("AccessToken", accessToken)

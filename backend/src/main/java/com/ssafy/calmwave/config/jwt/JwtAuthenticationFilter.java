@@ -7,6 +7,7 @@ import com.ssafy.calmwave.exception.RefreshTokenException;
 import com.ssafy.calmwave.model.RefreshToken;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.PrintWriter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -90,11 +91,34 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         System.out.println("AccessToken: " + accessToken);
         System.out.println("RefreshToken: " + refreshToken);
 
-        //response.addHeader로 안되는지 다시 테스트/ 근데 쿠키 되는지도 봐야함 ;
-        response.addCookie(new Cookie("AccessToken", accessToken));
-        response.addCookie(new Cookie("RefreshToken",refreshToken));
+//        response.setHeader("Access-Control-Allow-Credentials", "true");
+//        response.setHeader("Access-Control-Allow-Headers", "*");
+//        response.setHeader("Access-Control-Allow-Methods", "*");
+//        response.setHeader("Access-Control-Allow-Origin", "*");
 
-        response.setStatus(200, "ok");
+//        response.setContentType("application/json");
+//        response.setCharacterEncoding("utf-8");
+
+        //response.addHeader로 안되는지 다시 테스트/ 근데 쿠키 되는지도 봐야함 ;
+//        response.addCookie(new Cookie("AccessToken", accessToken));
+//        response.addCookie(new Cookie("RefreshToken", refreshToken));
+//
+//        response.addHeader("AccessToken", accessToken);
+//        response.addHeader("RefreshToken", refreshToken);
+//
+//        response.setHeader("AccessToken", accessToken);
+//        response.setHeader("RefreshToken", refreshToken);
+
+        Long userId=principalDetails.getUser().getId();
+
+        String data = "{\"response\":{\"error\":false,\"AccessToken\":\""+accessToken+"\", \"RefreshToken\": \""+refreshToken+"\", \"userId\": \""+userId+"\"}}";
+        PrintWriter out = response.getWriter();
+        out.print(data);
+
+//        response.getWriter().write("Bearer " + accessToken);
+//        response.getWriter().flush();
+
+//        response.setStatus(200, "ok");
 
     }
 

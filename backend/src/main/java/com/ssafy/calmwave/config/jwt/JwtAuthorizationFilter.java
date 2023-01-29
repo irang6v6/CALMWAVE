@@ -22,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;
 
 //권한이나 인증이 필요한 특정 주소를 요청했을때 BasicAuthenticationFilter를 무조건 타게 되어있음
@@ -46,13 +47,13 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         String accessToken = request.getHeader("AccessToken");
 
         //header가 있는지 확인
-        if (accessToken == null || !accessToken.startsWith("Bearer")) {
+        if (accessToken == null || !accessToken.startsWith("Bearer ")) {
             chain.doFilter(request, response);//가던길가라.
             return;
         }
 
-        String a_token = request.getHeader("AccessToken").replace("Bearer", "");
-        String r_token = request.getHeader("RefreshToken").replace("Bearer", "");
+        String a_token = request.getHeader("AccessToken").replace("Bearer ", "");
+        String r_token = request.getHeader("RefreshToken").replace("Bearer ", "");
 
         String username = null;
 
@@ -82,8 +83,9 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                         .set("RefreshToken:" + username, refreshToken,
                                 JwtUtil.RefreshTokenTimeLimit, TimeUnit.MILLISECONDS);
 
-                response.addCookie(new Cookie("AccessToken", newAccessToken));
-                response.addCookie(new Cookie("RefreshToken", refreshToken));
+                String data = "{\"response\":{\"error\":false,\"AccessToken\":\""+newAccessToken+"\", \"RefreshToken\": \""+refreshToken+"\"}}";
+                PrintWriter out = response.getWriter();
+                out.print(data);
             } else {
                 System.out.println("refreshToken이 DB에 없거나 다릅니다..");
                 response.sendError(500, "토큰 불일치, 재로그인 필요");

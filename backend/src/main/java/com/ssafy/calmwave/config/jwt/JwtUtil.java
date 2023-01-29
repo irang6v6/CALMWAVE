@@ -43,7 +43,7 @@ public class JwtUtil {
                 .withClaim("id", id)
                 .withClaim("username", username)
                 .sign(Algorithm.HMAC512(secret));
-        return "Bearer"+token;
+        return token;
     }
 
     public static String createRefreshToken(long id, String username, int time) {
@@ -56,6 +56,6 @@ public class JwtUtil {
                 .withClaim("id", id)
                 .withClaim("username", username)
                 .sign(Algorithm.HMAC512(secret));
-        return "Bearer"+token;
+        return token;
     }
 }
