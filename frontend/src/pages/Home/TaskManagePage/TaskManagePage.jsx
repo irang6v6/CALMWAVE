@@ -1,8 +1,8 @@
-import styles from "./TodoList.module.css"
+import styles from "./TaskManagePage.module.css"
 import React from "react"
-import todoList from "../../assets/todolist.png"
+import todoList from "../../../assets/todolist.png"
 
-function TodoList(props) {
+function TaskManagePage(props) {
   return (
     <div ref={props.refVal} className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
@@ -26,4 +26,4 @@ function TodoList(props) {
     </div>
   )
 }
-export default TodoList
+export default TaskManagePage

@@ -1,9 +1,9 @@
 import styles from "./HomePage.module.css"
 import React from "react"
-import FirstPage from "./FirstPage"
-import SecondPage from "./SecondPage"
-import WorkTime from "./WorkTime"
-import TodoList from "./TodoList"
+import EnterPage from "./EnterPage/EnterPage"
+import InfoPage from "./InfoPage/InfoPage"
+import IntroPage from "./IntroPage/IntroPage"
+import TaskManagePage from "./TaskManagePage/TaskManagePage"
 import Posture from "./Posture"
 import Stretching from "./Streching"
 import Stress from "./Stress"
@@ -72,7 +72,7 @@ function HomePage() {
             // background={`rgba(31, 31, 36)`}
           />
         </div>
-        <FirstPage goNext={goSecond} />
+        <EnterPage goNext={goSecond} />
         <div className={`${styles["wave-container"]}`}>
           <DiagonalWave
             canvasWidth={canvasWidth}
@@ -82,7 +82,7 @@ function HomePage() {
             // background={`rgba(31, 31, 36)`}
           />
         </div>
-        <SecondPage refVal={secondRef} goNext={goWorkTime} />
+        <InfoPage refVal={secondRef} goNext={goWorkTime} />
         <div className={`${styles["wave-container"]}`}>
           <NightSky
             canvasWidth={canvasWidth}
@@ -90,12 +90,12 @@ function HomePage() {
             background={`rgba(32, 38, 38, 1) `}
           />
         </div>
-        <WorkTime refVal={worktimeRef} goNext={goTodo} />
-        <TodoList refVal={todoRef} goNext={goPosture} />
+        <IntroPage refVal={worktimeRef} goNext={goTodo} />
+        <TaskManagePage refVal={todoRef} goNext={goPosture} />
         <Posture refVal={postureRef} goNext={goStreching} />
         <Stretching refVal={stretchRef} goNext={goStress} />
-        <Stress refVal={stressRef} goNext={goLast}/>
-        <LastPage refVal={LastRef}/>
+        <Stress refVal={stressRef} goNext={goLast} />
+        <LastPage refVal={LastRef} />
         <div className={`${styles["go-up"]}`} onClick={goUp}>
           위로!
         </div>

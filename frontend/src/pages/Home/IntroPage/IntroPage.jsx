@@ -1,8 +1,8 @@
-import styles from "./WorkTime.module.css"
+import styles from "./IntroPage.module.css"
 import React from "react"
-import workTime from "../../assets/worktime.png"
+import workTime from "../../../assets/worktime.png"
 
-function WorkTime(props) {
+function IntroPage(props) {
   return (
     <div ref={props.refVal} className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
@@ -26,4 +26,4 @@ function WorkTime(props) {
     </div>
   )
 }
-export default WorkTime
+export default IntroPage
