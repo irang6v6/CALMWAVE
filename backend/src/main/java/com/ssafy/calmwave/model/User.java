@@ -39,6 +39,7 @@ public class User{
     @Column(name = "stretching_interval_min", nullable = false)
     private Integer stretchingIntervalMin;
 
+    @CreationTimestamp
     @Column(name = "date_registered")
     private Instant dateRegistered;
 
