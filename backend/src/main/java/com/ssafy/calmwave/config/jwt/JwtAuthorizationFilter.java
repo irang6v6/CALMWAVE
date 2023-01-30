@@ -3,13 +3,12 @@ package com.ssafy.calmwave.config.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.ssafy.calmwave.config.auth.PrincipalDetails;
-import com.ssafy.calmwave.config.repository.RefreshTokenRepository;
 import com.ssafy.calmwave.config.repository.UserRepository;
 import com.ssafy.calmwave.exception.NotFoundUserException;
 import com.ssafy.calmwave.model.User;
 
-import javax.servlet.http.Cookie;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,7 +29,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     private String secret;
     private UserRepository userRepository;
-    private RefreshTokenRepository refreshTokenRepository;
     private RedisTemplate<String, String> redisTemplate;
 
     public JwtAuthorizationFilter(String secret, AuthenticationManager authenticationManager, UserRepository userRepository, RedisTemplate<String, String> redisTemplate) {
@@ -43,7 +41,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 //        super.doFilterInternal(request, response, chain);
-
+        
         String accessToken = request.getHeader("AccessToken");
 
         //header가 있는지 확인
@@ -58,11 +56,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         String username = null;
 
         if (JwtUtil.tokenValidation(a_token)) {
-            System.out.println("access토큰이 정상입니다...");
+            logger.trace("access token is valid");
             username = JWT.require(Algorithm.HMAC512(secret)).build().verify(a_token).getClaim("username").asString();
             //continue
         } else if (JwtUtil.tokenValidation(r_token)) {
-            System.out.println("access토큰은 유효기간이 지났지만 refresh토큰이 유효합니다. DB와 비교합니다.");
             username = JWT.require(Algorithm.HMAC512(secret)).build().verify(r_token).getClaim("username").asString();
 
             //Redis에서 RefreshToken가져오기
@@ -75,7 +72,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             }
 
             if (refreshToken.equals(request.getHeader("RefreshToken"))) {
-                System.out.println("DB확인 완료. RefreshToken으로 AccessToken을 재발급합니다.");
+                logger.trace("accessToken 재발급");
                 long id = JWT.require(Algorithm.HMAC512(secret)).build().verify(r_token).getClaim("id").asLong();
                 String newAccessToken = JwtUtil.createToken(id, username, JwtUtil.AccessTokenTimeLimit);
 
@@ -87,14 +84,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                 PrintWriter out = response.getWriter();
                 out.print(data);
             } else {
-                System.out.println("refreshToken이 DB에 없거나 다릅니다..");
+                logger.trace("인가 실패");
                 response.sendError(500, "토큰 불일치, 재로그인 필요");
                 return;
             }
-
-
         } else {
-            System.out.println("로그인을 다시 하셔야 할것같읍니다...");
             response.sendError(500, "로그인 만료, 재로그인 필요");
             return;
         }

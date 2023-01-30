@@ -4,7 +4,6 @@ import com.ssafy.calmwave.config.jwt.JwtAuthenticationFilter;
 import com.ssafy.calmwave.config.jwt.JwtAuthorizationFilter;
 import com.ssafy.calmwave.config.oauth.OAuth2AuthenticationSuccessHandler;
 import com.ssafy.calmwave.config.oauth.PrincipalOauth2UserService;
-import com.ssafy.calmwave.config.repository.RefreshTokenRepository;
 import com.ssafy.calmwave.config.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -26,7 +25,6 @@ public class SecurityConfig {
 
     private final CorsFilter corsFilter;
     private final UserRepository userRepository;
-    private final RefreshTokenRepository refreshTokenRepository;
     private final RedisTemplate<String, String> redisTemplate;
     private final PrincipalOauth2UserService principalOauth2UserService;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
@@ -48,7 +46,7 @@ public class SecurityConfig {
                 .access("hasRole('ROLE_USER')")
                 .anyRequest().permitAll()
                 .and()
-                .addFilter(new JwtAuthenticationFilter(secret, refreshTokenRepository,
+                .addFilter(new JwtAuthenticationFilter(secret,
                         authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisTemplate))
                 .addFilter(new JwtAuthorizationFilter(secret,
                         authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)),
