@@ -3,15 +3,17 @@ import DiagonalWave from "../components/Canvas/DiagonalWave/DiagonalWave"
 import Wave from "../components/Canvas/Wave/Wave"
 import SecondWave from "../components/Canvas/SecondWave/SecondWave"
 import Rain from "../components/Canvas/Rain/Rain"
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import someImg from "../assets/calmwave.png"
 import NightSky from "../components/Canvas/NightSky/NightSky"
 import Earth from "../components/Canvas/Earth/Earth"
 import SecondNightSky from "../components/Canvas/SecondNightSky/SecondNightsky"
+import { useCustomWidthHeight } from "../hooks/custom/useCustomWidthHeight"
 
 function TestPage() {
   const [canvasWidth, setCanvasWidth] = useState(0)
   const [canvasHeight, setCanvasHeight] = useState(0)
+  const canvRef = useRef(null)
   /* eslint-disable */
   useEffect(
     function () {
@@ -20,6 +22,8 @@ function TestPage() {
     },
     [window.innerHeight, window.innerWidth]
   )
+  const { width, height } = useCustomWidthHeight(canvRef)
+  console.log(width, height)
   return (
     <>
       <div>테스트</div>
@@ -67,6 +71,7 @@ function TestPage() {
         canvasWidth={canvasWidth}
         background={`rgba(31, 31, 36)`}
       />
+      <div ref={canvRef}>can i get size?</div>
     </>
   )
 }

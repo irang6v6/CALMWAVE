@@ -46,46 +46,57 @@ function Signup(props) {
   const [password2Classes, setPassword2Classes] = useState(
     `${styles["form-input"]}`
   )
+  const [buttonClasses, setButtonClasses] = useState(`${styles["form-button"]}`)
 
   useEffect(
     function () {
-      setNickIsValid(() => nicknameValidation(userNickname).status)
-      if (nickIsValid) {
+      const { status: validStatus, message: validMessage } =
+        nicknameValidation(userNickname)
+      setNickIsValid(() => validStatus)
+      if (validStatus) {
         setNicknameClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
       } else if (!onNicknameTouched) {
         setNicknameClasses(() => `${styles["form-input"]}`)
       } else if (onNicknameTouched) {
         setNicknameClasses(() => `${styles["form-input"]} ${styles["invalid"]}`)
       }
+      console.log(validMessage)
     },
-    [onNicknameTouched, userNickname, nickIsValid]
+    [onNicknameTouched, userNickname]
   )
   useEffect(
     function () {
-      setEmailIsValid(() => emailValidation(useremail).status)
-      if (emailIsValid) {
+      const { status: validStatus, message: validMessage } =
+        emailValidation(useremail)
+      setEmailIsValid(() => validStatus)
+      if (validStatus) {
         setEmailClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
       } else if (!onEmailTouched) {
         setEmailClasses(() => `${styles["form-input"]}`)
       } else if (onEmailTouched) {
         setEmailClasses(() => `${styles["form-input"]} ${styles["invalid"]}`)
       }
+      console.log(validMessage)
     },
-    [onEmailTouched, useremail, emailIsValid]
+    [onEmailTouched, useremail]
   )
   useEffect(
     function () {
-      setPasswordIsValid(() => passwordValidation(userpassword).status)
-      if (passwordIsValid) {
+      const { status: validStatus, message: validMessage } =
+        passwordValidation(userpassword)
+      setPasswordIsValid(() => validStatus)
+      if (validStatus) {
         setPasswordClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
       } else if (!onPasswordTouched) {
         setPasswordClasses(() => `${styles["form-input"]}`)
       } else if (onPasswordTouched) {
         setPasswordClasses(() => `${styles["form-input"]} ${styles["invalid"]}`)
       }
+      console.log(validMessage)
     },
-    [onPasswordTouched, userpassword, passwordIsValid]
+    [onPasswordTouched, userpassword]
   )
+  // 2차 비번 effect
   useEffect(
     function () {
       if (userpassword2.trim().length === 0 && !onPassword2Touched) {
@@ -96,6 +107,8 @@ function Signup(props) {
         setPassword2Classes(
           () => `${styles["form-input"]} ${styles["invalid"]}`
         )
+        const validMessage = "2차 비밀번호는 필수 입력 값입니다."
+        console.log(validMessage)
         return
       }
       if (!passwordIsValid) {
@@ -107,12 +120,15 @@ function Signup(props) {
       setPassword2IsValid(() => userpassword === userpassword2)
       if (password2IsValid) {
         setPassword2Classes(() => `${styles["form-input"]} ${styles["valid"]}`)
+        return
       } else if (!onPassword2Touched) {
         setPassword2Classes(() => `${styles["form-input"]}`)
       } else if (onPassword2Touched) {
         setPassword2Classes(
           () => `${styles["form-input"]} ${styles["invalid"]}`
         )
+        const validMessage = "2차 비밀번호가 일치하지 않습니다."
+        console.log(validMessage)
       }
     },
     [
@@ -122,6 +138,22 @@ function Signup(props) {
       userpassword,
       passwordIsValid,
     ]
+  )
+  useEffect(
+    function () {
+      if (
+        nickIsValid &&
+        emailIsValid &&
+        passwordIsValid &&
+        passwordRef2.current.value.trim().length !== 0 &&
+        password2IsValid
+      ) {
+        setButtonClasses(() => `${styles["form-button"]}`)
+      } else {
+        setButtonClasses(() => `${styles["button-invalid"]}`)
+      }
+    },
+    [nickIsValid, emailIsValid, passwordIsValid, password2IsValid, passwordRef2]
   )
 
   const resetState = function () {
@@ -284,7 +316,7 @@ function Signup(props) {
           {props.isLoading ? (
             <SpinnerDots />
           ) : (
-            <button className={`${styles["form-button"]}`}>회원 가입</button>
+            <button className={buttonClasses}>회원 가입</button>
           )}
         </div>
       </form>

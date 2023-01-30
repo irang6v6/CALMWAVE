@@ -4,6 +4,9 @@
 /* eslint-disable */
 const engCheck = /[a-z]/
 
+/* eslint-disable */
+const upperCheck = /[A-Z]/
+
 /**
  * 숫자 체크용
  */
@@ -92,15 +95,23 @@ function idValidation(val) {
 function emailValidation(email) {
   const regex =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i
+  if (email.trim().length === 0) {
+    return { status: false, message: "이메일은 필수 입력 값입니다." }
+  }
   if (email !== "" && email !== undefined && regex.test(email)) {
     return { status: true, message: "유효한 이메일입니다." }
   }
-  return { status: false, message: "유효하지 않은 이메일입니다." }
+  return { status: false, message: "유효하지 않은 이메일 형식입니다." }
 }
 
 function passwordValidation(val) {
   if (val.trim().length === 0) {
     return { status: false, message: "비밀번호는 필수 입력란입니다." }
+  }
+  if (!speCheck.test(val)) {
+    return { status: false, message: "특수문자를 포함해야 합니다." }
+  } else if (!numCheck.test(val)) {
+    return { status: false, message: "숫자를 포함해야 합니다." }
   }
   const passwordRules = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,16}$/
   if (passwordRules.test(val)) {
@@ -115,7 +126,7 @@ function nicknameValidation(val) {
   }
   const nicknameRules = /^([a-zA-Z0-9가-힣]).{1,8}$/
   if (nicknameRules.test(val)) {
-    return { status: true, message: false }
+    return { status: true, message: "유효한 닉네임 입니다." }
   }
   return { status: false, message: "유효하지 않은 닉네임입니다." }
 }
