@@ -8,7 +8,7 @@ import { useSelector } from "react-redux"
 import HandleTodo from "../../components/UI/HandleTodo"
 
 export const RoomPage = () => {
-  const todos = useSelector(state => state.todos.todos)
+  const todos = useSelector((state) => state.todos.todos)
 
   const alignTodosInColumn = (columnName) => {
     return todos
@@ -31,9 +31,12 @@ export const RoomPage = () => {
       <HandleTodo></HandleTodo>
       <div className={`${styles["container"]}`}>
         <DndProvider backend={HTML5Backend}>
-          <TodoColumn title="To do" className={`bg-cw-indigo-7`}>
-            {alignTodosInColumn("To do")}
-          </TodoColumn>
+          <div>
+            <div className={`${styles["video"]}`}><h1>WebCam</h1></div>
+            <TodoColumn title="To do" className={`bg-cw-indigo-7`}>
+              {alignTodosInColumn("To do")}
+            </TodoColumn>
+          </div>
           <TodoColumn title="In Progress" className={`bg-cw-yellow-5`}>
             {alignTodosInColumn("In Progress")}
           </TodoColumn>

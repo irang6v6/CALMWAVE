@@ -1,11 +1,17 @@
 .todobox {
   height: auto;
-  width: 30vw;
-  margin: 20px;
+  width: 25vw;
+  margin: 10px;
   border-radius: 11px;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
   display: flex;
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
+  transition: width .25s ease;
+  padding: 10px;
+}
+
+.todobox_focused {
+  width: 40vw;
 }

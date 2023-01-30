@@ -148,15 +148,35 @@ export default function TodoCard({
       ref={ref}
       style={{ opacity }}
       className={
-        currentColumn !== "In Progress"
-          ? `${styles["dragable"]} bg-wb-nightsky-8 txt-wb-mint-10`
-          : `${styles["ongoing"]} bg-cw-yellow-10`
+        `${styles["todocard"]}
+        ${currentColumn === "To do" && styles["todo"]}
+        ${currentColumn === "In Progress" && styles["progress"]} 
+        ${currentColumn === "Done" && styles["done"]}'
+        ${currentColumn !== "In Progress"
+          ? `bg-wb-nightsky-8 txt-wb-mint-10`
+          : `bg-cw-yellow-10`}
+        `
+
+
+
+
       }
     >
       <span>{title}</span>
       <span>{description}</span>
       {currentColumn !== "In Progress" ? (
         <div>
+          {time + currentTime - startTime >= 3600000 ? (
+            <span>
+              {(
+                "0" +
+                Math.floor(((time + currentTime - startTime) / 3600000) % 60)
+              ).slice(-2)}
+              :
+            </span>
+          ) : (
+            <span></span>
+          )}
           <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
           <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
           <button onClick={deleteTodo} className={`${styles["deleteButton"]}`}>
@@ -165,6 +185,17 @@ export default function TodoCard({
         </div>
       ) : (
         <div>
+          {time + currentTime - startTime >= 3600000 ? (
+            <span>
+              {(
+                "0" +
+                Math.floor(((time + currentTime - startTime) / 3600000) % 60)
+              ).slice(-2)}
+              :
+            </span>
+          ) : (
+            <span></span>
+          )}
           <span>
             {(
               "0" + Math.floor(((time + currentTime - startTime) / 60000) % 60)
