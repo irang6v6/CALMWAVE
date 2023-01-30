@@ -1,28 +1,31 @@
 import axios from "axios"
-import { useState, useCallback } from "React"
+import { useState, useCallback } from "react"
 
 const useApi = function () {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
   const axiosRequest = useCallback(async (requestData, saveDataFunction) => {
-    await axios({
-      method: requestData.method,
-      url: requestData.url,
-      // transformRequest: ,
-      // transformResponse: ,
-      headers: requestData.headers,
-      data: requestData.data,
-      timeout: requestData.timeout,
-      withCredentials: requestData.withCredentials,
-    })
+    // requestData = {
+    //   method: requestData.method,
+    //   url: requestData.url,
+    //   // transformRequest: ,
+    //   // transformResponse: ,
+    //   headers: requestData.headers,
+    //   data: requestData.data,
+    //   timeout: requestData.timeout,
+    //   withCredentials: requestData.withCredentials,
+    // }
+    setIsLoading(true)
+    await axios(requestData)
       .then((res) => {
-        saveDataFunction(res)
+        saveDataFunction(res.data)
       })
       .then((res) => {
         setIsLoading(false)
       })
       .catch((err) => {
+        saveDataFunction(err) // 에러처리까지 해두었다면
         setError(true)
         setIsLoading(false)
       })

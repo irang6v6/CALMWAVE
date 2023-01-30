@@ -21,7 +21,9 @@
 }
 
 .left-box {
-  width: 50%;
+  box-sizing: border-box;
+  margin: 0px 3.5% 0px 3.5%;
+  /* width: auto; */
   height: 70%;
   text-align: center;
 }
@@ -35,49 +37,68 @@
   height: 70%;
   /* border: 1px solid #000; */
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   align-items: center;
 }
 
 .text-box {
-  width: 90%;
+  width: 100%;
   /* border: 1px solid #000; */
 }
 
-.text-box h1 {
-  font-size: 2.5rem;
+.slogun-kr {
+  font-size: 2.2rem;
+  font-weight: 900;
+  margin: 10% 0px 20px 0px;
+  display: block;
 }
 
-.text-box p {
+.slogun-en {
   font-size: 1.5rem;
+  font-weight: 600;
+  margin: 5px 10px 20px 10px;
+  display: block;
 }
 
 /* Button */
 
-.btn-wrap {
+.icon-wrap {
   /* border: 1px solid #000; */
+  padding: 5px 10px 5px 10px;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
 }
 
-.btn-wrap div {
-  display: inline-block;
-  cursor: pointer;
-  border: none;
-  border-radius: 50px;
-  padding: 2%;
-  white-space: nowrap;
-  /* border: 1px solid #000; */
-  width: 15%;
-  text-align: center;
-  background-color: #86c5ff;
-  color: #fff;
-  margin: 0 10px 0 10px;
+.shortcut-container {
+  box-sizing: border-box;
+  border-radius: 3px;
+  /* background-color: #0084ff; */
+  border-radius: 13px;
+  width: 5vw;
+  padding: 5px 2px 5px 2px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  margin: 0 3%;
+  /* background-color: rgba(255, 255, 255, 0.5); */
+  transition: 0.4s;
+  color: black;
 }
 
-.start-btn {
+.icons {
+  min-width: 70px;
+  height: auto;
+  color: rgba(0, 132, 255);
+  transition: 0.4s;
 }
-
-.btn-wrap div:hover {
-  background-color: #0084ff;
+/* color: rgba(29, 88, 164); */
+.icons:hover {
+  transform: scale(115%);
+  color: #0084ff;
 }
 
 .go-down {
