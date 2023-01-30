@@ -1,28 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit"
+import axios from "axios"
+// import axios from "axios"
 
 const initialState = {
-  userId: "",
-  accessToken: "tokenExample",
-  refreshToken: "tokenExample",
-  isLogin: false,
-  userNickname: "기본 값 닉네임",
-  description: "기본 자기 소개",
-  stretchingIntervalTime: 50,
-  OAuthType: "",
-  OAuthSub: "",
-  maximumWorkTime: 50,
-  faceInfo: {
-    neutral: 23,
-    happy: 385,
-    sad: 654,
-    angry: 700,
-    fearful: 888,
-    disgusted: 512,
-    surprised: 12,
-  },
-  workInfo: [],
-  turtleCount: 0,
-  deathCount: 12,
+  isLoading: false,
+  isError: false,
+  userData: {},
 }
 
 const UserSlice = createSlice({
@@ -54,6 +37,18 @@ const UserSlice = createSlice({
     },
   },
 })
+
+export const AxiosGetUser = function (requestData) {
+  return async function (dispatch) {
+    axios(requestData)
+      .then((res) => {
+        console.log(res)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+}
 
 export const userActions = UserSlice.actions
 export default UserSlice.reducer

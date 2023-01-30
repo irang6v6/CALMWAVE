@@ -1,4 +1,4 @@
-.epic-card-container {
+.category-card-container {
   box-sizing: border-box;
   background-color: aqua;
   border-radius: 8px;
@@ -10,14 +10,14 @@
   transition: 0.4s;
 }
 
-.epic-card-container.is-hovered {
+.category-card-container.is-hovered {
   transform: scale(105%);
 }
 
-.epic-card-container.is-selected {
+.category-card-container.is-selected {
   background-color: blue;
 }
-.epic-card-container.is-selected.is-hovered {
+.category-card-container.is-selected.is-hovered {
   background-color: blue;
   transform: scale(105%);
 }

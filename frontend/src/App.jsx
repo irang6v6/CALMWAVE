@@ -12,7 +12,7 @@ import NotFound from "./pages/NotFound/NotFound"
 import DoorParentPage from "./pages/Door/DoorParentPage"
 // import axios from "axios"
 
-// axios.defaults.baseURL = ""
+// axios.defaults.baseURL = "https://asdf"
 // axios.defaults.transformRequest = []
 
 function App() {

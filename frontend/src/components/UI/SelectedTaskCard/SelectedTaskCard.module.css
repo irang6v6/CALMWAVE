@@ -1,0 +1,7 @@
+.selected-task-card-container {
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 5px;
+  margin: 4px 8px 4px 8px;
+  background-color: bisque;
+}
