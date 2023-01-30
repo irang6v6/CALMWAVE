@@ -60,15 +60,21 @@ function SignPage({ pageRef }) {
           username: email,
           password: password,
         },
-        headers: {
-          "Content-Type": "application/json",
-        },
       },
-      function (resData) {
-        console.log(resData)
-        console.log(loginError, "<<<")
-        console.log(loginLoading, "<<<<<<")
-        navigate("/")
+      function (res) {
+        if (res?.data?.response?.AccessToken) {
+          localStorage.setItem(
+            "Access",
+            res.data.response.AccessToken.substr(7)
+          )
+          localStorage.setItem(
+            "Refresh",
+            res.data.response.RefreshToken.substr(7)
+          )
+          navigate("/")
+        } else {
+          console.log("ㅎㅇ")
+        }
       }
     )
   }
@@ -90,14 +96,14 @@ function SignPage({ pageRef }) {
         },
       },
       async function (res) {
-        console.log(res)
-        console.log(signupError, "<<<")
-        console.log(signupError)
-        toggleLoginOrSignup()
-        resetAction()
+        if (res?.data?.result) {
+          toggleLoginOrSignup()
+          resetAction()
+        }
       }
     )
   }
+  console.log(loginError, signupError)
 
   return (
     <div ref={pageRef} className={`${styles["sign-container"]}`}>

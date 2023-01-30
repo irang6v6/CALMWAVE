@@ -25,6 +25,7 @@ const useApi = function () {
         setIsLoading(false)
       })
       .catch((err) => {
+        saveDataFunction(err) // 에러처리까지 해두었다면
         setError(true)
         setIsLoading(false)
       })
