@@ -8,7 +8,7 @@
   align-items: center;
   flex-direction: column;
   flex-wrap: wrap;
-  transition: width .25s ease;
+  transition: width 0.35s ease-out;
   padding: 10px;
 }
 

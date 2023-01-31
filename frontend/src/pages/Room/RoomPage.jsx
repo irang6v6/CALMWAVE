@@ -1,11 +1,12 @@
 import React from "react"
+import { useSelector } from "react-redux"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
 import styles from "./RoomPage.module.css"
 import TodoColumn from "../../components/UI/TodoColumn"
 import TodoCard from "../../components/UI/TodoCard"
-import { useSelector } from "react-redux"
 import HandleTodo from "../../components/UI/HandleTodo"
+import Video from "../../components/Video/Video"
 
 export const RoomPage = () => {
   const todos = useSelector((state) => state.todos.todos)
@@ -32,7 +33,8 @@ export const RoomPage = () => {
       <div className={`${styles["container"]}`}>
         <DndProvider backend={HTML5Backend}>
           <div>
-            <div className={`${styles["video"]}`}><h1>WebCam</h1></div>
+            <Video>
+            </Video>
             <TodoColumn title="To do" className={`bg-cw-indigo-7`}>
               {alignTodosInColumn("To do")}
             </TodoColumn>
