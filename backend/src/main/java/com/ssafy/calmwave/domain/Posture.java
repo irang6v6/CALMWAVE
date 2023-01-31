@@ -1,5 +1,6 @@
-package com.ssafy.calmwave.model;
+package com.ssafy.calmwave.domain;
 
+import java.time.Instant;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,20 +12,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "work_category")
-public class WorkCategory {
+@Table(name = "posture")
+public class Posture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "work_cate_id", nullable = false)
+    @Column(name = "posture_id", nullable = false)
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "cate_name", nullable = false, length = 20)
-    private String cateName;
+    @Column(name = "dtype", nullable = false, length = 1)
+    private String dtype;
+
+    @Column(name = "date_created", nullable = false)
+    private Instant dateCreated;
 
     public Long getId() {
         return id;
@@ -42,12 +46,20 @@ public class WorkCategory {
         this.user = user;
     }
 
-    public String getCateName() {
-        return cateName;
+    public String getDtype() {
+        return dtype;
     }
 
-    public void setCateName(String cateName) {
-        this.cateName = cateName;
+    public void setDtype(String dtype) {
+        this.dtype = dtype;
+    }
+
+    public Instant getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Instant dateCreated) {
+        this.dateCreated = dateCreated;
     }
 
 }

@@ -1,6 +1,6 @@
-package com.ssafy.calmwave.config.repository;
+package com.ssafy.calmwave.repository;
 
-import com.ssafy.calmwave.model.User;
+import com.ssafy.calmwave.domain.User;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 

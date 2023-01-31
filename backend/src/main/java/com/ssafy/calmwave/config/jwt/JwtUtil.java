@@ -2,9 +2,8 @@ package com.ssafy.calmwave.config.jwt;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.ssafy.calmwave.config.repository.UserRepository;
-import com.ssafy.calmwave.model.User;
-import java.util.Optional;
+import com.ssafy.calmwave.repository.UserRepository;
+import com.ssafy.calmwave.domain.User;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;

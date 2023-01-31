@@ -1,13 +1,13 @@
-package com.ssafy.calmwave.controller;
+package com.ssafy.calmwave.repository.controller;
 
 import com.ssafy.calmwave.config.jwt.JwtUtil;
-import com.ssafy.calmwave.config.repository.UserRepository;
+import com.ssafy.calmwave.repository.UserRepository;
 import com.ssafy.calmwave.dto.UserInfoDto;
-import com.ssafy.calmwave.model.User;
+import com.ssafy.calmwave.domain.User;
 import com.ssafy.calmwave.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.time.Instant;
+
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -45,7 +46,7 @@ public class UserController {
     public ResponseEntity<?> join(@RequestBody User user) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        User findUser = userRepository.findByUsername(user.getUsername());
+        User findUser =userService.findByUsername(user.getUsername());
         if (findUser == null) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             user.setRole("ROLE_USER");
@@ -70,7 +71,7 @@ public class UserController {
     public ResponseEntity<?> checkEmail(@PathVariable("email") String email) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        User user = userRepository.findByUsername(email);
+        User user = userService.findByUsername(email);
         if (user == null) {
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
@@ -118,8 +119,8 @@ public class UserController {
         try {
             User user = jwtUtil.getUser(token);
             return ResponseEntity.ok().body(
-                new UserInfoDto(user.getId(), user.getUsername(), user.getNickname(),
-                    user.getStretchingIntervalMin(), user.getDateRegistered()));
+                    new UserInfoDto(user.getId(), user.getUsername(), user.getNickname(),
+                            user.getStretchingIntervalMin(), user.getDateRegistered()));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);

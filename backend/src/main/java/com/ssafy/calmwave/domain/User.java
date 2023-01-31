@@ -1,18 +1,13 @@
-package com.ssafy.calmwave.model;
+package com.ssafy.calmwave.domain;
 
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @ToString
@@ -130,7 +125,6 @@ public class User{
         this.role = role;
         this.provider = provider;
     }
-
 
     public List<String> getRoleList() {
         if (this.role.length() > 0) {

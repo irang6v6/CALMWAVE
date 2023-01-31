@@ -4,7 +4,7 @@ import com.ssafy.calmwave.config.jwt.JwtAuthenticationFilter;
 import com.ssafy.calmwave.config.jwt.JwtAuthorizationFilter;
 import com.ssafy.calmwave.config.oauth.OAuth2AuthenticationSuccessHandler;
 import com.ssafy.calmwave.config.oauth.PrincipalOauth2UserService;
-import com.ssafy.calmwave.config.repository.UserRepository;
+import com.ssafy.calmwave.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

@@ -1,4 +1,4 @@
-package com.ssafy.calmwave.model;
+package com.ssafy.calmwave.domain;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

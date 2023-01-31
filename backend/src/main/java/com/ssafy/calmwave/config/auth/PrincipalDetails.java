@@ -1,6 +1,6 @@
 package com.ssafy.calmwave.config.auth;
 
-import com.ssafy.calmwave.model.User;
+import com.ssafy.calmwave.domain.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

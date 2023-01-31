@@ -1,8 +1,8 @@
 package com.ssafy.calmwave.service;
 
-import com.ssafy.calmwave.config.repository.UserRepository;
+import com.ssafy.calmwave.repository.UserRepository;
 import com.ssafy.calmwave.dto.UserInfoDto;
-import com.ssafy.calmwave.model.User;
+import com.ssafy.calmwave.domain.User;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -23,10 +23,15 @@ public class UserService {
         user.get().setDeleted(Byte.parseByte("1"));
     }
 
-    @Transactional
     public void updateUser(UserInfoDto userInfoDto) {
         Optional<User> user = userRepository.findById(userInfoDto.getId());
         user.get().setNickname(userInfoDto.getNickname());
         user.get().setStretchingIntervalMin(userInfoDto.getStretchingIntervalMin());
     }
+
+    public User findByUsername(String username){
+         return userRepository.findByUsername(username);
+    }
+
+
 }

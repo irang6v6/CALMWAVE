@@ -1,8 +1,12 @@
 package com.ssafy.calmwave.dto;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 
-@Data
+@Getter
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class LoginRequestDto {
     private String username;
     private String password;
