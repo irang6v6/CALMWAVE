@@ -15,6 +15,7 @@ export default function Video() {
   // )
   const [session, setSession] = useState(undefined)
   const [publisher, setPublisher] = useState(undefined)
+  /* eslint-disable */
   const [OV, setOV] = useState()
 
   useEffect(() => {
@@ -162,16 +163,13 @@ export default function Video() {
   return (
     <div className={`${styles["videobox"]} bg-cw-indigo-7`}>
       {publisher === undefined ? (
-          <form className={`${styles["video"]}`} onSubmit={joinSession}>
-              <input
-                type="submit"
-                value="JOIN"
-              />
-          </form>
+        <form className={`${styles["video"]}`} onSubmit={joinSession}>
+          <input type="submit" value="JOIN" />
+        </form>
       ) : (
         <UserVideoComponent streamManager={publisher} />
       )}
-      <div className={`${styles["videonav"]}`} >VIDEO NAV</div>
+      <div className={`${styles["videonav"]}`}>VIDEO NAV</div>
     </div>
   )
 }
