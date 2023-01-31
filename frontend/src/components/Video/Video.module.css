@@ -1,0 +1,15 @@
+.videobox > div > div > video {
+    height: auto;
+    width: 25vw;
+    border-radius: 11px;
+}
+
+.videobox {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 10px;
+    box-sizing: border-box;
+    border-radius: 11px;
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+}
