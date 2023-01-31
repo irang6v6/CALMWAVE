@@ -1,9 +1,13 @@
 .selected-task-container {
-  background-color: rgba(255, 255, 255, 0.5);
+  /* background-color: rgba(255, 255, 255, 0.5); */
   width: 100%;
   display: flex;
   flex-direction: column;
   /* justify-content: center; */
   box-sizing: border-box;
   padding: 10px 5px 10px 5px;
+  overflow-y: scroll;
+}
+.selected-task-container::-webkit-scrollbar {
+  display: none;
 }

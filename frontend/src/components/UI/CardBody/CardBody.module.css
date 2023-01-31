@@ -1,0 +1,12 @@
+.card-body-container {
+  box-sizing: border-box;
+  /* border: solid 1px black; */
+  margin: 10px 8px 10px 8px;
+}
+
+.card-body-data {
+  box-sizing: border-box;
+  width: 100%;
+  font-size: 1.1rem;
+  margin-bottom: 3px;
+}

@@ -8,10 +8,14 @@ function Category() {
   return (
     <>
       <div className={`${styles[`cam-container`]}`}>캠임</div>
-      <div className={`${styles[`epic-container`]}`}>
-        {categoryList.map((category) => {
+      <div className={`${styles[`category-container`]}`}>
+        {categoryList.map((category, idx) => {
           return (
-            <CategoryCard category={category} key={`category-${category.id}`} />
+            <CategoryCard
+              category={category}
+              idx={idx}
+              key={`category-${category.id}`}
+            />
           )
         })}
       </div>

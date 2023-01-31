@@ -2,6 +2,8 @@ import styles from "./Door.module.css"
 import SelectedTask from "./SelectedTask/SelectedTask"
 import Category from "./Category/Category"
 import CategoryTask from "./CategoryTask/CategoryTask"
+// import { DndProvider } from "react-dnd"
+// import { HTML5Backend } from "react-dnd-html5-backend"
 
 function Door(props) {
   return (

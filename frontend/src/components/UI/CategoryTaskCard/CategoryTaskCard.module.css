@@ -3,5 +3,7 @@
   border-radius: 8px;
   padding: 5px;
   margin: 4px 8px 4px 8px;
-  background-color: bisque;
+  background-color: rgba(111, 111, 111, 0.8);
+  color: white;
+  -webkit-user-drag: element;
 }

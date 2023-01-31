@@ -9,21 +9,21 @@ const initialState = {
   categoryList: [
     {
       id: 1,
-      name: "카테고리 1",
+      title: "카테고리 1",
       description: "카테고리 설명 1",
       sumBusinessHours: 12, // 그냥 데이터로 받아온다고 생각하겠음.
       isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
     },
     {
       id: 2,
-      name: "카테고리 2",
+      title: "카테고리 2",
       description: "카테고리 설명 2",
       sumBusinessHours: 10, // 그냥 데이터로 받아온다고 생각하겠음.
       isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
     },
     {
       id: 3,
-      name: "카테고리 3",
+      title: "카테고리 3",
       description: "카테고리 설명 3",
       sumBusinessHours: 16, // 그냥 데이터로 받아온다고 생각하겠음.
       isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
@@ -46,6 +46,10 @@ const categorySlice = createSlice({
     },
     changeHovered(state, action) {
       state.hoveredCategoryId = action.payload.hoveredCategoryId
+    },
+    changeCategoryPlaceByIdx(state, action) {
+      state.categoryList[action.payload.idx1] = action.payload.category2
+      state.categoryList[action.payload.idx2] = action.payload.category1
     },
   },
 })

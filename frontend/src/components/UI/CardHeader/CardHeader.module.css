@@ -1,0 +1,95 @@
+.card-header-container {
+  width: 100%;
+  box-sizing: border-box;
+  border-bottom: solid rgba(0, 0, 0, 0.5);
+  padding: 11px 13px 11px 13px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  /* background-color: blueviolet; */
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-header-header {
+  display: flex;
+  flex-direction: row;
+  max-width: 70%;
+}
+
+.card-header-lights-red {
+  min-height: 33px;
+  min-width: 33px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  transition: 0.3s;
+  background-color: rgba(230, 63, 49, 1);
+  box-shadow: 0 0 12px 2px rgba(255, 255, 255, 1);
+  margin-right: 10px;
+  border: solid 3px rgba(222, 102, 77, 1);
+}
+.card-header-lights-yellow {
+  min-height: 33px;
+  min-width: 33px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  transition: 0.3s;
+  background-color: rgba(251, 194, 28, 1);
+  box-shadow: 0 0 12px 2px rgba(255, 255, 255, 1);
+  margin-right: 10px;
+  border: solid 3px rgba(251, 222, 50, 1);
+}
+.card-header-lights-green {
+  min-height: 33px;
+  min-width: 33px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  transition: 0.3s;
+  background-color: rgba(34, 146, 65, 1);
+  box-shadow: 0 0 12px 2px rgba(255, 255, 255, 1);
+  margin-right: 10px;
+  border: solid 3px rgba(66, 160, 111, 1);
+}
+.card-header-lights-blue {
+  min-height: 33px;
+  min-width: 33px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  transition: 0.3s;
+  background-color: rgba(47, 124, 238, 1);
+  box-shadow: 0 0 12px 2px rgba(255, 255, 255, 1);
+  margin-right: 10px;
+  border: solid 3px rgba(90, 166, 238, 1);
+}
+
+.card-header-title {
+  box-sizing: border-box;
+  width: auto;
+  min-height: 33px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-shadow: 2px 2px 2px 2px;
+  white-space: nowrap;
+}
+
+.card-header-icon-container {
+  box-sizing: border-box;
+  min-height: 33px;
+  min-width: 66px;
+  display: flex;
+  flex-direction: row;
+}
+.card-header-icon {
+  box-sizing: border-box;
+  min-height: 30px;
+  min-width: 30px;
+  margin: 2px;
+  transition: 0.3s;
+  opacity: 0.9;
+}
+
+.card-header-icon:hover {
+  transform: scale(120%);
+  opacity: 1;
+  cursor: pointer;
+}

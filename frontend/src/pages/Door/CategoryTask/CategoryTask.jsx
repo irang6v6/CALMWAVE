@@ -1,32 +1,37 @@
-import TaskCard from "../../../components/UI/TaskCard/TaskCard"
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
+import CategoryTaskCard from "../../../components/UI/CategoryTaskCard/CategoryTaskCard"
+import { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import styles from "./CategoryTask.module.css"
+import { categoryTaskActions } from "../../../store/door-store/category-task-slice"
 
 function CategoryTask(props) {
+  const dispatch = useDispatch()
+  const { categoryTaskList } = useSelector((state) => state.doorctask)
   const selectedCategoryId = useSelector(
     (state) => state.category.selectedCategoryId
   )
-  const [taskList, setTaskList] = useState([])
   const originalTaskList = useSelector((state) => state.task.taskList)
 
   useEffect(
     function () {
-      setTaskList(() =>
-        originalTaskList.filter((task) => {
-          return task.categoryId === selectedCategoryId
+      dispatch(
+        categoryTaskActions.getCategoryTask({
+          newList: originalTaskList.filter((task) => {
+            return task.categoryId === selectedCategoryId
+          }),
         })
       )
     },
-    [selectedCategoryId, originalTaskList]
+    [selectedCategoryId, originalTaskList, dispatch]
   )
 
   return (
     <div className={`${styles[`epic-task-container`]}`}>
-      {taskList.map((task) => {
+      {categoryTaskList.map((task, idx) => {
         return (
-          <TaskCard
+          <CategoryTaskCard
             task={task}
+            idx={idx}
             key={`task-card-${task.categoryId}-${task.id}`}
           />
         )

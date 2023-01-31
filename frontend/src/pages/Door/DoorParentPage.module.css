@@ -10,3 +10,7 @@
   -ms-user-select: none;
   user-select: none;
 }
+
+.canvas-container::-webkit-scrollbar {
+  display: none;
+}
