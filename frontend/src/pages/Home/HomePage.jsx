@@ -14,7 +14,13 @@ import { useRef, useState, useEffect } from "react" //
 import { useCustomWidthHeight } from "../../hooks/custom/useCustomWidthHeight"
 import DiagonalWave from "../../components/Canvas/DiagonalWave/DiagonalWave"
 import NightSky from "../../components/Canvas/NightSky/NightSky"
+import { useDispatch } from "react-redux"
+import { AxiosGetCategory } from "../../store/category-slice"
+
 function HomePage() {
+  const dispatch = useDispatch()
+  const [isInitial, setIsInitial] = useState(true)
+
   const [canvasWidth, setCanvasWidth] = useState(0)
   const [canvasHeight, setCanvasHeight] = useState(0)
   const pageRef = useRef(null)
@@ -27,6 +33,23 @@ function HomePage() {
     useRef(null),
     useRef(null),
   ]
+
+  // 첫 진입 시 카테고리 가져오기
+  useEffect(
+    function () {
+      if (isInitial) {
+        setIsInitial(() => false)
+      }
+      dispatch(
+        AxiosGetCategory({
+          method: "get",
+          url: "/hello", // 주소 요청해서 보내면 가져옴.
+        })
+      )
+    },
+    [dispatch, isInitial]
+  )
+
   /* eslint-disable */
   useEffect(
     function () {

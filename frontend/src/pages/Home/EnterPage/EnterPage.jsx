@@ -1,37 +1,48 @@
 import styles from "./EnterPage.module.css"
 import React from "react"
-import turtleImg from "../../../assets/blueturtle.png"
+// import turtleImg from "../../../assets/blueturtle.png"
 import { NavLink } from "react-router-dom"
+import Logo from "../../../components/Logo/Logo"
+import { AiFillPlayCircle, AiFillInfoCircle, AiFillEdit } from "react-icons/ai"
 
 function EnterPage(props) {
   return (
     <div className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
         <div className={`${styles["left-box"]}`}>
-          <img
-            src={turtleImg}
-            className={`${styles["turtle-img"]}`}
-            alt="임시이미지"
-          />
+          <Logo />
         </div>
 
         <div className={`${styles["right-box"]}`}>
           <div className={`${styles["text-box"]}`}>
-            <h1>
-              Lorem ipsum dolor sit. <br />
-              Lorem ipsum dolor sit amet consectetur.
-            </h1>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit. Sapiente
-              voluptatem dolorum, magni ipsa ducimus totam{" "}
-            </p>
-            <div className={`${styles["btn-wrap"]}`}>
-              <div className={`${styles["start-btn"]}`}>
-                <NavLink to={`/room`}>START</NavLink>
-              </div>
-              <div className={`${styles["mypage-btn"]}`}>
-                <NavLink to={`/profile`}>MY PAGE</NavLink>
-              </div>
+            <span className={`${styles[`slogun-kr`]}`}>
+              조금씩 더 나아질 당신을 위해
+            </span>
+            <span className={`${styles[`slogun-en`]}`}>
+              For You who will get better little by little
+            </span>
+            <div className={`${styles["icon-wrap"]}`}>
+              <NavLink
+                to={`/door`}
+                className={`${styles[`shortcut-container`]}`}
+              >
+                <AiFillPlayCircle className={`${styles[`icons`]}`} />
+                <span>START</span>
+              </NavLink>
+              <NavLink
+                to={`/manage`}
+                className={`${styles[`shortcut-container`]}`}
+              >
+                <AiFillEdit className={`${styles[`icons`]}`} />
+                <span>TASKS</span>
+              </NavLink>
+              <NavLink
+                to={`/profile`}
+                className={`${styles[`shortcut-container`]}`}
+              >
+                <AiFillInfoCircle className={`${styles[`icons`]}`} />
+                <span>PROFILE</span>
+              </NavLink>
             </div>
           </div>
         </div>

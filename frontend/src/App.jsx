@@ -9,9 +9,10 @@ import RoomResult from "./pages/Room/RoomResult/RoomResult"
 import SignParentPage from "./pages/Sign/SignParentPage"
 import TestPage from "./pages/TestPage"
 import NotFound from "./pages/NotFound/NotFound"
+import DoorParentPage from "./pages/Door/DoorParentPage"
 // import axios from "axios"
 
-// axios.defaults.baseURL = ""
+// axios.defaults.baseURL = "https://asdf"
 // axios.defaults.transformRequest = []
 
 function App() {
@@ -25,7 +26,9 @@ function App() {
         </Route>
         <Route path={`/profile`} element={<ProfilePage />} />
         <Route path={`/profile/:infoType`} element={<ProfilePage />} />
-        <Route path={`test`} element={<TestPage />} />
+        <Route path={`/door`} element={<DoorParentPage />} />
+        <Route path={`/manage`} element />
+        <Route path={`/test`} element={<TestPage />} />
         <Route path={`*`} element={<NotFound />} />
       </Routes>
     </div>

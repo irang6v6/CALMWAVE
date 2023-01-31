@@ -1,0 +1,23 @@
+.category-card-container {
+  box-sizing: border-box;
+  background-color: aqua;
+  border-radius: 8px;
+  cursor: pointer;
+  width: 100%;
+  margin: 4px 8px 4px 8px;
+  padding: 5px;
+
+  transition: 0.4s;
+}
+
+.category-card-container.is-hovered {
+  transform: scale(105%);
+}
+
+.category-card-container.is-selected {
+  background-color: blue;
+}
+.category-card-container.is-selected.is-hovered {
+  background-color: blue;
+  transform: scale(105%);
+}

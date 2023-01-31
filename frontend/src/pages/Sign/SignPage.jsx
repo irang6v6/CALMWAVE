@@ -5,10 +5,21 @@ import Signup from "./Signup"
 import LoginLogo from "./LoginLogo"
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
+import useApi from "../../hooks/http/use-api"
 
 function SignPage({ pageRef }) {
   const navigate = useNavigate()
-  const [isLoading, setIsLoading] = useState(false)
+  const {
+    isLoading: loginLoading,
+    error: loginError,
+    axiosRequest: loginRequest,
+  } = useApi()
+  const {
+    isLoading: signupLoading,
+    error: signupError,
+    axiosRequest: signupRequest,
+  } = useApi()
+  // const [isLoading, setIsLoading] = useState(false)
   const [loginOrSignup, setLoginOrSignup] = useState(true)
   const [page1Class, setPage1Class] = useState(`${styles["page1"]}`)
   const [page2Class, setPage2Class] = useState(`${styles["page2"]}`)
@@ -38,60 +49,61 @@ function SignPage({ pageRef }) {
       withCredentials: true,
     })
   }
+
   const loginHandler = async function (email, password) {
-    setIsLoading(true)
-    axios({
-      method: "post",
-      baseURL: "https://5d2112b6-33e0-4cf7-853b-f9d783cec939.mock.pstmn.io",
-      url: "/login",
-      data: {
-        username: email,
-        password: password,
+    loginRequest(
+      {
+        method: "post",
+        baseURL: "https://5d2112b6-33e0-4cf7-853b-f9d783cec939.mock.pstmn.io",
+        url: "/login",
+        data: {
+          username: email,
+          password: password,
+        },
       },
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
-      .then((res) => {
-        console.log(res)
-        console.log(res.headers["AccessToken"], "액세스 토큰")
-        console.log(res.headers["RefreshToken"], "리프레시 토큰")
-        console.log("로그인 성공! 여기서 redux 갱신")
-        setIsLoading(false)
-        navigate("/")
-      })
-      .catch((err) => {
-        console.error(err)
-        setIsLoading(false)
-      })
+      function (res) {
+        if (res?.data?.response?.AccessToken) {
+          localStorage.setItem(
+            "Access",
+            res.data.response.AccessToken.substr(7)
+          )
+          localStorage.setItem(
+            "Refresh",
+            res.data.response.RefreshToken.substr(7)
+          )
+          navigate("/")
+        } else {
+          console.log("ㅎㅇ")
+        }
+      }
+    )
   }
-  const signupHandler = function (email, password, nickname, resetAction) {
-    setIsLoading(true)
-    let ret
-    axios({
-      method: "post",
-      baseURL: "https://5d2112b6-33e0-4cf7-853b-f9d783cec939.mock.pstmn.io",
-      url: "/api/v1/join",
-      data: {
-        username: email,
-        password: password,
-        nickname: nickname,
+  const signupHandler = async function (
+    email,
+    password,
+    nickname,
+    resetAction
+  ) {
+    signupRequest(
+      {
+        method: "post",
+        baseURL: "https://5d2112b6-33e0-4cf7-853b-f9d783cec939.mock.pstmn.io",
+        url: "/api/v1/join",
+        data: {
+          username: email,
+          password: password,
+          nickname: nickname,
+        },
       },
-    })
-      .then((res) => {
-        console.log(res)
-        console.log("여기서 redux 갱신")
-        setIsLoading(false)
-        toggleLoginOrSignup()
-        resetAction()
-      })
-      .catch((err) => {
-        console.error(err)
-        ret = err
-        setIsLoading(false)
-      })
-    return ret
+      async function (res) {
+        if (res?.data?.result) {
+          toggleLoginOrSignup()
+          resetAction()
+        }
+      }
+    )
   }
+  console.log(loginError, signupError)
 
   return (
     <div ref={pageRef} className={`${styles["sign-container"]}`}>
@@ -101,7 +113,7 @@ function SignPage({ pageRef }) {
           <Login
             onSignup={toggleLoginOrSignup}
             onLogin={loginHandler}
-            isLoading={isLoading}
+            isLoading={loginLoading}
             googleLogin={googleLoginHandler}
           />
         </div>
@@ -109,7 +121,7 @@ function SignPage({ pageRef }) {
           <Signup
             onLogin={toggleLoginOrSignup}
             onSignup={signupHandler}
-            isLoading={isLoading}
+            isLoading={signupLoading}
           />
         </div>
       </div>
