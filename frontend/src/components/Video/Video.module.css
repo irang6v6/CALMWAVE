@@ -6,10 +6,19 @@
 
 .videobox {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin: 10px;
     box-sizing: border-box;
     border-radius: 11px;
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+    padding: 2% 2% 2% 2%;
+}
+
+.video {
+    height: 19vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

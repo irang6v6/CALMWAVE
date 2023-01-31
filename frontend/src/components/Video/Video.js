@@ -5,7 +5,6 @@ import UserVideoComponent from "./UserVideoComponent"
 import { useEffect } from "react"
 import styles from "./Video.module.css"
 
-
 const APPLICATION_SERVER_URL =
   process.env.NODE_ENV === "production" ? "" : "http://localhost:5000/"
 
@@ -23,10 +22,10 @@ export default function Video() {
   }, [])
 
   useEffect(() => {
-    window.addEventListener('beforeunload', leaveSession)
+    window.addEventListener("beforeunload", leaveSession)
     return () => {
       leaveSession()
-      window.removeEventListener('beforeunload', leaveSession)
+      window.removeEventListener("beforeunload", leaveSession)
     }
   }, [session])
 
@@ -94,7 +93,6 @@ export default function Video() {
   }
 
   const leaveSession = () => {
-
     if (!session) return
     session?.disconnect()
 
@@ -162,15 +160,18 @@ export default function Video() {
   // }
 
   return (
-    <div  className={`${styles["videobox"]} bg-cw-indigo-7`}>
-      <UserVideoComponent streamManager={publisher} />
-      {/* <input
-                                className="btn btn-large btn-success"
-                                type="button"
-                                id="buttonSwitchCamera"
-                                onClick={this.switchCamera}
-                                value="Switch Camera"
-                            /> */}
+    <div className={`${styles["videobox"]} bg-cw-indigo-7`}>
+      {publisher === undefined ? (
+          <form className={`${styles["video"]}`} onSubmit={joinSession}>
+              <input
+                type="submit"
+                value="JOIN"
+              />
+          </form>
+      ) : (
+        <UserVideoComponent streamManager={publisher} />
+      )}
+      <div className={`${styles["videonav"]}`} >VIDEO NAV</div>
     </div>
   )
 }
