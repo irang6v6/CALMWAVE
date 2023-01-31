@@ -18,7 +18,7 @@
   /* justify-content: center; */
   align-items: center;
   box-sizing: border-box;
-  /* padding: 15px; */
+  padding: 10px;
   padding-top: 20px;
   overflow-y: scroll;
 }
