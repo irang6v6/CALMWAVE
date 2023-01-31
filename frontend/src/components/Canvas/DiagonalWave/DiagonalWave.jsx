@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { useCanvas } from "../../../hooks/custom/useCanvas"
 import { DevideWave } from "./DevideWave"
 
@@ -18,4 +19,4 @@ function DiagonalWave({ canvasWidth, canvasHeight, leftColor, rightColor }) {
   return <canvas ref={canvasRef} />
 }
 
-export default DiagonalWave
+export default memo(DiagonalWave)

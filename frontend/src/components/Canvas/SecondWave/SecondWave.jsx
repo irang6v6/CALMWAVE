@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { useCanvas } from "../../../hooks/custom/useCanvas"
 import { EachWave } from "./EachWave"
 // import { SecondWaveBackground } from "./SecondWaveBackground"
@@ -31,4 +32,4 @@ function SecondWave({
   return <canvas ref={canvasRef} />
 }
 
-export default SecondWave
+export default memo(SecondWave)

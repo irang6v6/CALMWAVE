@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { useCanvas } from "../../../hooks/custom/useCanvas"
 import { LinearGraph } from "./LinearGraph"
 
@@ -27,4 +28,4 @@ function FooterGraph({
   return <canvas ref={canvasRef} />
 }
 
-export default FooterGraph
+export default memo(FooterGraph)

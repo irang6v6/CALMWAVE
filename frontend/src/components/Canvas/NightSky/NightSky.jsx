@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { useCanvas } from "../../../hooks/custom/useCanvas"
 import { SkyObject } from "./SkyObject"
 
@@ -41,4 +42,4 @@ function NightSky({ canvasWidth, canvasHeight, background }) {
   return <canvas ref={canvasRef} />
 }
 
-export default NightSky
+export default memo(NightSky)

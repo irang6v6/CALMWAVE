@@ -1,8 +1,9 @@
+import React from "react"
 import { useSelector } from "react-redux"
 import CategoryCard from "../../../components/UI/CategoryCard/CategoryCard"
 import styles from "./Category.module.css"
 
-function Category() {
+const Category = function Category() {
   // hoverEpicId, SelectedEpicId, hoverHandler, selectHandler, mouseOutHandler
   const { categoryList } = useSelector((state) => state.category)
   return (

@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { useCanvas } from "../../../hooks/custom/useCanvas"
 import { RainDrop } from "./RainDrop"
 
@@ -23,4 +24,4 @@ function Rain({ background, canvasWidth, canvasHeight }) {
   return <canvas ref={canvasRef} />
 }
 
-export default Rain
+export default memo(Rain)
