@@ -147,20 +147,16 @@ export default function TodoCard({
     <div
       ref={ref}
       style={{ opacity }}
-      className={
-        `${styles["todocard"]}
+      className={`${styles["todocard"]}
         ${currentColumn === "To do" && styles["todo"]}
         ${currentColumn === "In Progress" && styles["progress"]} 
         ${currentColumn === "Done" && styles["done"]}'
-        ${currentColumn !== "In Progress"
-          ? `bg-wb-nightsky-8 txt-wb-mint-10`
-          : `bg-cw-yellow-10`}
-        `
-
-
-
-
-      }
+        ${
+          currentColumn !== "In Progress"
+            ? `bg-wb-nightsky-8 txt-wb-mint-10`
+            : `bg-cw-yellow-10`
+        }
+        `}
     >
       <span>{title}</span>
       <span>{description}</span>

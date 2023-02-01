@@ -54,6 +54,11 @@ const categorySlice = createSlice({
       state.categoryList[action.payload.idx1] = action.payload.category2
       state.categoryList[action.payload.idx2] = action.payload.category1
     },
+    changeCategoryList(state, action) {
+      state.categoryList = action.payload
+      // {workType, itemId} : column 종류, 해당 아이템 id unique 값
+      // action.payload.workType //
+    },
   },
 })
 
