@@ -7,6 +7,8 @@ import com.ssafy.calmwave.repository.UserRepository;
 import com.ssafy.calmwave.exception.NotFoundUserException;
 import com.ssafy.calmwave.domain.User;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -54,7 +56,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         String username = null;
 
         if (JwtUtil.tokenValidation(a_token)) {
-            logger.trace("access token is valid");
+            Logger logger = LoggerFactory.getLogger(JwtUtil.class);
+            logger.info("access token is valid");
             username = JWT.require(Algorithm.HMAC512(secret)).build().verify(a_token).getClaim("username").asString();
             //continue
         } else if (JwtUtil.tokenValidation(r_token)) {

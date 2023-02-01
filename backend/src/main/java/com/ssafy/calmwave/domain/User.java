@@ -115,6 +115,7 @@ public class User{
     public void setProvider(String provider) {
         this.provider = provider;
     }
+
     @Builder
     public User(String email, String nickname, int stretchingIntervalMin, Byte quit, String password, String role, String provider) {
         this.username = email;

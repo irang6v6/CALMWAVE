@@ -94,7 +94,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void unsuccessfulAuthentication(HttpServletRequest request,
         HttpServletResponse response, AuthenticationException failed)
         throws IOException, ServletException {
-        System.out.println("JwtAuthenticationFilter.unsuccessfulAuthentication");
         response.sendError(403, "유저를 찾을 수 없습니다.");
     }
 }

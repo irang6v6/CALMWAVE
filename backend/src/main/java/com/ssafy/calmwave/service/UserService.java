@@ -34,4 +34,11 @@ public class UserService {
     }
 
 
+    public Optional<User> findById(Long userId) {
+        return userRepository.findById(userId);
+    }
+
+    public User saveUser(User user) {
+        return userRepository.save(user);
+    }
 }

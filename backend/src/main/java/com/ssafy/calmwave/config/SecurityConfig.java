@@ -34,6 +34,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .headers()
+                .xssProtection()
+                .and()
+                .contentSecurityPolicy("script-src 'self'");
         http.csrf().disable();//브라우저간의 정보전달이 없기 때문에 꺼놔도 됨
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //세션 안쓸게(JWT 쓸거니까)(stateless 서버)

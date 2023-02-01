@@ -1,13 +1,21 @@
 package com.ssafy.calmwave.domain;
 
+import com.ssafy.calmwave.dto.WorkResponseDto;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
+import reactor.util.annotation.Nullable;
+
 import javax.persistence.*;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "work")
+@NoArgsConstructor
 public class Work {
     @Id
     @Column(name = "work_id", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "title")
@@ -20,19 +28,21 @@ public class Work {
     @Column(name = "status")
     private WorkStatus status;
 
+    @CreationTimestamp
     @Column(name = "date_created")
-    private Instant dateCreated;
+    private LocalDateTime dateCreated;
 
     @Column(name = "date_aimed")
-    private Instant dateAimed;
+    private LocalDateTime dateAimed;
 
     @Column(name = "date_finished")
-    private Instant dateFinished;
+    private LocalDateTime dateFinished;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @Nullable
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_cate_id")
     private WorkCategory workCate;
@@ -69,27 +79,27 @@ public class Work {
         this.status = status;
     }
 
-    public Instant getDateCreated() {
+    public LocalDateTime getDateCreated() {
         return dateCreated;
     }
 
-    public void setDateCreated(Instant dateCreated) {
+    public void setDateCreated(LocalDateTime dateCreated) {
         this.dateCreated = dateCreated;
     }
 
-    public Instant getDateAimed() {
+    public LocalDateTime getDateAimed() {
         return dateAimed;
     }
 
-    public void setDateAimed(Instant dateAimed) {
+    public void setDateAimed(LocalDateTime dateAimed) {
         this.dateAimed = dateAimed;
     }
 
-    public Instant getDateFinished() {
+    public LocalDateTime getDateFinished() {
         return dateFinished;
     }
 
-    public void setDateFinished(Instant dateFinished) {
+    public void setDateFinished(LocalDateTime dateFinished) {
         this.dateFinished = dateFinished;
     }
 
@@ -109,4 +119,13 @@ public class Work {
         this.workCate = workCate;
     }
 
+    @Builder
+    public Work(String title, String description, WorkStatus status, LocalDateTime dateAimed, User user, WorkCategory workCate) {
+        this.title = title;
+        this.description = description;
+        this.status = status;
+        this.dateAimed = dateAimed;
+        this.user = user;
+        this.workCate = workCate;
+    }
 }
