@@ -14,7 +14,7 @@ import styles from "./CategoryCard.module.css"
 //   dragEnd,
 // } from "../../../store/door-store/drag-task-slice"
 
-function CategoryCard({ category, idx }) {
+function CategoryCard({ category, idx, settingModal, openModal }) {
   // const {
   //   dragStartColumn,
   //   dragStartIdx,
@@ -23,11 +23,9 @@ function CategoryCard({ category, idx }) {
   //   dragEndIdx,
   //   dragEndTask,
   // } = useSelector((state) => state.dragtask)
-  // const cardType = "category"
+  const cardType = false
   const dispatch = useDispatch()
-  const categoryList = useSelector(
-    (state) => state.category.categoryList
-  )
+  const categoryList = useSelector((state) => state.category.categoryList)
   // const [cardClasses, setCardClasses] = useState(
   //   `${styles[`category-card-container`]}`
   // )
@@ -104,15 +102,23 @@ function CategoryCard({ category, idx }) {
   })
 
   const moveCardHandler = (dragItem, hoverId) => {
-    const dragCategory = categoryList.filter((category) => category.id === dragItem.category.id)[0]
+    const dragCategory = categoryList.filter(
+      (category) => category.id === dragItem.category.id
+    )[0]
     const dragCategoryIndex = categoryList.indexOf(dragCategory)
-    const hoverCategory = categoryList.filter((category) => category.id === hoverId)[0]
+    const hoverCategory = categoryList.filter(
+      (category) => category.id === hoverId
+    )[0]
     const hoverCategoryIndex = categoryList.indexOf(hoverCategory)
     if (dragCategory) {
       const coppiedStateArray = [...categoryList]
 
       // remove item by "hoverIndex" and put "dragItem" instead
-      const prevCategory = coppiedStateArray.splice(hoverCategoryIndex, 1, dragCategory)
+      const prevCategory = coppiedStateArray.splice(
+        hoverCategoryIndex,
+        1,
+        dragCategory
+      )
 
       // remove item by "dragIndex" and put "prevItem" instead
       coppiedStateArray.splice(dragCategoryIndex, 1, prevCategory[0])
@@ -120,20 +126,18 @@ function CategoryCard({ category, idx }) {
       dispatch(categoryActions.changeCategoryList(coppiedStateArray))
     }
   }
-  
 
   const [{ isDragging }, drag] = useDrag({
     type: "Category",
     item: { idx, category }, // time
-    end: (item, monitor) => {
-    },
+    end: (item, monitor) => {},
     collect: (monitor) => ({
       isDragging: monitor.isDragging(),
     }),
   })
 
   const opacity = isDragging ? 0.6 : 1
-  
+
   drag(drop(ref))
 
   // const hoverHandler = function () {
@@ -170,6 +174,10 @@ function CategoryCard({ category, idx }) {
   // const dragExitHandler = function () {
   //   // dispatch(resetEnd())
   // }
+  const settingAndOpenModal = function () {
+    settingModal(cardType, category)
+    openModal()
+  }
   return (
     <div
       ref={ref}
@@ -184,7 +192,7 @@ function CategoryCard({ category, idx }) {
       // onDragEnter={dragEnterHandler}
     >
       {/* 카드 헤더에 onSetting이랑 onDelete 넣어줘야 함. */}
-      <CardHeader data={category} />
+      <CardHeader data={category} onSetting={settingAndOpenModal} />
       <CardBody data={category} />
       <CardFooter
         data={category}

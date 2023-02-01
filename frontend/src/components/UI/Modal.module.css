@@ -1,0 +1,53 @@
+.modal-container {
+  transition: 0.4s;
+}
+.modal-container.close {
+  box-sizing: border-box;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 255;
+  position: fixed;
+  visibility: hidden;
+  opacity: 0;
+}
+
+.modal-container.open {
+  box-sizing: border-box;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 255;
+  position: fixed;
+  visibility: visible;
+  opacity: 1;
+}
+
+.modal-close-button {
+  box-sizing: border-box;
+  background-color: rgb(255, 255, 255);
+  opacity: 0.66;
+  position: fixed;
+  top: 5%;
+  left: 93%;
+  z-index: 256;
+  width: 45px;
+  height: 45px;
+  border-radius: 5px;
+  padding: 3px;
+  transition: 0.4s;
+}
+
+.modal-close-button:hover {
+  transform: scale(110%);
+  opacity: 0.88;
+  cursor: pointer;
+}

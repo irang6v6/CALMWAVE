@@ -98,18 +98,18 @@ const dragEnd = function (
           })
         )
       } else if (dragStartColumn === "selected-task") {
+        dispatch(
+          selectedTaskActions.changeSelectedTaskPlaceByIdx({
+            idx1: dragstartIdx,
+            idx2: dragEndIdx,
+            task1: dragStartTask,
+            task2: dragEndTask,
+          })
+        )
       }
       return
     }
     if (dragStartColumn === "category-task" && dragEndColumn === "category") {
-      console.log(
-        dragStartColumn,
-        dragstartIdx,
-        dragStartTask,
-        dragEndColumn,
-        dragEndIdx,
-        dragEndTask
-      )
       if (dragStartTask.categoryId === dragEndTask.id) {
         return
       }
@@ -129,6 +129,24 @@ const dragEnd = function (
       dragStartColumn === "category-task" &&
       dragEndColumn === "selected-task"
     ) {
+      return
+    }
+    if (
+      dragStartColumn === "selected-task" &&
+      dragEndColumn !== "selected-task"
+      // && dragEndColumn !== null
+    ) {
+      console.log(
+        dragStartColumn,
+        dragstartIdx,
+        dragStartTask,
+        dragEndColumn,
+        dragEndIdx,
+        dragEndTask
+      )
+      dispatch(
+        selectedTaskActions.addSelectedTask({ newTask: { ...dragStartTask } })
+      )
       return
     }
   }

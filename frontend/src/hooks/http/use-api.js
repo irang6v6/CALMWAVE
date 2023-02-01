@@ -26,16 +26,12 @@ const useApi = function () {
       })
       .catch((err) => {
         saveDataFunction(err) // 에러처리까지 해두었다면
-        setError(true)
         setIsLoading(false)
+        setError(true)
       })
   }, [])
 
-  return {
-    isLoading,
-    error,
-    axiosRequest,
-  }
+  return [isLoading, error, axiosRequest]
 }
 
 export default useApi

@@ -1,5 +1,5 @@
 import styles from "./CardHeader.module.css"
-import { AiFillCloseCircle, AiTwotoneSetting } from "react-icons/ai"
+import { AiFillCloseCircle, AiFillEdit } from "react-icons/ai"
 
 const colors = [
   `${styles[`card-header-lights-yellow`]}`,
@@ -18,7 +18,7 @@ function CardHeader({ data, onSetting, onDelete }) {
         </div>
       </div>
       <div className={`${styles[`card-header-icon-container`]}`}>
-        <AiTwotoneSetting
+        <AiFillEdit
           className={`${styles[`card-header-icon`]}`}
           onClick={onSetting}
         />

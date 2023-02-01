@@ -10,9 +10,9 @@ import SignParentPage from "./pages/Sign/SignParentPage"
 import TestPage from "./pages/TestPage"
 import NotFound from "./pages/NotFound/NotFound"
 import DoorParentPage from "./pages/Door/DoorParentPage"
-// import axios from "axios"
+import axios from "axios"
 
-// axios.defaults.baseURL = "https://asdf"
+axios.defaults.baseURL = "https://i8a105.p.ssafy.io/api"
 // axios.defaults.transformRequest = []
 
 function App() {

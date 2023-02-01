@@ -4,7 +4,7 @@ import CategoryCard from "../../../components/UI/CategoryCard/CategoryCard"
 import Video from "../../../components/Video/Video"
 import styles from "./Category.module.css"
 
-const Category = function Category() {
+const Category = function Category({ settingModal, openModal }) {
   // hoverEpicId, SelectedEpicId, hoverHandler, selectHandler, mouseOutHandler
   const { categoryList } = useSelector((state) => state.category)
   return (
@@ -19,6 +19,8 @@ const Category = function Category() {
               category={category}
               idx={idx}
               key={`category-${category.id}`}
+              settingModal={settingModal}
+              openModal={openModal}
             />
           )
         })}

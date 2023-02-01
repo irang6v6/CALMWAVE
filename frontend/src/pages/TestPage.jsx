@@ -9,6 +9,8 @@ import NightSky from "../components/Canvas/NightSky/NightSky"
 import Earth from "../components/Canvas/Earth/Earth"
 import SecondNightSky from "../components/Canvas/SecondNightSky/SecondNightsky"
 import { useCustomWidthHeight } from "../hooks/custom/useCustomWidthHeight"
+import Modal from "../components/UI/Modal"
+import CategoryForm from "../components/UI/CategoryForm/CategoryForm"
 
 function TestPage() {
   const [canvasWidth, setCanvasWidth] = useState(0)
@@ -23,11 +25,24 @@ function TestPage() {
     [window.innerHeight, window.innerWidth]
   )
   const { width, height } = useCustomWidthHeight(canvRef)
-  console.log(width, height)
+  const [isModal, setIsModal] = useState(true)
+  const toggleModal = function () {
+    setIsModal((val) => !val)
+  }
+  // const [isHi, setIsHi] = useState(false)
+  // const toggleHi = function () {
+  //   setIsHi((val) => !val)
+  // }
   return (
     <>
-      <div>테스트</div>
-      <div>테스트</div>
+      <Modal toggleIsOpen={toggleModal} isOpen={isModal}>
+        <CategoryForm
+          // data={{ title: "수정", description: "기존 값" }}
+          isOpen={isModal}
+        />
+      </Modal>
+      <div onClick={toggleModal}>모달 토글</div>
+      {/* <div onClick={toggleHi}>하이 토글</div> */}
       <div style={{ display: "none" }}>
         <img src={someImg} id={`test-logo`} />
       </div>
