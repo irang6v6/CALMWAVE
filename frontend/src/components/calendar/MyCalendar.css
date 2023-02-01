@@ -4,11 +4,18 @@
     margin-top: 100px;
 }
 
+.calender-container{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding: 0 5% 0 5%;
+}
+
 
 /* 캘린더 wrap (배경) */
 .react-calendar {
-    width: 400px;
-    height: 340px;
+    width: 25%;
+    height: 100%;
     padding: 20px;
     background-color: rgb(223, 242, 255);
     /* border: 1px solid #000; */
@@ -247,6 +254,14 @@
 
   .select-date{
     /* border: 1px solid #000; */
+    width: 60%;
+    /* border: 1px solid #000; */
+    border-radius: 20px;
     text-align: center;
     margin-top: 10px;
+    background-color: rgb(223, 242, 255);
+    box-shadow: 3px 3px 3px 3px rgb(209, 209, 209);
+    font-weight: 600;
+    font-size: 1.5rem;
+    padding: 1%;
   }
