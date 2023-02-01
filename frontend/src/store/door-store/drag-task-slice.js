@@ -1,4 +1,8 @@
 import { createSlice } from "@reduxjs/toolkit"
+import { categoryActions } from "../category-slice"
+import { taskActions } from "../task-slice"
+import { categoryTaskActions } from "./category-task-slice"
+import { selectedTaskActions } from "./selected-task-slice"
 
 const initialState = {
   dragStartColumn: "",
@@ -39,5 +43,97 @@ const dragTaskSlice = createSlice({
   },
 })
 
+const dragStart = function (idx, column, taskOrCategory) {
+  return function (dispatch) {
+    dispatch(
+      dragTaskActions.setStartItem({ idx, column, task: taskOrCategory })
+    )
+  }
+}
+
+const dragEnter = function (idx, column, taskOrCategory) {
+  return function (dispatch) {
+    dispatch(dragTaskActions.setEndItem({ idx, column, task: taskOrCategory }))
+  }
+}
+
+const resetEnd = function () {
+  return function (dispatch) {
+    dispatch(dragTaskActions.resetEndItem())
+  }
+}
+
+const resetStartEnd = function () {
+  return function (dispatch) {
+    dispatch(dragTaskActions.resetItems())
+  }
+}
+
+const dragEnd = function (
+  dragStartColumn,
+  dragstartIdx,
+  dragStartTask,
+  dragEndColumn,
+  dragEndIdx,
+  dragEndTask
+) {
+  return function (dispatch) {
+    if (dragStartColumn === dragEndColumn) {
+      if (dragStartColumn === "category") {
+        dispatch(
+          categoryActions.changeCategoryPlaceByIdx({
+            idx1: dragstartIdx,
+            idx2: dragEndIdx,
+            category1: dragStartTask,
+            category2: dragEndTask,
+          })
+        )
+      } else if (dragStartColumn === "category-task") {
+        dispatch(
+          categoryTaskActions.changeCategoryTaskPlaceByIdx({
+            idx1: dragstartIdx,
+            idx2: dragEndIdx,
+            task1: dragStartTask,
+            task2: dragEndTask,
+          })
+        )
+      } else if (dragStartColumn === "selected-task") {
+      }
+      return
+    }
+    if (dragStartColumn === "category-task" && dragEndColumn === "category") {
+      console.log(
+        dragStartColumn,
+        dragstartIdx,
+        dragStartTask,
+        dragEndColumn,
+        dragEndIdx,
+        dragEndTask
+      )
+      if (dragStartTask.categoryId === dragEndTask.id) {
+        return
+      }
+      dispatch(
+        taskActions.changeTaskObjectById({
+          newTask: { ...dragStartTask, categoryId: dragEndTask.id },
+        })
+      )
+      dispatch(
+        selectedTaskActions.changeSelectedTaskById({
+          newTask: { ...dragStartTask, categoryId: dragEndTask.id },
+        })
+      )
+      return
+    }
+    if (
+      dragStartColumn === "category-task" &&
+      dragEndColumn === "selected-task"
+    ) {
+      return
+    }
+  }
+}
+
 export const dragTaskActions = dragTaskSlice.actions
 export default dragTaskSlice.reducer
+export { dragStart, resetStartEnd, dragEnter, resetEnd, dragEnd }

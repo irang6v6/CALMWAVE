@@ -1,6 +1,7 @@
 import React from "react"
 import { useSelector } from "react-redux"
 import CategoryCard from "../../../components/UI/CategoryCard/CategoryCard"
+import Video from "../../../components/Video/Video"
 import styles from "./Category.module.css"
 
 const Category = function Category() {
@@ -8,7 +9,9 @@ const Category = function Category() {
   const { categoryList } = useSelector((state) => state.category)
   return (
     <>
-      <div className={`${styles[`cam-container`]}`}>캠임</div>
+      <div className={`${styles[`cam-container`]}`}>
+        <Video />
+      </div>
       <div className={`${styles[`category-container`]}`}>
         {categoryList.map((category, idx) => {
           return (

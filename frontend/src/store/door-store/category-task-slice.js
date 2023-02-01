@@ -27,7 +27,7 @@ const categoryTaskSlice = createSlice({
     },
     editCategoryTaskById(state, action) {
       state.categoryTaskList = state.categoryTaskList.map((ctask) => {
-        if (ctask.id === action.payload.id) {
+        if (ctask.id === action.payload.newTask.id) {
           return action.payload.newTask
         }
         return ctask

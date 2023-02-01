@@ -1,12 +1,17 @@
 import { useState, useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { categoryActions } from "../../../store/category-slice"
-import { categoryTaskActions } from "../../../store/door-store/category-task-slice"
-import { dragTaskActions } from "../../../store/door-store/drag-task-slice"
 import CardBody from "../CardBody/CardBody"
 import CardFooter from "../CardFooter/CardFooter"
 import CardHeader from "../CardHeader/CardHeader"
 import styles from "./CategoryCard.module.css"
+import {
+  dragStart,
+  resetStartEnd,
+  dragEnter,
+  resetEnd,
+  dragEnd,
+} from "../../../store/door-store/drag-task-slice"
 
 function CategoryCard({ category, idx }) {
   const {
@@ -62,58 +67,28 @@ function CategoryCard({ category, idx }) {
   const mouseOutHandler = function () {
     dispatch(categoryActions.changeHovered({ hoveredCategoryId: null }))
   }
+
   const dragStartHandler = function () {
-    dispatch(
-      dragTaskActions.setStartItem({
-        column: cardType,
-        task: category,
-        idx: idx,
-      })
-    )
+    dispatch(dragStart(idx, cardType, category))
   }
   const dragEnterHandler = function () {
-    dispatch(
-      dragTaskActions.setEndItem({ column: cardType, task: category, idx: idx })
-    )
+    dispatch(dragEnter(idx, cardType, category))
   }
   const dragEndHandler = function () {
-    console.log(
-      dragStartColumn,
-      dragStartIdx,
-      dragStartTask
-      // dragEndColumn,
-      // dragEndIdx,
-      // dragEndTask
+    dispatch(
+      dragEnd(
+        dragStartColumn,
+        dragStartIdx,
+        dragStartTask,
+        dragEndColumn,
+        dragEndIdx,
+        dragEndTask
+      )
     )
-    if (
-      dragStartColumn === "category" &&
-      dragEndColumn === "category" &&
-      dragEndIdx !== dragStartIdx
-    ) {
-      dispatch(
-        categoryActions.changeCategoryPlaceByIdx({
-          idx1: dragStartIdx,
-          idx2: dragEndIdx,
-          category1: dragStartTask,
-          category2: dragEndTask,
-        })
-      )
-      dispatch(dragTaskActions.resetItems())
-    } else if (
-      dragStartColumn === "category-task" &&
-      dragEndColumn === "category"
-    ) {
-      dispatch(
-        categoryTaskActions.editCategoryTaskById({
-          id: dragStartTask.id,
-          newTask: { ...dragStartTask, categoryId: category.id },
-        })
-      )
-      dispatch(dragTaskActions.resetItems())
-    }
+    dispatch(resetStartEnd())
   }
   const dragExitHandler = function () {
-    dispatch(dragTaskActions.resetEndItem())
+    dispatch(resetEnd())
   }
   return (
     <div
@@ -124,11 +99,16 @@ function CategoryCard({ category, idx }) {
       onDragStart={dragStartHandler}
       onDragEnd={dragEndHandler}
       onDragExit={dragExitHandler}
-      onDragOver={dragEnterHandler}
+      onDragEnter={dragEnterHandler}
     >
+      {/* 카드 헤더에 onSetting이랑 onDelete 넣어줘야 함. */}
       <CardHeader data={category} />
       <CardBody data={category} />
-      <CardFooter data={category} />
+      <CardFooter
+        data={category}
+        big={category.sumBusinessHours}
+        small={category.nowBusinessHours}
+      />
     </div>
   )
 }

@@ -163,11 +163,12 @@ const taskSlice = createSlice({
     },
     changeTaskObjectById(state, action) {
       state.taskList = state.taskList.map((task) => {
-        if (task.id === action.payload.taskId) {
+        if (task.id === action.payload.newTask.id) {
           return action.payload.newTask
         }
         return task
       })
+      console.log(state.taskList)
     },
   },
 })

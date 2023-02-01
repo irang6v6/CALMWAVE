@@ -43,9 +43,17 @@ const selectedTaskSlice = createSlice({
     clearSelectedTaskList(state, action) {
       state.selectedTaskList = []
     },
-    deleteCategoryTaskById(state, action) {
-      state.selectedTaskList = state.selectedTaskList.filter((ctask) => {
-        return ctask.id !== action.payload.id
+    deleteSelectedTaskById(state, action) {
+      state.selectedTaskList = state.selectedTaskList.filter((stask) => {
+        return stask.id !== action.payload.id
+      })
+    },
+    changeSelectedTaskById(state, action) {
+      state.selectedTaskList = state.selectedTaskList.map((stask) => {
+        if (stask.id === action.payload.newTask.id) {
+          return action.payload.newTask
+        }
+        return stask
       })
     },
   },
