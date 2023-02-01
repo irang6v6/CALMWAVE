@@ -22,6 +22,7 @@ function NightSky({ canvasWidth, canvasHeight, background }) {
     new SkyObject(canvasWidth, canvasHeight),
     new SkyObject(canvasWidth, canvasHeight),
     new SkyObject(canvasWidth, canvasHeight),
+    new SkyObject(canvasWidth, canvasHeight),
   ]
   for (let i = 0; i < canvasWidth / 2; i++) {
     stars.push(new SkyObject(canvasWidth, canvasHeight))
