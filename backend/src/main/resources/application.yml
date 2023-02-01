@@ -2,6 +2,17 @@ spring:
   profiles:
     include: oauth
 
+security:
+  oauth2:
+    client:
+      registration:
+        google:
+          client-id: ${GOOGLE_CLIENT_ID}
+          client-secret: ${GOOGLE_CLIENT_SECRET}
+          scope:
+            - email
+            - profile
+
 ---
 
 spring:
@@ -36,17 +47,6 @@ jpa:
 logging.level:
   org.hibernate.SQL: debug
 #  org.hibernate.type: trace
-
-security:
-  oauth2:
-    client:
-      registration:
-        google:
-          client-id: 492158022289-hi74phr5f2jrhr0qbgs9u48umqj4a6i2.apps.googleusercontent.com
-          client-secret: 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
-          scope:
-            - email
-            - profile
 
 my:
   secret: ${JWT_SECRET_KEY}
@@ -94,17 +94,6 @@ jpa:
 logging.level:
   org.hibernate.SQL: debug
 #  org.hibernate.type: trace
-
-security:
-  oauth2:
-    client:
-      registration:
-        google:
-          client-id: 492158022289-hi74phr5f2jrhr0qbgs9u48umqj4a6i2.apps.googleusercontent.com
-          client-secret: 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
-          scope:
-            - email
-            - profile
 
 my:
   secret: ${JWT_SECRET_KEY}
