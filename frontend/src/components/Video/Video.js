@@ -18,10 +18,12 @@ export default function Video() {
   /* eslint-disable */
   const [OV, setOV] = useState()
 
+  // 최초 진입 시 세션 접속
   useEffect(() => {
     joinSession()
   }, [])
 
+  // 페이지 변동에 따른 세션 종료
   useEffect(() => {
     window.addEventListener("beforeunload", leaveSession)
     return () => {
@@ -30,14 +32,14 @@ export default function Video() {
     }
   }, [session])
 
+  // 토큰 반환 (추가 예정)
   const getToken = async () => {
     const sessionId = await createSession(mySessionId)
     return await createToken(sessionId)
   }
 
-  // // 세션에 참여하는 함수
+  // 세션에 참여하는 함수
   const joinSession = () => {
-    // e.preventDefault()
 
     const newOV = new OpenVidu()
     newOV.enableProdMode()
@@ -49,7 +51,7 @@ export default function Video() {
     const connection = () => {
       // subscribers 관련 내용 삭제
 
-      // 토큰 가져오기
+      // 토큰 가져오기 (수정 예정)
       getToken().then((token) => {
         mySession
           .connect(token, { clientData: "Participant 77" })
@@ -61,15 +63,12 @@ export default function Video() {
                 videoSource: undefined, // The source of video. If undefined default webcam
                 // resolution: "640x480", // The resolution of your video
                 resolution: undefined, // The resolution of your video
-                // resolution: "320x240", // The resolution of your video
                 frameRate: 30, // The frame rate of your video
               })
               .then((mediaStream) => {
-                // let videoTrack = mediaStream.getVideoTracks()[0]
 
                 let newPublisher = newOV.initPublisher("Participant 77", {
                   audioSource: undefined,
-                  // videoSource: videoTrack,
                   publishAudio: false, // Whether you want to start publishing with your audio unmuted or not
                   publishVideo: true, // Whether you want to start publishing with your video enabled or not
                   mirror: true, // Whether to mirror your local video or not
@@ -94,9 +93,10 @@ export default function Video() {
   }
 
   const leaveSession = () => {
+    // session에 따른 useEffect -> 세션이 남아있는 경우에만 실행되도록
     if (!session) return
     session?.disconnect()
-
+    // 데이터 비우기
     setOV(null)
     setSession(undefined)
     setMySessionId("SessionA")
@@ -125,6 +125,7 @@ export default function Video() {
     return response.data // The token
   }
 
+  // 카메라 변경 함수
   // async switchCamera() {
   //     try {
   //         const devices = await this.OV.getDevices()

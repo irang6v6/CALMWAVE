@@ -33,8 +33,7 @@ export const RoomPage = () => {
       <div className={`${styles["container"]}`}>
         <DndProvider backend={HTML5Backend}>
           <div>
-            <Video>
-            </Video>
+            <Video></Video>
             <TodoColumn title="To do" className={`bg-cw-indigo-7`}>
               {alignTodosInColumn("To do")}
             </TodoColumn>
