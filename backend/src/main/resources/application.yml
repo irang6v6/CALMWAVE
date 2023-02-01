@@ -99,7 +99,7 @@ my:
   secret: ${JWT_SECRET_KEY}
 
 server:
-  port: 8091
+  port: 8080
   servlet:
     context-path: /
     encoding:
