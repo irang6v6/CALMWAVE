@@ -35,7 +35,7 @@ public class CategoryController {
      * @return
      */
     @PostMapping("create")
-    @ApiOperation(value = "카테고리 추가", notes = "result:ok")
+    @ApiOperation(value = "카테고리 추가", notes = "result:ok, cateName,cateColor,cateIcon만 보내면 됨")
     public ResponseEntity<?> create(@RequestHeader(value = "AccessToken") String token, @RequestBody WorkCategoryDto categoryRequestDto) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
@@ -71,7 +71,7 @@ public class CategoryController {
      * @return List<WorkCategoryDto>
      */
     @GetMapping("list")
-    @ApiOperation(value = "유저별 카테고리 리스트 조회", notes = "",response = WorkCategory.class)
+    @ApiOperation(value = "유저별 카테고리 리스트 order순 조회", notes = "",response = WorkCategoryDto.class)
     public ResponseEntity<?> getCategoryList(@RequestHeader(value = "AccessToken") String token) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
@@ -96,19 +96,19 @@ public class CategoryController {
     }
 
     /**
-     * @param workCategoryRequestDto
+     * @param workCategoryDto
      * @return ok
      */
     @PostMapping("update/{cateid}")
     @ApiOperation(value = "카테고리 수정", notes = "result:ok")
-    public ResponseEntity<?> join(@RequestBody WorkCategoryDto workCategoryRequestDto) {
+    public ResponseEntity<?> join(@RequestBody WorkCategoryDto workCategoryDto) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        Optional<WorkCategory> byId = categoryService.findById(workCategoryRequestDto.getCateId());
+        Optional<WorkCategory> byId = categoryService.findById(workCategoryDto.getCateId());
         WorkCategory workCategory = byId.get();
-        workCategory.setCateColor(workCategoryRequestDto.getCateColor());
-        workCategory.setCateIcon(workCategoryRequestDto.getCateIcon());
-        workCategory.setCateName(workCategoryRequestDto.getCateName());
+        workCategory.setCateColor(workCategoryDto.getCateColor());
+        workCategory.setCateIcon(workCategoryDto.getCateIcon());
+        workCategory.setCateName(workCategoryDto.getCateName());
         WorkCategory save = categoryService.save(workCategory);
         if (save != null) {
             //데이터 요청 성공
