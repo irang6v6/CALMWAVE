@@ -3,6 +3,7 @@ package com.ssafy.calmwave.controller;
 import com.ssafy.calmwave.config.jwt.JwtUtil;
 import com.ssafy.calmwave.domain.User;
 import com.ssafy.calmwave.domain.Work;
+import com.ssafy.calmwave.dto.WorkCategoryDto;
 import com.ssafy.calmwave.dto.WorkRequestDto;
 import com.ssafy.calmwave.dto.WorkResponseDto;
 import com.ssafy.calmwave.service.UserService;
@@ -33,7 +34,7 @@ public class WorkController {
      * @return
      */
     @PostMapping("create")
-    @ApiOperation(value = "작업 추가", notes = "")
+    @ApiOperation(value = "작업 추가", notes = "result:ok")
     public ResponseEntity<?> createTask(@RequestBody WorkRequestDto workRequestDto) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
@@ -55,12 +56,13 @@ public class WorkController {
      * @return
      */
     @GetMapping("todo")
-    @ApiOperation(value = "해야 할 일 리스트", notes = "todo")
+    @ApiOperation(value = "해야 할 일 리스트", notes = "todo",response = WorkResponseDto.class)
     public ResponseEntity<?> getTodo(@RequestHeader(value = "AccessToken") String token) {
         User user = jwtUtil.getUser(token);
         List<Work> todo = workService.getTodo(user.getId());
         List<WorkResponseDto> collect = todo.stream()
-                .map(m-> new WorkResponseDto(m.getId(),m.getTitle(),m.getDescription(),m.getStatus(),m.getDateCreated(),m.getDateAimed(),m.getWorkCate()))
+                .map(m-> new WorkResponseDto(m.getId(),m.getTitle(),m.getDescription(),m.getStatus(),m.getDateCreated(),m.getDateAimed()
+                        ,new WorkCategoryDto(m.getWorkCate().getId(),m.getWorkCate().getCateName(),m.getWorkCate().getCateColor(),m.getWorkCate().getCateIcon(),m.getWorkCate().getCateOrder())))
                 .collect(Collectors.toList());
         return ResponseEntity.ok().body(collect);
     }

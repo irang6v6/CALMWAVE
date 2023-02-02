@@ -3,6 +3,7 @@ package com.ssafy.calmwave.domain;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 
 import javax.persistence.*;
 
@@ -12,6 +13,13 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class WorkCategory {
 
+    public WorkCategory(Long id, String cateName, int cateColor, int cateIcon) {
+        this.id = id;
+        this.cateName = cateName;
+        this.cateColor = cateColor;
+        this.cateIcon = cateIcon;
+    }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "work_cate_id")
@@ -20,6 +28,7 @@ public class WorkCategory {
     @Column(name = "cate_name", nullable = false, length = 20)
     private String cateName;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
@@ -28,9 +37,12 @@ public class WorkCategory {
 
     private int cateIcon;
 
+    private int cateOrder;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "work_cate_status")
     private WorkCategoryStatus status;
+
 
     @Builder
     public WorkCategory(String cateName, User user, int cateColor, int cateIcon,WorkCategoryStatus workCategoryStatus) {
@@ -39,6 +51,14 @@ public class WorkCategory {
         this.cateColor = cateColor;
         this.cateIcon = cateIcon;
         this.status = workCategoryStatus;
+    }
+
+    public int getCateOrder() {
+        return cateOrder;
+    }
+
+    public void setCateOrder(int cateOrder) {
+        this.cateOrder = cateOrder;
     }
 
     public int getCateColor() {

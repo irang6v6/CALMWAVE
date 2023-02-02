@@ -4,7 +4,7 @@ import com.ssafy.calmwave.config.jwt.JwtUtil;
 import com.ssafy.calmwave.domain.WorkCategory;
 import com.ssafy.calmwave.domain.WorkCategoryStatus;
 import com.ssafy.calmwave.domain.User;
-import com.ssafy.calmwave.dto.WorkCategoryRequestDto;
+import com.ssafy.calmwave.dto.WorkCategoryDto;
 import com.ssafy.calmwave.repository.WorkCategoryRepository;
 import com.ssafy.calmwave.service.CategoryService;
 import io.swagger.annotations.Api;
@@ -36,7 +36,7 @@ public class CategoryController {
      */
     @PostMapping("create")
     @ApiOperation(value = "카테고리 추가", notes = "result:ok")
-    public ResponseEntity<?> create(@RequestHeader(value = "AccessToken") String token, @RequestBody WorkCategoryRequestDto categoryRequestDto) {
+    public ResponseEntity<?> create(@RequestHeader(value = "AccessToken") String token, @RequestBody WorkCategoryDto categoryRequestDto) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         User user = jwtUtil.getUser(token);
@@ -68,7 +68,7 @@ public class CategoryController {
     /**
      *
      * @param token
-     * @return List<WorkCategory>
+     * @return List<WorkCategoryDto>
      */
     @GetMapping("list")
     @ApiOperation(value = "유저별 카테고리 리스트 조회", notes = "",response = WorkCategory.class)
@@ -76,7 +76,7 @@ public class CategoryController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         User user = jwtUtil.getUser(token);
-        List<WorkCategory> workCategories = categoryService.findByUserAndStatus(user);
+        List<WorkCategoryDto> workCategories = categoryService.findByUserAndStatus(user);
         return ResponseEntity.ok().body(workCategories);
     }
 
@@ -101,10 +101,10 @@ public class CategoryController {
      */
     @PostMapping("update/{cateid}")
     @ApiOperation(value = "카테고리 수정", notes = "result:ok")
-    public ResponseEntity<?> join(@RequestBody WorkCategoryRequestDto workCategoryRequestDto) {
+    public ResponseEntity<?> join(@RequestBody WorkCategoryDto workCategoryRequestDto) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        Optional<WorkCategory> byId = categoryService.findById(workCategoryRequestDto.getId());
+        Optional<WorkCategory> byId = categoryService.findById(workCategoryRequestDto.getCateId());
         WorkCategory workCategory = byId.get();
         workCategory.setCateColor(workCategoryRequestDto.getCateColor());
         workCategory.setCateIcon(workCategoryRequestDto.getCateIcon());

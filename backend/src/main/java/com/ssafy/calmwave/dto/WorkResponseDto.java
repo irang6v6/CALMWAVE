@@ -14,9 +14,9 @@ public class WorkResponseDto {
     private WorkStatus status;
     private LocalDateTime dateCreated;
     private LocalDateTime dateAimed;
-    private WorkCategory workCate;
+    private WorkCategoryDto workCate;
 
-    public WorkResponseDto(Long id, String title, String description, WorkStatus status, LocalDateTime dateCreated, LocalDateTime dateAimed, WorkCategory workCate) {
+    public WorkResponseDto(Long id, String title, String description, WorkStatus status, LocalDateTime dateCreated, LocalDateTime dateAimed, WorkCategoryDto workCate) {
         this.id = id;
         this.title = title;
         this.description = description;

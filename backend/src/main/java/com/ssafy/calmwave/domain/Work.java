@@ -38,11 +38,13 @@ public class Work {
     @Column(name = "date_finished")
     private LocalDateTime dateFinished;
 
+    @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_cate_id",nullable = false)
     private WorkCategory workCate;
 
