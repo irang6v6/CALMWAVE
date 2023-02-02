@@ -4,10 +4,9 @@
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  margin: 1% 1% 1% 1%;
   position: relative;
-  width: 90%;
   height: 10em;
+  margin: 5px;
 }
 
 .todo {
@@ -15,7 +14,7 @@
 }
 
 .progress {
-  height: 85%;
+  height: 95%;
 }
 
 .done {

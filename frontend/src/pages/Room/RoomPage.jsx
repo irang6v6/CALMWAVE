@@ -1,15 +1,19 @@
-import React from "react"
+import { useRef } from "react"
 import { useSelector } from "react-redux"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
 import styles from "./RoomPage.module.css"
 import TodoColumn from "../../components/UI/TodoColumn"
 import TodoCard from "../../components/UI/TodoCard"
-import HandleTodo from "../../components/UI/HandleTodo"
+// import HandleTodo from "../../components/UI/HandleTodo"
 import Video from "../../components/Video/Video"
+import NightSky from "../../components/Canvas/NightSky/NightSky"
+import { useCustomWidthHeight } from "../../hooks/custom/useCustomWidthHeight"
 
 export const RoomPage = () => {
   const todos = useSelector((state) => state.todos.todos)
+  const doorRef = useRef(null)
+  const { width, height } = useCustomWidthHeight(doorRef)
 
   const alignTodosInColumn = (columnName) => {
     return todos
@@ -29,11 +33,15 @@ export const RoomPage = () => {
 
   return (
     <>
-      <HandleTodo></HandleTodo>
-      <div className={`${styles["container"]}`}>
+      <div className={`${styles[`canvas-container`]}`}>
+        <NightSky canvasWidth={width} canvasHeight={height} />
+      </div>
+      <div ref={doorRef} className={`${styles["todobox-container"]}`}>
         <DndProvider backend={HTML5Backend}>
-          <div>
-            <Video></Video>
+          <div className={`${styles["cam-todo-container"]}`}>
+            <div className={`${styles[`cam-container`]}`}>
+              <Video />
+            </div>
             <TodoColumn title="To do" className={`bg-cw-indigo-7`}>
               {alignTodosInColumn("To do")}
             </TodoColumn>

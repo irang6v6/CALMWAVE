@@ -90,7 +90,6 @@ function CategoryCard({ category, idx, settingModal, openModal }) {
       if (dragIndex > hoverIndex && hoverClientY > hoverMiddleY) {
         return
       }
-      console.log(item)
       // Time to actually perform the action
       moveCardHandler(item, hoverId)
       // Note: we're mutating the monitor item here!
@@ -122,7 +121,6 @@ function CategoryCard({ category, idx, settingModal, openModal }) {
 
       // remove item by "dragIndex" and put "prevItem" instead
       coppiedStateArray.splice(dragCategoryIndex, 1, prevCategory[0])
-      console.log(coppiedStateArray)
       dispatch(categoryActions.changeCategoryList(coppiedStateArray))
     }
   }

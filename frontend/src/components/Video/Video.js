@@ -162,7 +162,7 @@ export default function Video() {
   // }
 
   return (
-    <div className={`${styles["videobox"]} bg-cw-indigo-7`}>
+    <div className={`${styles["videobox"]}`}>
       {publisher === undefined ? (
         <form className={`${styles["video"]}`} onSubmit={joinSession}>
           <input type="submit" value="JOIN" />

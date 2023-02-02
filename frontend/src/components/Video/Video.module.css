@@ -12,8 +12,10 @@
     margin: 10px;
     box-sizing: border-box;
     border-radius: 11px;
+    background-color: rgba(111, 111, 111, 0.8);
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
     padding: 2% 2% 2% 2%;
+    color: white;
 }
 
 .video {

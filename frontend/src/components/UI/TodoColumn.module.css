@@ -1,17 +1,32 @@
 .todobox {
-  height: auto;
-  width: 25vw;
-  margin: 10px;
+  height: 100%;
+  width: 24vw;
   border-radius: 11px;
   box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
   transition: width 0.35s ease-out;
-  padding: 10px;
+  box-sizing: border-box;
+  overflow-y: scroll;
+  margin: 5px
+}
+
+.todobox::-webkit-scrollbar {
+  display: none;
 }
 
 .todobox_focused {
-  width: 40vw;
+  width: 38vw;
+}
+
+.title-container {
+  font-size: 2rem;
+  color: rgba(200, 254, 238, 1);
+}
+
+.box-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
 }

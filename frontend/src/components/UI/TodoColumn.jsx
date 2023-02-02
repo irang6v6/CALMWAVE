@@ -25,7 +25,6 @@ export default function TodoColumn({ children, className, title }) {
         })
       )
     )
-    
   }
 
   const [, drop] = useDrop({
@@ -38,7 +37,10 @@ export default function TodoColumn({ children, className, title }) {
       if (dragColumn === hoverColumn) {
         return
       }
-      if (hoverColumn === "In Progress" || item.currentColumn === "In Progress") {
+      if (
+        hoverColumn === "In Progress" ||
+        item.currentColumn === "In Progress"
+      ) {
         return
       }
       moveCardColumnHandler(item, hoverColumn)
@@ -48,15 +50,19 @@ export default function TodoColumn({ children, className, title }) {
   })
 
   return (
-    <div
-      ref={drop}
-      className={`${styles["todobox"]}
+    <div className={`${styles[`box-container`]}`}>
+      <div className={`${styles[`title-container`]}`}>
+        {title}
+      </div>
+      <div
+        ref={drop}
+        className={`${styles["todobox"]}
         ${progress && title === "In Progress" && styles["todobox_focused"]} 
         ${!progress && title === "Done" && styles["todobox_focused"]}
         ${className}`}
-    >
-      {title}
-      {children}
+      >
+        {children}
+      </div>
     </div>
   )
 }
