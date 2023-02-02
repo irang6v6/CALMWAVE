@@ -11,8 +11,16 @@ import SecondNightSky from "../components/Canvas/SecondNightSky/SecondNightsky"
 import { useCustomWidthHeight } from "../hooks/custom/useCustomWidthHeight"
 import Modal from "../components/UI/Modal"
 import CategoryForm from "../components/UI/CategoryForm/CategoryForm"
+import { useSearchParams } from "react-router-dom"
 
 function TestPage() {
+  const [searchParams] = useSearchParams()
+  const AccessToken = searchParams.get("AccessToken")
+  const RefreshToken = searchParams.get("RefreshToken")
+  const userid = searchParams.get("userid")
+  console.log(">>>>>>>>", AccessToken)
+  console.log("<<<<<<<<", RefreshToken)
+  console.log(userid, "여기가 유저 아이디에용")
   const [canvasWidth, setCanvasWidth] = useState(0)
   const [canvasHeight, setCanvasHeight] = useState(0)
   const canvRef = useRef(null)

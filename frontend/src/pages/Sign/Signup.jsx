@@ -12,6 +12,7 @@ import {
   SpinnerDots,
   SpinnerCircle,
 } from "../../components/UI/Spinner"
+import useApi from "../../hooks/http/use-api"
 
 function Signup(props) {
   const [userNickname, setUserNickname] = useState("")
@@ -173,7 +174,49 @@ function Signup(props) {
     setEmailIsValid(false)
     setPasswordIsValid(false)
     setPassword2IsValid(false)
+    setEmailDupValid(null)
+    setEmailDupBtnClasses(() => `${styles[`email-dup-check-yet`]}`)
   }
+
+  // 이메일 중복 확인 관련
+  const [emailDupValid, setEmailDupValid] = useState(null)
+  const [emailDupBtnClasses, setEmailDupBtnClasses] = useState(
+    `${styles[`email-dup-check-yet`]}`
+  )
+  const [emailCheckLoading, emailCheckError, AxiosEmailCheck] = useApi()
+  const emailCheckHandler = function () {
+    AxiosEmailCheck(
+      {
+        method: "get",
+        url: `/api/v1/account/checkemail/${useremail}`,
+      },
+      function (resData) {
+        setEmailDupValid(true)
+      }
+    )
+  }
+
+  useEffect(
+    function () {
+      if (emailCheckError) {
+        setEmailDupValid(() => false)
+      } else {
+        setEmailDupValid(() => null)
+      }
+    },
+    [emailCheckError]
+  )
+
+  useEffect(
+    function () {
+      if (emailDupValid === true) {
+        setEmailDupBtnClasses(() => `${styles[`email-dup-check-complete`]}`)
+      } else if (emailDupValid === false) {
+        setEmailDupBtnClasses(() => `${styles[`email-dup-check-fail`]}`)
+      }
+    },
+    [emailDupValid]
+  )
 
   const onSubmitHandler = async function (event) {
     event.preventDefault()
@@ -208,6 +251,9 @@ function Signup(props) {
     setUserNickname(() => nickRef.current.value)
   }
   const onInputEmailHandler = function () {
+    if (emailDupValid) {
+      return
+    }
     setUseremail(() => emailRef.current.value)
   }
   const onInputPasswordHandler = function () {
@@ -267,10 +313,24 @@ function Signup(props) {
             placeholder="2~8자로 적어주세요."
           />
           <br />
-          <label htmlFor="signup-email" className={`${styles["form-label"]}`}>
-            이메일
-          </label>
-          <br />
+          <div className={`${styles["label-container"]}`}>
+            <br />
+            <label htmlFor="signup-email" className={`${styles["form-label"]}`}>
+              이메일
+            </label>
+
+            <span className={emailDupBtnClasses} onClick={emailCheckHandler}>
+              {emailCheckLoading ? (
+                <SpinnerDots />
+              ) : emailDupValid === true ? (
+                "확인 완료"
+              ) : emailDupValid === false ? (
+                "재확인"
+              ) : (
+                "중복 확인"
+              )}
+            </span>
+          </div>
           <input
             ref={emailRef}
             type="email"
