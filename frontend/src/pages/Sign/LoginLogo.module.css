@@ -6,8 +6,8 @@
   box-sizing: border-box;
   border-radius: 100%;
   background-color: rgba(230, 246, 255);
-  width: 48vh;
-  height: 48vh;
+  width: 45vh;
+  height: 45vh;
   box-shadow: 3px 10px 5px 3px rgba(2, 45, 82, 0.2);
 }
 .logo-img {
