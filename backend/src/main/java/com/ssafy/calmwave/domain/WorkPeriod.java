@@ -17,7 +17,7 @@ public class WorkPeriod {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "work_period_id", nullable = false)
+    @Column(name = "work_period_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

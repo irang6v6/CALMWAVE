@@ -17,7 +17,7 @@ public class Stretch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "stretch_id", nullable = false)
+    @Column(name = "stretch_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

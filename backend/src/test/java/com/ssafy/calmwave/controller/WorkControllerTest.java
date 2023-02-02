@@ -6,7 +6,6 @@ import com.ssafy.calmwave.domain.WorkCategory;
 import com.ssafy.calmwave.domain.WorkStatus;
 import com.ssafy.calmwave.dto.WorkRequestDto;
 import com.ssafy.calmwave.service.UserService;
-import com.ssafy.calmwave.service.WorkCategoryService;
 import com.ssafy.calmwave.service.WorkService;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,16 +13,12 @@ import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
 import java.time.LocalDateTime;
 import java.util.Optional;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

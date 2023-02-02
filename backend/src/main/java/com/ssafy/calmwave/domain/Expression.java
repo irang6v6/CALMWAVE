@@ -17,7 +17,7 @@ public class Expression {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "expression_id", nullable = false)
+    @Column(name = "expression_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)

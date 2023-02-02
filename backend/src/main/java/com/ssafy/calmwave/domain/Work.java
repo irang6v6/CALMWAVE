@@ -1,8 +1,8 @@
 package com.ssafy.calmwave.domain;
 
-import com.ssafy.calmwave.dto.WorkResponseDto;
 import lombok.Builder;
 import lombok.NoArgsConstructor;
+import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import reactor.util.annotation.Nullable;
 
@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Work {
     @Id
-    @Column(name = "work_id", nullable = false)
+    @Column(name = "work_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -42,9 +42,8 @@ public class Work {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Nullable
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "work_cate_id")
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "work_cate_id",nullable = false)
     private WorkCategory workCate;
 
     public Long getId() {

@@ -16,7 +16,7 @@ public class Memo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "memo_id", nullable = false)
+    @Column(name = "memo_id")
     private Long id;
 
     @Column(name = "content", length = 500)

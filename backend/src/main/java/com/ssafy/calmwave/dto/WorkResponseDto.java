@@ -2,9 +2,8 @@ package com.ssafy.calmwave.dto;
 
 import com.ssafy.calmwave.domain.WorkCategory;
 import com.ssafy.calmwave.domain.WorkStatus;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
+
 import java.time.LocalDateTime;
 
 @Getter

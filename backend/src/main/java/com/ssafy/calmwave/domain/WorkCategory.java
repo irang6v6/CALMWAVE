@@ -1,13 +1,20 @@
 package com.ssafy.calmwave.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 
 @Entity
 @Table(name = "work_category")
+@NoArgsConstructor
+@AllArgsConstructor
 public class WorkCategory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "work_cate_id", nullable = false)
+    @Column(name = "work_cate_id")
     private Long id;
 
     @Column(name = "cate_name", nullable = false, length = 20)
@@ -16,6 +23,47 @@ public class WorkCategory {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    private int cateColor;
+
+    private int cateIcon;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "work_cate_status")
+    private WorkCategoryStatus status;
+
+    @Builder
+    public WorkCategory(String cateName, User user, int cateColor, int cateIcon,WorkCategoryStatus workCategoryStatus) {
+        this.cateName = cateName;
+        this.user = user;
+        this.cateColor = cateColor;
+        this.cateIcon = cateIcon;
+        this.status = workCategoryStatus;
+    }
+
+    public int getCateColor() {
+        return cateColor;
+    }
+
+    public void setCateColor(int cateColor) {
+        this.cateColor = cateColor;
+    }
+
+    public int getCateIcon() {
+        return cateIcon;
+    }
+
+    public void setCateIcon(int cateIcon) {
+        this.cateIcon = cateIcon;
+    }
+
+    public WorkCategoryStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(WorkCategoryStatus status) {
+        this.status = status;
+    }
 
     public Long getId() {
         return id;

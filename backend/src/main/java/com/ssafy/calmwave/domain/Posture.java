@@ -17,7 +17,7 @@ public class Posture {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "posture_id", nullable = false)
+    @Column(name = "posture_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
