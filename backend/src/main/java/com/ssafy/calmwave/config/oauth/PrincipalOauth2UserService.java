@@ -1,10 +1,9 @@
 package com.ssafy.calmwave.config.oauth;
 
 import com.ssafy.calmwave.config.auth.PrincipalDetails;
-import com.ssafy.calmwave.model.User;
-import com.ssafy.calmwave.config.repository.UserRepository;
+import com.ssafy.calmwave.domain.User;
+import com.ssafy.calmwave.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
 import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
@@ -12,7 +11,6 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import java.sql.Timestamp;
 import java.util.UUID;
 
 /**

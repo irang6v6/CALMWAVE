@@ -1,13 +1,15 @@
 package com.ssafy.calmwave.controller;
 
 import com.ssafy.calmwave.config.jwt.JwtUtil;
-import com.ssafy.calmwave.config.repository.UserRepository;
+import com.ssafy.calmwave.repository.UserRepository;
 import com.ssafy.calmwave.dto.UserInfoDto;
-import com.ssafy.calmwave.model.User;
+import com.ssafy.calmwave.domain.User;
 import com.ssafy.calmwave.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import java.time.Instant;
+
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -45,7 +48,7 @@ public class UserController {
     public ResponseEntity<?> join(@RequestBody User user) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        User findUser = userRepository.findByUsername(user.getUsername());
+        User findUser =userService.findByUsername(user.getUsername());
         if (findUser == null) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             user.setRole("ROLE_USER");
@@ -66,11 +69,11 @@ public class UserController {
      * @return true/false 통과(DB에 중복된 email이 없음)일때 true
      */
     @GetMapping("account/checkemail/{email}")
-    @ApiOperation(value = "이메일 중복검사 진행", notes = "")
-    public ResponseEntity<?> checkEmail(@PathVariable("email") String email) {
+    @ApiOperation(value = "이메일 중복검사 진행", notes = "result:ok")
+    public ResponseEntity<Map<String, Object>> checkEmail(@PathVariable("email") String email) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        User user = userRepository.findByUsername(email);
+        User user = userService.findByUsername(email);
         if (user == null) {
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
@@ -85,9 +88,9 @@ public class UserController {
      * @param userid
      * @return "result":"ok" FRONT에서 store된 Token을 비롯한 UserData 삭제해줘야함
      */
-    @ApiOperation(value = "로그아웃", notes = "")
+    @ApiOperation(value = "로그아웃", notes = "result:ok")
     @GetMapping("user/logout/{userid}")
-    public ResponseEntity<?> removeToken(@PathVariable("userid") Long userid) {
+    public ResponseEntity<Map<String, Object>> removeToken(@PathVariable("userid") Long userid) {
         Logger logger = LoggerFactory.getLogger(this.getClass());
         logger.info("로그아웃");
         Map<String, Object> resultMap = new HashMap<>();
@@ -111,15 +114,15 @@ public class UserController {
      * @return UserInfoDto
      */
     @GetMapping("user/userinfo")
-    @ApiOperation(value = "사용자 정보 조회", notes = "")
-    public ResponseEntity getUserInfo(@RequestHeader(value = "AccessToken") String token) {
+    @ApiOperation(value = "사용자 정보 조회", notes = "",response = UserInfoDto.class)
+    public ResponseEntity<UserInfoDto> getUserInfo(@RequestHeader(value = "AccessToken") String token) {
         Logger logger = LoggerFactory.getLogger(this.getClass());
         logger.info("사용자 정보 조회");
         try {
             User user = jwtUtil.getUser(token);
             return ResponseEntity.ok().body(
-                new UserInfoDto(user.getId(), user.getUsername(), user.getNickname(),
-                    user.getStretchingIntervalMin(), user.getDateRegistered()));
+                    new UserInfoDto(user.getId(), user.getUsername(), user.getNickname(),
+                            user.getStretchingIntervalMin(), user.getDateRegistered()));
         } catch (Exception e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
@@ -134,15 +137,17 @@ public class UserController {
      * @return
      */
     @GetMapping("user/withdraw")
-    @ApiOperation(value = "회원탈퇴", notes = "")
+    @ApiOperation(value = "회원탈퇴", notes = "result:ok")
     public ResponseEntity<?> signout(@RequestHeader(value = "AccessToken") String token) {
 
         User user = jwtUtil.getUser(token);
 
         userService.invalidateUser(user.getId());
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result","ok");
 
         SecurityContextHolder.clearContext();
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).body(null);
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(resultMap);
     }
 
     /**
@@ -152,11 +157,14 @@ public class UserController {
      * @return
      */
     @PostMapping("/user/update")
-    @ApiOperation(value = "사용자의 설정 변경", notes = "")
+    @ApiOperation(value = "사용자의 설정 변경", notes = "result:ok")
     public ResponseEntity changeInfo(@RequestBody UserInfoDto userInfoDto) {
 
         userService.updateUser(userInfoDto);
 
-        return ResponseEntity.ok().body(null);
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("result","ok");
+
+        return ResponseEntity.status(HttpStatus.ACCEPTED).body(resultMap);
     }
 }

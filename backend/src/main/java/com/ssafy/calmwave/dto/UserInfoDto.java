@@ -1,8 +1,7 @@
 package com.ssafy.calmwave.dto;
 
-import com.ssafy.calmwave.model.User;
 import java.time.Instant;
-import java.util.Optional;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;

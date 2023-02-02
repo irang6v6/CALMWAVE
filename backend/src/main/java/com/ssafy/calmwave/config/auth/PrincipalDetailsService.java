@@ -1,18 +1,14 @@
 package com.ssafy.calmwave.config.auth;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.ssafy.calmwave.config.repository.UserRepository;
+import com.ssafy.calmwave.repository.UserRepository;
 import com.ssafy.calmwave.exception.NotFoundUserException;
-import com.ssafy.calmwave.model.User;
+import com.ssafy.calmwave.domain.User;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-
-import java.util.HashMap;
-import java.util.Map;
 
 @Service
 @RequiredArgsConstructor

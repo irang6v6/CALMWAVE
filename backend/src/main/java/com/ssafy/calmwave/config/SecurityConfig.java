@@ -4,7 +4,7 @@ import com.ssafy.calmwave.config.jwt.JwtAuthenticationFilter;
 import com.ssafy.calmwave.config.jwt.JwtAuthorizationFilter;
 import com.ssafy.calmwave.config.oauth.OAuth2AuthenticationSuccessHandler;
 import com.ssafy.calmwave.config.oauth.PrincipalOauth2UserService;
-import com.ssafy.calmwave.config.repository.UserRepository;
+import com.ssafy.calmwave.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -34,6 +34,11 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .headers()
+                .xssProtection()
+                .and()
+                .contentSecurityPolicy("script-src 'self'");
         http.csrf().disable();//브라우저간의 정보전달이 없기 때문에 꺼놔도 됨
         http.sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS) //세션 안쓸게(JWT 쓸거니까)(stateless 서버)

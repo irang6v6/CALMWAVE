@@ -1,6 +1,6 @@
 package com.ssafy.calmwave.config.auth;
 
-import com.ssafy.calmwave.model.User;
+import com.ssafy.calmwave.domain.User;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -33,7 +33,7 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() { //권한 가져와서 원하는 데이터 형태로 만드는 .... 중인듯?
+    public Collection<? extends GrantedAuthority> getAuthorities() { //권한 가져와서 원하는 데이터 형태로
         Collection<GrantedAuthority> authorities = new ArrayList<>();
         user.getRoleList().forEach(r -> {
             authorities.add(() -> r);

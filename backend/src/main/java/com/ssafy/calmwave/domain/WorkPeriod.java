@@ -1,4 +1,4 @@
-package com.ssafy.calmwave.model;
+package com.ssafy.calmwave.domain;
 
 import java.time.Instant;
 import javax.persistence.Column;
@@ -12,23 +12,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "stretch")
-public class Stretch {
+@Table(name = "work_period")
+public class WorkPeriod {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "stretch_id", nullable = false)
+    @Column(name = "work_period_id")
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "work_id", nullable = false)
+    private Work work;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "date_created", nullable = false)
-    private Instant dateCreated;
+    @Column(name = "start_time", nullable = false)
+    private Instant startTime;
 
-    @Column(name = "is_finished", nullable = false)
-    private Byte isFinished;
+    @Column(name = "end_time", nullable = false)
+    private Instant endTime;
 
     public Long getId() {
         return id;
@@ -36,6 +40,14 @@ public class Stretch {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Work getWork() {
+        return work;
+    }
+
+    public void setWork(Work work) {
+        this.work = work;
     }
 
     public User getUser() {
@@ -46,20 +58,20 @@ public class Stretch {
         this.user = user;
     }
 
-    public Instant getDateCreated() {
-        return dateCreated;
+    public Instant getStartTime() {
+        return startTime;
     }
 
-    public void setDateCreated(Instant dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setStartTime(Instant startTime) {
+        this.startTime = startTime;
     }
 
-    public Byte getIsFinished() {
-        return isFinished;
+    public Instant getEndTime() {
+        return endTime;
     }
 
-    public void setIsFinished(Byte isFinished) {
-        this.isFinished = isFinished;
+    public void setEndTime(Instant endTime) {
+        this.endTime = endTime;
     }
 
 }

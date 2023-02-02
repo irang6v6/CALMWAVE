@@ -1,18 +1,13 @@
-package com.ssafy.calmwave.model;
+package com.ssafy.calmwave.domain;
 
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import org.springframework.data.annotation.CreatedDate;
 
 @Entity
 @ToString
@@ -21,7 +16,7 @@ import org.springframework.data.annotation.CreatedDate;
 public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "user_id")
     private Long id;
 
     @Column(name = "roles", nullable = false, length = 10)
@@ -120,6 +115,7 @@ public class User{
     public void setProvider(String provider) {
         this.provider = provider;
     }
+
     @Builder
     public User(String email, String nickname, int stretchingIntervalMin, Byte quit, String password, String role, String provider) {
         this.username = email;
@@ -130,7 +126,6 @@ public class User{
         this.role = role;
         this.provider = provider;
     }
-
 
     public List<String> getRoleList() {
         if (this.role.length() > 0) {

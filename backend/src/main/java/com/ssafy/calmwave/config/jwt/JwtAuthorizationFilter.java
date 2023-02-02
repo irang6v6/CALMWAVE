@@ -3,9 +3,9 @@ package com.ssafy.calmwave.config.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.ssafy.calmwave.config.auth.PrincipalDetails;
-import com.ssafy.calmwave.config.repository.UserRepository;
+import com.ssafy.calmwave.repository.UserRepository;
 import com.ssafy.calmwave.exception.NotFoundUserException;
-import com.ssafy.calmwave.model.User;
+import com.ssafy.calmwave.domain.User;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +56,8 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
         String username = null;
 
         if (JwtUtil.tokenValidation(a_token)) {
-            logger.trace("access token is valid");
+            Logger logger = LoggerFactory.getLogger(JwtUtil.class);
+            logger.info("access token is valid");
             username = JWT.require(Algorithm.HMAC512(secret)).build().verify(a_token).getClaim("username").asString();
             //continue
         } else if (JwtUtil.tokenValidation(r_token)) {

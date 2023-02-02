@@ -1,5 +1,6 @@
-package com.ssafy.calmwave.model;
+package com.ssafy.calmwave.domain;
 
+import java.time.Instant;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,20 +12,23 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "memo")
-public class Memo {
+@Table(name = "stretch")
+public class Stretch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "memo_id", nullable = false)
+    @Column(name = "stretch_id")
     private Long id;
-
-    @Column(name = "content", length = 500)
-    private String content;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
+
+    @Column(name = "date_created", nullable = false)
+    private Instant dateCreated;
+
+    @Column(name = "is_finished", nullable = false)
+    private Byte isFinished;
 
     public Long getId() {
         return id;
@@ -34,20 +38,28 @@ public class Memo {
         this.id = id;
     }
 
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
     public User getUser() {
         return user;
     }
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Instant getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Instant dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public Byte getIsFinished() {
+        return isFinished;
+    }
+
+    public void setIsFinished(Byte isFinished) {
+        this.isFinished = isFinished;
     }
 
 }

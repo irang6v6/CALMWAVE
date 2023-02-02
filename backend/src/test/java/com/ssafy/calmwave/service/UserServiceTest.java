@@ -2,22 +2,20 @@ package com.ssafy.calmwave.service;
 
 import static org.junit.Assert.*;
 
-import com.ssafy.calmwave.config.repository.UserRepository;
+import com.ssafy.calmwave.repository.UserRepository;
 import com.ssafy.calmwave.dto.UserInfoDto;
-import com.ssafy.calmwave.model.User;
-import java.util.Optional;
+import com.ssafy.calmwave.domain.User;
+
 import javax.persistence.EntityManager;
 import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @Transactional
-@Rollback(value = false)
 class UserServiceTest {
 
     @Autowired
@@ -29,7 +27,7 @@ class UserServiceTest {
 
     @Test
     public void 유저탈퇴() throws Exception {
-        User user = new User("member3@member.com", "m3", 50, Byte.parseByte("0"), "member3#",
+        User user = new User("member30@member.com", "m30", 50, Byte.parseByte("0"), "member30#",
             "USER_ROLE", "");
         userRepository.save(user);
         User user1 = userRepository.findByUsername(user.getUsername());
@@ -39,7 +37,7 @@ class UserServiceTest {
 
     @Test
     public void 유저정보변경() throws Exception {
-        User user = new User("member3@member.com", "m3", 50, Byte.parseByte("0"), "member3#",
+        User user = new User("member30@member.com", "m30", 50, Byte.parseByte("0"), "member30#",
             "USER_ROLE", "");
         userRepository.save(user);
 
