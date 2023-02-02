@@ -4,7 +4,7 @@ import styles from "./SignPage.module.css"
 import Signup from "./Signup"
 import LoginLogo from "./LoginLogo"
 import { useNavigate } from "react-router-dom"
-import axios from "axios"
+// import axios from "axios"
 import useApi from "../../hooks/http/use-api"
 
 function SignPage({ pageRef }) {
@@ -41,13 +41,16 @@ function SignPage({ pageRef }) {
     setLoginOrSignup((val) => !val)
   }
   const googleLoginHandler = async function () {
-    axios({
-      method: "post",
-      baseURL: "http://asdfasdfxxc",
-      url: "/authorization/google",
-      headers: {},
-      withCredentials: true,
-    })
+    // axios({
+    //   method: "post",
+    //   baseURL: "http://asdfasdfxxc",
+    //   url: "/authorization/google",
+    //   headers: {},
+    //   withCredentials: true,
+    // })
+    window.location.href = `
+    http://i8a105.p.ssafy.io:8091/oauth2/authorization/google`
+    // 이후 AccessToken, RefreshToken, userid 받아옴.
   }
 
   const loginHandler = async function (email, password) {

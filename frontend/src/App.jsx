@@ -29,6 +29,7 @@ function App() {
         <Route path={`/door`} element={<DoorParentPage />} />
         <Route path={`/manage`} element />
         <Route path={`/test`} element={<TestPage />} />
+        <Route path={`/oauth`} element={<TestPage />} />
         <Route path={`*`} element={<NotFound />} />
       </Routes>
     </div>

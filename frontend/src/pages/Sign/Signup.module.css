@@ -97,6 +97,64 @@
   align-items: center;
 }
 
+.email-dup-check-yet {
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: auto;
+  transition: 0.2s;
+  transform: translate(0, 4px);
+  color: rgb(2, 45, 82);
+
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: rgba(222, 222, 222, 0.95);
+  padding: 3px 7px 3px 7px;
+}
+.email-dup-check-yet:hover {
+  cursor: pointer;
+  color: rgba(52, 105, 174);
+  transform: scale(105%) translate(-5px, 3px);
+}
+.email-dup-check-complete {
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: auto;
+  transition: 0.2s;
+  transform: translate(0, 4px);
+  color: rgb(2, 45, 82);
+
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 3px 7px 3px 7px;
+
+  pointer-events: none;
+  background-color: rgba(139, 213, 255, 0.9);
+}
+.email-dup-check-complete:hover {
+  transform: scale(105%) translate(-5px, 3px);
+}
+.email-dup-check-fail {
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: auto;
+  transition: 0.2s;
+  transform: translate(0, 4px);
+  color: rgb(2, 45, 82);
+
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 3px 7px 3px 7px;
+
+  background-color: rgba(255, 101, 103, 0.9);
+  cursor: pointer;
+}
+.email-dup-check-fail:hover {
+  transform: scale(105%) translate(-5px, 3px);
+}
+
 .change-button {
   font-size: 1.05rem;
   font-weight: 600;
