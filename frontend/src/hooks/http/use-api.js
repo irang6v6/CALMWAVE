@@ -21,11 +21,7 @@ const useApi = function () {
 
   const axiosRequest = useCallback(async (requestData, saveDataFunction) => {
     setIsLoading(true)
-    await axios({
-      method: requestData.method,
-      url: requestData.url,
-      data: requestData.data,
-    })
+    await axios(requestData)
       .then((res) => {
         if (res?.data?.response?.AccessToken) {
           localStorage.setItem(
@@ -64,7 +60,7 @@ const useApi = function () {
         setIsLoading(false)
         setError(true)
       })
-  }, [])
+  }, [dispatch])
 
   // const getNewAccessToken = useCallback(
   //   async (requestData, saveDataFunction) => {

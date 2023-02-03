@@ -41,7 +41,7 @@ function SignPage({ pageRef }) {
     //   withCredentials: true,
     // })
     window.location.href = `
-    http://i8a105.p.ssafy.io:8091/oauth2/authorization/google`
+    https://i8a105.p.ssafy.io/api/oauth2/authorization/google`
     // 이후 AccessToken, RefreshToken, userid를 페이지에서 받아오고 작업시켜야 한다.
   }
 
@@ -61,11 +61,11 @@ function SignPage({ pageRef }) {
         if (res.data.response.AccessToken) {
           localStorage.setItem(
             "Access",
-            res.data.response.AccessToken.substr(7)
+            `Bearer `+ res.data.response.AccessToken.substr(7)
           )
           localStorage.setItem(
             "Refresh",
-            res.data.response.RefreshToken.substr(7)
+            `Bearer `+ res.data.response.RefreshToken.substr(7)
           )
           navigate("/")
         } else {
