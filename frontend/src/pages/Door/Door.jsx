@@ -7,6 +7,7 @@ import { HTML5Backend } from "react-dnd-html5-backend"
 import Modal from "../../components/UI/Modal"
 import { useState } from "react"
 import CategoryForm from "../../components/UI/CategoryForm/CategoryForm"
+import NavIcon from "../../components/NavIcon/NavIcon"
 
 function Door(props) {
   const [isModal, setIsModal] = useState(false)
@@ -25,6 +26,7 @@ function Door(props) {
   }
   return (
     <DndProvider backend={HTML5Backend}>
+      <NavIcon />
       <Modal isOpen={isModal} toggleIsOpen={toggleModalIsOpenHandler}>
         {isTask ? null : (
           <CategoryForm

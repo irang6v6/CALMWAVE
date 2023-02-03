@@ -6,14 +6,15 @@ import UserInfo from "./Info/UserInfo"
 import GraphInfo from "./GraphInfo/GraphInfo"
 import Router3 from "./Router3/Router3"
 import Router4 from "./Router4/Router4"
-import NavBar from "../../components/NavBar/NavBar"
+// import NavBar from "../../components/NavBar/NavBar"
+import NavIcon from "../../components/NavIcon/NavIcon"
 
 function ProfilePage() {
   const { infoType } = useParams()
 
   return (
     <div className={`${styles["container"]}`}>
-      <NavBar/>
+      <NavIcon />
       <div className={`${styles["inner"]}`}>
         {/* <SideNav infoType={infoType} /> */}
         <div className={`${styles["right-box"]}`}>

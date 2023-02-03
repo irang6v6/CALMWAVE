@@ -8,7 +8,6 @@ import Posture from "./Posture"
 import Stretching from "./Streching"
 import Stress from "./Stress"
 import LastPage from "./LastPage"
-import NavBar from "../../components/NavBar/NavBar"
 import Wave from "../../components/Canvas/Wave/Wave"
 import { useRef, useState, useEffect } from "react" //
 import { useCustomWidthHeight } from "../../hooks/custom/useCustomWidthHeight"
@@ -16,6 +15,7 @@ import DiagonalWave from "../../components/Canvas/DiagonalWave/DiagonalWave"
 import NightSky from "../../components/Canvas/NightSky/NightSky"
 import { useDispatch } from "react-redux"
 import { AxiosGetCategory } from "../../store/category-slice"
+import NavIcon from "../../components/NavIcon/NavIcon"
 
 function HomePage() {
   const dispatch = useDispatch()
@@ -87,13 +87,13 @@ function HomePage() {
   }
   return (
     <>
-      <NavBar />
+      <NavIcon />
       <div ref={pageRef} className={`${styles["container"]}`}>
         <div className={`${styles["wave-container"]}`}>
           <Wave
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
-            background={`rgb(235, 247, 251)`}
+            background={`rgb(31, 31, 34)`}
             // background={`rgba(31, 31, 36)`}
           />
         </div>
