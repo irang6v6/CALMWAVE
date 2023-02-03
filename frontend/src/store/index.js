@@ -6,6 +6,7 @@ import selectedTaskSlice from "./door-store/selected-task-slice"
 import taskSlice from "./task-slice"
 // import exReducer from "./ex-slice"
 import todosSlice from "./todos-slice"
+import tokenSlice from "./token-slice"
 import userSlice from "./user-slice"
 
 const store = configureStore({
@@ -17,6 +18,7 @@ const store = configureStore({
     doorctask: categoryTaskSlice,
     doorstask: selectedTaskSlice,
     dragtask: dragTaskSlice,
+    token: tokenSlice,
   },
 })
 

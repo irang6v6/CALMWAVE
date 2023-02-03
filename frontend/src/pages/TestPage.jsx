@@ -13,6 +13,7 @@ import Modal from "../components/UI/Modal"
 import CategoryForm from "../components/UI/CategoryForm/CategoryForm"
 import { useSearchParams } from "react-router-dom"
 import test from "../utils/test"
+import axios from "axios"
 
 function TestPage() {
   const [searchParams] = useSearchParams()
@@ -38,6 +39,7 @@ function TestPage() {
   const toggleModal = function () {
     setIsModal((val) => !val)
   }
+  axios.defaults.headers.asdf = "asdfadsf"
   // const [isHi, setIsHi] = useState(false)
   // const toggleHi = function () {
   //   setIsHi((val) => !val)

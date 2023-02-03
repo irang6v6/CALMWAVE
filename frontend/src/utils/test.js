@@ -13,6 +13,11 @@ const test = function () {
       return axios({
         method: "get",
         url: "https://dog.ceo/api/breeds/image/random",
+        transformRequest: [
+          function (config) {
+            console.log(config)
+          },
+        ],
       })
         .then((res) => {
           console.log("성공2", res)
