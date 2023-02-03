@@ -12,7 +12,6 @@ spring:
             scope:
               - email
               - profile
-            redirect-uri: https://i8a105.p.ssafy.io/api/
 
 ---
 
