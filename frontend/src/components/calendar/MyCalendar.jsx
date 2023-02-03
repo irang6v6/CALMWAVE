@@ -12,6 +12,16 @@ export default function MyCalendar() {
 
   const todolist = useSelector((state) => (state.task.taskList))
 
+  const daysRemaining = moment(date).diff(moment().format("YYYY-MM-DD"), "day");
+  let dDayLabel = "D";
+  if (daysRemaining === 0) {
+    dDayLabel += "-Day";
+  } else if (daysRemaining <= 0) {
+    dDayLabel += `+${-daysRemaining}`;
+  } else {
+    dDayLabel += `-${daysRemaining}`;
+  }
+
   const selectDay = (selectedDate) => {
     return todolist
     .filter((todo) => todo.createdDate === selectedDate)
@@ -52,9 +62,16 @@ export default function MyCalendar() {
           return "highlight-sunday"
         }}}
       />
-        <div className="select-date">
+        <div className="select-date-wrap">
+          <div className="select-date">
             {moment(date).format("YYYY년 MM월 DD일")}
+          </div>
+
+          <div className="select-todolist">
             {selectDay(moment(date).format("YYYY-MM-DD"))}
+            <br />
+          {dDayLabel}
+          </div>
         </div>
         </div>
     </div>
