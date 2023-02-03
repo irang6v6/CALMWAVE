@@ -252,7 +252,7 @@
     background-color: #bb2c2c;
   }
 
-  .select-date{
+  .select-date-wrap{
     /* border: 1px solid #000; */
     width: 60%;
     /* border: 1px solid #000; */
@@ -261,7 +261,15 @@
     margin-top: 10px;
     background-color: rgb(223, 242, 255);
     box-shadow: 3px 3px 3px 3px rgb(209, 209, 209);
+    padding: 1%;
+  }
+
+  .select-date{
     font-weight: 600;
     font-size: 1.5rem;
-    padding: 1%;
+  }
+
+  .select-todolist{
+    margin-top: 5%;
+    line-height: 250%;
   }
