@@ -5,21 +5,31 @@ const useApi = function () {
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
+  // const [accessToken, setAccessToken] = useState("")
+  // const [refreshToken, setRefreshToken] = useState(
+  //   localStorage.getItem("RefreshToken")
+  // )
+  // requestData = {
+  //   method: requestData.method,
+  //   url: requestData.url,
+  //   // transformRequest: ,
+  //   // transformResponse: ,
+  //   headers: requestData.headers,
+  //   data: requestData.data,
+  //   timeout: requestData.timeout,
+  //   withCredentials: requestData.withCredentials,
+  // }
+
   const axiosRequest = useCallback(async (requestData, saveDataFunction) => {
-    // requestData = {
-    //   method: requestData.method,
-    //   url: requestData.url,
-    //   // transformRequest: ,
-    //   // transformResponse: ,
-    //   headers: requestData.headers,
-    //   data: requestData.data,
-    //   timeout: requestData.timeout,
-    //   withCredentials: requestData.withCredentials,
-    // }
     setIsLoading(true)
-    await axios(requestData)
+    await axios({
+      method: requestData.method,
+      url: requestData.url,
+      data: requestData.data,
+    })
       .then((res) => {
-        saveDataFunction(res.data)
+        localStorage.setItem("AccessToken")
+        saveDataFunction(res)
       })
       .then((res) => {
         setIsLoading(false)
@@ -31,6 +41,21 @@ const useApi = function () {
         setError(true)
       })
   }, [])
+
+  // const getNewAccessToken = useCallback(
+  //   async (requestData, saveDataFunction) => {
+  //     let [AccessToken, RefreshToken] = [
+  //       localStorage.getItem("AccessToken"),
+  //       localStorage.getItem("RefreshToken"),
+  //     ]
+  //     axios.defaults.headers = { AccessToken, RefreshToken }
+  //     await axios({
+  //       method: "post",
+  //       // baseURL: "",
+  //       url: "/login",
+  //     })
+  //   }
+  // )
 
   return [isLoading, error, axiosRequest]
 }
@@ -44,4 +69,5 @@ const {isLoading, error, axiosRequest} = useApi()
 axiosRequest 함수를 호출하게 되는데
 axiosRequest(requestData, saveDataFunction) 의 각각 인자는 axios 요청을 보낼 객체, 해당 response를 받아서 실행 할 로직. 이런식으로 넣어준다.
 
+로컬호스트 포트 로그인
 */

@@ -12,6 +12,7 @@ import { useCustomWidthHeight } from "../hooks/custom/useCustomWidthHeight"
 import Modal from "../components/UI/Modal"
 import CategoryForm from "../components/UI/CategoryForm/CategoryForm"
 import { useSearchParams } from "react-router-dom"
+import test from "../utils/test"
 
 function TestPage() {
   const [searchParams] = useSearchParams()
@@ -50,6 +51,7 @@ function TestPage() {
         />
       </Modal>
       <div onClick={toggleModal}>모달 토글</div>
+      <div onClick={test}>테스트</div>
       {/* <div onClick={toggleHi}>하이 토글</div> */}
       <div style={{ display: "none" }}>
         <img src={someImg} id={`test-logo`} />

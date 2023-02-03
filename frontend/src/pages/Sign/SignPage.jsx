@@ -42,7 +42,7 @@ function SignPage({ pageRef }) {
     // })
     window.location.href = `
     http://i8a105.p.ssafy.io:8091/oauth2/authorization/google`
-    // 이후 AccessToken, RefreshToken, userid 받아옴.
+    // 이후 AccessToken, RefreshToken, userid를 페이지에서 받아오고 작업시켜야 한다.
   }
 
   const loginHandler = async function (email, password) {
@@ -58,16 +58,15 @@ function SignPage({ pageRef }) {
         },
       },
       function (res) {
-        if (res?.response?.AccessToken) {
+        if (res.data.response.AccessToken) {
           localStorage.setItem(
             "Access",
-            res.response.AccessToken.substr(7)
+            res.data.response.AccessToken.substr(7)
           )
           localStorage.setItem(
             "Refresh",
-            res.response.RefreshToken.substr(7)
+            res.data.response.RefreshToken.substr(7)
           )
-
           navigate("/")
         } else {
           console.log("ㅎㅇ")
@@ -95,7 +94,7 @@ function SignPage({ pageRef }) {
       },
       // res로 { "result": "ok" } 가 온다
       async function (res) {
-        if (res?.data?.result) {
+        if (res.data.result !== "ok") {
           toggleLoginOrSignup()
           resetAction()
         }
