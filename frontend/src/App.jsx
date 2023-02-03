@@ -11,6 +11,7 @@ import TestPage from "./pages/TestPage"
 import NotFound from "./pages/NotFound/NotFound"
 import DoorParentPage from "./pages/Door/DoorParentPage"
 import axios from "axios"
+import OauthLoad from "./pages/OauthLoad/OauthLoad"
 
 axios.defaults.baseURL = "https://i8a105.p.ssafy.io/api"
 // axios.defaults.transformRequest = []
@@ -29,7 +30,7 @@ function App() {
         <Route path={`/door`} element={<DoorParentPage />} />
         <Route path={`/manage`} element />
         <Route path={`/test`} element={<TestPage />} />
-        <Route path={`/oauth`} element={<TestPage />} />
+        <Route path={`/oauth`} element={<OauthLoad />} />
         <Route path={`*`} element={<NotFound />} />
       </Routes>
     </div>

@@ -31,6 +31,14 @@ const initialState = {
       nowBusinessHours: 10,
       isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
     },
+    {
+      id: 4,
+      title: "카테고리 4",
+      description: "카테고리 설명 4",
+      sumBusinessHours: 16, // 그냥 데이터로 받아온다고 생각하겠음.
+      nowBusinessHours: 10,
+      isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
+    },
   ],
 }
 
