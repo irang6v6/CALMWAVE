@@ -60,7 +60,6 @@ public class SecurityConfig {
                         userRepository, redisTemplate))
                 .oauth2Login()
                 .authorizationEndpoint()
-//                .baseUri("api/oauth2/authorization")
                 .authorizationRequestRepository(httpCookieOAuth2AuthorizationRequestRepository)
                 .and()
                 .userInfoEndpoint()
