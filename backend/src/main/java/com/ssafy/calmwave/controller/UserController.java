@@ -27,7 +27,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1")
+@RequestMapping("v1")
 @Api(tags = "유저 API")
 public class UserController {
 

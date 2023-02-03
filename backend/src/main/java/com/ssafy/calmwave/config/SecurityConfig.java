@@ -47,7 +47,7 @@ public class SecurityConfig {
                 .formLogin().disable()
                 .httpBasic().disable()
                 .authorizeRequests()
-                .antMatchers("/api/v1/user/**")
+                .antMatchers("/v1/user/**")
                 .access("hasRole('ROLE_USER')")
                 .anyRequest().permitAll()
                 .and()

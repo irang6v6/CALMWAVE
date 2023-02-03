@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("api/v1/task")
+@RequestMapping("v1/task")
 @Api(tags = "업무 API")
 public class WorkController {
 
