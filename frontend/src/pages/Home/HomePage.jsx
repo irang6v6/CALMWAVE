@@ -43,7 +43,9 @@ function HomePage() {
       dispatch(
         AxiosGetCategory({
           method: "get",
-          url: "/hello", // 주소 요청해서 보내면 가져옴.
+          // baseURL: "http://localhost:8080",
+          baseURL: "https://5d2112b6-33e0-4cf7-853b-f9d783cec939.mock.pstmn.io",
+          url: "api/v1/category/list", // 주소 요청해서 보내면 가져옴.
         })
       )
     },

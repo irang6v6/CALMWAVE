@@ -61,11 +61,11 @@ function SignPage({ pageRef }) {
         if (res.data.response.AccessToken) {
           localStorage.setItem(
             "Access",
-            res.data.response.AccessToken.substr(7)
+            `Bearer `+ res.data.response.AccessToken.substr(7)
           )
           localStorage.setItem(
             "Refresh",
-            res.data.response.RefreshToken.substr(7)
+            `Bearer `+ res.data.response.RefreshToken.substr(7)
           )
           navigate("/")
         } else {

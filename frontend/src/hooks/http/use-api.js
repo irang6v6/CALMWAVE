@@ -52,7 +52,7 @@ const useApi = function () {
         setIsLoading(false)
         setError(true)
       })
-  }, [])
+  }, [dispatch])
 
   // const getNewAccessToken = useCallback(
   //   async (requestData, saveDataFunction) => {

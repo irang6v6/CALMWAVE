@@ -2,8 +2,8 @@ import { createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
 
 const initialState = {
-  Access: localStorage.getItem("Access"),
-  Refresh: localStorage.getItem("Refresh"),
+  Access: localStorage.getItem("Access") || "",
+  Refresh: localStorage.getItem("Refresh") || "",
 }
 
 const tokenSlice = createSlice({

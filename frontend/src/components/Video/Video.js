@@ -6,7 +6,7 @@ import { useEffect } from "react"
 import styles from "./Video.module.css"
 
 const APPLICATION_SERVER_URL =
-  process.env.NODE_ENV === "production" ? "" : "http://localhost:5000/"
+  process.env.NODE_ENV === "production" ? "" : "https://i8a105.p.ssafy.io:8443/"
 
 export default function Video() {
   const [mySessionId, setMySessionId] = useState("SessionA")
