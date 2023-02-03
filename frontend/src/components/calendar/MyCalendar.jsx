@@ -2,12 +2,25 @@ import Calendar from "react-calendar"
 import styles from "./MyCalendar.css"
 import React, { useState } from 'react';
 import moment from 'moment';
+import { useSelector } from "react-redux";
 
 
 
 export default function MyCalendar() {
   const [date, setDate] = useState(new Date())
   const [activeDate, setActiveDate] = useState(new Date())
+
+  const todolist = useSelector((state) => (state.task.taskList))
+
+  const selectDay = (selectedDate) => {
+    return todolist
+    .filter((todo) => todo.createdDate === selectedDate)
+    .map((todo, index) => (
+      <div key={todo.id}>
+        {todo.title}
+      </div>
+    ))
+  }
 
   return (
     <div className="MyCalendar">
@@ -35,11 +48,13 @@ export default function MyCalendar() {
         if (moment(date).format("LLLL").split(",")[0] === "Saturday") {
           return "highlight-saturday"
         } else if (moment(date).format("LLLL").split(",")[0] === "Sunday") {
+          console.log(todolist)
           return "highlight-sunday"
         }}}
       />
         <div className="select-date">
             {moment(date).format("YYYY년 MM월 DD일")}
+            {selectDay(moment(date).format("YYYY-MM-DD"))}
         </div>
         </div>
     </div>
