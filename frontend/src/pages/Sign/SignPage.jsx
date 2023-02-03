@@ -9,16 +9,8 @@ import useApi from "../../hooks/http/use-api"
 
 function SignPage({ pageRef }) {
   const navigate = useNavigate()
-  const {
-    isLoading: loginLoading,
-    error: loginError,
-    axiosRequest: loginRequest,
-  } = useApi()
-  const {
-    isLoading: signupLoading,
-    error: signupError,
-    axiosRequest: signupRequest,
-  } = useApi()
+  const [loginLoading, loginError, loginRequest] = useApi()
+  const [signupLoading, signupError, signupRequest] = useApi()
   // const [isLoading, setIsLoading] = useState(false)
   const [loginOrSignup, setLoginOrSignup] = useState(true)
   const [page1Class, setPage1Class] = useState(`${styles["page1"]}`)
@@ -57,6 +49,7 @@ function SignPage({ pageRef }) {
     loginRequest(
       {
         method: "post",
+        // baseURL: "http://localhost:8080",
         baseURL: "https://5d2112b6-33e0-4cf7-853b-f9d783cec939.mock.pstmn.io",
         url: "/login",
         data: {
@@ -65,15 +58,16 @@ function SignPage({ pageRef }) {
         },
       },
       function (res) {
-        if (res?.data?.response?.AccessToken) {
+        if (res?.response?.AccessToken) {
           localStorage.setItem(
             "Access",
-            res.data.response.AccessToken.substr(7)
+            res.response.AccessToken.substr(7)
           )
           localStorage.setItem(
             "Refresh",
-            res.data.response.RefreshToken.substr(7)
+            res.response.RefreshToken.substr(7)
           )
+
           navigate("/")
         } else {
           console.log("ㅎㅇ")
@@ -90,14 +84,16 @@ function SignPage({ pageRef }) {
     signupRequest(
       {
         method: "post",
+        // baseURL: "http://localhost:8080",
         baseURL: "https://5d2112b6-33e0-4cf7-853b-f9d783cec939.mock.pstmn.io",
-        url: "/api/v1/join",
+        url: "/api/v1/account/join",
         data: {
           username: email,
           password: password,
           nickname: nickname,
         },
       },
+      // res로 { "result": "ok" } 가 온다
       async function (res) {
         if (res?.data?.result) {
           toggleLoginOrSignup()
