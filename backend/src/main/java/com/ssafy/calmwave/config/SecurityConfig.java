@@ -53,11 +53,6 @@ public class SecurityConfig {
                 .access("hasRole('ROLE_USER')")
                 .anyRequest().permitAll()
                 .and()
-                .addFilter(new JwtAuthenticationFilter(secret,
-                        authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisTemplate))
-                .addFilter(new JwtAuthorizationFilter(secret,
-                        authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)),
-                        userRepository, redisTemplate))
                 .oauth2Login()
                 .authorizationEndpoint()
                 .authorizationRequestRepository(httpCookieOAuth2AuthorizationRequestRepository)
@@ -68,7 +63,13 @@ public class SecurityConfig {
                 .userInfoEndpoint()
                 .userService(principalOauth2UserService)
                 .and()
-                .successHandler(oAuth2AuthenticationSuccessHandler);
+                .successHandler(oAuth2AuthenticationSuccessHandler)
+                .and()
+                .addFilter(new JwtAuthenticationFilter(secret,
+                        authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)), redisTemplate))
+                .addFilter(new JwtAuthorizationFilter(secret,
+                        authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)),
+                        userRepository, redisTemplate));
         return http.build();
     }
 
