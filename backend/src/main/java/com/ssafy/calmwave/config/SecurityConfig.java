@@ -2,6 +2,7 @@ package com.ssafy.calmwave.config;
 
 import com.ssafy.calmwave.config.jwt.JwtAuthenticationFilter;
 import com.ssafy.calmwave.config.jwt.JwtAuthorizationFilter;
+import com.ssafy.calmwave.config.oauth.HttpCookieOAuth2AuthorizationRequestRepository;
 import com.ssafy.calmwave.config.oauth.OAuth2AuthenticationSuccessHandler;
 import com.ssafy.calmwave.config.oauth.PrincipalOauth2UserService;
 import com.ssafy.calmwave.repository.UserRepository;
@@ -28,6 +29,7 @@ public class SecurityConfig {
     private final RedisTemplate<String, String> redisTemplate;
     private final PrincipalOauth2UserService principalOauth2UserService;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+    private final HttpCookieOAuth2AuthorizationRequestRepository httpCookieOAuth2AuthorizationRequestRepository;
 
     @Value("${my.secret}")
     String secret;
@@ -57,6 +59,9 @@ public class SecurityConfig {
                         authenticationManager(http.getSharedObject(AuthenticationConfiguration.class)),
                         userRepository, redisTemplate))
                 .oauth2Login()
+                .authorizationEndpoint()
+                .authorizationRequestRepository(httpCookieOAuth2AuthorizationRequestRepository)
+                .and()
                 .userInfoEndpoint()
                 .userService(principalOauth2UserService)
                 .and()
