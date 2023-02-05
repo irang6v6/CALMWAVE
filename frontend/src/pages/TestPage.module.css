@@ -1,0 +1,13 @@
+.test {
+  color: crimson;
+  background-color: aqua;
+}
+.test.hover {
+  background-color: brown;
+}
+.test.select {
+  background-color: darkslateblue;
+}
+.test.hover.select {
+  background-color: chartreuse;
+}

@@ -14,6 +14,8 @@ import CategoryForm from "../components/UI/CategoryForm/CategoryForm"
 // import { useSearchParams } from "react-router-dom"
 import test from "../utils/test"
 import axios from "axios"
+import styles from "./TestPage.module.css"
+import { useClasses } from "../hooks/custom/useClasses"
 
 function TestPage() {
   // const [searchParams] = useSearchParams()
@@ -26,6 +28,7 @@ function TestPage() {
   const [canvasWidth, setCanvasWidth] = useState(0)
   const [canvasHeight, setCanvasHeight] = useState(0)
   const canvRef = useRef(null)
+  const [togglehover, toggleselect, classes] = useClasses(styles, "test")
   /* eslint-disable */
   useEffect(
     function () {
@@ -52,6 +55,14 @@ function TestPage() {
           isOpen={isModal}
         />
       </Modal>
+      <div
+        className={classes}
+        onClick={toggleselect}
+        onMouseEnter={togglehover}
+        onMouseLeave={togglehover}
+      >
+        useClasses Test Well~~~~~
+      </div>
       <div onClick={toggleModal}>모달 토글</div>
       <div onClick={test}>테스트</div>
       {/* <div onClick={toggleHi}>하이 토글</div> */}

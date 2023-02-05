@@ -13,19 +13,19 @@
   -webkit-user-drag: element;
 }
 
-.category-card-container.is-hovered {
+.category-card-container.hover {
   background-color: rgba(255, 255, 255, 0.5);
   transform: scale(104%);
 }
 
-.category-card-container.is-selected {
-  background-color: rgba(255, 255, 255, 0.5);
+.category-card-container.select {
+  background-color: rgba(100, 255, 255, 0.5);
   color: black;
   transform: scale(101%);
   /* color: white; */
 }
-.category-card-container.is-selected.is-hovered {
-  background-color: rgba(255, 255, 255, 0.5);
+.category-card-container.hover.select {
+  background-color: rgba(20, 255, 255, 0.5);
   /* background-color: rgba(111, 111, 111, 0.8); */
   color: black;
   transform: scale(104%);

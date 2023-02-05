@@ -1,60 +1,31 @@
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
 import { useDrag, useDrop } from "react-dnd"
 import { useDispatch, useSelector } from "react-redux"
+import { useClasses } from "../../../hooks/custom/useClasses"
 import { categoryActions } from "../../../store/category-slice"
 import CardBody from "../CardBody/CardBody"
 import CardFooter from "../CardFooter/CardFooter"
 import CardHeader from "../CardHeader/CardHeader"
 import styles from "./CategoryCard.module.css"
-// import {
-//   dragStart,
-//   resetStartEnd,
-//   dragEnter,
-//   resetEnd,
-//   dragEnd,
-// } from "../../../store/door-store/drag-task-slice"
 
 function CategoryCard({ category, idx, settingModal, openModal }) {
-  // const {
-  //   dragStartColumn,
-  //   dragStartIdx,
-  //   dragStartTask,
-  //   dragEndColumn,
-  //   dragEndIdx,
-  //   dragEndTask,
-  // } = useSelector((state) => state.dragtask)
   const cardType = false
   const dispatch = useDispatch()
-  const categoryList = useSelector((state) => state.category.categoryList)
-  // const [cardClasses, setCardClasses] = useState(
-  //   `${styles[`category-card-container`]}`
-  // )
-  // useEffect(
-  //   function () {
-  //     if (
-  //       category.id === selectedCategoryId &&
-  //       category.id === hoveredCategoryId
-  //     ) {
-  //       setCardClasses(
-  //         () =>
-  //           `${styles[`category-card-container`]} ${styles[`is-selected`]} ${
-  //             styles[`is-hovered`]
-  //           }`
-  //       )
-  //     } else if (category.id === selectedCategoryId) {
-  //       setCardClasses(
-  //         () => `${styles[`category-card-container`]} ${styles[`is-selected`]}`
-  //       )
-  //     } else if (category.id === hoveredCategoryId) {
-  //       setCardClasses(
-  //         () => `${styles[`category-card-container`]} ${styles[`is-hovered`]}`
-  //       )
-  //     } else {
-  //       setCardClasses(() => `${styles[`category-card-container`]}`)
-  //     }
-  //   },
-  //   [selectedCategoryId, hoveredCategoryId, category.id]
-  // )
+  const { categoryList, selectedCategoryId } = useSelector(
+    (state) => state.category
+  )
+  /* eslint-disable */
+  const [togglehover, toggleselect, customselect, classes] = useClasses(
+    styles,
+    "category-card-container"
+  )
+
+  useEffect(
+    function () {
+      customselect(category.id === selectedCategoryId)
+    },
+    [selectedCategoryId, category.id, customselect]
+  )
 
   const ref = useRef(null)
   const [, drop] = useDrop({
@@ -138,40 +109,13 @@ function CategoryCard({ category, idx, settingModal, openModal }) {
 
   drag(drop(ref))
 
-  // const hoverHandler = function () {
-  //   // dispatch(categoryActions.changeHovered({ hoveredCategoryId: category.id }))
-  // }
   const selectHandler = function () {
     dispatch(
       categoryActions.changeSelected({ selectedCategoryId: category.id })
     )
   }
-  // const mouseOutHandler = function () {
-  //   // dispatch(categoryActions.changeHovered({ hoveredCategoryId: null }))
-  // }
+  console.log(selectedCategoryId, classes)
 
-  // const dragStartHandler = function () {
-  //   // dispatch(dragStart(idx, cardType, category))
-  // }
-  // const dragEnterHandler = function () {
-  //   // dispatch(dragEnter(idx, cardType, category))
-  // }
-  // const dragEndHandler = function () {
-  //   // dispatch(
-  //   //   dragEnd(
-  //   //     dragStartColumn,
-  //   //     dragStartIdx,
-  //   //     dragStartTask,
-  //   //     dragEndColumn,
-  //   //     dragEndIdx,
-  //   //     dragEndTask
-  //   //   )
-  //   // )
-  //   // dispatch(resetStartEnd())
-  // }
-  // const dragExitHandler = function () {
-  //   // dispatch(resetEnd())
-  // }
   const settingAndOpenModal = function () {
     settingModal(cardType, category)
     openModal()
@@ -179,15 +123,11 @@ function CategoryCard({ category, idx, settingModal, openModal }) {
   return (
     <div
       ref={ref}
-      className={`${styles[`category-card-container`]}`}
+      className={classes}
       style={{ opacity }}
-      // onMouseEnter={() => hoverHandler(category.id)}
-      onClick={() => selectHandler(category.id)}
-      // onMouseLeave={() => mouseOutHandler()}
-      // onDragStart={dragStartHandler}
-      // onDragEnd={dragEndHandler}
-      // onDragExit={dragExitHandler}
-      // onDragEnter={dragEnterHandler}
+      onClick={selectHandler}
+      onMouseEnter={togglehover}
+      onMouseLeave={togglehover}
     >
       {/* 카드 헤더에 onSetting이랑 onDelete 넣어줘야 함. */}
       <CardHeader data={category} onSetting={settingAndOpenModal} />
