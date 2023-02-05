@@ -9,6 +9,7 @@ spring:
           google:
             client-id: ${GOOGLE_CLIENT_ID}
             client-secret: ${GOOGLE_CLIENT_SECRET}
+            redirect-uri: "https://i8a105.p.ssafy.io/api/login/oauth2/code/google"
             scope:
               - email
               - profile
