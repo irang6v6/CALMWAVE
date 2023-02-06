@@ -3,6 +3,7 @@ import chart1 from "../../assets/chart1.png"
 import chart2 from "../../assets/chart2.png"
 import chart3 from "../../assets/chart3.png"
 import React from "react"
+import { VscTriangleDown } from "react-icons/vsc"
 
 function Stretching(props) {
   return (
@@ -22,7 +23,7 @@ function Stretching(props) {
         </div>
       </div>
       <div className={`${styles["go-down"]}`} onClick={props.goNext}>
-        한 칸 아래로!
+      <VscTriangleDown className={`${styles[`go-down-icon`]}`} />
       </div>
     </div>
   )

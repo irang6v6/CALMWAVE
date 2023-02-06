@@ -3,6 +3,7 @@ import React from "react"
 import startbtn from "../../assets/startbtn.png"
 import mypagebtn from "../../assets/mypagebtn.png"
 import { NavLink } from "react-router-dom"
+import { VscTriangleDown } from "react-icons/vsc"
 
 function LastPage(props) {
   return (

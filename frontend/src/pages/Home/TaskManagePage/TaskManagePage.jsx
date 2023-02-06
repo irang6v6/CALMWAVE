@@ -4,6 +4,7 @@ import alertimg from "../../../assets/alert.png"
 import cuteturtle from "../../../assets/cuteturtle.png"
 import stretching from "../../../assets/stretching.png"
 import angryface from "../../../assets/angryface.png"
+import { VscTriangleDown } from "react-icons/vsc"
 
 function TaskManagePage(props) {
   return (
@@ -27,7 +28,7 @@ function TaskManagePage(props) {
         </div>
       </div>
       <div className={`${styles["go-down"]}`} onClick={props.goNext}>
-        한 칸 아래로!
+      <VscTriangleDown className={`${styles[`go-down-icon`]}`} />
       </div>
     </div>
   )
