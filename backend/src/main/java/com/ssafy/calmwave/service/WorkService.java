@@ -5,6 +5,7 @@ import com.ssafy.calmwave.domain.Work;
 import com.ssafy.calmwave.domain.WorkCategory;
 import com.ssafy.calmwave.domain.WorkStatus;
 import com.ssafy.calmwave.dto.WorkRequestDto;
+import com.ssafy.calmwave.repository.WorkCategoryRepository;
 import com.ssafy.calmwave.repository.WorkRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,38 +22,29 @@ public class WorkService {
     private final WorkRepository workRepository;
     private final UserService userService;
     private final CategoryService categoryService;
+    private final WorkCategoryRepository workCategoryRepository;
 
     public Work save(Work work) {
         return workRepository.save(work);
     }
 
-    public Work convert(WorkRequestDto workRequestDto) {
-        Optional<User> byId = userService.findById(workRequestDto.getUserId());
-        if (byId.isPresent()) {
-            User user = byId.get();
+    public Work convert(User user, WorkRequestDto workRequestDto) {
+        Work work = Work.builder()
+                .user(user)
+                .title(workRequestDto.getTitle())
+                .description(workRequestDto.getDescription())
+                .status(WorkStatus.TODO)
+                .dateAimed(workRequestDto.getDateAimed())
+                .build();
 
-            Work work = Work.builder()
-                    .user(user)
-                    .title(workRequestDto.getTitle())
-                    .description(workRequestDto.getDescription())
-                    .status(WorkStatus.TODO)
-                    .dateAimed(workRequestDto.getDateAimed())
-                    .build();
+        Optional<WorkCategory> byId1 = categoryService.findById(workRequestDto.getWorkCateId());
+        WorkCategory workCategory = byId1.get();
+        work.setWorkCate(workCategory);
 
-            if (workRequestDto.getWorkCateId() != null) {
-                Optional<WorkCategory> byId1 = categoryService.findById(workRequestDto.getWorkCateId());
-                WorkCategory workCategory = byId1.get();
-                work.setWorkCate(workCategory);
-            }
-            return work;
-        } else {
-            return null;
-        }
-
-
+        return work;
     }
 
     public List<Work> getTodo(Long userId) {
-        return workRepository.findAllByUserIdAndStatus(userId, WorkStatus.TODO);
+        return workRepository.findAllByUserIdAndStatusOrderByWorkOrder(userId, WorkStatus.TODO);
     }
 }

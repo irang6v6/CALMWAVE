@@ -38,6 +38,9 @@ public class Work {
     @Column(name = "date_finished")
     private LocalDateTime dateFinished;
 
+    @Column(name = "work_order")
+    private int workOrder;
+
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
@@ -47,6 +50,14 @@ public class Work {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_cate_id",nullable = false)
     private WorkCategory workCate;
+
+    public int getWorkOrder() {
+        return workOrder;
+    }
+
+    public void setWorkOrder(int workOrder) {
+        this.workOrder = workOrder;
+    }
 
     public Long getId() {
         return id;

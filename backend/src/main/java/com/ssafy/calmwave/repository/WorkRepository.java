@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface WorkRepository extends JpaRepository<Work,Long> {
-     List<Work> findAllByUserIdAndStatus(Long id, WorkStatus todo);
+     List<Work> findAllByUserIdAndStatusOrderByWorkOrder(Long id, WorkStatus todo);
 
 }
