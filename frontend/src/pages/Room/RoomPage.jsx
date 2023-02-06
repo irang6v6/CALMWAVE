@@ -1,7 +1,9 @@
 import { useEffect, useRef } from "react"
 import { useDispatch, useSelector } from "react-redux"
+import { NavLink } from "react-router-dom"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
+import { BsFillPlayFill } from "react-icons/bs"
 import styles from "./RoomPage.module.css"
 import TodoColumn from "../../components/UI/TodoColumn"
 import TodoCard from "../../components/UI/TodoCard"
@@ -24,6 +26,10 @@ export const RoomPage = () => {
   useEffect(() => {
     window.localStorage.setItem("todo", JSON.stringify(todos))
   }, [todos])
+
+  const backToHome = () => {
+    window.localStorage.removeItem("todo")
+  }
 
   const alignTodosInColumn = (columnName) => {
     return todos
@@ -63,6 +69,13 @@ export const RoomPage = () => {
           </div>
           <TodoColumn title="Done" className={`bg-wb-mint-4`}>
             {alignTodosInColumn("Done")}
+            <NavLink
+              to={`/`}
+              className={`${styles[`lets-go-home`]}`}
+              onClick={backToHome}
+            >
+              <BsFillPlayFill className={`${styles[`play-icon`]}`} />
+            </NavLink>
           </TodoColumn>
         </DndProvider>
       </div>

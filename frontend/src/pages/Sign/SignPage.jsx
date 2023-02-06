@@ -50,7 +50,7 @@ function SignPage({ pageRef }) {
       {
         method: "post",
         // baseURL: "http://localhost:8080",
-        baseURL: "https://5d2112b6-33e0-4cf7-853b-f9d783cec939.mock.pstmn.io",
+        baseURL: "https://i8a105.p.ssafy.io/api",
         url: "/login",
         data: {
           username: email,
@@ -84,8 +84,8 @@ function SignPage({ pageRef }) {
       {
         method: "post",
         // baseURL: "http://localhost:8080",
-        baseURL: "https://5d2112b6-33e0-4cf7-853b-f9d783cec939.mock.pstmn.io",
-        url: "/api/v1/account/join",
+        baseURL: "https://i8a105.p.ssafy.io/api",
+        url: "/v1/account/join",
         data: {
           username: email,
           password: password,

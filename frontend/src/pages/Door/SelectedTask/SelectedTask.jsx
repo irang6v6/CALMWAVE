@@ -29,7 +29,7 @@ function SelectedTask() {
   }
   return (
     <>
-      <div className={`${styles[`door-title-container`]}`}>선택 한 업무들</div>
+      <div className={`${styles[`door-title-container`]}`}>선택한 업무들</div>
       <div className={`${styles[`selected-task-container`]}`}>
         {selectedTaskList.map((task, idx) => {
           return (

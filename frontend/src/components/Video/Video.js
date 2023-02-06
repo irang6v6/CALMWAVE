@@ -10,6 +10,7 @@ const OPENVIDU_SERVER_SECRET = "WAVES"
 
 export default function Video() {
   const user = useSelector((state) => state.user.userData)
+  const progress = useSelector((state) => state.todos.onProgress)
   const [mySessionId, setMySessionId] = useState(`Session${user.id}`)
   const [session, setSession] = useState(undefined)
   const [publisher, setPublisher] = useState(undefined)
@@ -170,15 +171,22 @@ export default function Video() {
   // }
 
   return (
-    <div className={`${styles["videobox"]}`}>
-      {publisher === undefined ? (
-        <form className={`${styles["video"]}`} onSubmit={joinSession}>
-          <input type="submit" value="JOIN" />
-        </form>
-      ) : (
-        <UserVideoComponent streamManager={publisher} />
-      )}
-      <div className={`${styles["videonav"]}`}>VIDEO NAV</div>
-    </div>
+    <>
+      <div className={`${styles[`empty`]}`}>empty</div>
+      <div className={`${styles["video-info-container"]}`}>
+        <div className={`${styles["videobox"]}`}>
+          {publisher === undefined ? (
+            <form className={`${styles["video"]}`} onSubmit={joinSession}>
+              <input type="submit" value="JOIN" />
+            </form>
+          ) : (
+            <UserVideoComponent streamManager={publisher} />
+          )}
+          <div className={`${styles["videonav"]}`}>VIDEO NAV</div>
+        </div>
+        <div className={`${styles["info-container"]}
+        ${progress && styles["info-container_focused"]}`}></div>
+      </div>
+    </>
   )
 }

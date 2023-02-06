@@ -1,26 +1,57 @@
 .videobox > div > div > video {
-    height: auto;
-    width: 25vw;
-    border-radius: 11px;
+  height: auto;
+  width: 24vw;
+  border-radius: 11px;
 }
 
 .videobox {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 10px;
-    box-sizing: border-box;
-    border-radius: 11px;
-    background-color: rgba(111, 111, 111, 0.8);
-    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
-    padding: 2% 2% 2% 2%;
-    color: white;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  box-sizing: border-box;
+  /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5); */
+  color: white;
+  width: 24vw;
 }
 
 .video {
-    height: 19vw;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  height: 19vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.empty {
+  font-size: 2rem;
+  color: rgba(200, 254, 238, 1);
+  text-align: center;
+  margin-bottom: 5px;
+  visibility: hidden;
+}
+
+.video-info-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  background-color: rgba(111, 111, 111, 0.8);
+  border-radius: 11px;
+}
+
+.info-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 0vw;
+  transition: width 0.35s ease-out;
+  /* visibility: hidden; */
+  opacity: 0;
+}
+
+.info-container_focused {
+  width: 14vw;
+  visibility: visible;
+  opacity: 1;
+  /* transition: opacity 1s ease-in-out; */
+  transition: width 0.35s ease-out;
 }
