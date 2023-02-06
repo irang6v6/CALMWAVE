@@ -26,7 +26,7 @@ public class JwtUtil {
     private static String secret;
     private final UserRepository userRepository;
 
-    public JwtUtil(@Value("${my.secret}") String secret, UserRepository userRepository) {
+    public JwtUtil(@Value("${JWT_SECRET_KEY}") String secret, UserRepository userRepository) {
         this.secret = secret;
         this.userRepository = userRepository;
     }
