@@ -155,7 +155,14 @@ function Signup(props) {
         setButtonClasses(() => `${styles["button-invalid"]}`)
       }
     },
-    [nickIsValid, emailIsValid, passwordIsValid, password2IsValid, passwordRef2]
+    [
+      nickIsValid,
+      emailIsValid,
+      passwordIsValid,
+      password2IsValid,
+      passwordRef2,
+      emailDupValid,
+    ]
   )
 
   const resetState = function () {
