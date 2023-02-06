@@ -2,8 +2,36 @@
   box-sizing: border-box;
   border-radius: 8px;
   padding: 5px;
-  margin: 4px 8px 4px 8px;
+  margin: 8px 12px 8px 12px;
   background-color: rgba(111, 111, 111, 0.8);
   color: white;
   -webkit-user-drag: element;
+  transition: 0.4s;
+
+  animation: imhere;
+  animation-duration: 0.4s;
+}
+
+.selected-task-card-container.hover {
+  transform: scale(104%);
+}
+.selected-task-card-container.select {
+  transform: scale(0%);
+  transition: 0.3s;
+}
+.selected-task-card-container.hover.select {
+  transform: scale(0%);
+  transition: 0.3s;
+}
+
+@keyframes imhere {
+  from {
+    transform: scale(0%);
+  }
+  60% {
+    transform: scale(105%);
+  }
+  to {
+    transform: scale(100%);
+  }
 }

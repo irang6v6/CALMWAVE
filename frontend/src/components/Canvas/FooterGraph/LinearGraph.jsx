@@ -8,8 +8,8 @@ export class LinearGraph {
     this.maxX = 0.1 * canvasWidth + canvasWidth * 0.8 * this.percentage
     this.x = 0.1 * canvasWidth
     this.y = 0.55 * canvasHeight
-    this.speedMaxX = 1
-    this.speedFrontX = 1
+    this.speedMaxX = 1.2
+    this.speedFrontX = 1.3
     this.maxLineX = this.x
     this.frontLineX = this.x
   }

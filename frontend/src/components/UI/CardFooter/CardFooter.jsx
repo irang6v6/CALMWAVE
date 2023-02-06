@@ -1,4 +1,4 @@
-import { useRef } from "react"
+import { useRef, memo } from "react"
 import styles from "./CardFooter.module.css"
 import { useCustomWidthHeight } from "../../../hooks/custom/useCustomWidthHeight"
 import FooterGraph from "../../Canvas/FooterGraph/FooterGraph"
@@ -20,4 +20,4 @@ function CardFooter({ data, big, small }) {
   )
 }
 
-export default CardFooter
+export default memo(CardFooter)

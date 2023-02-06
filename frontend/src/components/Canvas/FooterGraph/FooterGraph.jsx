@@ -15,7 +15,12 @@ function FooterGraph({
   //   ctx.fillRect(0, 0, canvasWidth, canvasHeight)
   // }
 
-  const g = new LinearGraph(canvasWidth, canvasHeight, maxPoint, nowPoint)
+  const g = new LinearGraph(
+    canvasWidth,
+    canvasHeight,
+    maxPoint || 100,
+    nowPoint || 70
+  )
   const animate = function (ctx) {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight)
     // fillBackground(ctx)

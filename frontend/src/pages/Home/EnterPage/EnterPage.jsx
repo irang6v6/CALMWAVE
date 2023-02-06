@@ -4,6 +4,7 @@ import React from "react"
 import { NavLink } from "react-router-dom"
 import Logo from "../../../components/Logo/Logo"
 import { AiFillPlayCircle, AiFillInfoCircle, AiFillEdit } from "react-icons/ai"
+import { VscTriangleDown } from "react-icons/vsc"
 
 function EnterPage(props) {
   return (
@@ -48,7 +49,7 @@ function EnterPage(props) {
         </div>
       </div>
       <div className={`${styles["go-down"]}`} onClick={props.goNext}>
-        한 칸 아래로!
+        <VscTriangleDown className={`${styles[`go-down-icon`]}`} />
       </div>
     </div>
   )

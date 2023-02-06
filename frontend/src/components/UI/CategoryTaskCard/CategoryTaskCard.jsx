@@ -1,25 +1,30 @@
 import { useDispatch, useSelector } from "react-redux"
-import {
-  dragStart,
-  resetStartEnd,
-  resetEnd,
-  dragEnd,
-  dragEnter,
-} from "../../../store/door-store/drag-task-slice"
+import { useClasses } from "../../../hooks/custom/useClasses"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
+import CardBody from "../CardBody/CardBody"
+import CardFooter from "../CardFooter/CardFooter"
+import CardHeader from "../CardHeader/CardHeader"
 import styles from "./CategoryTaskCard.module.css"
+import { useEffect } from "react"
 
+/* eslint-disable */
 function CategoryTaskCard({ task, idx }) {
   const cardType = "category-task"
   const dispatch = useDispatch()
-  const {
-    dragStartColumn,
-    dragStartIdx,
-    dragStartTask,
-    dragEndColumn,
-    dragEndIdx,
-    dragEndTask,
-  } = useSelector((state) => state.dragtask)
+  const { selectedTaskList } = useSelector((state) => state.doorstask)
+  const [toggleHover, toggleSelect, customSelect, classes] = useClasses(
+    styles,
+    "task-card-container"
+  )
+  const selected =
+    selectedTaskList.findIndex((val) => val.id === task.id) !== -1
+
+  useEffect(
+    function () {
+      customSelect(selected)
+    },
+    [selected]
+  )
 
   const toggleWorkHandler = function () {
     dispatch(
@@ -30,42 +35,19 @@ function CategoryTaskCard({ task, idx }) {
       })
     )
   }
-  const dragStartHandler = function () {
-    dispatch(dragStart(idx, cardType, task))
-  }
-  const dragExitHandler = function () {
-    dispatch(resetEnd())
-  }
-  const dragEnterHandler = function () {
-    dispatch(dragEnter(idx, cardType, task))
-  }
-  const dragEndHandler = function () {
-    dispatch(
-      dragEnd(
-        dragStartColumn,
-        dragStartIdx,
-        dragStartTask,
-        dragEndColumn,
-        dragEndIdx,
-        dragEndTask
-      )
-    )
-    dispatch(resetStartEnd())
-  }
 
   return (
     <div
-      className={`${styles[`task-card-container`]}`}
+      className={`${classes}`}
       onClick={toggleWorkHandler}
-      onDragStart={dragStartHandler}
-      onDragEnd={dragEndHandler}
-      onDragExit={dragExitHandler}
-      onDragEnter={dragEnterHandler}
+      onMouseEnter={toggleHover}
+      onMouseLeave={toggleHover}
     >
-      <div>{task.title}</div>
+      <CardHeader />
       <div>{task.description}</div>
       <div>{task.businessHours}</div>
-      <div>{task.categoryId}</div>
+      <CardBody />
+      <CardFooter />
     </div>
   )
 }

@@ -1,4 +1,5 @@
 import styles from "./CardBody.module.css"
+import { memo } from "react"
 
 function CardBody(data) {
   return (
@@ -16,4 +17,4 @@ function CardBody(data) {
   )
 }
 
-export default CardBody
+export default memo(CardBody)

@@ -103,10 +103,9 @@
 
 .go-down {
   box-sizing: border-box;
-  padding: 20px;
   position: absolute;
   top: 85%;
-  background-color: #0084ff;
+  /* background-color: #0084ff; */
   transform: translate(0, 0px);
 
   animation-name: tongtong;
@@ -117,6 +116,12 @@
 
 .go-down:hover {
   cursor: pointer;
+}
+
+.go-down-icon {
+  width: 50px;
+  height: 50px;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 @keyframes tongtong {
