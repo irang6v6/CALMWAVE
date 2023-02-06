@@ -5,7 +5,7 @@ const initialState = {
   isLoading: false,
   isError: false,
   userData: {
-    id: 0,
+    id: 18,
     nickname: "default",
   },
 }
