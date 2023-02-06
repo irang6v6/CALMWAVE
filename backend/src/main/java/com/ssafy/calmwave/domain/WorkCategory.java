@@ -45,7 +45,7 @@ public class WorkCategory {
 
 
     @Builder
-    public WorkCategory(String cateName, User user, int cateColor, int cateIcon,WorkCategoryStatus workCategoryStatus) {
+    public WorkCategory(String cateName, User user, int cateColor, int cateIcon, WorkCategoryStatus workCategoryStatus) {
         this.cateName = cateName;
         this.user = user;
         this.cateColor = cateColor;

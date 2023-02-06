@@ -66,12 +66,11 @@ public class CategoryController {
     }
 
     /**
-     *
      * @param token
      * @return List<WorkCategoryDto>
      */
     @GetMapping("list")
-    @ApiOperation(value = "유저별 카테고리 리스트 order순 조회", notes = "",response = WorkCategoryDto.class)
+    @ApiOperation(value = "유저별 카테고리 리스트 order순 조회", notes = "", response = WorkCategoryDto.class)
     public ResponseEntity<?> getCategoryList(@RequestHeader(value = "AccessToken") String token) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;

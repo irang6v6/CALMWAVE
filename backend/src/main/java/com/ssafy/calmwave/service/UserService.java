@@ -3,8 +3,10 @@ package com.ssafy.calmwave.service;
 import com.ssafy.calmwave.repository.UserRepository;
 import com.ssafy.calmwave.dto.UserInfoDto;
 import com.ssafy.calmwave.domain.User;
+
 import java.util.Optional;
 import java.util.UUID;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,8 +31,8 @@ public class UserService {
         user.get().setStretchingIntervalMin(userInfoDto.getStretchingIntervalMin());
     }
 
-    public User findByUsername(String username){
-         return userRepository.findByUsername(username);
+    public User findByUsername(String username) {
+        return userRepository.findByUsername(username);
     }
 
 
