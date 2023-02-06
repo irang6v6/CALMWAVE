@@ -2,8 +2,20 @@
   box-sizing: border-box;
   border-radius: 8px;
   padding: 5px;
-  margin: 4px 8px 4px 8px;
+  margin: 8px 12px 8px 12px;
   background-color: rgba(111, 111, 111, 0.8);
   color: white;
   -webkit-user-drag: element;
+  transition: 0.4s;
+}
+
+.task-card-container.hover {
+  transform: scale(103%);
+}
+.task-card-container.select {
+  box-shadow: 3px 3px 3px 3px rgba(12, 210, 189, 1);
+}
+.task-card-container.hover.select {
+  box-shadow: rgba(12, 210, 189, 1);
+  transform: scale(103%);
 }

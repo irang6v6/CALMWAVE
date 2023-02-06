@@ -1,14 +1,19 @@
 import React from "react"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import CategoryCard from "../../../components/UI/CategoryCard/CategoryCard"
 import styles from "./Category.module.css"
+import {
+  openCategoryModal,
+  modalActions,
+} from "../../../store/door-store/modal-slice"
 
-const Category = function Category({ settingModal, openModal }) {
+const Category = function Category() {
+  const dispatch = useDispatch()
   // hoverEpicId, SelectedEpicId, hoverHandler, selectHandler, mouseOutHandler
   const { categoryList } = useSelector((state) => state.category)
   const newCategory = function () {
-    settingModal("category")
-    openModal()
+    dispatch(modalActions.resetFormData())
+    dispatch(openCategoryModal())
   }
   return (
     <>
@@ -21,8 +26,6 @@ const Category = function Category({ settingModal, openModal }) {
               category={category}
               idx={idx}
               key={`category-${category.id}`}
-              settingModal={settingModal}
-              openModal={openModal}
             />
           )
         })}

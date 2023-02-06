@@ -1,71 +1,53 @@
-import { useDispatch, useSelector } from "react-redux"
+import { useState } from "react"
+import { useDispatch } from "react-redux"
+import useAnimation from "../../../hooks/custom/useAnimation"
+import { useClasses } from "../../../hooks/custom/useClasses"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
 import CardFooter from "../CardFooter/CardFooter"
 import CardHeader from "../CardHeader/CardHeader"
 import styles from "./SelectedTaskCard.module.css"
-import {
-  dragStart,
-  resetStartEnd,
-  resetEnd,
-  dragEnd,
-  dragEnter,
-} from "../../../store/door-store/drag-task-slice"
 
 function SelectedTaskCard({ task, idx }) {
-  const cardType = "selected-task"
+  // const cardType = "selected-task"
   const dispatch = useDispatch()
-  const {
-    dragStartColumn,
-    dragStartIdx,
-    dragStartTask,
-    dragEndColumn,
-    dragEndIdx,
-    dragEndTask,
-  } = useSelector((state) => state.dragtask)
-
+  /* eslint-disable */
+  const [togglehover, toggleselect, customselect, classes] = useClasses(
+    styles,
+    "selected-task-card-container"
+  )
+  const [opened, setOpened] = useState(true)
+  const [isRender, transitionEnd, transitionTrigger] = useAnimation(opened)
+  const close = function () {
+    setOpened(false)
+    toggleselect()
+  }
   const toggleWorkHandler = function () {
-    dispatch(selectedTaskActions.addSelectedTask({ newTask: { ...task } }))
-  }
-  const dragStartHandler = function () {
-    dispatch(dragStart(idx, cardType, task))
-  }
-  const dragExitHandler = function () {
-    dispatch(resetEnd())
-    console.log("?")
-  }
-  const dragEnterHandler = function () {
-    dispatch(dragEnter(idx, cardType, task))
-  }
-  const dragEndHandler = function () {
-    dispatch(
-      dragEnd(
-        dragStartColumn,
-        dragStartIdx,
-        dragStartTask,
-        dragEndColumn,
-        dragEndIdx,
-        dragEndTask
-      )
-    )
-    dispatch(resetStartEnd())
+    transitionEnd()
+    if (!transitionTrigger) {
+      dispatch(selectedTaskActions.addSelectedTask({ newTask: { ...task } }))
+      console.log(transitionTrigger)
+    }
   }
 
   return (
-    <div
-      className={`${styles[`selected-task-card-container`]}`}
-      onClick={toggleWorkHandler}
-      onDragStart={dragStartHandler}
-      onDragEnd={dragEndHandler}
-      onDragExit={dragExitHandler}
-      onDragEnter={dragEnterHandler}
-    >
-      <CardHeader />
-      <div>{task.title}</div>
-      <div>{task.description}</div>
-      <div>{task.businessHours}</div>
-      <div>{task.categoryId}</div>
-      <CardFooter />
-    </div>
+    <>
+      {isRender && (
+        <div
+          className={classes}
+          onClick={close}
+          onTransitionEnd={toggleWorkHandler}
+          onMouseEnter={togglehover}
+          onMouseLeave={togglehover}
+        >
+          <CardHeader />
+          <div>{task.title}</div>
+          <div>{task.description}</div>
+          <div>{task.businessHours}</div>
+          <div>{task.categoryId}</div>
+          <CardFooter />
+        </div>
+      )}
+    </>
   )
 }
 

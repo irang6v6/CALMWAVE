@@ -3,6 +3,11 @@ import { useState } from "react"
 import ReactDOM from "react-dom"
 import styles from "./Modal.module.css"
 import { AiOutlineClose } from "react-icons/ai"
+import { useDispatch, useSelector } from "react-redux"
+import { closeModal } from "../../store/door-store/modal-slice"
+import { SpinnerDots } from "./Spinner"
+import DeleteModalForm from "./DeleteModalForm/DeleteModalForm"
+import CategoryForm from "./CategoryForm/CategoryForm"
 
 /**
  *
@@ -11,35 +16,46 @@ import { AiOutlineClose } from "react-icons/ai"
  * @children 무난한 자식들
  * @returns
  */
-function Modal({ toggleIsOpen, children, isOpen }) {
+function Modal() {
+  const dispatch = useDispatch()
+  const { isModal, isTask, isDelete, isLoading, isError } = useSelector(
+    (state) => state.modal
+  )
   const [classes, setClasses] = useState(
     `${styles[`modal-container`]} ${styles[`close`]}`
   )
 
   useEffect(
     function () {
-      if (isOpen) {
+      if (isModal) {
         setClasses(() => `${styles[`modal-container`]} ${styles[`open`]}`)
       } else {
         setClasses(() => `${styles[`modal-container`]} ${styles[`close`]}`)
       }
     },
-    [isOpen]
+    [isModal]
   )
+  const onCloseModal = function () {
+    dispatch(closeModal())
+  }
 
   return (
     <div>
       {ReactDOM.createPortal(
-        <div
-          // onClick={onConfirm}
-          // onClick={toggleIsOpen}
-          className={classes}
-        >
+        <div className={classes}>
           <AiOutlineClose
             className={`${styles[`modal-close-button`]}`}
-            onClick={toggleIsOpen}
+            onClick={onCloseModal}
           />
-          {children}
+          {isLoading ? (
+            <SpinnerDots />
+          ) : isError ? (
+            <div>에러임</div>
+          ) : isDelete ? (
+            <DeleteModalForm />
+          ) : isTask ? null : (
+            <CategoryForm />
+          )}
         </div>,
         document.getElementById("overlay-root")
       )}
