@@ -3,14 +3,18 @@ import React from "react"
 // import turtleImg from "../../../assets/blueturtle.png"
 import { NavLink } from "react-router-dom"
 import Logo from "../../../components/Logo/Logo"
+import LogoImg from "../../../assets/logo_imgonly.png"
 import { AiFillPlayCircle, AiFillInfoCircle, AiFillEdit } from "react-icons/ai"
+import startbtn from "../../../assets/enter_start.png"
+import mypagebtn from "../../../assets/enter_mypage.png"
 
 function EnterPage(props) {
   return (
     <div className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
         <div className={`${styles["left-box"]}`}>
-          <Logo />
+          {/* <Logo /> */}
+            <img src={LogoImg} alt="logoImg" className={`${styles["logo-img"]}`}/>
         </div>
 
         <div className={`${styles["right-box"]}`}>
@@ -26,22 +30,16 @@ function EnterPage(props) {
                 to={`/door`}
                 className={`${styles[`shortcut-container`]}`}
               >
-                <AiFillPlayCircle className={`${styles[`icons`]}`} />
-                <span>START</span>
+                {/* <AiFillPlayCircle className={`${styles[`icons`]}`} /> */}
+                <img src={startbtn} alt="룸 입장" className={`${styles[`enter-btn`]}`}/>
               </NavLink>
-              <NavLink
-                to={`/manage`}
-                className={`${styles[`shortcut-container`]}`}
-              >
-                <AiFillEdit className={`${styles[`icons`]}`} />
-                <span>TASKS</span>
-              </NavLink>
+
               <NavLink
                 to={`/profile`}
                 className={`${styles[`shortcut-container`]}`}
               >
-                <AiFillInfoCircle className={`${styles[`icons`]}`} />
-                <span>PROFILE</span>
+                {/* <AiFillInfoCircle className={`${styles[`icons`]}`} /> */}
+                <img src={mypagebtn} alt="마이페이지" className={`${styles[`enter-btn`]}`}/>
               </NavLink>
             </div>
           </div>

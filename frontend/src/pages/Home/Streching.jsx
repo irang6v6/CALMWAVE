@@ -1,39 +1,23 @@
 import styles from "./Stretching.module.css"
+import chart1 from "../../assets/chart1.png"
+import chart2 from "../../assets/chart2.png"
+import chart3 from "../../assets/chart3.png"
 import React from "react"
 
 function Stretching(props) {
   return (
     <div ref={props.refVal} className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
-        <div className={`${styles["left-box"]}`}>
-          <div className={`${styles["stretching-timeset"]}`}>
-            <h1>스트레칭 알림 받을 시간</h1>
-            <span>-</span>
-            <span>50분 간격</span>
-            <span>+</span>
+        <h2>결과페이지에서 확인할 수 있는 다양한 나의 기록</h2>
+        <div className={`${styles["chart-wrap"]}`}>
+          <div className={`${styles["chart"]}`}><img src={chart1} alt="차트1"/>
+            <p>이번 주 목표 달성도</p>
           </div>
-        </div>
-
-        <div className={`${styles["right-box"]}`}>
-          <div className={`${styles["mode-wrap"]}`}>
-            <div className={`${styles["silent-mode"]}`}>
-              <h3>무음모드</h3>
-              <div className={`${styles["inner-box"]}`}>
-                <p>스트레칭 할 시간입니다.</p>
-                <div className={`${styles["close-btn"]}`}>닫기</div>
-              </div>
-            </div>
-
-            <div className={`${styles["mission-mode"]}`}>
-              <h3>소리모드</h3>
-              <div className={`${styles["inner-box"]}`}>
-                <p>
-                  스트레칭 할 시간입니다.
-                  <br />
-                  일어나서 스트레칭을 해주세요
-                </p>
-              </div>
-            </div>
+          <div className={`${styles["chart"]}`}><img src={chart2} alt="차트2"/>
+          <p>이번 주 목표 달성도</p>
+          </div>
+          <div className={`${styles["chart"]}`}><img src={chart3} alt="차트3"/>
+          <p>이번 주 목표 달성도</p>
           </div>
         </div>
       </div>
