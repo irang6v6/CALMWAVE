@@ -1,5 +1,5 @@
 import styles from "./UserInfo.module.css"
-import MyCalendar from "../../../components/calendar/MyCalendar"
+import MyCalendar from "../../../components/Calendar/MyCalendar"
 
 function UserInfo() {
   return (

@@ -3,15 +3,34 @@
   height: 100vh;
   justify-content: center;
   align-items: center;
+  background: #001930;
 }
 
 .inner {
   display: flex;
-  width: 80%;
+  width: 90%;
   height: 70%;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   /* border: 1px solid #000; */
+}
+
+.work-box{
+  border: 3px solid #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 25%;
+  height: 80%;
+  border-radius: 20px;
+  background: rgba(166, 250, 255, 0.25);
+  color: white;
+  padding: 0 1% 0 1%;
+}
+
+.work-box img{
+  width: 45%;
 }
 
 .text-wrap {

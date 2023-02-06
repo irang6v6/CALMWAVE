@@ -10,10 +10,10 @@ function NightSky({ canvasWidth, canvasHeight, background }) {
       canvasWidth * 0.1,
       canvasHeight
     )
-    gradient.addColorStop(0, `rgba(16, 19, 19, 1)`)
-    gradient.addColorStop(0.3, `rgba(28, 33, 33, 1)`)
-    gradient.addColorStop(0.77, `rgba(32, 38, 38, 1)`)
-    gradient.addColorStop(1, `rgba(54, 45, 30, 1)`)
+    gradient.addColorStop(0, `#001930`)
+    gradient.addColorStop(0.3, `#001930`)
+    gradient.addColorStop(0.77, `#001930`)
+    gradient.addColorStop(1, `#27435e`)
     ctx.fillStyle = gradient
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
   }
