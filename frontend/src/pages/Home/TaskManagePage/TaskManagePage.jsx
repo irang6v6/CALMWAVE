@@ -1,27 +1,34 @@
 import styles from "./TaskManagePage.module.css"
 import React from "react"
-import todoList from "../../../assets/todolist.png"
+import alertimg from "../../../assets/alert.png"
+import cuteturtle from "../../../assets/cuteturtle.png"
+import stretching from "../../../assets/stretching.png"
+import angryface from "../../../assets/angryface.png"
+import { VscTriangleDown } from "react-icons/vsc"
 
 function TaskManagePage(props) {
   return (
     <div ref={props.refVal} className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
-        <div className={`${styles["img-wrap"]}`}>
-          <img src={todoList} alt="임시이미지" />
+        <div className={`${styles["left-box"]}`}>
+          <img src={alertimg} alt="알림 이미지" className={`${styles["alert-img"]}`}/>
         </div>
-        <div className={`${styles["text-wrap"]}`}>
-          <h1>업무 시간을 편하게 관리</h1>
-          <p>
-            업무 누적 시간을 한 눈에 확인할 수 있어요. 업무 누적 시간을 한 눈에
-            확인할 수 있어요. <br />
-            업무 누적 시간을 한 눈에 확인할 수 있어요. 업무 누적 시간을 한 눈에
-            확인할 수 있어요. 업무 누적 시간을 한 <br />
-            업무 누적 시간을 한 눈에 확인할 수 있어요{" "}
-          </p>
+        <div className={`${styles["right-box"]}`}>
+          <div className={`${styles["icon-wrap"]}`}>
+            <img src={cuteturtle} alt="거북이 아이콘" className={`${styles["turtle-img"]}`}/>
+            <img src={stretching} alt="스트레칭 아이콘" className={`${styles["stretcing-img"]}`}/>
+            <img src={angryface} alt="화난얼굴 아이콘" className={`${styles["angry-img"]}`}/>
+          </div>
+          <div className={`${styles["alert-wrap"]}`}>
+            <div className={`${styles["alert-box"]}`}>그러다 거북이가 친구하자 하겠어요</div>
+            <div className={`${styles["alert-box"]}`}>허리피자 허리 수술  6000만원</div>
+            <div className={`${styles["alert-box"]}`}>스트레칭 할 시간이예요 ~</div>
+            <div className={`${styles["alert-box"]}`}>썩은 표정! 잠시 쉬어가요</div>
+          </div>
         </div>
       </div>
       <div className={`${styles["go-down"]}`} onClick={props.goNext}>
-        한 칸 아래로!
+      <VscTriangleDown className={`${styles[`go-down-icon`]}`} />
       </div>
     </div>
   )

@@ -8,7 +8,7 @@ import CardFooter from "../CardFooter/CardFooter"
 import CardHeader from "../CardHeader/CardHeader"
 import styles from "./CategoryCard.module.css"
 
-function CategoryCard({ category, idx, settingModal, openModal }) {
+function CategoryCard({ category, idx }) {
   const cardType = false
   const dispatch = useDispatch()
   const { categoryList, selectedCategoryId } = useSelector(
@@ -114,12 +114,7 @@ function CategoryCard({ category, idx, settingModal, openModal }) {
       categoryActions.changeSelected({ selectedCategoryId: category.id })
     )
   }
-  console.log(selectedCategoryId, classes)
 
-  const settingAndOpenModal = function () {
-    settingModal(cardType, category)
-    openModal()
-  }
   return (
     <div
       ref={ref}
@@ -130,7 +125,7 @@ function CategoryCard({ category, idx, settingModal, openModal }) {
       onMouseLeave={togglehover}
     >
       {/* 카드 헤더에 onSetting이랑 onDelete 넣어줘야 함. */}
-      <CardHeader data={category} onSetting={settingAndOpenModal} />
+      <CardHeader data={category} cardType={false} />
       <CardBody data={category} />
       <CardFooter
         data={category}

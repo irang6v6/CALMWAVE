@@ -90,15 +90,22 @@ function HomePage() {
       <NavIcon />
       <div ref={pageRef} className={`${styles["container"]}`}>
         <div className={`${styles["wave-container"]}`}>
-          <Wave
+          
+        <NightSky canvasWidth={canvasWidth}
+            canvasHeight={canvasHeight} 
+            background={`rgb(31, 31, 34)`}
+            />
+      </div>
+
+          {/* <Wave
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
             background={`rgb(31, 31, 34)`}
             // background={`rgba(31, 31, 36)`}
-          />
-        </div>
+          /> */}
+        {/* </div> */}
         <EnterPage goNext={goSecond} />
-        <div className={`${styles["wave-container"]}`}>
+        {/* <div className={`${styles["wave-container"]}`}>
           <DiagonalWave
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
@@ -106,21 +113,29 @@ function HomePage() {
             rightColor={`rgba(29, 88, 164, 0.66)`}
             // background={`rgba(31, 31, 36)`}
           />
-        </div>
+        </div> */}
         <InfoPage refVal={secondRef} goNext={goWorkTime} />
-        <div className={`${styles["wave-container"]}`}>
+        {/* <div className={`${styles["wave-container"]}`}>
           <NightSky
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
             background={`rgba(32, 38, 38, 1) `}
           />
-        </div>
+        </div> */}
         <IntroPage refVal={worktimeRef} goNext={goTodo} />
         <TaskManagePage refVal={todoRef} goNext={goPosture} />
         <Posture refVal={postureRef} goNext={goStreching} />
         <Stretching refVal={stretchRef} goNext={goStress} />
+
+        <div className={`${styles["wave-container"]}`}>
+          
+        <NightSky canvasWidth={canvasWidth}
+            canvasHeight={canvasHeight} 
+            background={`rgb(31, 31, 34)`}
+            />
+      </div>
         <Stress refVal={stressRef} goNext={goLast} />
-        <LastPage refVal={LastRef} />
+        {/* <LastPage refVal={LastRef} /> */}
         <div className={`${styles["go-up"]}`} onClick={goUp}>
           위로!
         </div>

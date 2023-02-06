@@ -147,7 +147,8 @@ function Signup(props) {
         emailIsValid &&
         passwordIsValid &&
         passwordRef2.current.value.trim().length !== 0 &&
-        password2IsValid
+        password2IsValid &&
+        emailDupValid
       ) {
         setButtonClasses(() => `${styles["form-button"]}`)
       } else {
@@ -188,10 +189,10 @@ function Signup(props) {
     AxiosEmailCheck(
       {
         method: "get",
-        url: `/api/v1/account/checkemail/${useremail}`,
+        url: `/v1/account/checkemail/${useremail}`,
       },
       function (resData) {
-        setEmailDupValid(true)
+        setEmailDupValid(() => true)
       }
     )
   }
@@ -201,7 +202,11 @@ function Signup(props) {
       if (emailCheckError) {
         setEmailDupValid(() => false)
       } else {
-        setEmailDupValid(() => null)
+        setEmailDupValid((val) => {
+          if (val) {
+            return val
+          }
+        })
       }
     },
     [emailCheckError]
@@ -221,14 +226,19 @@ function Signup(props) {
   const onSubmitHandler = async function (event) {
     event.preventDefault()
     // 유효성에 따라 return 해줄지 적어야 함.
-    if (nickIsValid && emailIsValid && passwordIsValid && password2IsValid) {
+    if (
+      nickIsValid &&
+      emailIsValid &&
+      emailDupValid &&
+      passwordIsValid &&
+      password2IsValid
+    ) {
       const status = props.onSignup(
         useremail,
         userpassword,
         userNickname,
         resetState
       )
-      console.log(status)
 
       // 성공적으로 회원가입 시
       // props.onLogin() // 로그인 창으로 넘겨주기
@@ -252,6 +262,7 @@ function Signup(props) {
   }
   const onInputEmailHandler = function () {
     if (emailDupValid) {
+      console.log(emailDupValid, "<<")
       return
     }
     setUseremail(() => emailRef.current.value)
@@ -339,6 +350,7 @@ function Signup(props) {
             onChange={onInputEmailHandler}
             onBlur={toggleEmailTouched}
             placeholder="이메일을 입력해주세요."
+            readOnly={emailDupValid}
           />
           <br />
           <label htmlFor="signup-pw" className={`${styles["form-label"]}`}>
