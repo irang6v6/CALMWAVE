@@ -18,14 +18,13 @@
   color: white;
 }
 
-
-.chart-wrap{
+.chart-wrap {
   display: flex;
   justify-content: center;
-  align-items: end;
+  align-items: flex-end;
 }
 
-.chart{
+.chart {
   width: 30%;
   /* border: 1px solid #ffffff; */
   display: flex;
@@ -34,7 +33,7 @@
   align-items: center;
 }
 
-.chart img{
+.chart img {
   width: 50%;
 }
 

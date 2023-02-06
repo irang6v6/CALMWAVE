@@ -147,7 +147,8 @@ function Signup(props) {
         emailIsValid &&
         passwordIsValid &&
         passwordRef2.current.value.trim().length !== 0 &&
-        password2IsValid
+        password2IsValid &&
+        emailDupValid
       ) {
         setButtonClasses(() => `${styles["form-button"]}`)
       } else {
@@ -188,7 +189,7 @@ function Signup(props) {
     AxiosEmailCheck(
       {
         method: "get",
-        url: `/api/v1/account/checkemail/${useremail}`,
+        url: `/v1/account/checkemail/${useremail}`,
       },
       function (resData) {
         setEmailDupValid(true)

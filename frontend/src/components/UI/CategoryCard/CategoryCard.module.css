@@ -11,6 +11,9 @@
 
   transition: 0.4s;
   -webkit-user-drag: element;
+
+  animation: imhere;
+  animation-duration: 0.4s;
 }
 
 .category-card-container.hover {
@@ -29,4 +32,16 @@
   /* background-color: rgba(111, 111, 111, 0.8); */
   color: black;
   transform: scale(104%);
+}
+
+@keyframes imhere {
+  from {
+    transform: scale(0%);
+  }
+  60% {
+    transform: scale(105%);
+  }
+  to {
+    transform: scale(100%);
+  }
 }
