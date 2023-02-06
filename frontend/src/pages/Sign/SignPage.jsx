@@ -61,11 +61,11 @@ function SignPage({ pageRef }) {
         if (res.data.response.AccessToken) {
           localStorage.setItem(
             "Access",
-            `Bearer `+ res.data.response.AccessToken.substr(7)
+            `Bearer ` + res.data.response.AccessToken.substr(7)
           )
           localStorage.setItem(
             "Refresh",
-            `Bearer `+ res.data.response.RefreshToken.substr(7)
+            `Bearer ` + res.data.response.RefreshToken.substr(7)
           )
           navigate("/")
         } else {
@@ -94,7 +94,7 @@ function SignPage({ pageRef }) {
       },
       // res로 { "result": "ok" } 가 온다
       async function (res) {
-        if (res.data.result !== "ok") {
+        if (res.data.result === "ok") {
           toggleLoginOrSignup()
           resetAction()
         }
