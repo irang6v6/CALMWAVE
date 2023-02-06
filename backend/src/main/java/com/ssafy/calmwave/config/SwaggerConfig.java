@@ -17,18 +17,18 @@ public class SwaggerConfig {
     @Bean
     public Docket restAPI() {
         return new Docket(DocumentationType.SWAGGER_2)
-            .apiInfo(apiInfo())
-            .select()
-            .apis(RequestHandlerSelectors.basePackage("com.ssafy"))
-            .paths(PathSelectors.any())
-            .build();
+                .apiInfo(apiInfo())
+                .select()
+                .apis(RequestHandlerSelectors.basePackage("com.ssafy"))
+                .paths(PathSelectors.any())
+                .build();
     }
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("Calm Wave~")
-            .version("1.0.0")
-            .description("swagger api 입니다.")
-            .build();
+                .title("Calm Wave~")
+                .version("1.0.0")
+                .description("swagger api 입니다.")
+                .build();
     }
 }

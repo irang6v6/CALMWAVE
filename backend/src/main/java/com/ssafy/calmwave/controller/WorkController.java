@@ -40,11 +40,11 @@ public class WorkController {
      */
     @PostMapping("create")
     @ApiOperation(value = "작업 추가", notes = "result:ok")
-    public ResponseEntity<?> createTask(@RequestHeader(value = "AccessToken") String token,@RequestBody WorkRequestDto workRequestDto) {
+    public ResponseEntity<?> createTask(@RequestHeader(value = "AccessToken") String token, @RequestBody WorkRequestDto workRequestDto) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         User user = jwtUtil.getUser(token);
-        Work work = workService.convert(user,workRequestDto);
+        Work work = workService.convert(user, workRequestDto);
         if (work != null) {
             workService.save(work);
             resultMap.put("result", "ok");

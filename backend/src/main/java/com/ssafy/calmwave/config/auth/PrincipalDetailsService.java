@@ -1,4 +1,5 @@
 package com.ssafy.calmwave.config.auth;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import com.ssafy.calmwave.repository.UserRepository;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 public class PrincipalDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
+
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Logger logger = LoggerFactory.getLogger(this.getClass());

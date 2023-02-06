@@ -19,7 +19,7 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-//    public static final int AccessTokenTimeLimit = 30 * 60 * 1000; //배포 시 30분으로 변경 필
+    //    public static final int AccessTokenTimeLimit = 30 * 60 * 1000; //배포 시 30분으로 변경 필
     public static final int AccessTokenTimeLimit = 60000 * 60 * 24 * 14;
     public static final int RefreshTokenTimeLimit = 60000 * 60 * 24 * 7;
 

@@ -53,7 +53,7 @@ public class Work {
 
     @JsonIgnore
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "work_cate_id",nullable = false)
+    @JoinColumn(name = "work_cate_id", nullable = false)
     private WorkCategory workCate;
 
 

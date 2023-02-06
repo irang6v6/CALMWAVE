@@ -48,7 +48,7 @@ public class UserController {
     public ResponseEntity<?> join(@RequestBody User user) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        User findUser =userService.findByUsername(user.getUsername());
+        User findUser = userService.findByUsername(user.getUsername());
         if (findUser == null) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             user.setRole("ROLE_USER");
@@ -114,7 +114,7 @@ public class UserController {
      * @return UserInfoDto
      */
     @GetMapping("user/userinfo")
-    @ApiOperation(value = "사용자 정보 조회", notes = "",response = UserInfoDto.class)
+    @ApiOperation(value = "사용자 정보 조회", notes = "", response = UserInfoDto.class)
     public ResponseEntity<UserInfoDto> getUserInfo(@RequestHeader(value = "AccessToken") String token) {
         Logger logger = LoggerFactory.getLogger(this.getClass());
         logger.info("사용자 정보 조회");
@@ -144,7 +144,7 @@ public class UserController {
 
         userService.invalidateUser(user.getId());
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("result","ok");
+        resultMap.put("result", "ok");
 
         SecurityContextHolder.clearContext();
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(resultMap);
@@ -163,7 +163,7 @@ public class UserController {
         userService.updateUser(userInfoDto);
 
         Map<String, Object> resultMap = new HashMap<>();
-        resultMap.put("result","ok");
+        resultMap.put("result", "ok");
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(resultMap);
     }

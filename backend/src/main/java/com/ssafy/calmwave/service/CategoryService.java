@@ -19,7 +19,7 @@ public class CategoryService {
     private final WorkCategoryRepository categoryRepository;
 
     public WorkCategory findByName(String cateName, User user) {
-        return categoryRepository.findByCateNameAndUser(cateName,user);
+        return categoryRepository.findByCateNameAndUser(cateName, user);
     }
 
     public WorkCategory save(WorkCategory byName) {
@@ -28,7 +28,7 @@ public class CategoryService {
 
     public void deleteById(Long cateId) {
         Optional<WorkCategory> byId = categoryRepository.findById(cateId);
-        if(byId.isPresent()){
+        if (byId.isPresent()) {
             byId.get().setStatus(WorkCategoryStatus.DELETED);
         }
     }

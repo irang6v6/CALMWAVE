@@ -41,7 +41,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
 //        super.doFilterInternal(request, response, chain);
-        
+
         String accessToken = request.getHeader("AccessToken");
 
         //header가 있는지 확인
@@ -81,7 +81,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                         .set("RefreshToken:" + username, refreshToken,
                                 JwtUtil.RefreshTokenTimeLimit, TimeUnit.MILLISECONDS);
 
-                String data = "{\"response\":{\"error\":false,\"AccessToken\":\""+newAccessToken+"\", \"RefreshToken\": \""+refreshToken+"\"}}";
+                String data = "{\"response\":{\"error\":false,\"AccessToken\":\"" + newAccessToken + "\", \"RefreshToken\": \"" + refreshToken + "\"}}";
                 PrintWriter out = response.getWriter();
                 out.print(data);
             } else {

@@ -33,7 +33,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request,
-        HttpServletResponse response) throws AuthenticationException {
+                                                HttpServletResponse response) throws AuthenticationException {
 
         logger.trace("로그인 성공, AccessToken을 발급합니다.");
 
@@ -49,11 +49,11 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         //principalDetailsService에 loadUserByUsername이 실행됨
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-            loginRequestDto.getUsername(), loginRequestDto.getPassword());
+                loginRequestDto.getUsername(), loginRequestDto.getPassword());
         logger.trace(
-            "usernamePasswordAuthenticationToken = " + usernamePasswordAuthenticationToken);
+                "usernamePasswordAuthenticationToken = " + usernamePasswordAuthenticationToken);
         Authentication authentication = authenticationManager.authenticate(
-            usernamePasswordAuthenticationToken);
+                usernamePasswordAuthenticationToken);
 
         return authentication;
     }
@@ -61,25 +61,25 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     //JWT토큰을 만들어서 request요청한 사용자에게 JWT토큰을 response해주면 됨
     @Override
     public void successfulAuthentication(HttpServletRequest request,
-        HttpServletResponse response, FilterChain chain, Authentication authResult)
-        throws IOException, ServletException {
+                                         HttpServletResponse response, FilterChain chain, Authentication authResult)
+            throws IOException, ServletException {
         PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
         logger.info("로그인 성공, AccessToken을 발급합니다.");
 
         String accessToken = JwtUtil.createToken(principalDetails.getUser().getId(),
-            principalDetails.getUsername(), JwtUtil.AccessTokenTimeLimit);
+                principalDetails.getUsername(), JwtUtil.AccessTokenTimeLimit);
         String refreshToken = JwtUtil.createRefreshToken(principalDetails.getUser().getId(),
-            principalDetails.getUsername(), JwtUtil.RefreshTokenTimeLimit);
+                principalDetails.getUsername(), JwtUtil.RefreshTokenTimeLimit);
 
         //redis에 refreshToken저장
         redisTemplate.opsForValue()
-            .set("RefreshToken:" + principalDetails.getUsername(), refreshToken,
-                JwtUtil.RefreshTokenTimeLimit, TimeUnit.MILLISECONDS);
+                .set("RefreshToken:" + principalDetails.getUsername(), refreshToken,
+                        JwtUtil.RefreshTokenTimeLimit, TimeUnit.MILLISECONDS);
 
         Long userId = principalDetails.getUser().getId();
 
         String data = "{\"response\":{\"error\":false,\"AccessToken\":\"" + accessToken
-            + "\", \"RefreshToken\": \"" + refreshToken + "\", \"userId\": \"" + userId + "\"}}";
+                + "\", \"RefreshToken\": \"" + refreshToken + "\", \"userId\": \"" + userId + "\"}}";
         PrintWriter out = response.getWriter();
         out.print(data);
 
@@ -92,8 +92,8 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request,
-        HttpServletResponse response, AuthenticationException failed)
-        throws IOException, ServletException {
+                                              HttpServletResponse response, AuthenticationException failed)
+            throws IOException, ServletException {
         response.sendError(403, "유저를 찾을 수 없습니다.");
     }
 }
