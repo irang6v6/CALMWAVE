@@ -2,6 +2,7 @@ import styles from "./Stress.module.css"
 import React from "react"
 import startbtn from "../../assets/start-btn.png"
 import mypagebtn from "../../assets/mypage-btn.png"
+import { VscTriangleDown } from "react-icons/vsc"
 
 function Stress(props) {
   return (

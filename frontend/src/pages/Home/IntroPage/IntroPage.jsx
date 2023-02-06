@@ -3,6 +3,7 @@ import React from "react"
 import pomodoro from "../../../assets/pomodoro.png"
 import gtd from "../../../assets/GTD.png"
 import timeblock from "../../../assets/timeblock.png"
+import { VscTriangleDown } from "react-icons/vsc"
 
 function IntroPage(props) {
   return (
@@ -55,7 +56,7 @@ function IntroPage(props) {
         </div> */}
       </div>
       <div className={`${styles["go-down"]}`} onClick={props.goNext}>
-        한 칸 아래로!
+      <VscTriangleDown className={`${styles[`go-down-icon`]}`} />
       </div>
     </div>
   )

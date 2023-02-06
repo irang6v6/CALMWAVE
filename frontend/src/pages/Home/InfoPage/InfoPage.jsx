@@ -1,6 +1,7 @@
 import styles from "./InfoPage.module.css"
 import React from "react"
 import doorImg from "../../../assets/door.png"
+import { VscTriangleDown } from "react-icons/vsc"
 
 function InfoPage(props) {
   return (
@@ -15,7 +16,7 @@ function InfoPage(props) {
         </div>
       </div>
         <div className={`${styles["go-down"]}`} onClick={props.goNext}>
-          한 칸 아래로!
+        <VscTriangleDown className={`${styles[`go-down-icon`]}`} />
         </div>
     </div>
   )

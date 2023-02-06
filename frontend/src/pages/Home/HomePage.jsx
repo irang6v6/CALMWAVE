@@ -126,6 +126,14 @@ function HomePage() {
         <TaskManagePage refVal={todoRef} goNext={goPosture} />
         <Posture refVal={postureRef} goNext={goStreching} />
         <Stretching refVal={stretchRef} goNext={goStress} />
+
+        <div className={`${styles["wave-container"]}`}>
+          
+        <NightSky canvasWidth={canvasWidth}
+            canvasHeight={canvasHeight} 
+            background={`rgb(31, 31, 34)`}
+            />
+      </div>
         <Stress refVal={stressRef} goNext={goLast} />
         {/* <LastPage refVal={LastRef} /> */}
         <div className={`${styles["go-up"]}`} onClick={goUp}>
