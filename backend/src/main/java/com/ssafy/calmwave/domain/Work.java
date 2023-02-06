@@ -1,7 +1,10 @@
 package com.ssafy.calmwave.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import net.minidev.json.annotate.JsonIgnore;
 import org.hibernate.annotations.CreationTimestamp;
 import reactor.util.annotation.Nullable;
@@ -10,6 +13,7 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter @Setter
 @Table(name = "work")
 @NoArgsConstructor
 public class Work {
@@ -29,6 +33,7 @@ public class Work {
     private WorkStatus status;
 
     @CreationTimestamp
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @Column(name = "date_created")
     private LocalDateTime dateCreated;
 
@@ -51,85 +56,6 @@ public class Work {
     @JoinColumn(name = "work_cate_id",nullable = false)
     private WorkCategory workCate;
 
-    public int getWorkOrder() {
-        return workOrder;
-    }
-
-    public void setWorkOrder(int workOrder) {
-        this.workOrder = workOrder;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public WorkStatus getStatus() {
-        return status;
-    }
-
-    public void setStatus(WorkStatus status) {
-        this.status = status;
-    }
-
-    public LocalDateTime getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(LocalDateTime dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public LocalDateTime getDateAimed() {
-        return dateAimed;
-    }
-
-    public void setDateAimed(LocalDateTime dateAimed) {
-        this.dateAimed = dateAimed;
-    }
-
-    public LocalDateTime getDateFinished() {
-        return dateFinished;
-    }
-
-    public void setDateFinished(LocalDateTime dateFinished) {
-        this.dateFinished = dateFinished;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public WorkCategory getWorkCate() {
-        return workCate;
-    }
-
-    public void setWorkCate(WorkCategory workCate) {
-        this.workCate = workCate;
-    }
 
     @Builder
     public Work(String title, String description, WorkStatus status, LocalDateTime dateAimed, User user, WorkCategory workCate) {

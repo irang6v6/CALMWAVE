@@ -1,6 +1,12 @@
 package com.ssafy.calmwave.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.NoArgsConstructor;
+
 import java.time.Instant;
+import java.time.LocalDateTime;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -13,6 +19,8 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "work_period")
+@NoArgsConstructor
+@AllArgsConstructor
 public class WorkPeriod {
 
     @Id
@@ -28,11 +36,13 @@ public class WorkPeriod {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy HH:mm:ss")
     @Column(name = "start_time", nullable = false)
-    private Instant startTime;
+    private LocalDateTime startTime;
 
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy HH:mm:ss")
     @Column(name = "end_time", nullable = false)
-    private Instant endTime;
+    private LocalDateTime endTime;
 
     public Long getId() {
         return id;
@@ -58,20 +68,27 @@ public class WorkPeriod {
         this.user = user;
     }
 
-    public Instant getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(Instant startTime) {
-        this.startTime = startTime;
-    }
-
-    public Instant getEndTime() {
+    public LocalDateTime getEndTime() {
         return endTime;
     }
 
-    public void setEndTime(Instant endTime) {
+    public void setEndTime(LocalDateTime endTime) {
         this.endTime = endTime;
     }
 
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    @Builder
+    public WorkPeriod(Work work, User user, LocalDateTime startTime, LocalDateTime endTime) {
+        this.work = work;
+        this.user = user;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
 }

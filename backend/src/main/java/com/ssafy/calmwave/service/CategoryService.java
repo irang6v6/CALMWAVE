@@ -37,6 +37,11 @@ public class CategoryService {
         return categoryRepository.findById(id);
     }
 
+    /**
+     * 유저가 사용중인 카테고리를 사용자 설정 순서로 조회하는 메소드
+     * @param user
+     * @return
+     */
     public List<WorkCategoryDto> findByUserAndStatus(User user) {
         return categoryRepository.findByUserAndStatus(user.getId(), WorkCategoryStatus.VALID);
     }

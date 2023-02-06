@@ -96,8 +96,9 @@ public class CategoryController {
     }
 
     /**
+     * 카테고리 수정
      * @param workCategoryDto
-     * @return ok
+     * @return
      */
     @PostMapping("update/{cateid}")
     @ApiOperation(value = "카테고리 수정", notes = "result:ok")
@@ -121,6 +122,5 @@ public class CategoryController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
-
 
 }

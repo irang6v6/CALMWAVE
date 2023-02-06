@@ -1,11 +1,9 @@
 package com.ssafy.calmwave.service;
 
-import com.ssafy.calmwave.domain.User;
-import com.ssafy.calmwave.domain.Work;
-import com.ssafy.calmwave.domain.WorkCategory;
-import com.ssafy.calmwave.domain.WorkStatus;
+import com.ssafy.calmwave.domain.*;
 import com.ssafy.calmwave.dto.WorkRequestDto;
 import com.ssafy.calmwave.repository.WorkCategoryRepository;
+import com.ssafy.calmwave.repository.WorkPeriodRepository;
 import com.ssafy.calmwave.repository.WorkRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +21,7 @@ public class WorkService {
     private final UserService userService;
     private final CategoryService categoryService;
     private final WorkCategoryRepository workCategoryRepository;
+    private final WorkPeriodRepository workPeriodRepository;
 
     public Work save(Work work) {
         return workRepository.save(work);
@@ -46,5 +45,13 @@ public class WorkService {
 
     public List<Work> getTodo(Long userId) {
         return workRepository.findAllByUserIdAndStatusOrderByWorkOrder(userId, WorkStatus.TODO);
+    }
+
+    public Optional<Work> findById(Long workId) {
+        return workRepository.findById(workId);
+    }
+
+    public void saveWorkPeriod(WorkPeriod workPeriod) {
+        workPeriodRepository.save(workPeriod);
     }
 }
