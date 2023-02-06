@@ -11,8 +11,10 @@ export default function TodoCard({
   description,
   currentColumn,
   time,
+  startWorkingDate,
+  endWorkingDate,
 }) {
-  const [startTime] = useState(Date.now())
+  const [startTime] = useState(startWorkingDate ? startWorkingDate : Date.now())
   const [currentTime, setCurrentTime] = useState(Date.now())
   const [running] = useState(currentColumn === "In Progress")
   const todos = useSelector((state) => state.todos.todos)
@@ -52,7 +54,7 @@ export default function TodoCard({
     }
   }
 
-  const changeTodoState = (currentTodoId, columnName, currentTime) => {
+  const changeTodoState = (currentTodoId, columnName, currentTime, currentStartTime) => {
     const prevState = todos
     dispatch(
       todoActions.changeTodos(
@@ -61,11 +63,13 @@ export default function TodoCard({
             ...e,
             column: e.id === currentTodoId ? columnName : e.column,
             time: e.id === currentTodoId ? currentTime : e.time,
+            startWorkingDate: e.id === currentTodoId ? currentStartTime : e.startWorkingDate,
           }
         })
       )
     )
   }
+
 
   const ref = useRef(null)
   const [, drop] = useDrop({
@@ -118,18 +122,33 @@ export default function TodoCard({
       const dropResult = monitor.getDropResult()
       if (dropResult) {
         if (dropResult.title) {
-          changeTodoState(
-            item.id,
-            dropResult.title,
-            time + currentTime - startTime
-          )
           if (dropResult.title === "In Progress") {
+            const now = Date.now()
+            changeTodoState(
+              item.id,
+              dropResult.title,
+              time + currentTime - startTime,
+              now
+            )
             dispatch(todoActions.setProgress(true))
           } else if (
             item.currentColumn === "In Progress" &&
             dropResult.title !== "In Progress"
           ) {
+            changeTodoState(
+              item.id,
+              dropResult.title,
+              time + currentTime - startTime,
+              0
+            )            
             dispatch(todoActions.setProgress(false))
+          } else {
+            changeTodoState(
+              item.id,
+              dropResult.title,
+              time + currentTime - startTime,
+              0,
+            )
           }
         }
       }

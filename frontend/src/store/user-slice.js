@@ -4,7 +4,10 @@ import axios from "axios"
 const initialState = {
   isLoading: false,
   isError: false,
-  userData: {},
+  userData: {
+    id: 0,
+    nickname: "default",
+  },
 }
 
 const UserSlice = createSlice({

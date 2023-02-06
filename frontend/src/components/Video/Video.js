@@ -1,18 +1,16 @@
+import React, { useState, useEffect } from "react"
+import { useSelector } from "react-redux"
 import { OpenVidu } from "openvidu-browser"
 import axios from "axios"
-import React, { useState } from "react"
 import UserVideoComponent from "./UserVideoComponent"
-import { useEffect } from "react"
 import styles from "./Video.module.css"
 
-const APPLICATION_SERVER_URL =
-  process.env.NODE_ENV === "production" ? "" : "https://i8a105.p.ssafy.io:8443/"
+const OPENVIDU_SERVER_URL = "https://i8a105.p.ssafy.io:8443/"
+const OPENVIDU_SERVER_SECRET = "WAVES"
 
 export default function Video() {
-  const [mySessionId, setMySessionId] = useState("SessionA")
-  // const [myUserName, ] = useState(
-  //   "Participant" + Math.floor(Math.random() * 100)
-  // )
+  const user = useSelector((state) => state.user.userData)
+  const [mySessionId, setMySessionId] = useState(`Session${user.id}`)
   const [session, setSession] = useState(undefined)
   const [publisher, setPublisher] = useState(undefined)
   /* eslint-disable */
@@ -40,21 +38,19 @@ export default function Video() {
 
   // 세션에 참여하는 함수
   const joinSession = () => {
-
     const newOV = new OpenVidu()
     newOV.enableProdMode()
     const mySession = newOV.initSession()
 
     setOV(newOV)
     setSession(mySession)
-
     const connection = () => {
       // subscribers 관련 내용 삭제
 
       // 토큰 가져오기 (수정 예정)
       getToken().then((token) => {
         mySession
-          .connect(token, { clientData: "Participant 77" })
+          .connect(token, { clientData: `${user.nickname}` })
           .then(async () => {
             // 화면 가져오기
             newOV
@@ -66,8 +62,7 @@ export default function Video() {
                 frameRate: 30, // The frame rate of your video
               })
               .then((mediaStream) => {
-
-                let newPublisher = newOV.initPublisher("Participant 77", {
+                let newPublisher = newOV.initPublisher(`${user.nickname}`, {
                   audioSource: undefined,
                   publishAudio: false, // Whether you want to start publishing with your audio unmuted or not
                   publishVideo: true, // Whether you want to start publishing with your video enabled or not
@@ -99,30 +94,43 @@ export default function Video() {
     // 데이터 비우기
     setOV(null)
     setSession(undefined)
-    setMySessionId("SessionA")
+    setMySessionId("Session")
     setPublisher(undefined)
   }
 
   const createSession = async (sessionId) => {
     const response = await axios.post(
-      APPLICATION_SERVER_URL + "api/sessions",
+      OPENVIDU_SERVER_URL + "openvidu/api/sessions",
       { customSessionId: sessionId },
       {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          Authorization: `Basic ${btoa(
+            `OPENVIDUAPP:${OPENVIDU_SERVER_SECRET}`
+          )}`,
+          "Content-Type": "application/json",
+        },
       }
     )
-    return response.data // The sessionId
+    return response.data.sessionId // The sessionId
   }
 
   const createToken = async (sessionId) => {
     const response = await axios.post(
-      APPLICATION_SERVER_URL + "api/sessions/" + sessionId + "/connections",
+      OPENVIDU_SERVER_URL +
+        "openvidu/api/sessions/" +
+        sessionId +
+        "/connection",
       {},
       {
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          Authorization: `Basic ${btoa(
+            `OPENVIDUAPP:${OPENVIDU_SERVER_SECRET}`
+          )}`,
+          "Content-Type": "application/json",
+        },
       }
     )
-    return response.data // The token
+    return response.data.token // The token
   }
 
   // 카메라 변경 함수

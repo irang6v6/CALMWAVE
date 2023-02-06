@@ -1,5 +1,5 @@
-import { useRef } from "react"
-import { useSelector } from "react-redux"
+import { useEffect, useRef } from "react"
+import { useDispatch, useSelector } from "react-redux"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
 import styles from "./RoomPage.module.css"
@@ -9,11 +9,21 @@ import TodoCard from "../../components/UI/TodoCard"
 import Video from "../../components/Video/Video"
 import NightSky from "../../components/Canvas/NightSky/NightSky"
 import { useCustomWidthHeight } from "../../hooks/custom/useCustomWidthHeight"
+import { todoActions } from "../../store/todos-slice"
 
 export const RoomPage = () => {
   const todos = useSelector((state) => state.todos.todos)
+  const dispatch = useDispatch()
   const doorRef = useRef(null)
   const { width, height } = useCustomWidthHeight(doorRef)
+
+  useEffect(() => {
+    dispatch(todoActions.recallTodos())
+  }, [dispatch])
+
+  useEffect(() => {
+    window.localStorage.setItem("todo", JSON.stringify(todos))
+  }, [todos])
 
   const alignTodosInColumn = (columnName) => {
     return todos
@@ -27,6 +37,8 @@ export const RoomPage = () => {
           description={todo.description}
           index={index}
           time={todo.time}
+          startWorkingDate={todo.startWorkingDate}
+          endWorkingDate={todo.endWorkingDate}
         />
       ))
   }
@@ -38,17 +50,17 @@ export const RoomPage = () => {
       </div>
       <div ref={doorRef} className={`${styles["todobox-container"]}`}>
         <DndProvider backend={HTML5Backend}>
+          <TodoColumn title="To do" className={`bg-cw-indigo-7`}>
+            {alignTodosInColumn("To do")}
+          </TodoColumn>
           <div className={`${styles["cam-todo-container"]}`}>
             <div className={`${styles[`cam-container`]}`}>
               <Video />
             </div>
-            <TodoColumn title="To do" className={`bg-cw-indigo-7`}>
-              {alignTodosInColumn("To do")}
+            <TodoColumn title="In Progress" className={`bg-cw-yellow-5`}>
+              {alignTodosInColumn("In Progress")}
             </TodoColumn>
           </div>
-          <TodoColumn title="In Progress" className={`bg-cw-yellow-5`}>
-            {alignTodosInColumn("In Progress")}
-          </TodoColumn>
           <TodoColumn title="Done" className={`bg-wb-mint-4`}>
             {alignTodosInColumn("Done")}
           </TodoColumn>

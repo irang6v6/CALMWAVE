@@ -56,6 +56,14 @@ const selectedTaskSlice = createSlice({
         return stask
       })
     },
+    recallSelectedTaskList(state, action) {
+      const localData = JSON.parse(window.localStorage.getItem("todo"))
+      if (localData) {
+        state.selectedTaskList = localData
+      } else {
+        state.selectedTaskList = []
+      }
+    }
   },
 })
 
