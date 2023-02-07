@@ -6,8 +6,11 @@ import LoginLogo from "./LoginLogo"
 import { useNavigate } from "react-router-dom"
 // import axios from "axios"
 import useApi from "../../hooks/http/use-api"
+import { useDispatch } from "react-redux"
+import { AxiosGetUser } from "../../store/user-slice"
 
 function SignPage({ pageRef }) {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [loginLoading, loginError, loginRequest] = useApi()
   const [signupLoading, signupError, signupRequest] = useApi()
@@ -49,8 +52,7 @@ function SignPage({ pageRef }) {
       },
       function (res) {
         if (res) {
-          console.log(res)
-          console.log(typeof res)
+          dispatch(AxiosGetUser())
           navigate("/")
         } else {
           console.log("ㅎㅇ")

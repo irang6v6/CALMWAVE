@@ -6,7 +6,7 @@
   z-index: 80;
 
   font-size: 1.9rem;
-  color: rgba(100, 100, 100, 1);
+  color: rgba(222, 222, 222, 1);
 
   cursor: pointer;
   text-decoration: none;
@@ -63,7 +63,7 @@
 
   text-decoration: none;
   /* background-color: rgba(0, 0, 0, 0.5); */
-  color: rgba(100, 100, 100, 1);
+  color: rgba(222, 222, 222, 1);
 }
 .nav-icon-play.play-open {
   opacity: 1;
@@ -90,7 +90,7 @@
 
   text-decoration: none;
   /* background-color: rgba(0, 0, 0, 0.5); */
-  color: rgba(100, 100, 100, 1);
+  color: rgba(222, 222, 222, 1);
 }
 .nav-icon-door.door-open {
   opacity: 1;
@@ -117,7 +117,7 @@
 
   text-decoration: none;
   /* background-color: rgba(0, 0, 0, 0.5); */
-  color: rgba(100, 100, 100, 1);
+  color: rgba(222, 222, 222, 1);
 }
 .nav-icon-profile.profile-open {
   opacity: 1;
@@ -144,7 +144,7 @@
 
   text-decoration: none;
   /* background-color: rgba(0, 0, 0, 0.5); */
-  color: rgba(100, 100, 100, 1);
+  color: rgba(222, 222, 222, 1);
 }
 .nav-icon-logout.logout-open {
   opacity: 1;
@@ -168,7 +168,7 @@
 
   text-decoration: none;
   /* background-color: rgba(0, 0, 0, 0.5); */
-  color: rgba(100, 100, 100, 1);
+  color: rgba(222, 222, 222, 1);
   cursor: pointer;
 }
 
@@ -189,6 +189,6 @@
 
   text-decoration: none;
   /* background-color: rgba(0, 0, 0, 0.5); */
-  color: rgba(100, 100, 100, 1);
+  color: rgba(222, 222, 222, 1);
   cursor: pointer;
 }

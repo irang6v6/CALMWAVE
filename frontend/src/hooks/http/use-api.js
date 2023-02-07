@@ -24,6 +24,7 @@ const useApi = function () {
       setIsLoading(true)
       await axios(requestData)
         .then((res) => {
+          console.log(res)
           if (res?.data?.response?.AccessToken) {
             dispatch(setAccess(`Bearer ` + res.data.response.AccessToken))
           }

@@ -8,14 +8,19 @@ import {
   IoPersonAdd,
 } from "react-icons/io5"
 import { AiTwotoneEdit } from "react-icons/ai"
-import { useSelector } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { useState } from "react"
+import { AxiosLogout } from "../../store/user-slice"
 
 function NavIcon() {
-  const isLogin = useSelector((state) => state.user.id)
+  const dispatch = useDispatch()
+  const isLogin = useSelector((state) => state.user.userData.id)
   const [openMenu, setOpenMenu] = useState(false)
   const openMenuHandler = function () {
     setOpenMenu((val) => !val)
+  }
+  const logout = function () {
+    dispatch(AxiosLogout())
   }
   return (
     <>
@@ -65,6 +70,7 @@ function NavIcon() {
                   ? `${styles[`nav-icon-logout`]} ${styles[`logout-open`]}`
                   : `${styles[`nav-icon-logout`]}`
               }
+              onClick={logout}
             >
               <div className={`${styles[`icon-description`]}`}>로그아웃</div>
               <IoLogOut className={`${styles[`nav-icon-sizing`]}`} />

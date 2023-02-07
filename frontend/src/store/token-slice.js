@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
+import { userActions } from "./user-slice"
 
 const initialState = {
   Access: localStorage.getItem("Access") || "",
@@ -15,6 +16,10 @@ const tokenSlice = createSlice({
     },
     changeRefresh(state, action) {
       state.Refresh = action.payload || localStorage.getItem("Refresh")
+    },
+    resetTokens(state, action) {
+      state.Access = ""
+      state.Refresh = ""
     },
   },
 })
@@ -34,6 +39,14 @@ export const setRefresh = function (ref) {
     localStorage.setItem("Refresh", ref)
     axios.defaults.headers.common["RefreshToken"] =
       ref || localStorage.getItem("Refresh")
+  }
+}
+
+export const LOGOUTandRESETLOCALSTORAGE = function () {
+  return function (dispatch) {
+    dispatch(tokenActions.resetTokens())
+    dispatch(userActions.resetUserData())
+    localStorage.clear()
   }
 }
 
