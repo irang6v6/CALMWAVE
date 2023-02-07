@@ -41,8 +41,6 @@ function SignPage({ pageRef }) {
     loginRequest(
       {
         method: "post",
-        // baseURL: "http://localhost:8080",
-        // baseURL: "https://i8a105.p.ssafy.io/api",
         url: "/login",
         data: {
           username: email,
@@ -69,8 +67,6 @@ function SignPage({ pageRef }) {
     signupRequest(
       {
         method: "post",
-        // baseURL: "http://localhost:8080",
-        // baseURL: "https://i8a105.p.ssafy.io/api",
         url: "/v1/account/join",
         data: {
           username: email,

@@ -40,13 +40,7 @@ function HomePage() {
       if (isInitial) {
         setIsInitial(() => false)
       }
-      dispatch(
-        AxiosGetCategory({
-          method: "get",
-          // baseURL: "http://localhost:8080",
-          url: "/v1/category/list", // 주소 요청해서 보내면 가져옴.
-        })
-      )
+      dispatch(AxiosGetCategory())
     },
     [dispatch, isInitial]
   )

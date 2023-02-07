@@ -4,42 +4,58 @@ import { useInput } from "../../../hooks/custom/useInput"
 import { useEffect } from "react"
 import { SpinnerDots } from "../Spinner"
 import { useDispatch, useSelector } from "react-redux"
-import { submitModal } from "../../../store/door-store/modal-slice"
+// import { submitModal } from "../../../store/door-store/modal-slice"
+import axios from "axios"
+import {
+  // categoryActions,
+  AxiosGetCategory,
+} from "../../../store/category-slice"
+import { closeModal } from "../../../store/door-store/modal-slice"
 
-function CategoryForm() {
+function CategoryForm({ isCreate }) {
   const dispatch = useDispatch()
   const { formData, isLoading } = useSelector((state) => state.modal)
   const [titleRef] = [useRef(null)]
   const [titleInput, titleChangeHandler, titleSetTrigger] = useInput(titleRef)
 
-  const submitHandler = function (event) {
+  const submitHandler = async function (event) {
     event.preventDefault()
-    let requestData
-    console.log(formData)
-    if (formData) {
-      requestData = {
-        method: "post",
-        url: `/v1/category/update/${formData.id}`,
-        data: {
-          cateColor: ``,
-          cateIcon: ``,
-          cateName: `${titleInput}`,
-          cateOrder: 0,
-        },
-      }
-    } else {
-      requestData = {
+    if (isCreate) {
+      axios({
         method: "post",
         url: `/v1/category/create`,
         data: {
-          cateColor: ``,
-          cateIcon: ``,
           cateName: `${titleInput}`,
-          cateOrder: 0,
+          cateColor: 0,
+          cateIcon: 0,
+          // cateOrder: 0,
         },
-      }
+      })
+        .then((res) => {
+          dispatch(AxiosGetCategory())
+        })
+        .then((res) => {
+          dispatch(closeModal())
+        })
+        .catch((err) => {
+          console.log(err, "<<<<<<<<<<<<")
+        })
+    } else {
+      axios({
+        method: "post",
+        url: `/v1/category/update`,
+        data: {
+          cateColor: 0,
+          cateIcon: 0,
+          cateName: `${titleInput}`,
+          cateId: formData.id,
+          // cateOrder: 0,
+        },
+      }).then((res) => {
+        dispatch(AxiosGetCategory())
+      })
     }
-    dispatch(submitModal(requestData))
+    // dispatch(submitModal())
   }
 
   useEffect(

@@ -125,7 +125,7 @@ function CategoryCard({ category, idx }) {
       onMouseLeave={togglehover}
     >
       {/* 카드 헤더에 onSetting이랑 onDelete 넣어줘야 함. */}
-      <CardHeader data={category} cardType={false} />
+      <CardHeader data={category} cardType={cardType} />
       <CardBody data={category} />
       <CardFooter
         data={category}
