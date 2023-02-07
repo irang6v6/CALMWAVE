@@ -1,5 +1,6 @@
 import styles from "./UserInfo.module.css"
 import MyCalendar from "../../../components/Calendar/MyCalendar"
+import CalendarInfo from "../../../components/Calendar/CalendarInfo"
 
 function UserInfo() {
   return (
@@ -15,6 +16,7 @@ function UserInfo() {
       <div className={`${styles["info-Box"]}`}>
         <h3> 어쩌구 저쩌궁 </h3>
         <MyCalendar/>
+        <CalendarInfo/>
       </div>
     </div>
   )
