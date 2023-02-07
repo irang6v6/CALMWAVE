@@ -125,7 +125,7 @@ public class CategoryController {
      * @param workCategoryDto
      * @return "ok"
      */
-    @PostMapping("update/{cateid}")
+    @PostMapping("update")
     @ApiOperation(value = "카테고리 수정", notes = "result:ok")
     public ResponseEntity<?> join(@RequestHeader(value = "AccessToken") String token, @RequestBody WorkCategoryDto workCategoryDto) {
         Map<String, Object> resultMap = new HashMap<>();
