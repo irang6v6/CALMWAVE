@@ -8,7 +8,7 @@ const initialState = {
       id: 1,
       categoryId: 1,
       createdDate: "2023-01-30",
-      finishedDate: "",
+      finishedDate: "2023-02-15",
       title: "React",
       description: "리액트 강의 듣기",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -23,7 +23,7 @@ const initialState = {
       id: 2,
       categoryId: 1,
       createdDate: "2023-01-30",
-      finishedDate: "",
+      finishedDate: "2023-02-15",
       title: "Redux toolkit",
       description: "리덕스 툴킷이 뭔가요",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -38,7 +38,7 @@ const initialState = {
       id: 3,
       categoryId: 1,
       createdDate: "2023-01-30",
-      finishedDate: "",
+      finishedDate: "2023-02-15",
       title: "Custom Hook",
       description: "커스텀 후크 주세요",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -53,7 +53,7 @@ const initialState = {
       id: 4,
       categoryId: 2,
       createdDate: "2023-01-30",
-      finishedDate: "",
+      finishedDate: "2023-02-15",
       title: "BFS / DFS",
       description: "또FS 또FS",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -68,7 +68,7 @@ const initialState = {
       id: 5,
       categoryId: 2,
       createdDate: "2023-01-30",
-      finishedDate: "",
+      finishedDate: "2023-02-15",
       title: "다익스트라",
       description: "라트스익다",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -83,7 +83,7 @@ const initialState = {
       id: 6,
       categoryId: 3,
       createdDate: "2023-01-30",
-      finishedDate: "",
+      finishedDate: "2023-02-15",
       title: "컨설턴트님께 이메일 보내기",
       description: "이거 저거 물어보기",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -98,7 +98,7 @@ const initialState = {
       id: 7,
       categoryId: 3,
       createdDate: "2023-01-30",
-      finishedDate: "",
+      finishedDate: "2023-02-15",
       title: "프로님께 MM 보내기",
       description: "싸탈하고 싶습니다",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -113,7 +113,7 @@ const initialState = {
       id: 8,
       categoryId: 3,
       createdDate: "2023-01-30",
-      finishedDate: "",
+      finishedDate: "2023-02-15",
       title: "코치님께 이메일 보내기",
       description: "좋아합니다 프로젝트 이번엔 진짜라구요",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -128,7 +128,7 @@ const initialState = {
       id: 9,
       categoryId: 3,
       createdDate: "2023-01-30",
-      finishedDate: "",
+      finishedDate: "2023-02-15",
       title: "헤어질 결심 보기",
       description: "진짜로 보고싶습니다",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -143,7 +143,7 @@ const initialState = {
       id: 10,
       categoryId: 1,
       createdDate: "2023-02-03",
-      finishedDate: "2023-02-03",
+      finishedDate: "2023-02-20",
       title: "리액트 공부",
       description: "설명 설명 444444444444444444444444444444",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -158,7 +158,7 @@ const initialState = {
       id: 11,
       categoryId: 1,
       createdDate: "2023-02-03",
-      finishedDate: "2023-02-03",
+      finishedDate: "2023-02-15",
       title: "알고리즘 문제풀이",
       description: "설명 설명 444444444444444444444444444444",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -173,7 +173,7 @@ const initialState = {
       id: 12,
       categoryId: 1,
       createdDate: "2023-02-03",
-      finishedDate: "2023-02-03",
+      finishedDate: "2023-02-10",
       title: "CS 스터디",
       description: "설명 설명 444444444444444444444444444444",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값

@@ -58,9 +58,14 @@
 .text-box {
   width: 100%;
   border: 5px solid #C6E3FF;
+  background: rgba(168, 218, 255, 0.8);
   border-radius: 30px;
   /* border: 1px solid #000; */
   text-align: center;
+  animation-name: tongtong;
+  animation-duration: 5s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
 }
 
 .slogun-kr {
@@ -68,7 +73,7 @@
   font-weight: 900;
   margin: 10% 0px 20px 0px;
   display: block;
-  color: #C6E3FF;
+  color: #001930;
 }
 
 .slogun-en {
@@ -76,7 +81,7 @@
   font-weight: 600;
   margin: 5px 10px 20px 10px;
   display: block;
-  color: #C6E3FF;
+  color: #001930;
 }
 
 /* Button */

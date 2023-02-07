@@ -7,7 +7,7 @@ function NightSky({ canvasWidth, canvasHeight, background }) {
     const gradient = ctx.createLinearGradient(
       0,
       0,
-      canvasWidth * 0.1,
+      canvasWidth * 0.0,
       canvasHeight
     )
     gradient.addColorStop(0, `#001930`)

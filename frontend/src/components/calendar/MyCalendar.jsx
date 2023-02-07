@@ -4,6 +4,7 @@ import styles from "./MyCalendar.css"
 import React, { useState } from "react"
 import moment from "moment"
 import { useSelector } from "react-redux"
+import CalendarInfo from "./CalendarInfo"
 
 export default function MyCalendar() {
   const [date, setDate] = useState(new Date())
@@ -16,16 +17,29 @@ export default function MyCalendar() {
   if (daysRemaining === 0) {
     dDayLabel += "-Day";
   } else if (daysRemaining <= 0) {
-    dDayLabel += `+${-daysRemaining}`;
+    dDayLabel += `-${-daysRemaining}`;
   } else {
-    dDayLabel += `-${daysRemaining}`;
+    dDayLabel += `+${daysRemaining}`;
   }
 
-  const selectDay = (selectedDate) => {
-    return todolist
+  const setCalendar = (selectedDate) => {
+    console.log(selectedDate)
+    return  todolist
       .filter((todo) => todo.createdDate === selectedDate)
-      .map((todo, index) => <div key={todo.id}>{todo.title}</div>)
+      .map((todo, index) => (
+        <CalendarInfo
+          key={todo.id}
+          todo={todo}
+          />
+      ))
+    
+    // return todolist
+    //   .filter((todo) => todo.createdDate === selectedDate)
+    //   .map((todo, index) =>
+    //   <div key={todo.id}>{todo.title}<br/>{todo.finishedDate}</div>
+    //   )
   }
+
 
   return (
     <div className="MyCalendar">
@@ -43,25 +57,26 @@ export default function MyCalendar() {
           showNeighboringMonth={false}
           // 달력에 '일' 빼는 코드
           formatDay={(locale, date) =>
-            date.toLocaleString("en", { day: "numeric" })
+            // date.toLocaleString("en", { day: "numeric" })
+            moment(date).format("DD")
           }
-        
-        tileClassName={({ date }) => {
-        // 토요일: 파란색, 일요일: 빨간색
-        if (moment(date).format("LLLL").split(",")[0] === "Saturday") {
-          return "highlight-saturday"
-        } else if (moment(date).format("LLLL").split(",")[0] === "Sunday") {
-          console.log(todolist)
-          return "highlight-sunday"
-        }}}
-      />
+
+          tileClassName={({ date }) => {
+          // 토요일: 파란색, 일요일: 빨간색
+          if (moment(date).format("LLLL").split(",")[0] === "Saturday") {
+            return "highlight-saturday"
+          } else if (moment(date).format("LLLL").split(",")[0] === "Sunday") {
+            console.log(todolist)
+            return "highlight-sunday"
+          }}}
+        />
+
         <div className="select-date-wrap">
           <div className="select-date">
             {moment(date).format("YYYY년 MM월 DD일")}
           </div>
-
           <div className="select-todolist">
-            {selectDay(moment(date).format("YYYY-MM-DD"))}
+            {setCalendar(moment(date).format("YYYY-MM-DD"))}
             <br />
           {dDayLabel}
           </div>
