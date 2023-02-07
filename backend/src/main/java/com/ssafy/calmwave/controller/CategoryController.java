@@ -81,18 +81,19 @@ public class CategoryController {
 
     /**
      * 카테고리 삭제
-     * @param cateId
+     * @param
      * @return "ok"
      */
-    @GetMapping("delete/{cateid}")
+    @PostMapping("delete")
     @ApiOperation(value = "카테고리 삭제", notes = "result:ok")
-    public ResponseEntity<?> deleteCategory(@PathVariable("cateid") Long cateId, @RequestHeader(value = "AccessToken") String token) {
+        public ResponseEntity<?> deleteCategory(@RequestBody Map<String, Long> body, @RequestHeader(value = "AccessToken") String token) {
+        long categoryId = body.get("cateId");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
-        Optional<WorkCategory> byId = categoryService.findById(cateId);
+        Optional<WorkCategory> byId = categoryService.findById(categoryId);
         //카테고리의 주인이 맞는지 확인
         if (byId.isPresent() && categoryService.checkValid(byId,token)) {
-            categoryService.deleteById(cateId);
+            categoryService.deleteById(categoryId);
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
         } else {
