@@ -36,7 +36,7 @@ public class CategoryController {
      * @return
      */
     @PostMapping("create")
-    @ApiOperation(value = "카테고리 추가", notes = "result:ok, cateName,cateColor,cateIcon만 보내면 됨")
+    @ApiOperation(value = "카테고리 추가", notes = "result:ok")
     public ResponseEntity<?> create(@RequestHeader(value = "AccessToken") String token, @RequestBody WorkCategoryDto categoryRequestDto) {
         Map<String, Object> resultMap = new HashMap<>();
         User user = jwtUtil.getUser(token);

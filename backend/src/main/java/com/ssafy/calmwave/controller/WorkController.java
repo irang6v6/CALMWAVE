@@ -1,10 +1,7 @@
 package com.ssafy.calmwave.controller;
 
 import com.ssafy.calmwave.config.jwt.JwtUtil;
-import com.ssafy.calmwave.domain.User;
-import com.ssafy.calmwave.domain.Work;
-import com.ssafy.calmwave.domain.WorkCategory;
-import com.ssafy.calmwave.domain.WorkPeriod;
+import com.ssafy.calmwave.domain.*;
 import com.ssafy.calmwave.dto.WorkCategoryDto;
 import com.ssafy.calmwave.dto.WorkPeriodRequestDto;
 import com.ssafy.calmwave.dto.WorkRequestDto;
@@ -39,6 +36,7 @@ public class WorkController {
 
     /**
      * 업무 추가 (Token으로 유저를 식별한다)
+     *
      * @param workRequestDto
      * @return "ok" or "failed"
      */
@@ -62,6 +60,7 @@ public class WorkController {
 
     /**
      * User별 Todo를 Order순으로 모두 조회
+     *
      * @param token
      * @return List<WorkResponseDto>
      */
@@ -76,6 +75,7 @@ public class WorkController {
 
     /**
      * work 순서 변경
+     *
      * @param workIDs
      * @return "ok"
      */
@@ -94,6 +94,7 @@ public class WorkController {
 
     /**
      * 연속 업무 시간을 저장
+     *
      * @param token
      * @param workPeriodRequestDto
      * @return Http.status
@@ -107,7 +108,7 @@ public class WorkController {
         if (optionalWork.isPresent()) {
             Work work = optionalWork.get();
             //데이터 요청
-            WorkPeriod workPeriod= WorkPeriod.builder()
+            WorkPeriod workPeriod = WorkPeriod.builder()
                     .user(jwtUtil.getUser(token))
                     .work(work)
                     .startTime(workPeriodRequestDto.getStartTime())
@@ -126,6 +127,7 @@ public class WorkController {
 
     /**
      * work status를 TODO or DONE 으로 변경
+     *
      * @param workRequestDto
      * @return "ok"
      */
@@ -138,6 +140,11 @@ public class WorkController {
         if (optionalWork.isPresent()) {
             Work work = optionalWork.get();
             work.setStatus(workRequestDto.getWorkStatus());
+            if (work.getStatus() == WorkStatus.DONE) { //종료 시간 업데이트
+                work.setDateFinished(LocalDateTime.now());
+            }else{
+                work.setDateFinished(null);
+            }
             workRepository.save(work);
             //데이터 요청 성공
             resultMap.put("result", "ok");
