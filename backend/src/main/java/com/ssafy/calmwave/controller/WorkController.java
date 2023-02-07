@@ -79,7 +79,7 @@ public class WorkController {
      * @param workIDs
      * @return "ok"
      */
-    @PostMapping("/order")
+    @PostMapping("order")
     public ResponseEntity<?> updateComponentOrder(@RequestBody List<Long> workIDs) {
         List<Work> works = workRepository.findAllById(workIDs);
         for (int i = 0; i < works.size(); i++) {
@@ -119,6 +119,32 @@ public class WorkController {
         } else {
             //요청 실패
             resultMap.put("result", "해당 업무가 존재하지 않습니다.");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+
+    /**
+     * work status를 TODO or DONE 으로 변경
+     * @param workRequestDto
+     * @return "ok"
+     */
+    @PostMapping("status")
+    @ApiOperation(value = "work status를 변경한다.", notes = "")
+    public ResponseEntity<?> join(@RequestBody WorkRequestDto workRequestDto) {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        Optional<Work> optionalWork = workService.findById(workRequestDto.getWorkId());
+        if (optionalWork.isPresent()) {
+            Work work = optionalWork.get();
+            work.setStatus(workRequestDto.getWorkStatus());
+            workRepository.save(work);
+            //데이터 요청 성공
+            resultMap.put("result", "ok");
+            status = HttpStatus.ACCEPTED;
+        } else {
+            //요청 실패
+            resultMap.put("result", "err");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);

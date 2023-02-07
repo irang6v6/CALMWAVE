@@ -40,8 +40,28 @@ public class CategoryController {
     public ResponseEntity<?> create(@RequestHeader(value = "AccessToken") String token, @RequestBody WorkCategoryDto categoryRequestDto) {
         Map<String, Object> resultMap = new HashMap<>();
         User user = jwtUtil.getUser(token);
-        WorkCategory byName = categoryService.findByName(categoryRequestDto.getCateName(), user);
-        HttpStatus status = categoryService.create(byName, user, categoryRequestDto);
+        WorkCategory workCategory = categoryService.findByName(categoryRequestDto.getCateName(), user);
+        HttpStatus status;
+        if (workCategory == null) { //처음 만드는 카테고리일때
+            WorkCategory cate = WorkCategory.builder()
+                    .cateName(categoryRequestDto.getCateName())
+                    .cateColor(categoryRequestDto.getCateColor())
+                    .cateIcon(categoryRequestDto.getCateIcon())
+                    .workCategoryStatus(WorkCategoryStatus.VALID)
+                    .user(user)
+                    .build();
+            workCategoryRepository.save(cate);
+            resultMap.put("result", "ok");
+            status = HttpStatus.ACCEPTED;
+        } else if (workCategory != null && workCategory.getStatus() == WorkCategoryStatus.DELETED) {//예전에 만들었던 카테고리일때
+            workCategory.setStatus(WorkCategoryStatus.VALID);
+            workCategoryRepository.save(workCategory);
+            resultMap.put("result", "ok");
+            status = HttpStatus.ACCEPTED;
+        } else {
+            resultMap.put("result", "이미 사용중인 카테고리입니다!");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
