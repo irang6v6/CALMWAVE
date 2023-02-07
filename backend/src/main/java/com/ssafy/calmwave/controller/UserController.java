@@ -1,9 +1,12 @@
 package com.ssafy.calmwave.controller;
 
 import com.ssafy.calmwave.config.jwt.JwtUtil;
+import com.ssafy.calmwave.domain.WorkCategory;
+import com.ssafy.calmwave.domain.WorkCategoryStatus;
 import com.ssafy.calmwave.repository.UserRepository;
 import com.ssafy.calmwave.dto.UserInfoDto;
 import com.ssafy.calmwave.domain.User;
+import com.ssafy.calmwave.service.CategoryService;
 import com.ssafy.calmwave.service.UserService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,15 +36,15 @@ public class UserController {
 
     private final JwtUtil jwtUtil;
     private final UserService userService;
+    private final CategoryService categoryService;
     private final UserRepository userRepository;
     private final RedisTemplate<String, String> redisTemplate;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     /**
-     * 회원가입 진행
-     *
+     * 회원가입
      * @param user
-     * @return
+     * @return "ok" or "이미 회원에 등록된 이메일 주소입니다."
      */
     @PostMapping("account/join")
     @ApiOperation(value = "회원가입 진행", notes = "")
@@ -55,6 +58,10 @@ public class UserController {
             user.setDeleted((Byte.parseByte("0")));
             user.setStretchingIntervalMin(50);
             userRepository.save(user);
+
+            //기본 카테고리 생성
+            categoryService.save(new WorkCategory("기본",user,0,0, WorkCategoryStatus.VALID));
+
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
         } else {
@@ -65,6 +72,7 @@ public class UserController {
     }
 
     /**
+     * 이메일 중복검사
      * @param email
      * @return true/false 통과(DB에 중복된 email이 없음)일때 true
      */
@@ -85,23 +93,24 @@ public class UserController {
     }
 
     /**
-     * @param userid
-     * @return "result":"ok" FRONT에서 store된 Token을 비롯한 UserData 삭제해줘야함
+     * 로그아웃
+     * @param token
+     * @return "result":"ok"
      */
     @ApiOperation(value = "로그아웃", notes = "result:ok")
-    @GetMapping("user/logout/{userid}")
-    public ResponseEntity<Map<String, Object>> removeToken(@PathVariable("userid") Long userid) {
+    @GetMapping("user/logout")
+    public ResponseEntity<Map<String, Object>> removeToken(@RequestHeader(value = "AccessToken") String token) {
         Logger logger = LoggerFactory.getLogger(this.getClass());
         logger.info("로그아웃");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
+        User user = jwtUtil.getUser(token);
         try {
-            Optional<User> user = userRepository.findById(userid);
-            redisTemplate.delete("RefreshToken:" + user.get().getUsername());
+            redisTemplate.delete("RefreshToken:" + user.getUsername());
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
         } catch (Exception e) {
-            resultMap.put("result", e.getMessage());
+            resultMap.put("result", "로그아웃 실패");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
@@ -109,7 +118,6 @@ public class UserController {
 
     /**
      * 회원 정보 조회
-     *
      * @param token
      * @return UserInfoDto
      */
@@ -131,10 +139,9 @@ public class UserController {
 
 
     /**
-     * 회원 탈퇴
-     *
+     * 회원 탈퇴-민감정보를 지우고 invalidate status로 변경
      * @param token
-     * @return
+     * @return "ok"
      */
     @GetMapping("user/withdraw")
     @ApiOperation(value = "회원탈퇴", notes = "result:ok")
@@ -152,17 +159,14 @@ public class UserController {
 
     /**
      * 사용자 설정 변경
-     *
      * @param userInfoDto (Long id,String nickname,String stretchingIntervalMin)
      * @return
      */
     @PostMapping("/user/update")
     @ApiOperation(value = "사용자의 설정 변경", notes = "result:ok")
     public ResponseEntity changeInfo(@RequestBody UserInfoDto userInfoDto) {
-
-        userService.updateUser(userInfoDto);
-
         Map<String, Object> resultMap = new HashMap<>();
+        userService.updateUser(userInfoDto);
         resultMap.put("result", "ok");
 
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(resultMap);

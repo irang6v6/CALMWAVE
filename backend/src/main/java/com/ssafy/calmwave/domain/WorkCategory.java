@@ -13,13 +13,6 @@ import javax.persistence.*;
 @AllArgsConstructor
 public class WorkCategory {
 
-    public WorkCategory(Long id, String cateName, int cateColor, int cateIcon) {
-        this.id = id;
-        this.cateName = cateName;
-        this.cateColor = cateColor;
-        this.cateIcon = cateIcon;
-    }
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "work_cate_id")

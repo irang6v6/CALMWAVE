@@ -67,9 +67,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         logger.info("로그인 성공, AccessToken을 발급합니다.");
 
         String accessToken = JwtUtil.createToken(principalDetails.getUser().getId(),
-                principalDetails.getUsername(), JwtUtil.AccessTokenTimeLimit);
+                principalDetails.getUsername());
         String refreshToken = JwtUtil.createRefreshToken(principalDetails.getUser().getId(),
-                principalDetails.getUsername(), JwtUtil.RefreshTokenTimeLimit);
+                principalDetails.getUsername());
 
         //redis에 refreshToken저장
         redisTemplate.opsForValue()
@@ -82,11 +82,6 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 + "\", \"RefreshToken\": \"" + refreshToken + "\", \"userId\": \"" + userId + "\"}}";
         PrintWriter out = response.getWriter();
         out.print(data);
-
-//        response.getWriter().write("Bearer " + accessToken);
-//        response.getWriter().flush();
-
-//        response.setStatus(200, "ok");
 
     }
 

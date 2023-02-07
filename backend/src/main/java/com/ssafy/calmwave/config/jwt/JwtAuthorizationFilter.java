@@ -59,7 +59,6 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             Logger logger = LoggerFactory.getLogger(JwtUtil.class);
             logger.info("access token is valid");
             username = JWT.require(Algorithm.HMAC512(secret)).build().verify(a_token).getClaim("username").asString();
-            //continue
         } else if (JwtUtil.tokenValidation(r_token)) {
             username = JWT.require(Algorithm.HMAC512(secret)).build().verify(r_token).getClaim("username").asString();
 
@@ -75,7 +74,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             if (refreshToken.equals(request.getHeader("RefreshToken"))) {
                 logger.trace("accessToken 재발급");
                 long id = JWT.require(Algorithm.HMAC512(secret)).build().verify(r_token).getClaim("id").asLong();
-                String newAccessToken = JwtUtil.createToken(id, username, JwtUtil.AccessTokenTimeLimit);
+                String newAccessToken = JwtUtil.createToken(id, username);
 
                 redisTemplate.opsForValue()
                         .set("RefreshToken:" + username, refreshToken,

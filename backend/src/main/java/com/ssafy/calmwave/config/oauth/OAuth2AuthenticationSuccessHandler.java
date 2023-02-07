@@ -65,8 +65,8 @@ public class OAuth2AuthenticationSuccessHandler extends SimpleUrlAuthenticationS
 
         PrincipalDetails principal = (PrincipalDetails) authentication.getPrincipal();
 
-        String accessToken = tokenProvider.createToken(principal.getUser().getId(),principal.getUser().getUsername(),JwtUtil.AccessTokenTimeLimit);
-        String refreshToken = tokenProvider.createRefreshToken(principal.getUser().getId(),principal.getUser().getUsername(),JwtUtil.RefreshTokenTimeLimit);
+        String accessToken = tokenProvider.createToken(principal.getUser().getId(),principal.getUser().getUsername());
+        String refreshToken = tokenProvider.createRefreshToken(principal.getUser().getId(),principal.getUser().getUsername());
 
         return UriComponentsBuilder.fromUriString("https://i8a105.p.ssafy.io/oauth/")
             .queryParam("AccessToken", accessToken)

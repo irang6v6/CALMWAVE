@@ -21,4 +21,5 @@ public interface WorkCategoryRepository extends JpaRepository<WorkCategory, Long
      */
     @Query("select new com.ssafy.calmwave.dto.WorkCategoryDto(c.id,c.cateName,c.cateColor,c.cateIcon,c.cateOrder) from WorkCategory c join c.user u where u.id = :id and c.status =:status order by c.cateOrder")
     List<WorkCategoryDto> findByUserAndStatus(@Param("id") Long id, @Param("status") WorkCategoryStatus status);
+
 }

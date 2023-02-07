@@ -47,7 +47,7 @@ public class JwtUtil {
         }
     }
 
-    public static String createToken(long id, String username, int time) {
+    public static String createToken(long id, String username) {
         Date now = new Date();
         String token = JWT.create()
                 .withSubject(username)
@@ -58,13 +58,12 @@ public class JwtUtil {
         return token;
     }
 
-    public static String createRefreshToken(long id, String username, int time) {
+    public static String createRefreshToken(long id, String username) {
+        Date now = new Date();
         String token = JWT.create()
                 .withSubject(username)
                 .withAudience(username)
-                .withExpiresAt(Date.from(LocalDateTime.now()
-                        .plusMinutes(60 * 24 * 30)
-                        .atZone(ZoneId.systemDefault()).toInstant()))
+                .withExpiresAt(new Date(now.getTime() + AccessTokenTimeLimit))
                 .withClaim("id", id)
                 .withClaim("username", username)
                 .sign(Algorithm.HMAC512(secret));
