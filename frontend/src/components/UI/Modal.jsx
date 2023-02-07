@@ -10,21 +10,14 @@ import DeleteModalForm from "./DeleteModalForm/DeleteModalForm"
 import CategoryForm from "./CategoryForm/CategoryForm"
 import TaskForm from "./TaskFrom/TaskForm"
 
-/**
- *
- * @isOpen `닫힘 열림`
- * @toggleIsOpen `isOpen 토글 핸들러.`
- * @children 무난한 자식들
- * @returns
- */
 function Modal() {
   const dispatch = useDispatch()
-  const { isModal, isTask, isDelete, isLoading, isError } = useSelector(
-    (state) => state.modal
-  )
+  const { isModal, isTask, isDelete, isLoading, isError, formData, isCreate } =
+    useSelector((state) => state.modal)
   const [classes, setClasses] = useState(
     `${styles[`modal-container`]} ${styles[`close`]}`
   )
+  // const [taskCreate]
 
   useEffect(
     function () {
@@ -41,7 +34,7 @@ function Modal() {
   }
 
   return (
-    <div>
+    <>
       {ReactDOM.createPortal(
         <div className={classes}>
           <AiOutlineClose
@@ -53,16 +46,16 @@ function Modal() {
           ) : isError ? (
             <div>에러임</div>
           ) : isDelete ? (
-            <DeleteModalForm />
+            <DeleteModalForm cardType={isTask} cardId={formData?.id} />
           ) : isTask ? (
-            <TaskForm />
+            <TaskForm isCreate={isCreate} />
           ) : (
-            <CategoryForm />
+            <CategoryForm isCreate={isCreate} />
           )}
         </div>,
         document.getElementById("overlay-root")
       )}
-    </div>
+    </>
   )
 }
 

@@ -21,11 +21,16 @@ function CardHeader({ data, cardType, deleteSelectedTaskList }) {
   const dispatch = useDispatch()
   // const { isModal, isTask, isDelete, isLoading, isError, formData } =
   //   useSelector((state) => state.modal)
+  console.log(cardType)
   const openModal = function () {
     dispatch(modalActions.setFormData({ data }))
     if (cardType) {
+      dispatch(modalActions.setIsTask())
+      dispatch(modalActions.setIsUpdate())
       dispatch(openTaskModal())
     } else {
+      dispatch(modalActions.setIsCategory())
+      dispatch(modalActions.setIsUpdate())
       dispatch(openCategoryModal())
     }
   }
@@ -34,9 +39,13 @@ function CardHeader({ data, cardType, deleteSelectedTaskList }) {
       deleteSelectedTaskList()
       return
     } else if (cardType) {
-      dispatch(openCategoryDeleteModal())
-    } else {
+      // dispatch(modalActions.setIsTask())
+      dispatch(modalActions.setFormData({ data }))
       dispatch(openTaskDeleteModal())
+    } else {
+      // dispatch(modalActions.setIsCategory())
+      dispatch(modalActions.setFormData({ data }))
+      dispatch(openCategoryDeleteModal())
     }
   }
   return (

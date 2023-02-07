@@ -12,6 +12,7 @@ const Category = function Category() {
   // hoverEpicId, SelectedEpicId, hoverHandler, selectHandler, mouseOutHandler
   const { categoryList } = useSelector((state) => state.category)
   const newCategory = function () {
+    dispatch(modalActions.setIsCreate())
     dispatch(modalActions.resetFormData())
     dispatch(openCategoryModal())
   }

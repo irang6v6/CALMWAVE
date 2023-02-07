@@ -46,3 +46,35 @@
 /* .door-tab-container:hover {
   transform: scale(105%);
 } */
+
+.create-task {
+  box-sizing: border-box;
+  position: sticky;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 0;
+  top: auto;
+  left: 0;
+  right: 0;
+  text-decoration: none;
+  width: auto;
+  min-height: 17%;
+  background-color: rgba(78, 167, 253, 0.8);
+  color: white;
+  /* padding: 15px; */
+  border-radius: 11px;
+  margin: 5px 8px 0px 8px;
+  transition: 0.4s;
+}
+
+.play-icon {
+  width: auto;
+  height: 100%;
+}
+
+.create-task:hover {
+  transform: scale(102%);
+  background-color: rgba(150, 167, 253, 0.8);
+  color: rgba(180, 22, 70, 0.8);
+}
