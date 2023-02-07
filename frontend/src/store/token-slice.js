@@ -46,7 +46,8 @@ export const LOGOUTandRESETLOCALSTORAGE = function () {
   return function (dispatch) {
     dispatch(tokenActions.resetTokens())
     dispatch(userActions.resetUserData())
-    localStorage.clear()
+    localStorage.removeItem("Access")
+    localStorage.removeItem("Refresh")
   }
 }
 
