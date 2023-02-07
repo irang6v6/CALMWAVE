@@ -81,7 +81,7 @@ function NavIcon() {
           <>
             <NavLink to={`/sign`} className={`${styles[`nav-icon-sign`]}`}>
               <IoPersonAdd className={`${styles[`nav-icon-sign`]}`} />
-              <div className={`${styles[`icon-description`]}`}>회원 가입</div>
+              <div className={`${styles[`icon-description`]}`}>로그인</div>
             </NavLink>
           </>
         )}

@@ -9,7 +9,7 @@ import { useEffect } from "react"
 
 /* eslint-disable */
 function CategoryTaskCard({ task, idx }) {
-  const cardType = "category-task"
+  const cardType = true
   const dispatch = useDispatch()
   const { selectedTaskList } = useSelector((state) => state.doorstask)
   const [toggleHover, toggleSelect, customSelect, classes] = useClasses(
@@ -43,7 +43,7 @@ function CategoryTaskCard({ task, idx }) {
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
     >
-      <CardHeader />
+      <CardHeader data={task} cardType={cardType} />
       <div>{task.description}</div>
       <div>{task.businessHours}</div>
       <CardBody />

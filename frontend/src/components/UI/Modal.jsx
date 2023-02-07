@@ -8,6 +8,7 @@ import { closeModal } from "../../store/door-store/modal-slice"
 import { SpinnerDots } from "./Spinner"
 import DeleteModalForm from "./DeleteModalForm/DeleteModalForm"
 import CategoryForm from "./CategoryForm/CategoryForm"
+import TaskForm from "./TaskFrom/TaskForm"
 
 /**
  *
@@ -53,7 +54,9 @@ function Modal() {
             <div>에러임</div>
           ) : isDelete ? (
             <DeleteModalForm />
-          ) : isTask ? null : (
+          ) : isTask ? (
+            <TaskForm />
+          ) : (
             <CategoryForm />
           )}
         </div>,

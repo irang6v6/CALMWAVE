@@ -25,7 +25,6 @@ export const setAccess = function (acc) {
     localStorage.setItem("Access", acc)
     axios.defaults.headers.common["AccessToken"] =
       acc || localStorage.getItem("Access")
-    console.log(axios.defaults.headers.AccessToken)
   }
 }
 

@@ -1,10 +1,13 @@
 import styles from "./CardHeader.module.css"
 import { AiFillCloseCircle, AiFillEdit } from "react-icons/ai"
 import { memo } from "react"
-import { useSelector, useDispatch } from "react-redux"
+import { useDispatch } from "react-redux" // , useSelector
 import {
   modalActions,
   openCategoryModal,
+  openCategoryDeleteModal,
+  openTaskDeleteModal,
+  openTaskModal,
 } from "../../../store/door-store/modal-slice"
 
 const colors = [
@@ -14,13 +17,27 @@ const colors = [
   `${styles[`card-header-lights-blue`]}`,
 ]
 
-function CardHeader({ data }) {
+function CardHeader({ data, cardType, deleteSelectedTaskList }) {
   const dispatch = useDispatch()
-  const { isModal, isTask, isDelete, isLoading, isError, formData } =
-    useSelector((state) => state.modal)
+  // const { isModal, isTask, isDelete, isLoading, isError, formData } =
+  //   useSelector((state) => state.modal)
   const openModal = function () {
     dispatch(modalActions.setFormData({ data }))
-    dispatch(modalActions.toggleIsModal())
+    if (cardType) {
+      dispatch(openTaskModal())
+    } else {
+      dispatch(openCategoryModal())
+    }
+  }
+  const openDeleteModal = function () {
+    if (deleteSelectedTaskList) {
+      deleteSelectedTaskList()
+      return
+    } else if (cardType) {
+      dispatch(openCategoryDeleteModal())
+    } else {
+      dispatch(openTaskDeleteModal())
+    }
   }
   return (
     <div className={`${styles[`card-header-container`]}`}>
@@ -37,7 +54,7 @@ function CardHeader({ data }) {
         />
         <AiFillCloseCircle
           className={`${styles[`card-header-icon`]}`}
-          onClick={openModal}
+          onClick={openDeleteModal}
         />
       </div>
     </div>

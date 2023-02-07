@@ -75,7 +75,7 @@ export const AxiosGetCategory = function (requestData) {
     axios(requestData)
       .then((res) => {
         // response에 따라서 순회 돌린 값에 isSelected: false 넣어서 넣어준다.
-        dispatch(categoryActions.getCategory({ categotyList: res.data }))
+        dispatch(categoryActions.getCategory({ categoryList: res.data }))
       })
       .catch((err) => {
         console.log(err)

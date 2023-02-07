@@ -25,30 +25,17 @@ const useApi = function () {
       await axios(requestData)
         .then((res) => {
           if (res?.data?.response?.AccessToken) {
-            // localStorage.setItem(
-            //   "Access",
-            //   `Bearer ` + res.data.response.AccessToken.substr(7)
-            // )
-            // axios.defaults.headers.AccessToken =
-            //   `Bearer ` + res.data.response.AccessToken.substr(7)
-            dispatch(
-              setAccess(`Bearer ` + res.data.response.AccessToken.substr(7))
-            )
+            dispatch(setAccess(`Bearer ` + res.data.response.AccessToken))
           }
           if (res?.data?.response?.RefreshToken) {
-            // localStorage.setItem(
-            //   "Refresh",
-            //   `Bearer ` + res.data.response.RefreshToken.substr(7)
-            // )
-            // axios.defaults.headers.RefreshToken =
-            //   `Bearer ` + res.data.response.RefreshToken.substr(7)
-            dispatch(
-              setRefresh(`Bearer ` + res.data.response.RefreshToken.substr(7))
-            )
+            dispatch(setRefresh(`Bearer ` + res.data.response.RefreshToken))
           }
-          saveDataFunction(res)
+          return res
         })
         .then((res) => {
+          saveDataFunction(res)
+        })
+        .then(() => {
           setIsLoading(false)
           setError(false)
         })
