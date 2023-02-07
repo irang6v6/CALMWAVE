@@ -91,7 +91,7 @@ export const closeModal = function () {
     }, 400)
   }
 }
-export const submitModal = function (requestData) {
+export const submitModal = async function (requestData) {
   return async function (dispatch) {
     dispatch(modalActions.toggleIsLoading())
     dispatch(modalActions.setNotError())
