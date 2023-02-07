@@ -23,7 +23,9 @@ export const setAccess = function (acc) {
   return function (dispatch) {
     dispatch(tokenActions.changeAccess(acc))
     localStorage.setItem("Access", acc)
-    axios.defaults.headers.AccessToken = acc || localStorage.getItem("Access")
+    axios.defaults.headers.common["AccessToken"] =
+      acc || localStorage.getItem("Access")
+    console.log(axios.defaults.headers.AccessToken)
   }
 }
 
@@ -31,7 +33,8 @@ export const setRefresh = function (ref) {
   return function (dispatch) {
     dispatch(tokenActions.changeRefresh(ref))
     localStorage.setItem("Refresh", ref)
-    axios.defaults.headers.RefreshToken = ref || localStorage.getItem("Refresh")
+    axios.defaults.headers.common["RefreshToken"] =
+      ref || localStorage.getItem("Refresh")
   }
 }
 

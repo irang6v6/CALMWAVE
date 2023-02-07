@@ -1,10 +1,10 @@
 import axios from "axios"
 import { useState, useCallback } from "react"
-// import { useDispatch } from "react-redux"
+import { useDispatch } from "react-redux"
 import { setAccess, setRefresh } from "../../store/token-slice"
 
 const useApi = function () {
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch()
   const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState(null)
 
@@ -19,40 +19,47 @@ const useApi = function () {
   //   withCredentials: requestData.withCredentials,
   // }
 
-  const axiosRequest = useCallback(async (requestData, saveDataFunction) => {
-    setIsLoading(true)
-    await axios(requestData)
-      .then((res) => {
-        if (res?.data?.response?.AccessToken) {
-          // localStorage.setItem(
-          //   "Access",
-          //   `Bearer ` + res.data.response.AccessToken.substr(7)
-          // )
-          // axios.defaults.headers.AccessToken =
-          //   `Bearer ` + res.data.response.AccessToken.substr(7)
-          setAccess(`Bearer ` + res.data.response.AccessToken.substr(7))
-        }
-        if (res?.data?.response?.RefreshToken) {
-          // localStorage.setItem(
-          //   "Refresh",
-          //   `Bearer ` + res.data.response.RefreshToken.substr(7)
-          // )
-          // axios.defaults.headers.RefreshToken =
-          //   `Bearer ` + res.data.response.RefreshToken.substr(7)
-          setRefresh(`Bearer ` + res.data.response.RefreshToken.substr(7))
-        }
-        saveDataFunction(res)
-      })
-      .then((res) => {
-        setIsLoading(false)
-        setError(false)
-      })
-      .catch((err) => {
-        // saveDataFunction(err) // 에러처리까지 해두었다면
-        setIsLoading(false)
-        setError(true)
-      })
-  }, [])
+  const axiosRequest = useCallback(
+    async (requestData, saveDataFunction) => {
+      setIsLoading(true)
+      await axios(requestData)
+        .then((res) => {
+          if (res?.data?.response?.AccessToken) {
+            // localStorage.setItem(
+            //   "Access",
+            //   `Bearer ` + res.data.response.AccessToken.substr(7)
+            // )
+            // axios.defaults.headers.AccessToken =
+            //   `Bearer ` + res.data.response.AccessToken.substr(7)
+            dispatch(
+              setAccess(`Bearer ` + res.data.response.AccessToken.substr(7))
+            )
+          }
+          if (res?.data?.response?.RefreshToken) {
+            // localStorage.setItem(
+            //   "Refresh",
+            //   `Bearer ` + res.data.response.RefreshToken.substr(7)
+            // )
+            // axios.defaults.headers.RefreshToken =
+            //   `Bearer ` + res.data.response.RefreshToken.substr(7)
+            dispatch(
+              setRefresh(`Bearer ` + res.data.response.RefreshToken.substr(7))
+            )
+          }
+          saveDataFunction(res)
+        })
+        .then((res) => {
+          setIsLoading(false)
+          setError(false)
+        })
+        .catch((err) => {
+          // saveDataFunction(err) // 에러처리까지 해두었다면
+          setIsLoading(false)
+          setError(true)
+        })
+    },
+    [dispatch]
+  )
 
   // const getNewAccessToken = useCallback(
   //   async (requestData, saveDataFunction) => {
