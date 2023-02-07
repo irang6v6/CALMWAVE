@@ -13,7 +13,6 @@ public class WorkRequestDto {
 
     private String title;
     private String description;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime dateAimed;
     private Long workCateId;
 
