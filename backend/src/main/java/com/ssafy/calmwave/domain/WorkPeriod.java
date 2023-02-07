@@ -36,11 +36,9 @@ public class WorkPeriod {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy HH:mm:ss")
     @Column(name = "start_time", nullable = false)
     private LocalDateTime startTime;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "dd-MM-yyyy HH:mm:ss")
     @Column(name = "end_time", nullable = false)
     private LocalDateTime endTime;
 
