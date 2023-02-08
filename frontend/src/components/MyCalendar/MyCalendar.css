@@ -280,6 +280,7 @@
     font-weight: 600;
     font-size: 1.5rem;
     white-space: nowrap;
+    color: white;
   }
 
   .select-todolist{

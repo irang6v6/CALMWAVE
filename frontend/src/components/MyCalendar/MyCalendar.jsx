@@ -10,42 +10,58 @@ export default function MyCalendar() {
   const [date, setDate] = useState(new Date())
   const [activeDate, setActiveDate] = useState(new Date())
 
-  const todolist = useSelector((state) => (state.task.taskList))
+  const todolist = useSelector((state) => state.task.taskList)
 
-  const daysRemaining = moment(date).diff(moment().format("YYYY-MM-DD"), "day");
-  let dDayLabel = "D";
+  // const daysRemaining = moment(date).diff(moment().format("YYYY-MM-DD"), "day");
+  const daysRemaining = moment(date).diff(
+    moment().format("YYYY-MM-DD"),
+    "day"
+  )
+
+  // console.log(moment(date).format("YYYY-MM-DD"))
+
+
+  let dDayLabel = "D"
   if (daysRemaining === 0) {
-    dDayLabel += "-Day";
+    dDayLabel += "-Day"
   } else if (daysRemaining <= 0) {
-    dDayLabel += `-${-daysRemaining}`;
+    dDayLabel += `-${-daysRemaining}`
   } else {
-    dDayLabel += `+${daysRemaining}`;
+    dDayLabel += `+${daysRemaining}`
   }
 
-
+  // const daysRemaining = moment(date).diff(moment(finalDate).format("YYYY-MM-DD"), "day")
 
   const setCalendar = (selectedDate) => {
-    console.log(selectedDate)
-    return  todolist
+    // console.log(selectedDate)
+    return todolist
       .filter((todo) => todo.createdDate === selectedDate)
-      .map((todo, index) => (
-        <CalendarInfo
-          key={todo.id}
-          todo={todo}
-          />
-      ))
+      .map((todo, index) => <CalendarInfo key={todo.id} todo={todo} date={date} />)
 
+    // return todolist
+    //   .filter((todo) => todo.createdDate === selectedDate)
+    //   .map((todo, index) =>
+    //   <div key={todo.id}>{todo.title}<br/>{todo.finishedDate}</div>
+    //   )
+    // }
 
+    // const setCalendar = (selectedDate) => {
+    //   console.log(selectedDate)
+    //   return  todolist
+    //     .filter((todo) => todo.createdDate <= selectedDate <= todo.finishedDate)
+    //     .map((todo, index) => (
+    //       <CalendarInfo
+    //         key={todo.id}
+    //         todo={todo}
+    //         />
+    //     ))
 
-  
-    
     // return todolist
     //   .filter((todo) => todo.createdDate === selectedDate)
     //   .map((todo, index) =>
     //   <div key={todo.id}>{todo.title}<br/>{todo.finishedDate}</div>
     //   )
   }
-
 
   return (
     <div className="MyCalendar">
@@ -66,28 +82,27 @@ export default function MyCalendar() {
             // date.toLocaleString("en", { day: "numeric" })
             moment(date).format("DD")
           }
-
           tileClassName={({ date }) => {
-          // 토요일: 파란색, 일요일: 빨간색
-          if (moment(date).format("LLLL").split(",")[0] === "Saturday") {
-            return "highlight-saturday"
-          } else if (moment(date).format("LLLL").split(",")[0] === "Sunday") {
-            console.log(todolist)
-            return "highlight-sunday"
-          }}}
+            // 토요일: 파란색, 일요일: 빨간색
+            if (moment(date).format("LLLL").split(",")[0] === "Saturday") {
+              return "highlight-saturday"
+            } else if (moment(date).format("LLLL").split(",")[0] === "Sunday") {
+              // console.log(todolist)
+              return "highlight-sunday"
+            }
+          }}
         />
 
-      <div className="right-box">
-        <div className="select-date-wrap">
-          <div className="select-date">
-            {moment(date).format("YYYY년 MM월 DD일")}
+        <div className="right-box">
+          <div className="select-date-wrap">
+            <div className="select-date">
+              {moment(date).format("YYYY년 MM월 DD일")}
+            </div>
           </div>
-        </div>
 
           <div className="select-todolist">
             {setCalendar(moment(date).format("YYYY-MM-DD"))}
             <br />
-          {/* {dDayLabel} */}
           </div>
         </div>
       </div>
