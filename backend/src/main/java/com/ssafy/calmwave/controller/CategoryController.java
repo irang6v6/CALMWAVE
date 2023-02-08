@@ -7,6 +7,7 @@ import com.ssafy.calmwave.domain.User;
 import com.ssafy.calmwave.dto.WorkCategoryDto;
 import com.ssafy.calmwave.repository.WorkCategoryRepository;
 import com.ssafy.calmwave.service.CategoryService;
+import com.ssafy.calmwave.service.WorkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +27,7 @@ import java.util.Optional;
 public class CategoryController {
 
     private final JwtUtil jwtUtil;
+    private final WorkService workService;
     private final CategoryService categoryService;
     private final WorkCategoryRepository workCategoryRepository;
 
@@ -94,6 +96,7 @@ public class CategoryController {
         //카테고리의 주인이 맞는지 확인
         if (byId.isPresent() && categoryService.checkValid(byId,token)) {
             categoryService.deleteById(categoryId);
+            workService.deleteWorkByCateId(categoryId);
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
         } else {
@@ -128,7 +131,7 @@ public class CategoryController {
      */
     @PostMapping("update")
     @ApiOperation(value = "카테고리 수정", notes = "result:ok")
-    public ResponseEntity<?> join(@RequestHeader(value = "AccessToken") String token, @RequestBody WorkCategoryDto workCategoryDto) {
+    public ResponseEntity<?> updateCategory(@RequestHeader(value = "AccessToken") String token, @RequestBody WorkCategoryDto workCategoryDto) {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         Optional<WorkCategory> byId = categoryService.findById(workCategoryDto.getCateId());

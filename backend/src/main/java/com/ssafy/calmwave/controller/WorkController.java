@@ -8,14 +8,18 @@ import com.ssafy.calmwave.dto.WorkRequestDto;
 import com.ssafy.calmwave.dto.WorkResponseDto;
 import com.ssafy.calmwave.repository.WorkCategoryRepository;
 import com.ssafy.calmwave.repository.WorkRepository;
+import com.ssafy.calmwave.service.CategoryService;
 import com.ssafy.calmwave.service.WorkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
@@ -32,7 +36,9 @@ public class WorkController {
 
     private final JwtUtil jwtUtil;
     private final WorkService workService;
+    private final CategoryService categoryService;
     private final WorkRepository workRepository;
+    private final WorkCategoryRepository workCategoryRepository;
 
     /**
      * 업무 추가 (Token으로 유저를 식별한다)
@@ -51,6 +57,9 @@ public class WorkController {
             workService.save(work);
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
+        } else if (work.getWorkCate().getStatus() == WorkCategoryStatus.DELETED) {
+            resultMap.put("result", "삭제된 카테고리입니다.");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
         } else {
             resultMap.put("result", "failed");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
@@ -66,7 +75,11 @@ public class WorkController {
      */
     @GetMapping("todo")
     @ApiOperation(value = "해야 할 일 리스트", notes = "todo", response = WorkResponseDto.class)
-    public ResponseEntity<?> getTodo(@RequestHeader(value = "RefreshToken") String token) {
+    public ResponseEntity<?> getTodo(@RequestHeader("AccessToken") String token) {
+//        HttpServletRequest request
+//        String token=(String)request.getAttribute("Authorization");
+        Logger logger = LoggerFactory.getLogger(JwtUtil.class);
+        logger.info("todo : request token: " + token);
         User user = jwtUtil.getUser(token);
         List<Work> todo = workService.getTodo(user.getId());
         List<WorkResponseDto> workResponseDtos = workService.convert(todo);
@@ -83,7 +96,6 @@ public class WorkController {
     @ApiOperation(value = "완료된 일 리스트", notes = "done", response = WorkResponseDto.class)
     public ResponseEntity<?> getDone(@RequestHeader(value = "AccessToken") String token) {
         User user = jwtUtil.getUser(token);
-        System.out.println("todo요청 username: "+user.getUsername());
         List<Work> done = workService.getDone(user.getId());
         List<WorkResponseDto> workResponseDtos = workService.convert(done);
         return ResponseEntity.ok().body(workResponseDtos);
@@ -158,7 +170,7 @@ public class WorkController {
             work.setStatus(workRequestDto.getWorkStatus());
             if (work.getStatus() == WorkStatus.DONE) { //종료 시간 업데이트
                 work.setDateFinished(LocalDateTime.now());
-            }else{
+            } else {
                 work.setDateFinished(null);
             }
             workRepository.save(work);
@@ -174,20 +186,64 @@ public class WorkController {
     }
 
     /**
+     * 업무 수정
+     *
+     * @param token
+     * @param workRequestDto
+     * @return
+     */
+    @PostMapping("update")
+    @ApiOperation(value = "업무 수정", notes = "result:ok")
+    public ResponseEntity<?> updateWork(@RequestHeader(value = "AccessToken") String token, @RequestBody WorkRequestDto workRequestDto) {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        Optional<Work> optionalWork = workService.findById(workRequestDto.getWorkId());
+        //업무의 주인이 맞는지 확인
+        if (optionalWork.isPresent() && workService.checkValid(optionalWork, token)) {
+            Work work = optionalWork.get();
+            work.setTitle(workRequestDto.getTitle());
+            work.setDescription(workRequestDto.getDescription());
+            work.setDateAimed(workRequestDto.getDateAimed());
+            Optional<WorkCategory> optionalWorkCategory = workCategoryRepository.findById(workRequestDto.getWorkCateId());
+            if (optionalWorkCategory.isPresent()) {
+                WorkCategory workCategory = optionalWorkCategory.get();
+                if(workService.checkCateValid(optionalWorkCategory,token)){
+                    work.setWorkCate(workCategory);
+                    workService.save(work);
+                    resultMap.put("result", "ok");
+                    status = HttpStatus.ACCEPTED;
+                }else{
+                    resultMap.put("result", "카테고리가 삭제되었거나 다른 유저의 카테고리를 참조했습니다.");
+                    status = HttpStatus.INTERNAL_SERVER_ERROR;
+                }
+            }else{
+                resultMap.put("result", "다른 유저의 업무를 참조했습니다.");
+                status = HttpStatus.INTERNAL_SERVER_ERROR;
+            }
+        } else {
+            resultMap.put("result", "해당 업무를 수정할 권한이 없습니다.");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+
+    /**
      * 업무 삭제
+     *
      * @param body(workId)
      * @param token
      * @return
      */
     @PostMapping("delete")
     @ApiOperation(value = "업무 삭제", notes = "result:ok")
-    public ResponseEntity<?> deleteWork(@RequestBody Map<String, Long> body, @RequestHeader(value = "AccessToken") String token) {
+    public ResponseEntity<?> deleteWork
+    (@RequestBody Map<String, Long> body, @RequestHeader(value = "AccessToken") String token) {
         long workId = body.get("workId");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         Optional<Work> optionalWork = workService.findById(workId);
         //work의 주인이 맞는지 확인
-        if (optionalWork.isPresent() && workService.checkValid(optionalWork,token)) {
+        if (optionalWork.isPresent() && workService.checkValid(optionalWork, token)) {
             workService.deleteById(workId);
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
@@ -197,4 +253,6 @@ public class WorkController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
+
+
 }

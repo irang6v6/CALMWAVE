@@ -83,10 +83,6 @@ public class WorkService {
         return list;
     }
 
-
-
-
-
     /**
      * work의 user와 token의 user가 동일한지 (업무의 주인이 맞는지)확인
      * @param optionalWork
@@ -99,5 +95,17 @@ public class WorkService {
 
     public void deleteById(long workId) {
         workRepository.deleteById(workId);
+    }
+
+    public void deleteWorkByCateId(long categoryId) {
+        workRepository.deleteAllByWorkCateId(categoryId);
+    }
+
+    public boolean checkCateValid(Optional<WorkCategory> optionalWorkCategory, String token) {
+        if(categoryService.checkValid(optionalWorkCategory,token) && optionalWorkCategory.get().getStatus()==WorkCategoryStatus.VALID){
+            return true;
+        }else{
+            return false;
+        }
     }
 }

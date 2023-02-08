@@ -20,8 +20,8 @@ import java.util.Date;
 @Component
 public class JwtUtil {
 
-        public static final int AccessTokenTimeLimit = 60 * 1000; //1분
-//    public static final int AccessTokenTimeLimit = 60000 * 60 * 24 * 14;
+//        public static final int AccessTokenTimeLimit = 60 * 1000; //1분
+    public static final int AccessTokenTimeLimit = 60000 * 60 * 24 * 15; //토큰 발급 시간대가 utc라 14일에서 하루 더해줬음
     public static final int RefreshTokenTimeLimit = 1000 * 60 * 60 * 24 * 7;
 
     private static String secret;

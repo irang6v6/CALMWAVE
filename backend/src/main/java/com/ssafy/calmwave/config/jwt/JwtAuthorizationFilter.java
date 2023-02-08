@@ -66,10 +66,10 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
             //Redis에서 RefreshToken가져오기
             String refreshToken = redisTemplate.opsForValue().get("RefreshToken:" + username);
-            System.out.println("refresh token: "+refreshToken);
+            System.out.println("refresh token: " + refreshToken);
             try {
-                logger.info("refreshToken: "+refreshToken);
-                logger.info("r_token: "+r_token);
+                logger.info("refreshToken: " + refreshToken);
+                logger.info("r_token: " + r_token);
                 refreshToken.equals(r_token);
             } catch (Exception e) {
                 response.sendError(500, "로그아웃한 유저입니다.");
@@ -84,7 +84,11 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
                 redisTemplate.opsForValue()
                         .set("RefreshToken:" + username, refreshToken,
                                 JwtUtil.RefreshTokenTimeLimit, TimeUnit.MILLISECONDS);
+
+                //1. response.setHeader - 돌려줄 new accessToken을 response header에 담고
                 response.setHeader("AccessToken", newAccessToken);
+                //2. request.setAttribute - 새로운 accessToken으로 request header 변경 후 나머지 요청 수행
+                request.setAttribute("Authorization", newAccessToken);
 
 //                String data = "{\"response\":{\"error\":false,\"AccessToken\":\"" + newAccessToken + "\", \"RefreshToken\": \"" + refreshToken + "\"}}";
 //                PrintWriter out = response.getWriter();

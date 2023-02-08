@@ -17,9 +17,12 @@ public class WorkRequestDto {
     private Long workCateId;
     private WorkStatus workStatus;
 
-    public WorkRequestDto(Long id,WorkStatus workStatus) {
-        this.workId = id;
-        this.workStatus = workStatus;
+    public WorkRequestDto(Long workId, String title, String description, LocalDateTime dateAimed, Long workCateId) {
+        this.workId = workId;
+        this.title = title;
+        this.description = description;
+        this.dateAimed = dateAimed;
+        this.workCateId = workCateId;
     }
 
     public WorkRequestDto(String title, String description, LocalDateTime dateAimed, Long workCateId) {

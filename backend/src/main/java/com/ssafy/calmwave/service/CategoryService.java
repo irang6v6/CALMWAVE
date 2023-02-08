@@ -6,6 +6,7 @@ import com.ssafy.calmwave.domain.User;
 import com.ssafy.calmwave.domain.WorkCategoryStatus;
 import com.ssafy.calmwave.dto.WorkCategoryDto;
 import com.ssafy.calmwave.repository.WorkCategoryRepository;
+import com.ssafy.calmwave.repository.WorkPeriodRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
@@ -22,6 +23,7 @@ import java.util.Optional;
 public class CategoryService {
     private final JwtUtil jwtUtil;
     private final WorkCategoryRepository categoryRepository;
+    private final WorkPeriodRepository workPeriodRepository;
 
     /**
      * 유저가 기존에 등록한 적 있는 카테고리인지 확인
@@ -54,7 +56,11 @@ public class CategoryService {
      * @return
      */
     public List<WorkCategoryDto> findByUserAndStatus(User user) {
-        return categoryRepository.findByUserAndStatus(user.getId(), WorkCategoryStatus.VALID);
+        List<WorkCategoryDto> categoryDtos = categoryRepository.findByUserAndStatus(user.getId(), WorkCategoryStatus.VALID);
+        for (WorkCategoryDto categoryDto : categoryDtos) {
+            categoryDto.setSumBusinessHours(workPeriodRepository.findTimediffByWorkCateId(categoryDto.getCateId()));
+        }
+        return categoryDtos;
     }
 
     /**
