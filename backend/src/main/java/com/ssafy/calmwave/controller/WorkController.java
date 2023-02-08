@@ -68,7 +68,12 @@ public class WorkController {
     @ApiOperation(value = "해야 할 일 리스트", notes = "todo", response = WorkResponseDto.class)
     public ResponseEntity<?> getTodo(@RequestHeader(value = "AccessToken") String token) {
         User user = jwtUtil.getUser(token);
+        System.out.println("todo요청 username: "+user.getUsername());
         List<Work> todo = workService.getTodo(user.getId());
+        for (Work work : todo) {
+            System.out.println("work = " + work);
+        }
+
         List<WorkResponseDto> workResponseDtos = workService.convert(todo);
         return ResponseEntity.ok().body(workResponseDtos);
     }
@@ -80,11 +85,15 @@ public class WorkController {
      * @return List<WorkResponseDto>
      */
     @GetMapping("done")
-    @ApiOperation(value = "해야 할 일 리스트", notes = "todo", response = WorkResponseDto.class)
+    @ApiOperation(value = "완료된 일 리스트", notes = "done", response = WorkResponseDto.class)
     public ResponseEntity<?> getDone(@RequestHeader(value = "AccessToken") String token) {
         User user = jwtUtil.getUser(token);
-        List<Work> todo = workService.getDone(user.getId());
-        List<WorkResponseDto> workResponseDtos = workService.convert(todo);
+        System.out.println("todo요청 username: "+user.getUsername());
+        List<Work> done = workService.getDone(user.getId());
+        for (Work work : done) {
+            System.out.println("work = " + work);
+        }
+        List<WorkResponseDto> workResponseDtos = workService.convert(done);
         return ResponseEntity.ok().body(workResponseDtos);
     }
 
