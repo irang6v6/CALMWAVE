@@ -15,6 +15,7 @@ import { todoActions } from "../../store/todos-slice"
 
 export const RoomPage = () => {
   const todos = useSelector((state) => state.todos.todos)
+  const progress = useSelector((state) => state.todos.onProgress)
   const dispatch = useDispatch()
   const doorRef = useRef(null)
   const { width, height } = useCustomWidthHeight(doorRef)
@@ -56,27 +57,33 @@ export const RoomPage = () => {
       </div>
       <div ref={doorRef} className={`${styles["todobox-container"]}`}>
         <DndProvider backend={HTML5Backend}>
-          <TodoColumn title="To do" className={`bg-cw-indigo-7`}>
-            {alignTodosInColumn("To do")}
-          </TodoColumn>
-          <div className={`${styles["cam-todo-container"]}`}>
+          <div className={`${styles["todo-container"]}`}>
+            <TodoColumn title="To do">
+              {alignTodosInColumn("To do")}
+            </TodoColumn>
+          </div>
+          <div className={`${styles["cam-progress-container"]}
+          ${progress && styles["cam-progress-container-focused"]}`}>
             <div className={`${styles[`cam-container`]}`}>
               <Video />
             </div>
-            <TodoColumn title="In Progress" className={`bg-cw-yellow-5`}>
+            <TodoColumn title="In Progress">
               {alignTodosInColumn("In Progress")}
             </TodoColumn>
           </div>
-          <TodoColumn title="Done" className={`bg-wb-mint-4`}>
-            {alignTodosInColumn("Done")}
-            <NavLink
-              to={`/`}
-              className={`${styles[`lets-go-home`]}`}
-              onClick={backToHome}
-            >
-              <BsFillPlayFill className={`${styles[`play-icon`]}`} />
-            </NavLink>
-          </TodoColumn>
+          <div className={`${styles["done-container"]}
+          ${!progress && styles["done-container-focused"]}`}>
+            <TodoColumn title="Done">
+              {alignTodosInColumn("Done")}
+              <NavLink
+                to={`/`}
+                className={`${styles[`lets-go-home`]}`}
+                onClick={backToHome}
+              >
+                <BsFillPlayFill className={`${styles[`play-icon`]}`} />
+              </NavLink>
+            </TodoColumn>
+          </div>
         </DndProvider>
       </div>
     </>

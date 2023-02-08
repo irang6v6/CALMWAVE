@@ -217,6 +217,7 @@ export default function TodoCard({
             ? `bg-wb-nightsky-8 txt-wb-mint-10`
             : `bg-cw-yellow-10`
         }
+        ${isDragging ? styles["todo-grabbing"] : styles["todo-grab"]}
         `}
     >
       <span>{title}</span>
