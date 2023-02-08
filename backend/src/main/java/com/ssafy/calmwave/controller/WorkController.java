@@ -71,7 +71,7 @@ public class WorkController {
         System.out.println("todo요청 username: "+user.getUsername());
         List<Work> todo = workService.getTodo(user.getId());
         for (Work work : todo) {
-            System.out.println("work = " + work.toString());
+            System.out.println("work = " + work.getTitle());
         }
 
         //List<WorkResponseDto> workResponseDtos = workService.convert(todo);
