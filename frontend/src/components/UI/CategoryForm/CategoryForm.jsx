@@ -10,16 +10,21 @@ import {
   // categoryActions,
   AxiosGetCategory,
 } from "../../../store/category-slice"
-import { closeModal } from "../../../store/door-store/modal-slice"
+import { closeModal, modalActions } from "../../../store/door-store/modal-slice"
 
-function CategoryForm({ isCreate }) {
+function CategoryForm() {
   const dispatch = useDispatch()
-  const { formData, isLoading } = useSelector((state) => state.modal)
+  const { formData, isLoading, isCreate } = useSelector((state) => state.modal)
   const [titleRef] = [useRef(null)]
   const [titleInput, titleChangeHandler, titleSetTrigger] = useInput(titleRef)
+  const FormTitle = isCreate ? `카테고리 생성` : `카테고리 수정`
 
-  const submitHandler = async function (event) {
+  const submitHandler = function (event) {
     event.preventDefault()
+    if (isLoading) {
+      return
+    }
+    // dispatch(modalActions.toggleIsLoading())
     if (isCreate) {
       axios({
         method: "post",
@@ -36,9 +41,14 @@ function CategoryForm({ isCreate }) {
         })
         .then((res) => {
           dispatch(closeModal())
+          titleSetTrigger("")
+        })
+        .then(() => {
+          // dispatch(modalActions.toggleIsLoading())
         })
         .catch((err) => {
           console.log(err, "<<<<<<<<<<<<")
+          dispatch(modalActions.toggleIsLoading())
         })
     } else {
       axios({
@@ -48,14 +58,25 @@ function CategoryForm({ isCreate }) {
           cateColor: 0,
           cateIcon: 0,
           cateName: `${titleInput}`,
-          cateId: formData.id,
+          cateId: formData?.id,
           // cateOrder: 0,
         },
-      }).then((res) => {
-        dispatch(AxiosGetCategory())
       })
+        .then((res) => {
+          dispatch(AxiosGetCategory())
+        })
+        .then(() => {
+          dispatch(closeModal())
+        })
+        .then(() => {
+          titleSetTrigger("")
+          dispatch(modalActions.toggleIsLoading())
+        })
+        .catch((err) => {
+          dispatch(modalActions.toggleIsLoading())
+          console.log(err)
+        })
     }
-    // dispatch(submitModal())
   }
 
   useEffect(
@@ -67,7 +88,7 @@ function CategoryForm({ isCreate }) {
 
   return (
     <div className={`${styles[`category-form-container`]}`}>
-      <div>카테고리 수수정정</div>
+      <div>{FormTitle}</div>
       <form
         className={`${styles[`category-form-input-container`]}`}
         onSubmit={submitHandler}
@@ -79,7 +100,9 @@ function CategoryForm({ isCreate }) {
           id="category-title"
           onChange={titleChangeHandler}
         />
-        <button>{isLoading ? <SpinnerDots /> : `완료`}</button>
+        <button disabled={isLoading}>
+          {isLoading ? <SpinnerDots /> : `완료`}
+        </button>
       </form>
     </div>
   )

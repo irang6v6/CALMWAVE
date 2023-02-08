@@ -12,7 +12,7 @@ const initialState = {
 }
 
 const modalSlice = createSlice({
-  name: "ex",
+  name: "modal",
   initialState,
   reducers: {
     toggleIsModal(state, action) {
@@ -55,7 +55,7 @@ const modalSlice = createSlice({
 })
 
 export const openCategoryModal = function () {
-  return function (dispatch) {
+  return async function (dispatch) {
     dispatch(modalActions.setIsNotDelete())
     dispatch(modalActions.setIsCategory())
     dispatch(modalActions.toggleIsModal())
@@ -85,13 +85,13 @@ export const openTaskDeleteModal = function () {
 export const closeModal = function () {
   return async function (dispatch) {
     dispatch(modalActions.toggleIsModal())
-    setTimeout(() => {
-      dispatch(modalActions.setNotError())
-      dispatch(modalActions.resetFormData())
-    }, 400)
+    dispatch(modalActions.setNotError())
+    dispatch(modalActions.resetFormData())
+    // setTimeout(function () {
+    // }, 400)
   }
 }
-export const submitModal = async function (requestData) {
+export const submitModal = function (requestData) {
   return async function (dispatch) {
     dispatch(modalActions.toggleIsLoading())
     dispatch(modalActions.setNotError())

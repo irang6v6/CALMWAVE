@@ -10,8 +10,8 @@ export const useInput = function (ref) {
   )
   const onSetDataTrigger = useCallback(
     function (originalValue) {
-      setInput(originalValue)
       ref.current.value = originalValue
+      setInput(() => originalValue)
     },
     [ref]
   )

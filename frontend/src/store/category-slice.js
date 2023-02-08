@@ -7,39 +7,39 @@ const initialState = {
   selectedCategoryId: null,
   hoveredCategoryId: null,
   categoryList: [
-    {
-      id: 1,
-      title: "카테고리 1",
-      cateColor: "",
-      cateIcon: "",
-      sumBusinessHours: 12, // 그냥 데이터로 받아온다고 생각하겠음.
-      nowBusinessHours: 10, // 그냥 데이터로 받아온다고 생각하겠음.
-      isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
-    },
-    {
-      id: 2,
-      title: "카테고리 2",
-      description: "카테고리 설명 2",
-      sumBusinessHours: 10, // 그냥 데이터로 받아온다고 생각하겠음.
-      nowBusinessHours: 2,
-      isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
-    },
-    {
-      id: 3,
-      title: "카테고리 3",
-      description: "카테고리 설명 3",
-      sumBusinessHours: 16, // 그냥 데이터로 받아온다고 생각하겠음.
-      nowBusinessHours: 10,
-      isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
-    },
-    {
-      id: 4,
-      title: "카테고리 4",
-      description: "카테고리 설명 4",
-      sumBusinessHours: 16, // 그냥 데이터로 받아온다고 생각하겠음.
-      nowBusinessHours: 10,
-      isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
-    },
+    // {
+    //   id: 1,
+    //   title: "카테고리 1",
+    //   cateColor: "",
+    //   cateIcon: "",
+    //   sumBusinessHours: 12, // 그냥 데이터로 받아온다고 생각하겠음.
+    //   nowBusinessHours: 10, // 그냥 데이터로 받아온다고 생각하겠음.
+    //   isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
+    // },
+    // {
+    //   id: 2,
+    //   title: "카테고리 2",
+    //   description: "카테고리 설명 2",
+    //   sumBusinessHours: 10, // 그냥 데이터로 받아온다고 생각하겠음.
+    //   nowBusinessHours: 2,
+    //   isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
+    // },
+    // {
+    //   id: 3,
+    //   title: "카테고리 3",
+    //   description: "카테고리 설명 3",
+    //   sumBusinessHours: 16, // 그냥 데이터로 받아온다고 생각하겠음.
+    //   nowBusinessHours: 10,
+    //   isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
+    // },
+    // {
+    //   id: 4,
+    //   title: "카테고리 4",
+    //   description: "카테고리 설명 4",
+    //   sumBusinessHours: 16, // 그냥 데이터로 받아온다고 생각하겠음.
+    //   nowBusinessHours: 10,
+    //   isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
+    // },
   ],
 }
 
@@ -79,6 +79,9 @@ export const AxiosGetCategory = function () {
     })
       .then((res) => {
         // response에 따라서 순회 돌린 값에 isSelected: false 넣어서 넣어준다.
+        if (res.headers?.AccessToken) {
+          axios.defaults.headers.common["AccessToken"] = res.headers.AccessToken
+        }
         dispatch(
           categoryActions.getCategory({
             categoryList: res.data.map((cate) => {

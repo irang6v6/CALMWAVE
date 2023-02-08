@@ -16,6 +16,8 @@ import NightSky from "../../components/Canvas/NightSky/NightSky"
 import { useDispatch } from "react-redux"
 import { AxiosGetCategory } from "../../store/category-slice"
 import NavIcon from "../../components/NavIcon/NavIcon"
+import { AxiosGetDones, AxiosGetTodos } from "../../store/task-slice"
+import axios from "axios"
 
 function HomePage() {
   const dispatch = useDispatch()
@@ -37,10 +39,15 @@ function HomePage() {
   // 첫 진입 시 카테고리 가져오기
   useEffect(
     function () {
+      if (!axios.defaults.headers.common["AccessToken"]) {
+        return
+      }
       if (isInitial) {
         setIsInitial(() => false)
       }
       dispatch(AxiosGetCategory())
+      dispatch(AxiosGetTodos())
+      dispatch(AxiosGetDones())
     },
     [dispatch, isInitial]
   )

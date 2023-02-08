@@ -1,8 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialState = {
-  todos: [
-  ],
+  todos: [],
   onProgress: false, // 일을 하고 있는지? 에 대한 boolean 값
 }
 
@@ -32,7 +31,7 @@ const todosSlice = createSlice({
     deleteTodo(state, action) {
       const id = action.payload
       state.todos = state.todos.filter((todo) => todo.id !== id)
-    }
+    },
   },
 })
 

@@ -9,12 +9,19 @@ import {
 } from "react-icons/io5"
 import { AiTwotoneEdit } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { AxiosLogout } from "../../store/user-slice"
 
 function NavIcon() {
   const dispatch = useDispatch()
-  const isLogin = useSelector((state) => state.user.userData.id)
+  const id = useSelector((state) => state.user.userData.id)
+  const [isLogin, setIsLogin] = useState(false)
+  useEffect(
+    function () {
+      setIsLogin(() => id || localStorage.getItem("isLogin"))
+    },
+    [id]
+  )
   const [openMenu, setOpenMenu] = useState(false)
   const openMenuHandler = function () {
     setOpenMenu((val) => !val)
