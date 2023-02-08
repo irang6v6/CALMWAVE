@@ -64,7 +64,7 @@ public class WorkController {
      * @param token
      * @return List<WorkResponseDto>
      */
-    @GetMapping("help1")
+    @GetMapping("todo")
     @ApiOperation(value = "해야 할 일 리스트", notes = "todo", response = WorkResponseDto.class)
     public ResponseEntity<?> getTodo(@RequestHeader(value = "AccessToken") String token) {
         User user = jwtUtil.getUser(token);
@@ -79,7 +79,7 @@ public class WorkController {
      * @param token
      * @return List<WorkResponseDto>
      */
-    @GetMapping("help2")
+    @GetMapping("done")
     @ApiOperation(value = "완료된 일 리스트", notes = "done", response = WorkResponseDto.class)
     public ResponseEntity<?> getDone(@RequestHeader(value = "AccessToken") String token) {
         User user = jwtUtil.getUser(token);
