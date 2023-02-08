@@ -13,15 +13,16 @@ import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
 @Slf4j
 @Component
 public class JwtUtil {
 
-    //    public static final int AccessTokenTimeLimit = 30 * 60 * 1000; //배포 시 30분으로 변경 필
-    public static final int AccessTokenTimeLimit = 60000 * 60 * 24 * 14;
-    public static final int RefreshTokenTimeLimit = 60000 * 60 * 24 * 7;
+        public static final int AccessTokenTimeLimit = 60 * 1000; //1분
+//    public static final int AccessTokenTimeLimit = 60000 * 60 * 24 * 14;
+    public static final int RefreshTokenTimeLimit = 1000 * 60 * 60 * 24 * 7;
 
     private static String secret;
     private final UserRepository userRepository;
@@ -41,7 +42,7 @@ public class JwtUtil {
                     .getClaim("username").asString();
             return true;
         } catch (Exception ex) {
-            System.out.println("불량토큰 발견입니다 발견... ");
+            logger.info("불량토큰 발견입니다 발견...");
             log.error(ex.getMessage());
             return false;
         }
@@ -60,10 +61,13 @@ public class JwtUtil {
 
     public static String createRefreshToken(long id, String username) {
         Date now = new Date();
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, 30);
+        System.out.println(c.getTime());
         String token = JWT.create()
                 .withSubject(username)
                 .withAudience(username)
-                .withExpiresAt(new Date(now.getTime() + AccessTokenTimeLimit))
+                .withExpiresAt(c.getTime())
                 .withClaim("id", id)
                 .withClaim("username", username)
                 .sign(Algorithm.HMAC512(secret));

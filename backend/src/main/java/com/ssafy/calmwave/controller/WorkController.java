@@ -66,7 +66,7 @@ public class WorkController {
      */
     @GetMapping("todo")
     @ApiOperation(value = "해야 할 일 리스트", notes = "todo", response = WorkResponseDto.class)
-    public ResponseEntity<?> getTodo(@RequestHeader(value = "AccessToken") String token) {
+    public ResponseEntity<?> getTodo(@RequestHeader(value = "RefreshToken") String token) {
         User user = jwtUtil.getUser(token);
         List<Work> todo = workService.getTodo(user.getId());
         List<WorkResponseDto> workResponseDtos = workService.convert(todo);
@@ -181,7 +181,7 @@ public class WorkController {
      */
     @PostMapping("delete")
     @ApiOperation(value = "업무 삭제", notes = "result:ok")
-    public ResponseEntity<?> deleteCategory(@RequestBody Map<String, Long> body, @RequestHeader(value = "AccessToken") String token) {
+    public ResponseEntity<?> deleteWork(@RequestBody Map<String, Long> body, @RequestHeader(value = "AccessToken") String token) {
         long workId = body.get("workId");
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
@@ -197,6 +197,4 @@ public class WorkController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
-
-
 }

@@ -23,6 +23,12 @@ public class CategoryService {
     private final JwtUtil jwtUtil;
     private final WorkCategoryRepository categoryRepository;
 
+    /**
+     * 유저가 기존에 등록한 적 있는 카테고리인지 확인
+     * @param cateName
+     * @param user
+     * @return
+     */
     public WorkCategory findByName(String cateName, User user) {
         return categoryRepository.findByCateNameAndUser(cateName, user);
     }

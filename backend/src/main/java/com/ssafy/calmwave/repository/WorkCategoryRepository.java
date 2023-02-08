@@ -11,6 +11,12 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface WorkCategoryRepository extends JpaRepository<WorkCategory, Long> {
+    /**
+     * 유저가 등록한 적 있는 카테고리인지 확인
+     * @param cateName
+     * @param user
+     * @return
+     */
     WorkCategory findByCateNameAndUser(String cateName, User user);
 
     /**

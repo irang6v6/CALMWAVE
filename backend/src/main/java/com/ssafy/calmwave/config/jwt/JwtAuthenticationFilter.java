@@ -5,6 +5,7 @@ import com.ssafy.calmwave.dto.LoginRequestDto;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.PrintWriter;
+import java.util.Calendar;
 import java.util.concurrent.TimeUnit;
 
 import lombok.RequiredArgsConstructor;
@@ -72,9 +73,12 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 principalDetails.getUsername());
 
         //redis에 refreshToken저장
+        Calendar c = Calendar.getInstance();
+        c.add(Calendar.DATE, 30);
+        logger.info("refresh token redis 삭제 기준 날짜: "+c.getTime()+" "+c.getTimeInMillis());
         redisTemplate.opsForValue()
                 .set("RefreshToken:" + principalDetails.getUsername(), refreshToken,
-                        JwtUtil.RefreshTokenTimeLimit, TimeUnit.MILLISECONDS);
+                        c.getTimeInMillis(), TimeUnit.MILLISECONDS);
 
         Long userId = principalDetails.getUser().getId();
 

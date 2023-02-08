@@ -60,29 +60,35 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
             logger.info("access token is valid");
             username = JWT.require(Algorithm.HMAC512(secret)).build().verify(a_token).getClaim("username").asString();
         } else if (JwtUtil.tokenValidation(r_token)) {
+            Logger logger = LoggerFactory.getLogger(JwtUtil.class);
+            logger.info("access token is invalid, but refresh token is valid");
             username = JWT.require(Algorithm.HMAC512(secret)).build().verify(r_token).getClaim("username").asString();
 
             //Redis에서 RefreshToken가져오기
             String refreshToken = redisTemplate.opsForValue().get("RefreshToken:" + username);
+            System.out.println("refresh token: "+refreshToken);
             try {
-                refreshToken.equals(request.getHeader("RefreshToken"));
+                logger.info("refreshToken: "+refreshToken);
+                logger.info("r_token: "+r_token);
+                refreshToken.equals(r_token);
             } catch (Exception e) {
                 response.sendError(500, "로그아웃한 유저입니다.");
                 throw new NotFoundUserException("로그아웃한 유저입니다.");
             }
 
-            if (refreshToken.equals(request.getHeader("RefreshToken"))) {
-                logger.trace("accessToken 재발급");
+            if (refreshToken.equals(r_token)) {
+                logger.info("return new access token");
                 long id = JWT.require(Algorithm.HMAC512(secret)).build().verify(r_token).getClaim("id").asLong();
                 String newAccessToken = JwtUtil.createToken(id, username);
 
                 redisTemplate.opsForValue()
                         .set("RefreshToken:" + username, refreshToken,
                                 JwtUtil.RefreshTokenTimeLimit, TimeUnit.MILLISECONDS);
+                response.setHeader("AccessToken", newAccessToken);
 
-                String data = "{\"response\":{\"error\":false,\"AccessToken\":\"" + newAccessToken + "\", \"RefreshToken\": \"" + refreshToken + "\"}}";
-                PrintWriter out = response.getWriter();
-                out.print(data);
+//                String data = "{\"response\":{\"error\":false,\"AccessToken\":\"" + newAccessToken + "\", \"RefreshToken\": \"" + refreshToken + "\"}}";
+//                PrintWriter out = response.getWriter();
+//                out.print(data);
             } else {
                 logger.trace("인가 실패");
                 response.sendError(500, "토큰 불일치, 재로그인 필요");
