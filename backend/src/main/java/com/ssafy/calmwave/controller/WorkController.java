@@ -74,6 +74,21 @@ public class WorkController {
     }
 
     /**
+     * User별 그날의 DONE을 모두 조회, 카테고리와 총 업무시간 포함
+     *
+     * @param token
+     * @return List<WorkResponseDto>
+     */
+    @GetMapping("done")
+    @ApiOperation(value = "해야 할 일 리스트", notes = "todo", response = WorkResponseDto.class)
+    public ResponseEntity<?> getDone(@RequestHeader(value = "AccessToken") String token) {
+        User user = jwtUtil.getUser(token);
+        List<Work> todo = workService.getDone(user.getId());
+        List<WorkResponseDto> workResponseDtos = workService.convert(todo);
+        return ResponseEntity.ok().body(workResponseDtos);
+    }
+
+    /**
      * work 순서 변경
      *
      * @param workIDs

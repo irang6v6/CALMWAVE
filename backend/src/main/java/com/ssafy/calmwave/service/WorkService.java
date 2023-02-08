@@ -34,6 +34,10 @@ public class WorkService {
         return workRepository.findAllByUserIdAndStatusOrderByWorkOrder(userId, WorkStatus.TODO);
     }
 
+    public List<Work> getDone(Long userId) {
+        return workRepository.findAllByUserIdAndStatusOrderByWorkOrder(userId, WorkStatus.DONE);
+    }
+
     public Optional<Work> findById(Long workId) {
         return workRepository.findById(workId);
     }
