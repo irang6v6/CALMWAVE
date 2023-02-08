@@ -188,7 +188,7 @@ const initialState = {
       id: 13,
       categoryId: 1,
       createdDate: "2023-02-08",
-      finishedDate: "2023-02-12",
+      finishedDate: "2023-02-10",
       title: "넷플릭스 보기",
       description: "볼 거 넘 많은데 프로젝트 싫어요",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -203,7 +203,7 @@ const initialState = {
       id: 14,
       categoryId: 1,
       createdDate: "2023-02-08",
-      finishedDate: "2023-02-10",
+      finishedDate: "2023-02-07",
       title: "리덕스 공부하기",
       description: "리액트도 모르겠는데 뭔 리덕스",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -218,7 +218,7 @@ const initialState = {
       id: 15,
       categoryId: 1,
       createdDate: "2023-02-08",
-      finishedDate: "2023-02-11",
+      finishedDate: "2023-02-08",
       title: "알고리즘 공부하기",
       description: "싸탈을 향한 발걸음",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
