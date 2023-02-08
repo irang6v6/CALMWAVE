@@ -1,5 +1,7 @@
 package com.ssafy.calmwave.domain;
 
+import lombok.NoArgsConstructor;
+
 import java.time.Instant;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,6 +15,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "posture")
+@NoArgsConstructor
 public class Posture {
 
     @Id

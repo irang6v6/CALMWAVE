@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -75,16 +76,19 @@ public class WorkService {
     public List<WorkResponseDto> convert(List<Work> todo) {
         List<WorkResponseDto> list = todo.stream().map(m ->
                         new WorkResponseDto(m.getId(), m.getTitle(), m.getDescription(), m.getStatus(), m.getDateCreated(), m.getDateAimed(), m.getWorkOrder()
-                                , workPeriodRepository.findTimediffByWorkId(m.getId()) * 1000, m.getWorkCate().getId())
-                )
+                                , workPeriodRepository.findTimediffByWorkId(m.getId())*1000
+                                , new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder())
+                        ))
                 .collect(Collectors.toList());
         return list;
     }
 
 
+
+
+
     /**
      * work의 user와 token의 user가 동일한지 (업무의 주인이 맞는지)확인
-     *
      * @param optionalWork
      * @param token
      * @return

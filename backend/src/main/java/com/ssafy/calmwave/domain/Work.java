@@ -52,7 +52,7 @@ public class Work {
     private User user;
 
     @JsonIgnore
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "work_cate_id", nullable = false)
     private WorkCategory workCate;
 
