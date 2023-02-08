@@ -13,9 +13,10 @@ function SkyWithWave({ canvasWidth, canvasHeight }) {
       canvasHeight
     )
     gradient.addColorStop(0, `rgba(0, 16, 36, 1)`)
-    gradient.addColorStop(0.3, `rgba(0, 18, 39, 1)`)
-    gradient.addColorStop(0.77, `rgba(0, 25, 48, 1)`)
-    gradient.addColorStop(1, `rgba(39, 67, 99, 1)`)
+    gradient.addColorStop(0.28, `rgba(0, 18, 39, 1)`)
+    gradient.addColorStop(0.55, `rgba(0, 25, 48, 1)`)
+    gradient.addColorStop(0.77, `rgba(0, 36, 55, 1)`)
+    gradient.addColorStop(1, `rgba(26, 45, 77, 1)`)
     ctx.fillStyle = gradient
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
   }
