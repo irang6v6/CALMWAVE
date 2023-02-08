@@ -59,7 +59,7 @@ public class WorkController {
     }
 
     /**
-     * User별 Todo를 Order순으로 모두 조회
+     * User별 Todo를 Order순으로 모두 조회, 카테고리와 총 업무시간 포함
      *
      * @param token
      * @return List<WorkResponseDto>

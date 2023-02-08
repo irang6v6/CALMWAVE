@@ -44,7 +44,8 @@ public class WorkService {
 
     /**
      * WorkRequestDto를 Work Entity로 변환
-     * @param user 유저객체
+     *
+     * @param user           유저객체
      * @param workRequestDto 제목,내용,목표날짜,카테고리
      * @return Work
      */
@@ -61,11 +62,17 @@ public class WorkService {
 
     /**
      * Work Entity를 ResponseDto로 변환
+     *
      * @param todo
      * @return list
      */
     public List<WorkResponseDto> convert(List<Work> todo) {
-        List<WorkResponseDto> list = todo.stream().map(m -> new WorkResponseDto(m.getId(), m.getTitle(), m.getDescription(), m.getStatus(), m.getDateCreated(), m.getDateAimed(), m.getWorkOrder(), new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder()), "01:25:26")).collect(Collectors.toList());
+        List<WorkResponseDto> list = todo.stream().map(m ->
+                        new WorkResponseDto(m.getId(), m.getTitle(), m.getDescription(), m.getStatus(), m.getDateCreated(), m.getDateAimed(), m.getWorkOrder()
+                                , workPeriodRepository.findTimediffByWorkId(m.getId())
+                                , new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder())
+                        ))
+                .collect(Collectors.toList());
         return list;
     }
 }
