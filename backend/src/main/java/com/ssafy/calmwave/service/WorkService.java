@@ -76,7 +76,7 @@ public class WorkService {
     public List<WorkResponseDto> convert(List<Work> todo) {
         List<WorkResponseDto> list = todo.stream().map(m ->
                         new WorkResponseDto(m.getId(), m.getTitle(), m.getDescription(), m.getStatus(), m.getDateCreated(), m.getDateAimed(), m.getWorkOrder()
-                                , workPeriodRepository.findTimediffByWorkId(m.getId())*1000
+                                , workPeriodRepository.findTimediffByWorkId(m.getId())
                                 , new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder())
                         ))
                 .collect(Collectors.toList());

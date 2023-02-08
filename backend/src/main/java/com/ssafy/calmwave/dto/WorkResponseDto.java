@@ -6,6 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 @Getter
 @AllArgsConstructor
@@ -19,6 +20,6 @@ public class WorkResponseDto {
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     private LocalDateTime dateAimed;
     private int workOrder;
-    private Long totalTime;
+    private Optional<Long> totalTime;
     private WorkCategoryDto workCate;
 }
