@@ -22,6 +22,8 @@ export default function MyCalendar() {
     dDayLabel += `+${daysRemaining}`;
   }
 
+
+
   const setCalendar = (selectedDate) => {
     console.log(selectedDate)
     return  todolist
@@ -32,6 +34,10 @@ export default function MyCalendar() {
           todo={todo}
           />
       ))
+
+
+
+  
     
     // return todolist
     //   .filter((todo) => todo.createdDate === selectedDate)
@@ -71,14 +77,17 @@ export default function MyCalendar() {
           }}}
         />
 
+      <div className="right-box">
         <div className="select-date-wrap">
           <div className="select-date">
             {moment(date).format("YYYY년 MM월 DD일")}
           </div>
+        </div>
+
           <div className="select-todolist">
             {setCalendar(moment(date).format("YYYY-MM-DD"))}
             <br />
-          {dDayLabel}
+          {/* {dDayLabel} */}
           </div>
         </div>
       </div>

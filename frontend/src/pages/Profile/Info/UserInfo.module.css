@@ -30,7 +30,7 @@
 
 .info-Box {
   width: 80%;
-  height: 700px;
+  height: 100vh;
   /* border: 1px solid #000; */
   background-color: #feffd7;
   margin: 0 auto;
