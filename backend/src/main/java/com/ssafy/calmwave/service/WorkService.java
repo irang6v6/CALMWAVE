@@ -1,5 +1,6 @@
 package com.ssafy.calmwave.service;
 
+import com.ssafy.calmwave.config.jwt.JwtUtil;
 import com.ssafy.calmwave.domain.*;
 import com.ssafy.calmwave.dto.WorkCategoryDto;
 import com.ssafy.calmwave.dto.WorkRequestDto;
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WorkService {
 
+    private final JwtUtil jwtUtil;
     private final WorkRepository workRepository;
     private final UserService userService;
     private final CategoryService categoryService;
@@ -78,5 +80,20 @@ public class WorkService {
                         ))
                 .collect(Collectors.toList());
         return list;
+    }
+
+
+    /**
+     * work의 user와 token의 user가 동일한지 (업무의 주인이 맞는지)확인
+     * @param optionalWork
+     * @param token
+     * @return
+     */
+    public boolean checkValid(Optional<Work> optionalWork, String token) {
+        return optionalWork.get().getUser().getId().equals(jwtUtil.getUser(token).getId());
+    }
+
+    public void deleteById(long workId) {
+        workRepository.deleteById(workId);
     }
 }

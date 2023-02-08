@@ -172,5 +172,30 @@ public class WorkController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
+    /**
+     * 업무 삭제
+     * @param body(workId)
+     * @param token
+     * @return
+     */
+    @PostMapping("delete")
+    @ApiOperation(value = "업무 삭제", notes = "result:ok")
+    public ResponseEntity<?> deleteCategory(@RequestBody Map<String, Long> body, @RequestHeader(value = "AccessToken") String token) {
+        long workId = body.get("workId");
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        Optional<Work> optionalWork = workService.findById(workId);
+        //work의 주인이 맞는지 확인
+        if (optionalWork.isPresent() && workService.checkValid(optionalWork,token)) {
+            workService.deleteById(workId);
+            resultMap.put("result", "ok");
+            status = HttpStatus.ACCEPTED;
+        } else {
+            resultMap.put("result", "해당 업무를 삭제할 권한이 없습니다.");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
+    }
+
 
 }
