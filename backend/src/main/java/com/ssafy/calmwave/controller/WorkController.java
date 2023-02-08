@@ -74,8 +74,8 @@ public class WorkController {
             System.out.println("work = " + work.getTitle());
         }
 
-        //List<WorkResponseDto> workResponseDtos = workService.convert(todo);
-        return ResponseEntity.ok().body(todo);
+        List<WorkResponseDto> workResponseDtos = workService.convert(todo);
+        return ResponseEntity.ok().body(workResponseDtos);
     }
 
     /**
