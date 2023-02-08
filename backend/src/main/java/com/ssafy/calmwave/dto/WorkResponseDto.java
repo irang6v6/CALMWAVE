@@ -20,6 +20,6 @@ public class WorkResponseDto {
     private LocalDateTime dateAimed;
     private int workOrder;
     private Long totalTime;
-    private WorkCategoryDto workCate;
+//    private WorkCategoryDto workCate;
 
 }

@@ -76,7 +76,7 @@ public class WorkService {
         List<WorkResponseDto> list = todo.stream().map(m ->
                         new WorkResponseDto(m.getId(), m.getTitle(), m.getDescription(), m.getStatus(), m.getDateCreated(), m.getDateAimed(), m.getWorkOrder()
                                 , workPeriodRepository.findTimediffByWorkId(m.getId())*1000
-                                , new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder())
+//                                , new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder())
                         ))
                 .collect(Collectors.toList());
         return list;
