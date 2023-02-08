@@ -16,6 +16,7 @@ import test from "../utils/test"
 import axios from "axios"
 import styles from "./TestPage.module.css"
 import { useClasses } from "../hooks/custom/useClasses"
+import SkyWithWave from "../components/Canvas/SkyWithWave/SkyWithWave"
 
 function TestPage() {
   // const [searchParams] = useSearchParams()
@@ -69,6 +70,11 @@ function TestPage() {
       <div style={{ display: "none" }}>
         <img src={someImg} id={`test-logo`} />
       </div>
+      <SkyWithWave
+        canvasWidth={canvasWidth}
+        canvasHeight={canvasHeight}
+        background={`rgba(0, 0, 0, 1)`}
+      />
       <SecondNightSky
         canvasWidth={canvasWidth}
         canvasHeight={canvasHeight}

@@ -30,8 +30,8 @@
 }
 
 /* .logo-calm-c {
-  font-family: "Love Ya Like A Sister", cursive;
-  font-size: 4.5rem;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 3.3rem;
   color: rgb(2, 45, 82);
   transition: 0.5s;
   display: inline-block;
@@ -44,8 +44,8 @@
   animation-direction: alternate;
 }
 .logo-calm-a {
-  font-family: "Love Ya Like A Sister", cursive;
-  font-size: 4.5rem;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 3.3rem;
   color: rgb(2, 45, 82);
   transition: 0.5s;
   display: inline-block;
@@ -59,8 +59,8 @@
   animation-delay: 0.5s;
 }
 .logo-calm-l {
-  font-family: "Love Ya Like A Sister", cursive;
-  font-size: 4.5rem;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 3.3rem;
   color: rgb(2, 45, 82);
   transition: 0.5s;
   display: inline-block;
@@ -74,8 +74,8 @@
   animation-delay: 1s;
 }
 .logo-calm-m {
-  font-family: "Love Ya Like A Sister", cursive;
-  font-size: 4.5rem;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 3.3rem;
   color: rgb(2, 45, 82);
   transition: 0.5s;
   display: inline-block;
@@ -91,8 +91,8 @@
 }
 
 .logo-wave-w {
-  font-family: "Love Ya Like A Sister", cursive;
-  font-size: 4.5rem;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 3.3rem;
   color: rgb(59, 123, 177);
   transition: 0.5s;
   display: inline-block;
@@ -106,8 +106,8 @@
   animation-delay: 2s;
 }
 .logo-wave-a {
-  font-family: "Love Ya Like A Sister", cursive;
-  font-size: 4.5rem;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 3.3rem;
   color: rgb(59, 123, 177);
   transition: 0.5s;
   display: inline-block;
@@ -121,8 +121,8 @@
   animation-delay: 2.5s;
 }
 .logo-wave-v {
-  font-family: "Love Ya Like A Sister", cursive;
-  font-size: 4.5rem;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 3.3rem;
   color: rgb(59, 123, 177);
   transition: 0.5s;
   display: inline-block;
@@ -136,8 +136,8 @@
   animation-delay: 3s;
 }
 .logo-wave-e {
-  font-family: "Love Ya Like A Sister", cursive;
-  font-size: 4.5rem;
+  font-family: 'Black Han Sans', sans-serif;
+  font-size: 3.3rem;
   color: rgb(59, 123, 177);
   transition: 0.5s;
   display: inline-block;
@@ -152,14 +152,14 @@
 } */
 
 .logo-calm {
-  font-family: "Love Ya Like A Sister", cursive;
-  font-size: 4.5rem;
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 3.3rem;
   color: rgb(2, 45, 82);
   transition: 0.5s;
   display: inline-block;
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
   cursor: pointer;
-  transform: translate(0, 10px) scale(98%);
+  transform: translate(0, 17px) scale(98%);
   user-select: none;
 
   animation-name: toktok;
@@ -169,14 +169,14 @@
 }
 
 .logo-wave {
-  font-family: "Love Ya Like A Sister", cursive;
-  font-size: 4.5rem;
+  font-family: "Black Han Sans", sans-serif;
+  font-size: 3.3rem;
   color: rgb(59, 123, 177);
   transition: 0.5s;
   display: inline-block;
   text-shadow: 1px 1px 2px rgba(2, 45, 82, 0.5);
   cursor: pointer;
-  transform: translate(0, 10px) scale(98%);
+  transform: translate(0, 17px) scale(98%);
   user-select: none;
 
   animation-name: toktok;
@@ -187,6 +187,6 @@
 
 @keyframes toktok {
   to {
-    transform: translate(0, -11px) scale(103%);
+    transform: translate(0, 0px) scale(103%);
   }
 }

@@ -25,7 +25,7 @@ function CategoryForm() {
       return
     }
     // dispatch(modalActions.toggleIsLoading())
-    if (isCreate) {
+    if (isCreate && titleInput) {
       axios({
         method: "post",
         url: `/v1/category/create`,
