@@ -3,7 +3,7 @@ import { useDrag, useDrop } from "react-dnd"
 import styles from "./TodoCard.module.css"
 import { useSelector, useDispatch } from "react-redux"
 import { todoActions } from "../../store/todos-slice"
-
+import useApi from "../../hooks/http/use-api"
 export default function TodoCard({
   id,
   title,
@@ -19,6 +19,8 @@ export default function TodoCard({
   const [running] = useState(currentColumn === "In Progress")
   const todos = useSelector((state) => state.todos.todos)
   const dispatch = useDispatch()
+  /* eslint-disable */
+  const [updateStatusLoading, updateStatusError, updateStatus] = useApi()
 
   useEffect(() => {
     let interval
@@ -54,7 +56,12 @@ export default function TodoCard({
     }
   }
 
-  const changeTodoState = (currentTodoId, columnName, currentTime, currentStartTime) => {
+  const changeTodoState = (
+    currentTodoId,
+    columnName,
+    currentTime,
+    currentStartTime
+  ) => {
     const prevState = todos
     dispatch(
       todoActions.changeTodos(
@@ -63,13 +70,47 @@ export default function TodoCard({
             ...e,
             column: e.id === currentTodoId ? columnName : e.column,
             time: e.id === currentTodoId ? currentTime : e.time,
-            startWorkingDate: e.id === currentTodoId ? currentStartTime : e.startWorkingDate,
+            startWorkingDate:
+              e.id === currentTodoId ? currentStartTime : e.startWorkingDate,
           }
         })
       )
     )
   }
 
+  const workPeriodHandler = async function (startTime, endTime) {
+    updateStatus({
+      method: "post",
+      url: "/v1/task/workperiod",
+      data: {
+        endTime: endTime,
+        startTime: startTime,
+        workId: id,
+      },
+    })
+  }
+
+  const statusToDoneHandler = async function () {
+    updateStatus({
+      method: "post",
+      url: "/v1/task/status",
+      data: {
+        workStatus: "DONE",
+        workId: id,
+      },
+    })
+  }
+
+  const statusToTodoHandler = async function () {
+    updateStatus({
+      method: "post",
+      url: "/v1/task/status",
+      data: {
+        workStatus: "TODO",
+        workId: id,
+      },
+    })
+  }
 
   const ref = useRef(null)
   const [, drop] = useDrop({
@@ -122,34 +163,35 @@ export default function TodoCard({
       const dropResult = monitor.getDropResult()
       if (dropResult) {
         if (dropResult.title) {
+          let now = 0
           if (dropResult.title === "In Progress") {
-            const now = Date.now()
-            changeTodoState(
-              item.id,
-              dropResult.title,
-              time + currentTime - startTime,
-              now
-            )
+            now = Date.now()
             dispatch(todoActions.setProgress(true))
-          } else if (
-            item.currentColumn === "In Progress" &&
-            dropResult.title !== "In Progress"
-          ) {
-            changeTodoState(
-              item.id,
-              dropResult.title,
-              time + currentTime - startTime,
-              0
-            )            
-            dispatch(todoActions.setProgress(false))
-          } else {
-            changeTodoState(
-              item.id,
-              dropResult.title,
-              time + currentTime - startTime,
-              0,
+          } else if (item.currentColumn === "In Progress") {
+            const workPeriodStartPoint = new Date(
+              startWorkingDate + 9 * 60 * 60 * 1000
             )
+              .toISOString()
+              .substr(0, 19)
+            const workPeriodEndPoint = new Date(
+              currentTime + 9 * 60 * 60 * 1000
+            )
+              .toISOString()
+              .substr(0, 19)
+            workPeriodHandler(workPeriodStartPoint, workPeriodEndPoint)
+            dispatch(todoActions.setProgress(false))
           }
+          if (dropResult.title === "Done") {
+            statusToDoneHandler()
+          } else if (dropResult.title === "To do") {
+            statusToTodoHandler()
+          }
+          changeTodoState(
+            item.id,
+            dropResult.title,
+            time + currentTime - startTime,
+            now
+          )
         }
       }
     },

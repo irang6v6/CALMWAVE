@@ -37,6 +37,13 @@ function Signup(props) {
   const [passwordIsValid, setPasswordIsValid] = useState(true)
   const [password2IsValid, setPassword2IsValid] = useState(true)
 
+  // 이메일 중복 확인 관련
+  const [emailDupValid, setEmailDupValid] = useState(null)
+  const [emailDupBtnClasses, setEmailDupBtnClasses] = useState(
+    `${styles[`email-dup-check-yet`]}`
+  )
+  const [emailCheckLoading, emailCheckError, AxiosEmailCheck] = useApi()
+
   const [nicknameClasses, setNicknameClasses] = useState(
     `${styles["form-input"]}`
   )
@@ -155,7 +162,14 @@ function Signup(props) {
         setButtonClasses(() => `${styles["button-invalid"]}`)
       }
     },
-    [nickIsValid, emailIsValid, passwordIsValid, password2IsValid, passwordRef2]
+    [
+      nickIsValid,
+      emailIsValid,
+      passwordIsValid,
+      password2IsValid,
+      passwordRef2,
+      emailDupValid,
+    ]
   )
 
   const resetState = function () {
@@ -179,12 +193,6 @@ function Signup(props) {
     setEmailDupBtnClasses(() => `${styles[`email-dup-check-yet`]}`)
   }
 
-  // 이메일 중복 확인 관련
-  const [emailDupValid, setEmailDupValid] = useState(null)
-  const [emailDupBtnClasses, setEmailDupBtnClasses] = useState(
-    `${styles[`email-dup-check-yet`]}`
-  )
-  const [emailCheckLoading, emailCheckError, AxiosEmailCheck] = useApi()
   const emailCheckHandler = function () {
     AxiosEmailCheck(
       {

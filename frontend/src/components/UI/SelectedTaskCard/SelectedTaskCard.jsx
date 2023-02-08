@@ -8,7 +8,7 @@ import CardHeader from "../CardHeader/CardHeader"
 import styles from "./SelectedTaskCard.module.css"
 
 function SelectedTaskCard({ task, idx }) {
-  // const cardType = "selected-task"
+  const cardType = true
   const dispatch = useDispatch()
   /* eslint-disable */
   const [togglehover, toggleselect, customselect, classes] = useClasses(
@@ -34,12 +34,16 @@ function SelectedTaskCard({ task, idx }) {
       {isRender && (
         <div
           className={classes}
-          onClick={close}
+          // onClick={close}
           onTransitionEnd={toggleWorkHandler}
           onMouseEnter={togglehover}
           onMouseLeave={togglehover}
         >
-          <CardHeader />
+          <CardHeader
+            cardType={cardType}
+            data={task}
+            deleteSelectedTaskList={close}
+          />
           <div>{task.title}</div>
           <div>{task.description}</div>
           <div>{task.businessHours}</div>

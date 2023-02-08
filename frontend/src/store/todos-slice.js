@@ -14,6 +14,9 @@ const todosSlice = createSlice({
       const localData = JSON.parse(window.localStorage.getItem("todo"))
       if (localData) {
         state.todos = localData
+        if (localData.filter((e) => e.column === "In Progress")[0]) {
+          state.onProgress = true
+        }
       } else {
         state.todos = []
       }

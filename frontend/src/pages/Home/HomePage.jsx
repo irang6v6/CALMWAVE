@@ -7,11 +7,11 @@ import TaskManagePage from "./TaskManagePage/TaskManagePage"
 import Posture from "./Posture"
 import Stretching from "./Streching"
 import Stress from "./Stress"
-import LastPage from "./LastPage"
-import Wave from "../../components/Canvas/Wave/Wave"
+// import LastPage from "./LastPage"
+// import Wave from "../../components/Canvas/Wave/Wave"
 import { useRef, useState, useEffect } from "react" //
 import { useCustomWidthHeight } from "../../hooks/custom/useCustomWidthHeight"
-import DiagonalWave from "../../components/Canvas/DiagonalWave/DiagonalWave"
+// import DiagonalWave from "../../components/Canvas/DiagonalWave/DiagonalWave"
 import NightSky from "../../components/Canvas/NightSky/NightSky"
 import { useDispatch } from "react-redux"
 import { AxiosGetCategory } from "../../store/category-slice"
@@ -40,14 +40,7 @@ function HomePage() {
       if (isInitial) {
         setIsInitial(() => false)
       }
-      dispatch(
-        AxiosGetCategory({
-          method: "get",
-          // baseURL: "http://localhost:8080",
-          baseURL: "https://5d2112b6-33e0-4cf7-853b-f9d783cec939.mock.pstmn.io",
-          url: "api/v1/category/list", // 주소 요청해서 보내면 가져옴.
-        })
-      )
+      dispatch(AxiosGetCategory())
     },
     [dispatch, isInitial]
   )
@@ -90,14 +83,14 @@ function HomePage() {
       <NavIcon />
       <div ref={pageRef} className={`${styles["container"]}`}>
         <div className={`${styles["wave-container"]}`}>
-          
-        <NightSky canvasWidth={canvasWidth}
-            canvasHeight={canvasHeight} 
+          <NightSky
+            canvasWidth={canvasWidth}
+            canvasHeight={canvasHeight}
             background={`rgb(31, 31, 34)`}
-            />
-      </div>
+          />
+        </div>
 
-          {/* <Wave
+        {/* <Wave
             canvasWidth={canvasWidth}
             canvasHeight={canvasHeight}
             background={`rgb(31, 31, 34)`}
@@ -128,12 +121,12 @@ function HomePage() {
         <Stretching refVal={stretchRef} goNext={goStress} />
 
         <div className={`${styles["wave-container"]}`}>
-          
-        <NightSky canvasWidth={canvasWidth}
-            canvasHeight={canvasHeight} 
+          <NightSky
+            canvasWidth={canvasWidth}
+            canvasHeight={canvasHeight}
             background={`rgb(31, 31, 34)`}
-            />
-      </div>
+          />
+        </div>
         <Stress refVal={stressRef} goNext={goLast} />
         {/* <LastPage refVal={LastRef} /> */}
         <div className={`${styles["go-up"]}`} onClick={goUp}>

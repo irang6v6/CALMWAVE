@@ -1,12 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
+import { LOGOUTandRESETLOCALSTORAGE } from "./token-slice"
 
 const initialState = {
   isLoading: false,
   isError: false,
   userData: {
-    id: 18,
-    nickname: "default",
+    id: 0, // String일 수도 있음.
+    nickname: "스트링 형태",
+    username: "이메일 형태",
+    stretchingIntervalMin: 50, // 스트레칭 시간 Number
+    dateRegistered: "Date 형태인듯", // 데이트 형태
   },
 }
 
@@ -14,37 +18,78 @@ const UserSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    updateStretchingIntervalTime(state, action) {
-      state.stretchingIntervalTime = action.payload.stretchingIntervalTime
+    setIsLoading(state, action) {
+      state.isLoading = true
     },
-    updateFaceInfo(state, action) {
-      state.faceInfo = action.payload.faceInfo
+    setEndLoading(state, action) {
+      state.isLoading = false
     },
-    updateWorkInfo(state, action) {
-      // 이건 아직
+    setIsError(state, action) {
+      state.isError = true
     },
-    updateTurtleCount(state, action) {
-      state.turtleCount += 1
-      // state.turtleCount += action.payload.count // count는 status에 따라 넣어주면 될듯? 아니라면 그냥 1로만 해도 됨.
+    setNotError(state, action) {
+      state.isError = false
     },
-    updateDeathCount(state, action) {
-      state.deathCount += 1
-      state.deathCount += action.payload.count // count는 status에 따라 넣어주면 될듯? 아니라면 그냥 1로만 해도 됨.
+    changeUserData(state, action) {
+      state.userData = action.payload
     },
-    updateMaximunWorkTime(state, action) {
-      state.maximumWorkTime = action.payload.maximumWorkTime
+    resetUserData(state, action) {
+      state.userData = {}
     },
-    updateLogin(state, action) {
-      state.isLogin = !state.isLogin
-    },
+    // updateStretchingIntervalTime(state, action) {
+    //   state.stretchingIntervalTime = action.payload.stretchingIntervalTime
+    // },
+    // updateFaceInfo(state, action) {
+    //   state.faceInfo = action.payload.faceInfo
+    // },
+    // updateWorkInfo(state, action) {
+    //   // 이건 아직
+    // },
+    // updateTurtleCount(state, action) {
+    //   state.turtleCount += 1
+    //   // state.turtleCount += action.payload.count // count는 status에 따라 넣어주면 될듯? 아니라면 그냥 1로만 해도 됨.
+    // },
+    // updateDeathCount(state, action) {
+    //   state.deathCount += 1
+    //   state.deathCount += action.payload.count // count는 status에 따라 넣어주면 될듯? 아니라면 그냥 1로만 해도 됨.
+    // },
+    // updateMaximunWorkTime(state, action) {
+    //   state.maximumWorkTime = action.payload.maximumWorkTime
+    // },
+    // updateLogin(state, action) {
+    //   state.isLogin = !state.isLogin
+    // },
   },
 })
 
-export const AxiosGetUser = function (requestData) {
+export const AxiosGetUser = function () {
   return async function (dispatch) {
-    axios(requestData)
+    dispatch(userActions.setIsLoading())
+    axios({
+      method: "get",
+      url: "v1/user/userinfo",
+    })
       .then((res) => {
-        console.log(res)
+        dispatch(userActions.changeUserData(res.data))
+      })
+      .then((res) => {
+        dispatch(userActions.setEndLoading())
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+}
+
+export const AxiosLogout = function () {
+  return async function (dispatch) {
+    dispatch(userActions.setIsLoading())
+    axios({
+      method: "get",
+      url: "/v1/user/logout",
+    })
+      .then((res) => {
+        dispatch(LOGOUTandRESETLOCALSTORAGE())
       })
       .catch((err) => {
         console.log(err)

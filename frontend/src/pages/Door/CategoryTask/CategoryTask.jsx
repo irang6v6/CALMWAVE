@@ -3,6 +3,9 @@ import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styles from "./CategoryTask.module.css"
 import { categoryTaskActions } from "../../../store/door-store/category-task-slice"
+import { BsFillPlayFill } from "react-icons/bs"
+import { modalActions } from "../../../store/door-store/modal-slice"
+import { openTaskModal } from "../../../store/door-store/modal-slice"
 
 function CategoryTask(props) {
   const dispatch = useDispatch()
@@ -25,6 +28,11 @@ function CategoryTask(props) {
     },
     [selectedCategoryId, originalTaskList, dispatch]
   )
+
+  const openCreateTaskModal = function () {
+    dispatch(modalActions.resetFormData())
+    dispatch(openTaskModal())
+  }
 
   return (
     <>
@@ -56,6 +64,12 @@ function CategoryTask(props) {
             />
           )
         })}
+        <div
+          className={`${styles[`create-task`]}`}
+          onClick={openCreateTaskModal}
+        >
+          <BsFillPlayFill className={`${styles[`play-icon`]}`} />
+        </div>
       </div>
     </>
   )

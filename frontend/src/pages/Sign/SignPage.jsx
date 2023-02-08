@@ -6,12 +6,14 @@ import LoginLogo from "./LoginLogo"
 import { useNavigate } from "react-router-dom"
 // import axios from "axios"
 import useApi from "../../hooks/http/use-api"
+import { useDispatch } from "react-redux"
+import { AxiosGetUser } from "../../store/user-slice"
 
 function SignPage({ pageRef }) {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const [loginLoading, loginError, loginRequest] = useApi()
   const [signupLoading, signupError, signupRequest] = useApi()
-  // const [isLoading, setIsLoading] = useState(false)
   const [loginOrSignup, setLoginOrSignup] = useState(true)
   const [page1Class, setPage1Class] = useState(`${styles["page1"]}`)
   const [page2Class, setPage2Class] = useState(`${styles["page2"]}`)
@@ -33,13 +35,6 @@ function SignPage({ pageRef }) {
     setLoginOrSignup((val) => !val)
   }
   const googleLoginHandler = async function () {
-    // axios({
-    //   method: "post",
-    //   baseURL: "http://asdfasdfxxc",
-    //   url: "/authorization/google",
-    //   headers: {},
-    //   withCredentials: true,
-    // })
     window.location.href = `
     https://i8a105.p.ssafy.io/api/oauth2/authorization/google`
     // 이후 AccessToken, RefreshToken, userid를 페이지에서 받아오고 작업시켜야 한다.
@@ -49,8 +44,6 @@ function SignPage({ pageRef }) {
     loginRequest(
       {
         method: "post",
-        // baseURL: "http://localhost:8080",
-        baseURL: "https://i8a105.p.ssafy.io/api",
         url: "/login",
         data: {
           username: email,
@@ -58,15 +51,8 @@ function SignPage({ pageRef }) {
         },
       },
       function (res) {
-        if (res.data.response.AccessToken) {
-          localStorage.setItem(
-            "Access",
-            `Bearer `+ res.data.response.AccessToken.substr(7)
-          )
-          localStorage.setItem(
-            "Refresh",
-            `Bearer `+ res.data.response.RefreshToken.substr(7)
-          )
+        if (res) {
+          dispatch(AxiosGetUser())
           navigate("/")
         } else {
           console.log("ㅎㅇ")
@@ -83,8 +69,6 @@ function SignPage({ pageRef }) {
     signupRequest(
       {
         method: "post",
-        // baseURL: "http://localhost:8080",
-        baseURL: "https://i8a105.p.ssafy.io/api",
         url: "/v1/account/join",
         data: {
           username: email,
@@ -94,14 +78,21 @@ function SignPage({ pageRef }) {
       },
       // res로 { "result": "ok" } 가 온다
       async function (res) {
-        if (res.data.result !== "ok") {
+        if (res.data.result === "ok") {
           toggleLoginOrSignup()
           resetAction()
         }
       }
     )
   }
-  console.log(loginError, signupError)
+  useEffect(
+    function () {
+      if (loginError || signupError) {
+        console.log(loginError, signupError)
+      }
+    },
+    [loginError, signupError]
+  )
 
   return (
     <div ref={pageRef} className={`${styles["sign-container"]}`}>
