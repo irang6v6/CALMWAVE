@@ -1,6 +1,6 @@
 import styles from "./UserInfo.module.css"
-import MyCalendar from "../../../components/Calendar/MyCalendar"
-import CalendarInfo from "../../../components/Calendar/CalendarInfo"
+import MyCalendar from "../../../components/MyCalendar/MyCalendar"
+import CalendarInfo from "../../../components/MyCalendar/CalendarInfo"
 
 function UserInfo() {
   return (
