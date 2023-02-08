@@ -27,7 +27,7 @@ export default function MyCalendar() {
   const setCalendar = (selectedDate) => {
     console.log(selectedDate)
     return  todolist
-      .filter((todo) => todo.createdDate.diff(selectedDate))
+      .filter((todo) => todo.createdDate === selectedDate)
       .map((todo, index) => (
         <CalendarInfo
           key={todo.id}
