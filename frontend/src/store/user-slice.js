@@ -5,6 +5,7 @@ import { LOGOUTandRESETLOCALSTORAGE } from "./token-slice"
 const initialState = {
   isLoading: false,
   isError: false,
+  isLogin: localStorage.getItem("isLogin") || false,
   userData: {
     id: 0, // String일 수도 있음.
     nickname: "스트링 형태",

@@ -27,6 +27,9 @@ function CategoryTaskCard({ task, idx }) {
   )
 
   const toggleWorkHandler = function () {
+    if (task.column === "Done") {
+      return
+    }
     dispatch(
       selectedTaskActions.addSelectedTask({
         newTask: {

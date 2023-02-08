@@ -68,7 +68,7 @@ const initialState = {
       id: 5,
       categoryId: 2,
       createdDate: "2023-01-30",
-      finishedDate: "2023-02-15",
+      finishedDate: "2023-02-11",
       title: "다익스트라",
       description: "라트스익다",
       isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
@@ -111,7 +111,7 @@ const initialState = {
     },
     {
       id: 8,
-      categoryId: 3,
+      categoryId: 44,
       createdDate: "2023-01-30",
       finishedDate: "2023-02-15",
       title: "코치님께 이메일 보내기",
@@ -121,12 +121,12 @@ const initialState = {
       endWorkingDate: "",
       Dday: "",
       businessHours: 4,
-      column: "To do",
+      column: "Done",
       time: 0,
     },
     {
       id: 9,
-      categoryId: 3,
+      categoryId: 44,
       createdDate: "2023-01-30",
       finishedDate: "2023-02-15",
       title: "헤어질 결심 보기",
@@ -136,12 +136,12 @@ const initialState = {
       endWorkingDate: "",
       Dday: "",
       businessHours: 4,
-      column: "To do",
+      column: "Done",
       time: 0,
     },
     {
       id: 10,
-      categoryId: 1,
+      categoryId: 44,
       createdDate: "2023-02-03",
       finishedDate: "2023-02-20",
       title: "리액트 공부",
@@ -156,7 +156,7 @@ const initialState = {
     },
     {
       id: 11,
-      categoryId: 1,
+      categoryId: 40,
       createdDate: "2023-02-03",
       finishedDate: "2023-02-15",
       title: "알고리즘 문제풀이",
@@ -171,7 +171,7 @@ const initialState = {
     },
     {
       id: 12,
-      categoryId: 1,
+      categoryId: 39,
       createdDate: "2023-02-03",
       finishedDate: "2023-02-10",
       title: "CS 스터디",
@@ -196,39 +196,90 @@ const taskSlice = createSlice({
     },
     changeTaskList(state, action) {
       state.taskList = action.payload
-      // {workType, itemId} : column 종류, 해당 아이템 id unique 값
-      // action.payload.workType //
     },
     deleteTask(state, action) {
       const id = action.payload
       state.taskList = state.taskList.filter((todo) => todo.id !== id)
     },
-    changeTaskObjectByIdx(state, action) {
-      state.taskList[action.payload.idx] = action.payload.newTask
-    },
-    changeTaskObjectById(state, action) {
-      state.taskList = state.taskList.map((task) => {
-        if (task.id === action.payload.newTask.id) {
-          return action.payload.newTask
-        }
-        return task
-      })
-      console.log(state.taskList)
+    pushTaskList(state, action) {
+      state.taskList = [...state.taskList, ...action.payload]
     },
   },
 })
 
-export const AxiosGetTasks = function (requestData) {
+export const AxiosGetTodos = function () {
   return async function (dispatch) {
-    axios(requestData)
+    axios({
+      method: "get",
+      url: `/v1/task/todo`,
+    })
       .then((res) => {
-        dispatch(taskActions.changeTaskList(res.data))
+        dispatch(
+          taskActions.changeTaskList(
+            res.data.map((task) => {
+              return {
+                id: task?.id,
+                title: task?.title,
+                description: task?.description,
+                category: task?.workCate,
+                categoryId: task?.workCate?.cateId,
+                createdDate: task?.dateCreated,
+                isSelected: false,
+                column:
+                  task?.status === "TODO"
+                    ? "To do"
+                    : task?.status === "DONE"
+                    ? "Done"
+                    : task?.status,
+                finishedDate: task?.dateAimed,
+                totalTime: task?.totalTime,
+                workOrder: task?.workOrder,
+              }
+            })
+          )
+        )
       })
       .catch((err) => {
         console.log(err)
       })
   }
 }
+
+export const AxiosGetDones = function () {
+  return async function (dispatch) {
+    axios({
+      method: "get",
+      url: `/v1/task/done`,
+    }).then((res) => {
+      dispatch(
+        taskActions.pushTaskList(
+          res.data.map((task) => {
+            return {
+              id: task.id,
+              title: task?.title,
+              description: task?.description,
+              category: task?.workCate,
+              categoryId: task?.workCate?.cateId,
+              createdDate: task?.dateCreated,
+              isSelected: false,
+              column: task?.status,
+              finishedDate: task?.dateAimed,
+              totalTime: task?.totalTime,
+              workOrder: task?.workOrder,
+            }
+          })
+        )
+      )
+    })
+  }
+}
+
+// export const AxiosGetAllTaskList = function () {
+//   return async function (dispatch) {
+//     dispatch(AxiosGetTodos())
+//     dispatch(AxiosGetDones())
+//   }
+// }
 
 export const taskActions = taskSlice.actions
 export default taskSlice.reducer

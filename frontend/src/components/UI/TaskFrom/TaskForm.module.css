@@ -1,0 +1,22 @@
+.task-form-container {
+  box-sizing: border-box;
+  outline: none;
+  width: 100%;
+  min-width: 500px;
+  max-width: 800px;
+  padding: 80px;
+  height: 100%;
+  background-color: aliceblue;
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  font-size: 2.77rem;
+}
+
+.task-form-input-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+}

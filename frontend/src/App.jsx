@@ -12,11 +12,22 @@ import NotFound from "./pages/NotFound/NotFound"
 import DoorParentPage from "./pages/Door/DoorParentPage"
 import axios from "axios"
 import OauthLoad from "./pages/OauthLoad/OauthLoad"
+import { useEffect } from "react"
 
 axios.defaults.baseURL = "https://i8a105.p.ssafy.io/api"
 // axios.defaults.transformRequest = []
 
 function App() {
+  useEffect(function () {
+    if (localStorage.getItem("Access")) {
+      axios.defaults.headers.common["AccessToken"] =
+        localStorage.getItem("Access")
+    }
+    if (localStorage.getItem("Refresh")) {
+      axios.defaults.headers.common["RefreshToken"] =
+        localStorage.getItem("Refresh")
+    }
+  }, [])
   return (
     <div className="App">
       <Routes>

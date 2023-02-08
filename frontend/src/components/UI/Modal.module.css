@@ -1,5 +1,5 @@
 .modal-container {
-  transition: 0.4s;
+  transition: 0.1s;
 }
 .modal-container.close {
   box-sizing: border-box;
@@ -43,11 +43,54 @@
   height: 45px;
   border-radius: 5px;
   padding: 3px;
-  transition: 0.4s;
+  transition: 0.1s;
 }
 
 .modal-close-button:hover {
   transform: scale(110%);
   opacity: 0.88;
   cursor: pointer;
+}
+
+.modal-content-container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 50%;
+}
+.modal-content-container.close {
+  animation-name: imout;
+  animation-duration: 0.1s;
+}
+.modal-content-container.open {
+  animation-name: imhere;
+  animation-duration: 0.2s;
+  animation: ease-in-out;
+}
+
+@keyframes imhere {
+  0% {
+    transform: scale(0%);
+  }
+  70% {
+    transform: scale(110%);
+  }
+  100% {
+    transform: scale(100%);
+  }
+}
+
+@keyframes imout {
+  100% {
+    transform: scale(0%);
+  }
+  30% {
+    transform: scale(110%);
+  }
+  0% {
+    transform: scale(100%);
+  }
 }

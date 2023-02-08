@@ -21,7 +21,6 @@ function CardHeader({ data, cardType, deleteSelectedTaskList }) {
   const dispatch = useDispatch()
   // const { isModal, isTask, isDelete, isLoading, isError, formData } =
   //   useSelector((state) => state.modal)
-  console.log(cardType)
   const openModal = function () {
     dispatch(modalActions.setFormData({ data }))
     if (cardType) {

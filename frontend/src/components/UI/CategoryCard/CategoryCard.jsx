@@ -3,7 +3,7 @@ import { useDrag, useDrop } from "react-dnd"
 import { useDispatch, useSelector } from "react-redux"
 import { useClasses } from "../../../hooks/custom/useClasses"
 import { categoryActions } from "../../../store/category-slice"
-import CardBody from "../CardBody/CardBody"
+// import CardBody from "../CardBody/CardBody"
 import CardFooter from "../CardFooter/CardFooter"
 import CardHeader from "../CardHeader/CardHeader"
 import styles from "./CategoryCard.module.css"
@@ -126,7 +126,7 @@ function CategoryCard({ category, idx }) {
     >
       {/* 카드 헤더에 onSetting이랑 onDelete 넣어줘야 함. */}
       <CardHeader data={category} cardType={cardType} />
-      <CardBody data={category} />
+      {/* <CardBody data={category} /> */}
       <CardFooter
         data={category}
         big={category.sumBusinessHours}

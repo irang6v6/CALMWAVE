@@ -6,6 +6,7 @@ import {
 } from "../../../store/category-slice"
 import styles from "./DeleteModalForm.module.css"
 import { closeModal } from "../../../store/door-store/modal-slice"
+import { AxiosGetDones, AxiosGetTodos } from "../../../store/task-slice"
 
 function DeleteModalForm({ cardType, cardId }) {
   const dispatch = useDispatch()
@@ -17,10 +18,22 @@ function DeleteModalForm({ cardType, cardId }) {
       axios({
         method: "post",
         url: "/v1/task/delete",
-        data: {},
+        data: {
+          workId: formData.id,
+        },
       })
-        .then()
-        .catch()
+        .then(() => {
+          dispatch(AxiosGetTodos())
+        })
+        .then(() => {
+          dispatch(AxiosGetDones())
+        })
+        .then(() => {
+          dispatch(closeModal())
+        })
+        .catch((err) => {
+          console.log("이건 일 지우기 에러임")
+        })
     } else {
       // category
       axios({
@@ -31,19 +44,10 @@ function DeleteModalForm({ cardType, cardId }) {
         },
       })
         .then((res) => {
-          axios({
-            method: "get",
-            url: `/v1/category/list`,
-          })
-            .then((res) => {
-              dispatch(AxiosGetCategory())
-            })
-            .then((res) => {
-              dispatch(closeModal())
-            })
-            .catch((err) => {
-              console.log(err)
-            })
+          dispatch(AxiosGetCategory())
+        })
+        .then(() => {
+          dispatch(closeModal())
         })
         .catch((err) => {
           console.log(err, "카테고리 삭제 에러")

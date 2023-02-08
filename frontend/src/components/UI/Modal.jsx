@@ -17,14 +17,23 @@ function Modal() {
   const [classes, setClasses] = useState(
     `${styles[`modal-container`]} ${styles[`close`]}`
   )
+  const [contentClasses, setContentClasses] = useState(
+    `${styles[`modal-content-container`]} ${styles[`close`]}`
+  )
   // const [taskCreate]
 
   useEffect(
     function () {
       if (isModal) {
         setClasses(() => `${styles[`modal-container`]} ${styles[`open`]}`)
+        setContentClasses(
+          () => `${styles[`modal-content-container`]} ${styles[`open`]}`
+        )
       } else {
         setClasses(() => `${styles[`modal-container`]} ${styles[`close`]}`)
+        setContentClasses(
+          () => `${styles[`modal-content-container`]} ${styles[`close`]}`
+        )
       }
     },
     [isModal]
@@ -41,17 +50,19 @@ function Modal() {
             className={`${styles[`modal-close-button`]}`}
             onClick={onCloseModal}
           />
-          {isLoading ? (
-            <SpinnerDots />
-          ) : isError ? (
-            <div>에러임</div>
-          ) : isDelete ? (
-            <DeleteModalForm cardType={isTask} cardId={formData?.id} />
-          ) : isTask ? (
-            <TaskForm isCreate={isCreate} />
-          ) : (
-            <CategoryForm isCreate={isCreate} />
-          )}
+          <div className={contentClasses}>
+            {isLoading ? (
+              <SpinnerDots />
+            ) : isError ? (
+              <div>에러임</div>
+            ) : isDelete ? (
+              <DeleteModalForm cardType={isTask} cardId={formData?.id} />
+            ) : isTask ? (
+              <TaskForm isCreate={isCreate} />
+            ) : (
+              <CategoryForm isCreate={isCreate} />
+            )}
+          </div>
         </div>,
         document.getElementById("overlay-root")
       )}

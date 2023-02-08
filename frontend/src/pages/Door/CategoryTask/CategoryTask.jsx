@@ -1,11 +1,12 @@
 import CategoryTaskCard from "../../../components/UI/CategoryTaskCard/CategoryTaskCard"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import styles from "./CategoryTask.module.css"
 import { categoryTaskActions } from "../../../store/door-store/category-task-slice"
-import { BsFillPlayFill } from "react-icons/bs"
+import { BsPlusLg } from "react-icons/bs"
 import { modalActions } from "../../../store/door-store/modal-slice"
 import { openTaskModal } from "../../../store/door-store/modal-slice"
+import { useClasses } from "../../../hooks/custom/useClasses"
 
 function CategoryTask(props) {
   const dispatch = useDispatch()
@@ -13,24 +14,84 @@ function CategoryTask(props) {
   const selectedCategoryId = useSelector(
     (state) => state.category.selectedCategoryId
   )
+  /* eslint-disable */
+  const [
+    toggleAllTabhover,
+    toggleAllTabSelect,
+    customAllTabSelect,
+    AlltabClasses,
+  ] = useClasses(styles, `tab-item`)
+  const [
+    toggleTodoTabhover,
+    toggleTodoTabSelect,
+    customTodoTabSelect,
+    TodotabClasses,
+  ] = useClasses(styles, `tab-item`)
+  const [
+    toggleCompleteTabhover,
+    toggleCompleteTabSelect,
+    customCompleteTabSelect,
+    CompletetabClasses,
+  ] = useClasses(styles, `tab-item`)
+
+  const [selectedState, setSelectedState] = useState(null)
+  useEffect(function () {
+    customAllTabSelect(true)
+  }, [])
 
   const originalTaskList = useSelector((state) => state.task.taskList)
+  // console.log(originalTaskList)
+
+  const selectAll = function () {
+    setSelectedState(() => null)
+    customAllTabSelect(true)
+    customCompleteTabSelect(false)
+    customTodoTabSelect(false)
+  }
+  const selectTodo = function () {
+    setSelectedState(() => "To do")
+    customAllTabSelect(false)
+    customCompleteTabSelect(false)
+    customTodoTabSelect(true)
+  }
+  const selectDone = function () {
+    setSelectedState(() => "DONE")
+    customAllTabSelect(false)
+    customCompleteTabSelect(true)
+    customTodoTabSelect(false)
+  }
 
   useEffect(
     function () {
       dispatch(
         categoryTaskActions.getCategoryTask({
-          newList: originalTaskList.filter((task) => {
-            return task.categoryId === selectedCategoryId
-          }),
+          newList:
+            selectedState === null
+              ? originalTaskList.filter((task) => {
+                  return task.categoryId === selectedCategoryId
+                })
+              : selectedState === "To do"
+              ? originalTaskList.filter((task) => {
+                  return (
+                    task.categoryId === selectedCategoryId &&
+                    task.column === "To do"
+                  )
+                })
+              : originalTaskList.filter((task) => {
+                  return (
+                    task.categoryId === selectedCategoryId &&
+                    task.column === "Done"
+                  )
+                }),
         })
       )
     },
-    [selectedCategoryId, originalTaskList, dispatch]
+    [selectedCategoryId, originalTaskList, dispatch, selectedState]
   )
 
   const openCreateTaskModal = function () {
     dispatch(modalActions.resetFormData())
+    dispatch(modalActions.setIsCreate())
     dispatch(openTaskModal())
   }
 
@@ -40,21 +101,17 @@ function CategoryTask(props) {
         해당 카테고리의 업무들
       </div>
       <div className={`${styles[`epic-task-container`]}`}>
-        <form className={`${styles[`door-tab-container`]}`}>
-          {/* 여기 아래는 보여주기용 체크박스인 상태. */}
-          <div>
-            <label htmlFor={`door-tab-daily`}>Daily</label>
-            <input type="checkbox" id={`door-tab-daily`}></input>
+        <div className={`${styles[`door-tab-container`]}`}>
+          <div className={AlltabClasses} onClick={selectAll}>
+            모두
           </div>
-          <div>
-            <label htmlFor={`door-tab-weekly`}>Weekly</label>
-            <input type="checkbox" id={`door-tab-weekly`}></input>
+          <div className={TodotabClasses} onClick={selectTodo}>
+            미완료
           </div>
-          <div>
-            <label htmlFor={`door-tab-monthly`}>Monthly</label>
-            <input type="checkbox" id={`door-tab-monthly`}></input>
+          <div className={CompletetabClasses} onClick={selectDone}>
+            완료
           </div>
-        </form>
+        </div>
         {categoryTaskList.map((task, idx) => {
           return (
             <CategoryTaskCard
@@ -68,7 +125,7 @@ function CategoryTask(props) {
           className={`${styles[`create-task`]}`}
           onClick={openCreateTaskModal}
         >
-          <BsFillPlayFill className={`${styles[`play-icon`]}`} />
+          <BsPlusLg className={`${styles[`play-icon`]}`} />
         </div>
       </div>
     </>

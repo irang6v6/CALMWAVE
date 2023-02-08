@@ -4,11 +4,13 @@
   width: 100%;
   min-width: 500px;
   max-width: 800px;
-  height: 77%;
+  padding: 80px;
+  height: 100%;
   background-color: aliceblue;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  /* align-items: center; */
+  font-size: 2.77rem;
 }
 
 .category-form-input-container {
