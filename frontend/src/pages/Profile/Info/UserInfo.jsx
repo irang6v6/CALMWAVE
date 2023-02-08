@@ -1,6 +1,7 @@
 import styles from "./UserInfo.module.css"
 import MyCalendar from "../../../components/MyCalendar/MyCalendar"
-import CalendarInfo from "../../../components/MyCalendar/CalendarInfo"
+// import CalendarInfo from "../../../components/MyCalendar/CalendarInfo"
+// import NightSky from "../../../components/Canvas/NightSky/NightSky"
 
 function UserInfo() {
   return (
@@ -14,9 +15,14 @@ function UserInfo() {
       </div>
 
       <div className={`${styles["info-Box"]}`}>
-        <h3> 어쩌구 저쩌궁 </h3>
+        <div className={`${styles["my-calendar"]}`}>
         <MyCalendar/>
-        <CalendarInfo/>
+        </div>
+
+        <div className={`${styles["calendar-info"]}`}>
+        {/* <CalendarInfo/> */}
+        </div>
+
       </div>
     </div>
   )

@@ -7,19 +7,16 @@ import { useSelector } from "react-redux"
 
 export default function CalendarInfo({ todo }) {
   console.log(todo?.title)
-  //   const [activeDate, setActiveDate] = useState(new Date())
 
-  //   const todolist = useSelector((state) => (state.task.taskList))
-
-  //   const daysRemaining = moment(date).diff(moment().format("YYYY-MM-DD"), "day");
-  //   let dDayLabel = "D";
-  //   if (daysRemaining === 0) {
-  //     dDayLabel += "-Day";
-  //   } else if (daysRemaining <= 0) {
-  //     dDayLabel += `-${-daysRemaining}`;
-  //   } else {
-  //     dDayLabel += `+${daysRemaining}`;
-  //   }
+  // const daysRemaining = moment(date).diff(moment().format("YYYY-MM-DD"), "day");
+  // let dDayLabel = "D";
+  // if (daysRemaining === 0) {
+  //   dDayLabel += "-Day";
+  // } else if (daysRemaining <= 0) {
+  //   dDayLabel += `-${-daysRemaining}`;
+  // } else {
+  //   dDayLabel += `+${daysRemaining}`;
+  // }
 
   //   const selectDay = (selectedDate) => {
   //     return todolist
@@ -29,47 +26,15 @@ export default function CalendarInfo({ todo }) {
   //       )
   //   }
 
-  return <div>{todo?.title}</div>
-  // <div className="MyCalendar">
-  //   <div className="calender-container">
-  //     {/* <Calendar
-  //       className="react-calendar"
-  //       onChange={setDate}
-  //       value={date}
-  //       // 일요일 먼저
-  //       calendarType="Hebrew"
-  //       // 연도 못보게
-  //       minDetail="month"
-  //       // 이전, 다음달 못보게
-  //       maxDetail="month"
-  //       showNeighboringMonth={false}
-  //       // 달력에 '일' 빼는 코드
-  //       formatDay={(locale, date) =>
-  //         // date.toLocaleString("en", { day: "numeric" })
-  //         moment(date).format("DD")
-  //       }
-
-  //       tileClassName={({ date }) => {
-  //       // 토요일: 파란색, 일요일: 빨간색
-  //       if (moment(date).format("LLLL").split(",")[0] === "Saturday") {
-  //         return "highlight-saturday"
-  //       } else if (moment(date).format("LLLL").split(",")[0] === "Sunday") {
-  //         console.log(todolist)
-  //         return "highlight-sunday"
-  //       }}}
-  //     /> */}
-
-  //     <div className="select-date-wrap">
-  //       {/* <div className="select-date">
-  //         {moment(date).format("YYYY년 MM월 DD일")}
-  //       </div> */}
-
-  //       <div className="select-todolist">
-  //         {/* {selectDay(moment(date).format("YYYY-MM-DD"))} */}
-  //         <br />
-  //       {/* {dDayLabel} */}
-  //       </div>
-  //     </div>
-  //   {/* </div> */}
-  // </div>
+  return <div className="todo-box"> 
+    <div className="todo-content">
+      <b>▶ {todo?.title}</b> &nbsp; <br/>
+      {todo?.description}<br/>
+      <br/>
+      목표일자 : {todo?.finishedDate}
+    </div>
+      <p>
+      카테고리: {todo?.categoryId}
+      </p>
+  </div>
 }

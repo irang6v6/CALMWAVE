@@ -7,15 +7,15 @@
 .calender-container{
   display: flex;
   width: 100%;
-  justify-content: space-between;
+  justify-content: center;
   padding: 0 5% 0 5%;
 }
 
 
 /* 캘린더 wrap (배경) */
 .react-calendar {
-    width: 25%;
-    height: 100%;
+    width: 30%;
+    height: 300px;
     padding: 20px;
     background-color: rgb(223, 242, 255);
     /* border: 1px solid #000; */
@@ -24,6 +24,8 @@
     font-family: Arial, Helvetica, sans-serif;
     line-height: 1.125em;
     box-shadow: 3px 3px 3px 3px rgb(209, 209, 209);
+    margin-right: 5%;
+    margin-top: 8%;
   }
   
   .react-calendar--doubleView {
@@ -252,24 +254,62 @@
     background-color: #bb2c2c;
   }
 
+  .right-box{
+    display: flex;
+    flex-direction: column;
+    /* border: 3px solid #da2222; */
+    width: 60%;
+    height: 500px;
+    /* text-align: center; */
+  }
+
   .select-date-wrap{
     /* border: 1px solid #000; */
-    width: 60%;
+    width: 100%;
     /* border: 1px solid #000; */
-    border-radius: 20px;
+    /* border-radius: 20px; */
     text-align: center;
     margin-top: 10px;
-    background-color: rgb(223, 242, 255);
-    box-shadow: 3px 3px 3px 3px rgb(209, 209, 209);
+    /* background-color: rgb(223, 242, 255); */
+    /* box-shadow: 3px 3px 3px 3px rgb(209, 209, 209); */
     padding: 1%;
+    height: auto;
   }
 
   .select-date{
     font-weight: 600;
     font-size: 1.5rem;
+    white-space: nowrap;
   }
 
   .select-todolist{
     margin-top: 5%;
-    line-height: 250%;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    /* line-height: 250%; */
+    /* border: 1px solid #000; */
+    /* border: 1px solid #000; */
+    /* overflow: hidden; */
+    /* overflow: scroll; */
+  }
+  
+  .todo-box{
+    display: flex;
+    justify-content: space-between;
+    /* border: 1px solid #000; */
+    width:70%;
+    padding: 5%;
+    /* padding-bottom: 5%; */
+    border-radius: 10px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    box-shadow: 3px 3px 3px 3px rgb(209, 209, 209);
+  }
+
+  .todo-content{
+
   }
