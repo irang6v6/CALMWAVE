@@ -71,11 +71,11 @@ public class WorkController {
         System.out.println("todo요청 username: "+user.getUsername());
         List<Work> todo = workService.getTodo(user.getId());
         for (Work work : todo) {
-            System.out.println("work = " + work);
+            System.out.println("work = " + work.toString());
         }
 
-        List<WorkResponseDto> workResponseDtos = workService.convert(todo);
-        return ResponseEntity.ok().body(workResponseDtos);
+        //List<WorkResponseDto> workResponseDtos = workService.convert(todo);
+        return ResponseEntity.ok().body(todo);
     }
 
     /**
@@ -93,8 +93,8 @@ public class WorkController {
         for (Work work : done) {
             System.out.println("work = " + work);
         }
-        List<WorkResponseDto> workResponseDtos = workService.convert(done);
-        return ResponseEntity.ok().body(workResponseDtos);
+        //List<WorkResponseDto> workResponseDtos = workService.convert(done);
+        return ResponseEntity.ok().body(done);
     }
 
     /**
