@@ -4,6 +4,12 @@ import { OpenVidu } from "openvidu-browser"
 import axios from "axios"
 import UserVideoComponent from "./UserVideoComponent"
 import styles from "./Video.module.css"
+import {
+  AiFillEye,
+  AiFillEyeInvisible,
+  AiFillVideoCamera,
+} from "react-icons/ai"
+import new_logo from "../../assets/new_logo.png"
 
 const OPENVIDU_SERVER_URL = "https://i8a105.p.ssafy.io:8443/"
 const OPENVIDU_SERVER_SECRET = "WAVES"
@@ -16,6 +22,7 @@ export default function Video() {
   const [publisher, setPublisher] = useState(undefined)
   /* eslint-disable */
   const [OV, setOV] = useState()
+  const [view, setView] = useState(true)
 
   // 최초 진입 시 세션 접속
   useEffect(() => {
@@ -134,6 +141,11 @@ export default function Video() {
     return response.data.token // The token
   }
 
+  const toggleView = () => {
+    setView(!view)
+    // const state =
+  }
+
   // 카메라 변경 함수
   // async switchCamera() {
   //     try {
@@ -175,17 +187,47 @@ export default function Video() {
       <div className={`${styles[`empty`]}`}>empty</div>
       <div className={`${styles["video-info-container"]}`}>
         <div className={`${styles["videobox"]}`}>
-          {publisher === undefined ? (
-            <form className={`${styles["video"]}`} onSubmit={joinSession}>
-              <input type="submit" value="JOIN" />
-            </form>
-          ) : (
-            <UserVideoComponent streamManager={publisher} />
-          )}
-          <div className={`${styles["videonav"]}`}>VIDEO NAV</div>
+          <div className={`${styles["video"]}`}>
+            {publisher === undefined ? (
+              <AiFillVideoCamera
+                onClick={joinSession}
+                className={`${styles[`videobox-icon`]}`}
+              />
+            ) : (
+              <>
+                <UserVideoComponent
+                  streamManager={publisher}
+                  className={`${!view && styles[`visi-hidden`]}`}
+                />
+                <img
+                  src={new_logo}
+                  className={`${styles[`logo-icon`]}
+                ${view && styles[`display-none`]}
+                `}
+                />
+              </>
+            )}
+          </div>
+          <div className={`${styles["videonav"]}`}>
+            {publisher === undefined ? (
+              <div></div>
+            ) : (
+              <div onClick={toggleView}>
+                {view ? (
+                  <AiFillEye className={`${styles[`videobox-icon`]}`} />
+                ) : (
+                  <AiFillEyeInvisible
+                    className={`${styles[`videobox-icon`]}`}
+                  />
+                )}
+              </div>
+            )}
+          </div>
         </div>
-        <div className={`${styles["info-container"]}
-        ${progress && styles["info-container_focused"]}`}></div>
+        <div
+          className={`${styles["info-container"]}
+        ${progress && styles["info-container_focused"]}`}
+        ></div>
       </div>
     </>
   )

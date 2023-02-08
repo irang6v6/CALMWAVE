@@ -3,7 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  border-radius: 5px;
+  border-radius: 8px;
   position: relative;
   height: 10em;
   margin: 5px;
@@ -11,10 +11,11 @@
 
 .todo {
   height: 5em;
-}
+} 
 
 .progress {
-  height: 95%;
+  height: 90%;
+  width: 100%;
 }
 
 .done {

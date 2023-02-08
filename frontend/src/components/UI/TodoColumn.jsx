@@ -57,8 +57,7 @@ export default function TodoColumn({ children, className, title }) {
       <div
         ref={drop}
         className={`${styles["todobox"]}
-        ${progress && title === "In Progress" && styles["todobox_focused"]} 
-        ${!progress && title === "Done" && styles["todobox_focused"]}
+        ${title === "In Progress" && styles["progressbox"]}
         ${className}`}
       >
         {children}

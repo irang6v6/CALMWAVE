@@ -1,22 +1,48 @@
-.videobox > div > div > video {
-  height: auto;
-  width: 24vw;
-  border-radius: 11px;
+.videobox > div > div > div > video {
+  width: 100%;
+  border-radius: 3px;
+  /* margin: 5px; */
+  /* width: 90% */
 }
 
 .videobox {
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
+  justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  /* box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5); */
   color: white;
-  width: 24vw;
+  height: 100%;
+  width: 100%;
 }
 
 .video {
-  height: 19vw;
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video > div {
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video > div > div {
+  box-sizing: border-box;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.video > div > div > div {
+  box-sizing: border-box;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -26,32 +52,61 @@
   font-size: 2rem;
   color: rgba(200, 254, 238, 1);
   text-align: center;
-  margin-bottom: 5px;
   visibility: hidden;
 }
 
 .video-info-container {
   box-sizing: border-box;
   display: flex;
+  justify-content: center;
   flex-direction: row;
+  align-items: center;
   background-color: rgba(111, 111, 111, 0.8);
-  border-radius: 11px;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.5);
+  border-radius: 5px;
+  margin: 5px;
+  width: 100%;
+  transition: width 0.35s ease-out;
+  height: 100%;
 }
 
 .info-container {
   display: flex;
+  width: 0%;
+  transition: width 0.35s ease-out;
+  /* flex-direction: column;
+  visibility: hidden;
   align-items: center;
   justify-content: center;
-  width: 0vw;
-  transition: width 0.35s ease-out;
-  /* visibility: hidden; */
-  opacity: 0;
+  opacity: 0; */
 }
 
 .info-container_focused {
-  width: 14vw;
-  visibility: visible;
-  opacity: 1;
-  /* transition: opacity 1s ease-in-out; */
+  width: 100%;
   transition: width 0.35s ease-out;
+  /* visibility: visible;
+  opacity: 1;
+  transition: opacity 1s ease-in-out; */
 }
+
+.videobox-icon {
+  min-height: 30px;
+  min-width: 30px;
+}
+
+.logo-icon {
+  width: 75%;
+  margin: 10px;
+}
+
+.visi-hidden {
+  /* visibility: hidden; */
+  position: absolute;
+  z-index: -40;
+  /* transform: scale(0%); */
+}
+
+.display-none {
+  display: none;
+}
+
