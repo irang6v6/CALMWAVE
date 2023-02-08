@@ -58,7 +58,7 @@ export const RoomPage = () => {
       <div ref={doorRef} className={`${styles["todobox-container"]}`}>
         <DndProvider backend={HTML5Backend}>
           <div className={`${styles["todo-container"]}`}>
-            <TodoColumn title="To do" className={`bg-cw-indigo-7`}>
+            <TodoColumn title="To do">
               {alignTodosInColumn("To do")}
             </TodoColumn>
           </div>
@@ -67,13 +67,13 @@ export const RoomPage = () => {
             <div className={`${styles[`cam-container`]}`}>
               <Video />
             </div>
-            <TodoColumn title="In Progress" className={`bg-cw-yellow-5`}>
+            <TodoColumn title="In Progress">
               {alignTodosInColumn("In Progress")}
             </TodoColumn>
           </div>
           <div className={`${styles["done-container"]}
           ${!progress && styles["done-container-focused"]}`}>
-            <TodoColumn title="Done" className={`bg-wb-mint-4`}>
+            <TodoColumn title="Done">
               {alignTodosInColumn("Done")}
               <NavLink
                 to={`/`}
