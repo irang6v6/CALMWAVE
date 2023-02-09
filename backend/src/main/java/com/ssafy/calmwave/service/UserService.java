@@ -26,7 +26,7 @@ public class UserService {
     }
 
     public void updateUser(UserInfoDto userInfoDto) {
-        Optional<User> user = userRepository.findById(userInfoDto.getId());
+        Optional<User> user = userRepository.findById(userInfoDto.getUserId());
         user.get().setNickname(userInfoDto.getNickname());
         user.get().setStretchingIntervalMin(userInfoDto.getStretchingIntervalMin());
     }

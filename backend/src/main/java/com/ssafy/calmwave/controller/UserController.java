@@ -159,7 +159,7 @@ public class UserController {
 
     /**
      * 사용자 설정 변경
-     * @param userInfoDto (Long id,String nickname,String stretchingIntervalMin)
+     * @param userInfoDto (Long userId,String nickname,String stretchingIntervalMin)
      * @return
      */
     @PostMapping("/user/update")
