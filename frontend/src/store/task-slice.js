@@ -28,7 +28,7 @@ const taskSlice = createSlice({
 
 export const AxiosGetTodos = function () {
   return async function (dispatch) {
-    await axios({
+    axios({
       method: "get",
       url: `/v1/task/todo`,
     })
@@ -54,13 +54,14 @@ export const AxiosGetTodos = function () {
                 finishedDate: task?.dateAimed,
                 time: task?.totalTime,
                 workOrder: task?.workOrder,
+                storyPoint: task?.timeAimed,
               }
             })
           )
         )
       })
       .then(async () => {
-        await axios({
+        axios({
           method: "get",
           url: `/v1/task/done`,
         }).then((res) => {
@@ -82,6 +83,7 @@ export const AxiosGetTodos = function () {
                   workOrder: task?.workOrder,
                   startWorkingDate: "",
                   endWorkingDate: "",
+                  storyPoint: task?.timeAimed,
                 }
               })
             )
