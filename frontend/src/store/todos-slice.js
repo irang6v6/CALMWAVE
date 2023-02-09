@@ -11,13 +11,13 @@ const todosSlice = createSlice({
   reducers: {
     recallTodos(state, action) {
       const localData = JSON.parse(window.localStorage.getItem("todo"))
-      console.log(localData)
-      if (!localData) {
+      if (localData) {
         state.todos = localData
         if (localData.filter((e) => e.column === "In Progress")[0]) {
           state.onProgress = true
         }
       } else {
+        state.todos = []
       }
     },
     setProgress(state, action) {
