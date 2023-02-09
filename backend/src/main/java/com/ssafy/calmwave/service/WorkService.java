@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -58,11 +59,18 @@ public class WorkService {
      * @return Work
      */
     public Work convert(User user, WorkRequestDto workRequestDto) {
-        Work work = Work.builder().user(user).title(workRequestDto.getTitle()).description(workRequestDto.getDescription()).status(WorkStatus.TODO).dateAimed(workRequestDto.getDateAimed()).timeAimed(workRequestDto.getTimeAimed() * 60 * 60).build(); //second
+        Work work = Work.builder().user(user).title(workRequestDto.getTitle()).description(workRequestDto.getDescription()).status(WorkStatus.TODO).build(); //second
         Optional<WorkCategory> byId1 = categoryService.findById(workRequestDto.getWorkCateId());
         WorkCategory workCategory = byId1.get();
         work.setWorkCate(workCategory);
-
+        Optional<LocalDateTime> dateAimed = workRequestDto.getDateAimed();
+        if(dateAimed.isPresent()){
+            work.setDateAimed(dateAimed.get());
+        }
+        Optional<Long> timeAimed = workRequestDto.getTimeAimed();
+        if(timeAimed.isPresent()){
+            work.setTimeAimed(timeAimed.get()*60*60);
+        }
         return work;
     }
 

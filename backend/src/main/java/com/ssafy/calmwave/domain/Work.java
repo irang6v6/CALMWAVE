@@ -64,8 +64,6 @@ public class Work {
         this.title = title;
         this.description = description;
         this.status = status;
-        this.dateAimed = dateAimed;
-        this.timeAimed = timeAimed;
         this.workOrder = workOrder;
         this.user = user;
         this.workCate = workCate;

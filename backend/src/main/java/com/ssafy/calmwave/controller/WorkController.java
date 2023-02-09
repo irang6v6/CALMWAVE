@@ -203,8 +203,16 @@ public class WorkController {
             Work work = optionalWork.get();
             work.setTitle(workRequestDto.getTitle());
             work.setDescription(workRequestDto.getDescription());
-            work.setDateAimed(workRequestDto.getDateAimed());
-            work.setTimeAimed(workRequestDto.getTimeAimed() * 60 * 60);
+
+            Optional<LocalDateTime> dateAimed = workRequestDto.getDateAimed();
+            if(dateAimed.isPresent()){
+                work.setDateAimed(dateAimed.get());
+            }
+            Optional<Long> timeAimed = workRequestDto.getTimeAimed();
+            if(timeAimed.isPresent()){
+                work.setTimeAimed(timeAimed.get()*60*60);
+            }
+
             Optional<WorkCategory> optionalWorkCategory = workCategoryRepository.findById(workRequestDto.getWorkCateId());
             if (optionalWorkCategory.isPresent()) {
                 WorkCategory workCategory = optionalWorkCategory.get();
