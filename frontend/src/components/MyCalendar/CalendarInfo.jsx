@@ -63,7 +63,7 @@ export default function CalendarInfo({ todo, date }) {
         {todo?.description}
         <br />
         <br />
-        목표일자 : {finalDate} &nbsp; ({dDayLabel})
+        목표일자 : {finalDate? `${finalDate} (${dDayLabel})`:`없음`}
       </div>
       <p>카테고리: {todo?.categoryId}</p>
 
