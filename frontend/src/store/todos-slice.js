@@ -11,28 +11,13 @@ const todosSlice = createSlice({
   reducers: {
     recallTodos(state, action) {
       const localData = JSON.parse(window.localStorage.getItem("todo"))
-      console.log(localData)
-      if (!localData) {
+      if (localData) {
         state.todos = localData
         if (localData.filter((e) => e.column === "In Progress")[0]) {
           state.onProgress = true
         }
       } else {
-        state.todos = [{
-          id: 200,
-          categoryId: 1,
-          createdDate: "2023-01-30",
-          finishedDate: "2023-02-15",
-          title: "Redux toolkit",
-          description: "리덕스 툴킷이 뭔가요",
-          isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
-          startWorkingDate: "",
-          endWorkingDate: "",
-          Dday: "",
-          businessHours: 4,
-          column: "To do",
-          time: 0,
-        },]
+        state.todos = []
       }
     },
     setProgress(state, action) {
