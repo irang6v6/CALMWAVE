@@ -15,7 +15,9 @@ import {
 function TaskForm() {
   const dispatch = useDispatch()
   const { formData, isLoading, isCreate } = useSelector((state) => state.modal)
-  const [titleRef, descriptionRef, dateRef] = [
+  const [titleRef, descriptionRef, dateRef, storyPointRef, categoryRef] = [
+    useRef(null),
+    useRef(null),
     useRef(null),
     useRef(null),
     useRef(null),
@@ -24,6 +26,10 @@ function TaskForm() {
   const [descriptionInput, descriptionChangeHandler, descriptionSetTrigger] =
     useInput(descriptionRef)
   const [dateInput, dateChangeHandler, dateSetTrigger] = useInput(dateRef)
+  const [storyPointInput, storyPointChangeHandler, storyPointSetTrigger] = useInput(storyPointRef)
+  const [categoryInput, categoryChangeHandler, categorySetTrigger] = useInput(categoryRef)
+
+
   const { selectedCategoryId } = useSelector((state) => state.category)
   const FormTitle = isCreate ? `업무 생성` : `업무 수정`
 
@@ -39,7 +45,8 @@ function TaskForm() {
           title: titleInput,
           description: descriptionInput,
           dateAimed: dateInput ? dateInput + `T18:00:00` : "", //'T'18:00:00.000'Z'
-          workCateId: selectedCategoryId,
+          timeAimed: storyPointInput,
+          workCateId: categoryInput || selectedCategoryId,
         },
       })
         .then(() => {
@@ -57,6 +64,7 @@ function TaskForm() {
           }, 400)
         })
         .catch((err) => {
+          console.log(err)
           dispatch(closeModal())
         })
     } else {
@@ -68,7 +76,8 @@ function TaskForm() {
           title: titleInput,
           description: descriptionInput,
           dateAimed: dateInput ? dateInput + `T18:00:00` : "", //'T'18:00:00.000'Z'
-          workCateId: selectedCategoryId,
+          timeAimed: storyPointInput,
+          workCateId: categoryInput || selectedCategoryId,
         },
       })
         .then(() => {
@@ -86,6 +95,7 @@ function TaskForm() {
           }, 100)
         })
         .catch((err) => {
+          console.log(err)
           dispatch(closeModal())
         })
     }
@@ -96,8 +106,10 @@ function TaskForm() {
       titleSetTrigger(formData?.title || "")
       descriptionSetTrigger(formData?.description || "")
       dateSetTrigger(formData?.finishedDate || "")
+      storyPointSetTrigger(formData?.finishedDate || 0)
+      categorySetTrigger(formData?.finishedDate || 0)
     },
-    [formData, titleSetTrigger, descriptionSetTrigger, dateSetTrigger]
+    [formData, titleSetTrigger, descriptionSetTrigger, dateSetTrigger,storyPointSetTrigger,categorySetTrigger]
   )
 
   return (
@@ -128,6 +140,23 @@ function TaskForm() {
           id="task-date"
           onChange={dateChangeHandler}
         />
+
+        <label htmlFor="task-storypoint">Storypoint</label>
+        <input
+          ref={storyPointRef}
+          type="number"
+          id="task-storypoint"
+          onChange={storyPointChangeHandler}
+        />
+
+        <label htmlFor="task-category">카테고리</label>
+        <input
+          ref={categoryRef}
+          type="number"
+          id="task-category"
+          onChange={categoryChangeHandler}
+        />
+
         <button>{isLoading ? <SpinnerDots /> : `완료`}</button>
       </form>
     </div>
