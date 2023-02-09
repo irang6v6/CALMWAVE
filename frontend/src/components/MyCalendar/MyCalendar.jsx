@@ -1,67 +1,59 @@
 import Calendar from "react-calendar"
 /* eslint-disable */
 import styles from "./MyCalendar.css"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import moment from "moment"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import CalendarInfo from "./CalendarInfo"
+import { BsPlusLg } from "react-icons/bs"
+import { modalActions } from "../../store/door-store/modal-slice"
+import { openTaskModal } from "../../store/door-store/modal-slice"
 
-export default function MyCalendar() {
+export default function MyCalendar(props) {
+  const dispatch = useDispatch()
   const [date, setDate] = useState(new Date())
   const [activeDate, setActiveDate] = useState(new Date())
 
   const todolist = useSelector((state) => state.task.taskList)
+  console.log(todolist, "<<<<")
 
-  // const daysRemaining = moment(date).diff(moment().format("YYYY-MM-DD"), "day");
-  const daysRemaining = moment(date).diff(
-    moment().format("YYYY-MM-DD"),
-    "day"
-  )
-
-  // console.log(moment(date).format("YYYY-MM-DD"))
-
-
-  let dDayLabel = "D"
-  if (daysRemaining === 0) {
-    dDayLabel += "-Day"
-  } else if (daysRemaining <= 0) {
-    dDayLabel += `-${-daysRemaining}`
-  } else {
-    dDayLabel += `+${daysRemaining}`
+  const openCreateTaskModal = function () {
+    dispatch(modalActions.resetFormData())
+    dispatch(modalActions.setIsCreate())
+    dispatch(openTaskModal())
   }
 
-  // const daysRemaining = moment(date).diff(moment(finalDate).format("YYYY-MM-DD"), "day")
+  // const setCalendar = () => {
+  //   console.log(selectedDate)
+  //   (moment(date).format("YYYY-MM-DD"))
+  //   if (todolist) {
+  //     return
+  //   }
+  // }
 
-  const setCalendar = (selectedDate) => {
-    // console.log(selectedDate)
-    return todolist
-      .filter((todo) => todo.createdDate === selectedDate)
-      .map((todo, index) => <CalendarInfo key={todo.id} todo={todo} date={date} />)
+  // return todolist
+  //   .filter((todo) => todo.createdDate === selectedDate)
+  //   .map((todo, index) =>
+  //   <div key={todo.id}>{todo.title}<br/>{todo.finishedDate}</div>
+  //   )
+  // }
 
-    // return todolist
-    //   .filter((todo) => todo.createdDate === selectedDate)
-    //   .map((todo, index) =>
-    //   <div key={todo.id}>{todo.title}<br/>{todo.finishedDate}</div>
-    //   )
-    // }
+  // const setCalendar = (selectedDate) => {
+  //   console.log(selectedDate)
+  //   return  todolist
+  //     .filter((todo) => todo.createdDate <= selectedDate <= todo.finishedDate)
+  //     .map((todo, index) => (
+  //       <CalendarInfo
+  //         key={todo.id}
+  //         todo={todo}
+  //         />
+  //     ))
 
-    // const setCalendar = (selectedDate) => {
-    //   console.log(selectedDate)
-    //   return  todolist
-    //     .filter((todo) => todo.createdDate <= selectedDate <= todo.finishedDate)
-    //     .map((todo, index) => (
-    //       <CalendarInfo
-    //         key={todo.id}
-    //         todo={todo}
-    //         />
-    //     ))
-
-    // return todolist
-    //   .filter((todo) => todo.createdDate === selectedDate)
-    //   .map((todo, index) =>
-    //   <div key={todo.id}>{todo.title}<br/>{todo.finishedDate}</div>
-    //   )
-  }
+  // return todolist
+  //   .filter((todo) => todo.createdDate === selectedDate)
+  //   .map((todo, index) =>
+  //   <div key={todo.id}>{todo.title}<br/>{todo.finishedDate}</div>
+  //   )
 
   return (
     <div className="MyCalendar">
@@ -101,9 +93,33 @@ export default function MyCalendar() {
           </div>
 
           <div className="select-todolist">
-            {setCalendar(moment(date).format("YYYY-MM-DD"))}
-            <br />
+            {todolist
+              ? todolist
+                  .filter(
+                    (todo) =>
+                      todo?.createdDate?.slice(0, 10) ===
+                      moment(date).format("YYYY-MM-DD")
+                  )
+                  .map((todo, index) => (
+                    <CalendarInfo
+                      key={`calendar-task-${todo.id}-${Math.random()}`}
+                      todo={todo}
+                      date={date}
+                    />
+                  ))
+              : null}
           </div>
+
+          <div
+            className={`${styles[`create-task`]}`}
+            onClick={openCreateTaskModal}
+          >
+            <BsPlusLg className={`${styles[`play-icon`]}`} />
+          </div>
+
+          
+
+
         </div>
       </div>
     </div>
