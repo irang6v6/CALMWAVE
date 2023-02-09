@@ -55,7 +55,7 @@ function CategoryTask(props) {
     customTodoTabSelect(true)
   }
   const selectDone = function () {
-    setSelectedState(() => "DONE")
+    setSelectedState(() => "Done")
     customAllTabSelect(false)
     customCompleteTabSelect(true)
     customTodoTabSelect(false)

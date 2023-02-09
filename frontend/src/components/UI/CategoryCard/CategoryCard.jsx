@@ -130,7 +130,7 @@ function CategoryCard({ category, idx }) {
       <CardFooter
         data={category}
         big={category.sumBusinessHours}
-        small={category.nowBusinessHours}
+        small={category.sumBusinessHours}
       />
     </div>
   )

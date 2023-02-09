@@ -2,11 +2,13 @@ import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import {
   AxiosGetCategory,
+  categoryActions,
   // categoryActions,
 } from "../../../store/category-slice"
 import styles from "./DeleteModalForm.module.css"
 import { closeModal } from "../../../store/door-store/modal-slice"
-import { AxiosGetDones, AxiosGetTodos } from "../../../store/task-slice"
+import { AxiosGetTodos } from "../../../store/task-slice"
+import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
 
 function DeleteModalForm({ cardType, cardId }) {
   const dispatch = useDispatch()
@@ -26,7 +28,8 @@ function DeleteModalForm({ cardType, cardId }) {
           dispatch(AxiosGetTodos())
         })
         .then(() => {
-          dispatch(AxiosGetDones())
+          // 삭제되는 친구들ㅇ르 selectedTask에서 제외해줘야 함.
+          dispatch(selectedTaskActions.filteringAfterTaskDelete(formData.id))
         })
         .then(() => {
           dispatch(closeModal())
@@ -45,6 +48,15 @@ function DeleteModalForm({ cardType, cardId }) {
       })
         .then((res) => {
           dispatch(AxiosGetCategory())
+        })
+        .then(() => {
+          dispatch(categoryActions.changeSelected({ selectedCategoryId: null }))
+        })
+        .then(() => {
+          // 삭제되는 친구들ㅇ르 selectedTask에서 제외해줘야 함.
+          dispatch(
+            selectedTaskActions.filteringAfterCategoryDelete(formData.id)
+          )
         })
         .then(() => {
           dispatch(closeModal())

@@ -10,10 +10,11 @@ import { useDispatch } from "react-redux"
 import { AxiosGetCategory } from "../../store/category-slice"
 import { useEffect } from "react"
 import axios from "axios"
-import { AxiosGetTodos, AxiosGetDones } from "../../store/task-slice"
+import { AxiosGetTodos } from "../../store/task-slice"
 
 function Door(props) {
   const dispatch = useDispatch()
+
   useEffect(
     function () {
       if (localStorage.getItem("Access")) {
@@ -24,9 +25,10 @@ function Door(props) {
         axios.defaults.headers.common["RefreshToken"] =
           localStorage.getItem("Refresh")
       }
+
       dispatch(AxiosGetCategory())
       dispatch(AxiosGetTodos())
-      dispatch(AxiosGetDones())
+      // dispatch(AxiosGetDones())
     },
     [dispatch]
   )

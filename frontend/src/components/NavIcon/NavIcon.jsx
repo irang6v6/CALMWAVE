@@ -10,15 +10,29 @@ import {
 import { AiTwotoneEdit } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
 import { useEffect, useState } from "react"
-import { AxiosLogout } from "../../store/user-slice"
+// import { AxiosLogout } from "../../store/user-slice"
+import useApi from "../../hooks/http/use-api"
+import { LOGOUTandRESETLOCALSTORAGE } from "../../store/token-slice"
+import { SpinnerDots } from "../UI/Spinner"
 
 function NavIcon() {
   const dispatch = useDispatch()
   const id = useSelector((state) => state.user.userData.id)
-  const [isLogin, setIsLogin] = useState(false)
+  const [isLogin, setIsLogin] = useState(
+    id ? true : false || localStorage.getItem("Access") ? true : false
+  )
+  /* eslint-disable */
+  const [logoutLoading, logoutError, logoutAxiosRequest] = useApi()
   useEffect(
     function () {
-      setIsLogin(() => id || localStorage.getItem("isLogin"))
+      setIsLogin(() =>
+        id
+          ? true
+          : false ||
+            (localStorage.getItem("Access") && localStorage.getItem("Refresh"))
+          ? true
+          : false
+      )
     },
     [id]
   )
@@ -27,7 +41,15 @@ function NavIcon() {
     setOpenMenu((val) => !val)
   }
   const logout = function () {
-    dispatch(AxiosLogout())
+    logoutAxiosRequest(
+      {
+        method: "get",
+        url: "/v1/user/logout",
+      },
+      function () {
+        dispatch(LOGOUTandRESETLOCALSTORAGE())
+      }
+    )
   }
   return (
     <>
@@ -35,7 +57,9 @@ function NavIcon() {
         CALM WAVE
       </NavLink>
       <div className={`${styles["nav-icon-container"]}`}>
-        {isLogin ? (
+        {logoutLoading ? (
+          <SpinnerDots />
+        ) : isLogin ? (
           <>
             <NavLink
               to={`/door`}

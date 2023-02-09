@@ -6,41 +6,7 @@ const initialState = {
   isError: null,
   selectedCategoryId: null,
   hoveredCategoryId: null,
-  categoryList: [
-    // {
-    //   id: 1,
-    //   title: "카테고리 1",
-    //   cateColor: "",
-    //   cateIcon: "",
-    //   sumBusinessHours: 12, // 그냥 데이터로 받아온다고 생각하겠음.
-    //   nowBusinessHours: 10, // 그냥 데이터로 받아온다고 생각하겠음.
-    //   isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
-    // },
-    // {
-    //   id: 2,
-    //   title: "카테고리 2",
-    //   description: "카테고리 설명 2",
-    //   sumBusinessHours: 10, // 그냥 데이터로 받아온다고 생각하겠음.
-    //   nowBusinessHours: 2,
-    //   isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
-    // },
-    // {
-    //   id: 3,
-    //   title: "카테고리 3",
-    //   description: "카테고리 설명 3",
-    //   sumBusinessHours: 16, // 그냥 데이터로 받아온다고 생각하겠음.
-    //   nowBusinessHours: 10,
-    //   isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
-    // },
-    // {
-    //   id: 4,
-    //   title: "카테고리 4",
-    //   description: "카테고리 설명 4",
-    //   sumBusinessHours: 16, // 그냥 데이터로 받아온다고 생각하겠음.
-    //   nowBusinessHours: 10,
-    //   isSelected: false, // 이건 push 혹은 get 할 때 임의로 넣어주는 값
-    // },
-  ],
+  categoryList: [],
 }
 
 const categorySlice = createSlice({
@@ -91,6 +57,7 @@ export const AxiosGetCategory = function () {
                 cateColor: cate.cateColor,
                 cateIcon: cate.cateIcon,
                 cateOrder: cate.cateOrder,
+                sumBusinessHours: cate.sumBusinessHours,
                 isSelected: false,
               }
             }),

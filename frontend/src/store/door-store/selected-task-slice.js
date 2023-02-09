@@ -24,6 +24,7 @@ const selectedTaskSlice = createSlice({
           return stask.id !== action.payload.newTask.id
         })
       }
+      localStorage.setItem("todo", JSON.stringify(state.selectedTaskList))
     },
     editSelectedTaskById(state, action) {
       state.selectedTaskList = state.selectedTaskList.map((stask) => {
@@ -47,6 +48,7 @@ const selectedTaskSlice = createSlice({
       state.selectedTaskList = state.selectedTaskList.filter((stask) => {
         return stask.id !== action.payload.id
       })
+      localStorage.setItem("todo", JSON.stringify(state.selectedTaskList))
     },
     changeSelectedTaskById(state, action) {
       state.selectedTaskList = state.selectedTaskList.map((stask) => {
@@ -57,13 +59,25 @@ const selectedTaskSlice = createSlice({
       })
     },
     recallSelectedTaskList(state, action) {
-      const localData = JSON.parse(window.localStorage.getItem("todo"))
+      const localData = JSON.parse(localStorage.getItem("todo"))
       if (localData) {
         state.selectedTaskList = localData
       } else {
         state.selectedTaskList = []
       }
-    }
+    },
+    filteringAfterCategoryDelete(state, action) {
+      state.selectedTaskList = state.selectedTaskList.filter((task) => {
+        return task.categoryId !== action.payload
+      })
+      localStorage.setItem("todo", JSON.stringify(state.selectedTaskList))
+    },
+    filteringAfterTaskDelete(state, action) {
+      state.selectedTaskList = state.selectedTaskList.filter((task) => {
+        return task.id !== action.payload
+      })
+      localStorage.setItem("todo", JSON.stringify(state.selectedTaskList))
+    },
   },
 })
 

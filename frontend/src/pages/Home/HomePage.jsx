@@ -16,7 +16,7 @@ import NightSky from "../../components/Canvas/NightSky/NightSky"
 import { useDispatch } from "react-redux"
 import { AxiosGetCategory } from "../../store/category-slice"
 import NavIcon from "../../components/NavIcon/NavIcon"
-import { AxiosGetDones, AxiosGetTodos } from "../../store/task-slice"
+import { AxiosGetTodos } from "../../store/task-slice"
 import axios from "axios"
 
 function HomePage() {
@@ -47,7 +47,6 @@ function HomePage() {
       }
       dispatch(AxiosGetCategory())
       dispatch(AxiosGetTodos())
-      dispatch(AxiosGetDones())
     },
     [dispatch, isInitial]
   )

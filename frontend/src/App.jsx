@@ -19,11 +19,9 @@ axios.defaults.baseURL = "https://i8a105.p.ssafy.io/api"
 
 function App() {
   useEffect(function () {
-    if (localStorage.getItem("Access")) {
+    if (localStorage.getItem("Access") && localStorage.getItem("Refresh")) {
       axios.defaults.headers.common["AccessToken"] =
         localStorage.getItem("Access")
-    }
-    if (localStorage.getItem("Refresh")) {
       axios.defaults.headers.common["RefreshToken"] =
         localStorage.getItem("Refresh")
     }

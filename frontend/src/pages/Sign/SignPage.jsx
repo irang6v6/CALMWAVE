@@ -53,7 +53,7 @@ function SignPage({ pageRef }) {
       function (res) {
         if (res) {
           dispatch(AxiosGetUser())
-          localStorage.setItem("isLogin", true)
+          // localStorage.setItem("isLogin", true)
           navigate("/")
         } else {
           console.log("ㅎㅇ")

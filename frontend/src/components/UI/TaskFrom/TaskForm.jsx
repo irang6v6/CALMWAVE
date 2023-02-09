@@ -8,7 +8,7 @@ import { closeModal, modalActions } from "../../../store/door-store/modal-slice"
 import axios from "axios"
 import {
   // AxiosGetAllTaskList,
-  AxiosGetDones,
+  // AxiosGetDones,
   AxiosGetTodos,
 } from "../../../store/task-slice"
 
@@ -46,7 +46,7 @@ function TaskForm() {
           dispatch(AxiosGetTodos())
         })
         .then(() => {
-          dispatch(AxiosGetDones())
+          // dispatch(AxiosGetDones())
         })
         .then(() => {
           dispatch(closeModal())

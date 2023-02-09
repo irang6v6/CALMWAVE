@@ -18,21 +18,6 @@ const todosSlice = createSlice({
           state.onProgress = true
         }
       } else {
-        state.todos = [{
-          id: 200,
-          categoryId: 1,
-          createdDate: "2023-01-30",
-          finishedDate: "2023-02-15",
-          title: "Redux toolkit",
-          description: "리덕스 툴킷이 뭔가요",
-          isSelected: false, // Door에서 선택되었는지? filter하기 위한 값
-          startWorkingDate: "",
-          endWorkingDate: "",
-          Dday: "",
-          businessHours: 4,
-          column: "To do",
-          time: 0,
-        },]
       }
     },
     setProgress(state, action) {
