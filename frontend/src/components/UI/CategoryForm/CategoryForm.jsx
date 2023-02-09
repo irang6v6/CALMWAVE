@@ -24,7 +24,6 @@ function CategoryForm() {
     if (isLoading) {
       return
     }
-    // dispatch(modalActions.toggleIsLoading())
     if (isCreate && titleInput) {
       axios({
         method: "post",
@@ -37,6 +36,7 @@ function CategoryForm() {
         },
       })
         .then((res) => {
+          dispatch(modalActions.setNotLoading)
           dispatch(AxiosGetCategory())
         })
         .then((res) => {
@@ -48,9 +48,9 @@ function CategoryForm() {
         })
         .catch((err) => {
           console.log(err, "<<<<<<<<<<<<")
-          dispatch(modalActions.toggleIsLoading())
+          dispatch(modalActions.setNotLoading())
         })
-    } else {
+    } else if (titleInput) {
       axios({
         method: "post",
         url: `/v1/category/update`,

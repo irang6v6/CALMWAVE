@@ -52,7 +52,7 @@ export const AxiosGetTodos = function () {
                     ? "Done"
                     : task?.status,
                 finishedDate: task?.dateAimed,
-                totalTime: task?.totalTime,
+                time: task?.totalTime,
                 workOrder: task?.workOrder,
               }
             })
@@ -78,7 +78,7 @@ export const AxiosGetTodos = function () {
                   isSelected: false,
                   column: task?.status === "TODO" ? "To do" : "Done",
                   finishedDate: task?.dateAimed,
-                  totalTime: task?.totalTime || 0,
+                  time: task?.totalTime || 0,
                   workOrder: task?.workOrder,
                   startWorkingDate: "",
                   endWorkingDate: "",

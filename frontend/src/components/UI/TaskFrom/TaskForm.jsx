@@ -38,7 +38,7 @@ function TaskForm() {
         data: {
           title: titleInput,
           description: descriptionInput,
-          dateAimed: dateInput ? dateInput + `T18:00:00` : "",
+          dateAimed: dateInput ? dateInput + `T18:00:00` : "", //'T'18:00:00.000'Z'
           workCateId: selectedCategoryId,
         },
       })
@@ -53,10 +53,41 @@ function TaskForm() {
         })
         .then(() => {
           setTimeout(function () {
-            dispatch(modalActions.toggleIsLoading())
+            dispatch(modalActions.setNotLoading())
           }, 400)
         })
+        .catch((err) => {
+          dispatch(closeModal())
+        })
     } else {
+      axios({
+        method: "post",
+        url: `/v1/task/update`,
+        data: {
+          workId: formData.id,
+          title: titleInput,
+          description: descriptionInput,
+          dateAimed: dateInput ? dateInput + `T18:00:00` : "", //'T'18:00:00.000'Z'
+          workCateId: selectedCategoryId,
+        },
+      })
+        .then(() => {
+          dispatch(AxiosGetTodos())
+        })
+        .then(() => {
+          // dispatch(AxiosGetDones())
+        })
+        .then(() => {
+          dispatch(closeModal())
+        })
+        .then(() => {
+          setTimeout(function () {
+            dispatch(modalActions.setNotLoading())
+          }, 100)
+        })
+        .catch((err) => {
+          dispatch(closeModal())
+        })
     }
   }
 

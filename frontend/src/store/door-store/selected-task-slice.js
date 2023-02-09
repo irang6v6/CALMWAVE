@@ -66,6 +66,14 @@ const selectedTaskSlice = createSlice({
         state.selectedTaskList = []
       }
     },
+    recallSelectedTodoTaskList(state, action) {
+      const localData = JSON.parse(localStorage.getItem("todo"))
+
+      state.selectedTaskList =
+        localData?.filter((todo) => {
+          return todo.column === "To do"
+        }) || []
+    },
     filteringAfterCategoryDelete(state, action) {
       state.selectedTaskList = state.selectedTaskList.filter((task) => {
         return task.categoryId !== action.payload

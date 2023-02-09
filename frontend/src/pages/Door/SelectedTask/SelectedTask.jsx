@@ -9,23 +9,38 @@ import { selectedTaskActions } from "../../../store/door-store/selected-task-sli
 
 function SelectedTask() {
   const { selectedTaskList } = useSelector((state) => state.doorstask)
+  const { taskList } = useSelector((state) => state.task)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(selectedTaskActions.recallSelectedTaskList())
+    dispatch(selectedTaskActions.recallSelectedTodoTaskList())
   }, [dispatch])
 
   const sendTodayTodo = () => {
-    const doorTodos = selectedTaskList.map((e) => {
-      return {
-        ...e,
-        startWorkingDate: e.startWorkingDate ? e.startWorkingDate : 0,
-        endWorkingDate: e.endWorkingDate ? e.endWorkingDate : 0,
-        businessHours: e.businessHours ? e.businessHours : null,
+    let todoSend = []
+    selectedTaskList.forEach((task) => {
+      if (task.column === "To do") {
+        todoSend.push({
+          ...task,
+          startWorkingDate: task.startWorkingDate ? task.startWorkingDate : 0,
+          endWorkingDate: task.endWorkingDate ? task.endWorkingDate : 0,
+          businessHours: task.businessHours ? task.businessHours : null,
+        })
       }
     })
-    dispatch(todoActions.changeTodos(doorTodos))
-    window.localStorage.setItem("todo", JSON.stringify(doorTodos))
+    taskList.forEach((task) => {
+      if (task.column === "Done") {
+        todoSend.push({
+          ...task,
+          startWorkingDate: task.startWorkingDate ? task.startWorkingDate : 0,
+          endWorkingDate: task.endWorkingDate ? task.endWorkingDate : 0,
+          businessHours: task.businessHours ? task.businessHours : null,
+        })
+      }
+    })
+
+    dispatch(todoActions.changeTodos(todoSend))
+    localStorage.setItem("todo", JSON.stringify(todoSend))
   }
   return (
     <>

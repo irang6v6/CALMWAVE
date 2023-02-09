@@ -51,6 +51,12 @@ const modalSlice = createSlice({
     setIsUpdate(state, action) {
       state.isCreate = false
     },
+    setLoading(state, action) {
+      state.isLoading = true
+    },
+    setNotLoading(state, action) {
+      state.isLoading = false
+    },
   },
 })
 
@@ -87,20 +93,23 @@ export const closeModal = function () {
     dispatch(modalActions.toggleIsModal())
     dispatch(modalActions.setNotError())
     dispatch(modalActions.resetFormData())
-    // setTimeout(function () {
-    // }, 400)
+    setTimeout(function () {
+      dispatch(modalActions.setNotLoading())
+    }, 100)
   }
 }
 export const submitModal = function (requestData) {
   return async function (dispatch) {
-    dispatch(modalActions.toggleIsLoading())
+    dispatch(modalActions.setLoading())
     dispatch(modalActions.setNotError())
     axios(requestData)
       .then((res) => {
         // axios 요청이므로 이전 then에서 전체 list를 가져오거나 한다.
         // 혹은 모든 list들을 돌면서 update 해준다.
         // request.method === "post" 로 확인하면 될 듯.
-        dispatch(modalActions.toggleIsLoading())
+        dispatch(modalActions.setNotLoading())
+      })
+      .then(() => {
         dispatch(modalActions.toggleIsModal())
       })
       .then(() => {

@@ -13,6 +13,7 @@ import DoorParentPage from "./pages/Door/DoorParentPage"
 import axios from "axios"
 import OauthLoad from "./pages/OauthLoad/OauthLoad"
 import { useEffect } from "react"
+import Modal from "./components/UI/Modal"
 
 axios.defaults.baseURL = "https://i8a105.p.ssafy.io/api"
 // axios.defaults.transformRequest = []
@@ -28,6 +29,7 @@ function App() {
   }, [])
   return (
     <div className="App">
+      <Modal />
       <Routes>
         <Route path={`/`} element={<HomePage />} />
         <Route path={`/sign`} element={<SignParentPage />} />

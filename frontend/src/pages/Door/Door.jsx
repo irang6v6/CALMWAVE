@@ -4,7 +4,6 @@ import Category from "./Category/Category"
 import CategoryTask from "./CategoryTask/CategoryTask"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
-import Modal from "../../components/UI/Modal"
 import NavIcon from "../../components/NavIcon/NavIcon"
 import { useDispatch } from "react-redux"
 import { AxiosGetCategory } from "../../store/category-slice"
@@ -36,7 +35,7 @@ function Door(props) {
   return (
     <DndProvider backend={HTML5Backend}>
       <NavIcon />
-      <Modal />
+
       <div ref={props.refVal} className={`${styles[`door-container`]}`}>
         <div className={`${styles[`cam-epic-container`]}`}>
           <Category />
