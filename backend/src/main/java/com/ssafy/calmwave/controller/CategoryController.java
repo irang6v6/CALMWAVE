@@ -113,11 +113,14 @@ public class CategoryController {
      */
     @PostMapping("/order")
     public ResponseEntity<?> updateComponentOrder(@RequestBody List<Long> cateIds) {
-        List<WorkCategory> workCategories = workCategoryRepository.findAllById(cateIds);
-        for (int i = 0; i < workCategories.size(); i++) {
-            workCategories.get(i).setCateOrder(i);
+        int order=0;
+        for (Long cateId : cateIds) {
+            Optional<WorkCategory> optionalWorkCategory = workCategoryRepository.findById(cateId);
+            WorkCategory workCategory = optionalWorkCategory.get();
+            workCategory.setCateOrder(order++);
+            workCategoryRepository.save(workCategory);
         }
-        workCategoryRepository.saveAll(workCategories);
+
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("result", "ok");
         HttpStatus status = HttpStatus.ACCEPTED;

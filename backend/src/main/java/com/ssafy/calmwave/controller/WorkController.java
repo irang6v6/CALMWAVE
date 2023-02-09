@@ -110,10 +110,13 @@ public class WorkController {
     @PostMapping("order")
     public ResponseEntity<?> updateComponentOrder(@RequestBody List<Long> workIDs) {
         List<Work> works = workRepository.findAllById(workIDs);
-        for (int i = 0; i < works.size(); i++) {
-            works.get(i).setWorkOrder(i);
+        int order=0;
+        for (Long workID : workIDs) {
+            Optional<Work> optionalWork = workRepository.findById(workID);
+            Work work = optionalWork.get();
+            work.setWorkOrder(order++);
+            workRepository.save(work);
         }
-        workRepository.saveAll(works);
         Map<String, Object> resultMap = new HashMap<>();
         resultMap.put("result", "ok");
         HttpStatus status = HttpStatus.ACCEPTED;
