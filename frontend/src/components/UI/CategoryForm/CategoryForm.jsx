@@ -121,7 +121,7 @@ function CategoryForm() {
           id="category-title"
           onChange={titleChangeHandler}
         />
-        <label for="category-color">category color</label>
+        <label htmlFor="category-color">category color</label>
         <select
           name="category-color-set"
           id="category-color"
