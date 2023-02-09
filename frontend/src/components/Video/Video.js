@@ -17,7 +17,7 @@ const OPENVIDU_SERVER_SECRET = "WAVES"
 export default function Video() {
   const user = useSelector((state) => state.user.userData)
   const progress = useSelector((state) => state.todos.onProgress)
-  const [mySessionId, setMySessionId] = useState(`Session${user.id}`)
+  const [mySessionId, setMySessionId] = useState(`${user.id}-${Date.now()}`)
   const [session, setSession] = useState(undefined)
   const [publisher, setPublisher] = useState(undefined)
   /* eslint-disable */
@@ -28,13 +28,16 @@ export default function Video() {
   useEffect(() => {
     joinSession()
   }, [])
-
+      
   // 페이지 변동에 따른 세션 종료
   useEffect(() => {
-    window.addEventListener("beforeunload", leaveSession)
-    return () => {
+    const handleBeforeUnload = () => {
       leaveSession()
-      window.removeEventListener("beforeunload", leaveSession)
+    }
+    window.addEventListener("beforeunload", handleBeforeUnload)
+    return () => {
+      window.removeEventListener("beforeunload", handleBeforeUnload)
+      leaveSession()
     }
   }, [session])
 
@@ -106,6 +109,17 @@ export default function Video() {
     setPublisher(undefined)
   }
 
+  const reJoinSession = () => {
+    setMySessionId(`${user.id}-${Date.now()}`)
+    leaveSession()
+      .then(() => {
+        joinSession()
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
+
   const createSession = async (sessionId) => {
     const response = await axios.post(
       OPENVIDU_SERVER_URL + "openvidu/api/sessions",
@@ -143,7 +157,6 @@ export default function Video() {
 
   const toggleView = () => {
     setView(!view)
-    // const state =
   }
 
   // 카메라 변경 함수
@@ -190,8 +203,10 @@ export default function Video() {
           <div className={`${styles["video"]}`}>
             {publisher === undefined ? (
               <AiFillVideoCamera
-                onClick={joinSession}
-                className={`${styles[`videobox-icon`]}`}
+                onClick={reJoinSession}
+                className={`${styles[`videobox-icon`]}
+                ${styles['icon-animation']}
+                `}
               />
             ) : (
               <>

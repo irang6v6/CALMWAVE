@@ -86,6 +86,19 @@ const selectedTaskSlice = createSlice({
       })
       localStorage.setItem("todo", JSON.stringify(state.selectedTaskList))
     },
+    updateCategoryChanged(state, action) {
+      state.selectedTaskList = state.selectedTaskList.map((task) => {
+        if (task.categoryId === action.payload.cateId) {
+          return {
+            ...task,
+            category : action.payload.cate,
+            categoryId : action.payload.cateId
+          } 
+        } else {
+          return task
+        }
+      })
+    }
   },
 })
 
