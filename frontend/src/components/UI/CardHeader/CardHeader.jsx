@@ -10,13 +10,6 @@ import {
   openTaskModal,
 } from "../../../store/door-store/modal-slice"
 
-const colors = [
-  `${styles[`card-header-lights-yellow`]}`,
-  `${styles[`card-header-lights-red`]}`,
-  `${styles[`card-header-lights-green`]}`,
-  `${styles[`card-header-lights-blue`]}`,
-]
-
 function CardHeader({ data, cardType, deleteSelectedTaskList }) {
   const dispatch = useDispatch()
   // const { isModal, isTask, isDelete, isLoading, isError, formData } =
@@ -50,7 +43,10 @@ function CardHeader({ data, cardType, deleteSelectedTaskList }) {
   return (
     <div className={`${styles[`card-header-container`]}`}>
       <div className={`${styles[`card-header-header`]}`}>
-        <div className={colors[Math.floor(Math.random() * 4)]} />
+        <div className={
+          `${styles[`card-header-lights`]}
+        bg-cat-${data?.category?.cateColor || data?.cateColor}`} />
+
         <div className={`${styles[`card-header-title`]}`}>
           {data?.title || "빈 카드 제목"}
         </div>

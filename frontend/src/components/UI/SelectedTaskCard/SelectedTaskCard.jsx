@@ -25,7 +25,6 @@ function SelectedTaskCard({ task, idx }) {
     transitionEnd()
     if (!transitionTrigger) {
       dispatch(selectedTaskActions.addSelectedTask({ newTask: { ...task } }))
-      console.log(transitionTrigger)
     }
   }
 

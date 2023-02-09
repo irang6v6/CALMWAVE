@@ -20,3 +20,34 @@
   /* justify-content: center; */
   /* align-items: center; */
 }
+
+select option {
+  margin: 40px;
+  background: rgba(0, 0, 0, 0.3);
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.4);
+  /* outline: none !important; */
+}
+
+select option[value="1"] {
+  background :#008FD6;
+}
+
+select option[value="2"] {
+  background: #00DAE8;
+}
+
+select option[value="3"] {
+  background:#4CE6B8;
+}
+
+select option[value="4"] {
+  background: #FDD85D;
+}
+
+select option[value="5"] {
+  background: #FD975D;
+}
+
+select option[value="6"] {
+  background: #FF383B;
+}

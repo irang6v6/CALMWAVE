@@ -11,12 +11,17 @@ import {
   AxiosGetCategory,
 } from "../../../store/category-slice"
 import { closeModal, modalActions } from "../../../store/door-store/modal-slice"
+import { AxiosGetTodos } from "../../../store/task-slice"
+import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
 
 function CategoryForm() {
   const dispatch = useDispatch()
   const { formData, isLoading, isCreate } = useSelector((state) => state.modal)
   const [titleRef] = [useRef(null)]
+  const [colorRef] = [useRef(null)]
   const [titleInput, titleChangeHandler, titleSetTrigger] = useInput(titleRef)
+  /* eslint-disable */
+  const [colorInput, colorChangeHandler, colorSetTrigger] = useInput(colorRef)
   const FormTitle = isCreate ? `카테고리 생성` : `카테고리 수정`
 
   const submitHandler = function (event) {
@@ -30,7 +35,7 @@ function CategoryForm() {
         url: `/v1/category/create`,
         data: {
           cateName: `${titleInput}`,
-          cateColor: 0,
+          cateColor: `${colorInput}`,
           cateIcon: 0,
           // cateOrder: 0,
         },
@@ -39,6 +44,10 @@ function CategoryForm() {
           dispatch(modalActions.setNotLoading)
           dispatch(AxiosGetCategory())
         })
+        .then(() => {
+          dispatch(AxiosGetTodos())
+        })
+
         .then((res) => {
           dispatch(closeModal())
           titleSetTrigger("")
@@ -55,7 +64,7 @@ function CategoryForm() {
         method: "post",
         url: `/v1/category/update`,
         data: {
-          cateColor: 0,
+          cateColor: `${colorInput}`,
           cateIcon: 0,
           cateName: `${titleInput}`,
           cateId: formData?.id,
@@ -67,6 +76,17 @@ function CategoryForm() {
         })
         .then(() => {
           dispatch(closeModal())
+        })
+        .then(() => {
+          dispatch(AxiosGetTodos())
+        })
+        .then(() => {
+          dispatch(
+            selectedTaskActions.updateCategoryChanged({
+              cateId: formData.id,
+              cate: { ...formData, cateColor: colorInput, title: titleInput },
+            })
+          )
         })
         .then(() => {
           titleSetTrigger("")
@@ -82,6 +102,7 @@ function CategoryForm() {
   useEffect(
     function () {
       titleSetTrigger(formData?.title || "")
+      colorSetTrigger(formData?.cateColor || 0)
     },
     [formData, titleSetTrigger]
   )
@@ -100,6 +121,21 @@ function CategoryForm() {
           id="category-title"
           onChange={titleChangeHandler}
         />
+        <label for="category-color">category color</label>
+        <select
+          name="category-color-set"
+          id="category-color"
+          ref={colorRef}
+          onChange={colorChangeHandler}
+          className={`bg-cat-${colorInput}`}
+        >
+          <option value="1"></option>
+          <option value="2"></option>
+          <option value="3"></option>
+          <option value="4"></option>
+          <option value="5"></option>
+          <option value="6"></option>
+        </select>
         <button disabled={isLoading}>
           {isLoading ? <SpinnerDots /> : `완료`}
         </button>

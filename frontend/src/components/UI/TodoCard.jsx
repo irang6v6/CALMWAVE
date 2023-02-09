@@ -172,12 +172,10 @@ export default function TodoCard({
               startWorkingDate + 9 * 60 * 60 * 1000
             )
               .toISOString()
-              .substr(0, 19)
             const workPeriodEndPoint = new Date(
               currentTime + 9 * 60 * 60 * 1000
             )
               .toISOString()
-              .substr(0, 19)
             workPeriodHandler(workPeriodStartPoint, workPeriodEndPoint)
             dispatch(todoActions.setProgress(false))
           }
