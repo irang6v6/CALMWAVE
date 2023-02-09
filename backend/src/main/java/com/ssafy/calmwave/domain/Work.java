@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import reactor.util.annotation.Nullable;
 
 import javax.persistence.*;
+import java.sql.ConnectionBuilder;
 import java.time.LocalDateTime;
 
 @Entity
@@ -33,12 +34,14 @@ public class Work {
     private WorkStatus status;
 
     @CreationTimestamp
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "Asia/Seoul")
     @Column(name = "date_created")
     private LocalDateTime dateCreated;
 
     @Column(name = "date_aimed")
     private LocalDateTime dateAimed;
+
+    @Column(name="time_aimed")
+    private Long timeAimed;
 
     @Column(name = "date_finished")
     private LocalDateTime dateFinished;
@@ -56,13 +59,14 @@ public class Work {
     @JoinColumn(name = "work_cate_id", nullable = false)
     private WorkCategory workCate;
 
-
     @Builder
-    public Work(String title, String description, WorkStatus status, LocalDateTime dateAimed, User user, WorkCategory workCate) {
+    public Work(String title, String description, WorkStatus status, LocalDateTime dateAimed, Long timeAimed, int workOrder, User user, WorkCategory workCate) {
         this.title = title;
         this.description = description;
         this.status = status;
         this.dateAimed = dateAimed;
+        this.timeAimed = timeAimed;
+        this.workOrder = workOrder;
         this.user = user;
         this.workCate = workCate;
     }

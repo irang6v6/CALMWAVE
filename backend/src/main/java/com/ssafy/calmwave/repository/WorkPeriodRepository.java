@@ -14,4 +14,8 @@ public interface WorkPeriodRepository extends JpaRepository<WorkPeriod, Long> {
     @Query(value = "SELECT (SUM(TIME_TO_SEC(t.endTime) - TIME_TO_SEC(t.startTime))) AS timediff FROM WorkPeriod t join Work w on t.work.id = w.id where w.workCate.id = :workCateId")
     Optional<Long> findTimediffByWorkCateId(@Param("workCateId") Long workCateId);
 
+    @Query("SELECT (SUM(w.timeAimed)) AS timediff FROM WorkCategory t join Work w on t.id=w.workCate.id where w.workCate.id = :workCateId")
+    Optional<Long> findSumOfTimeAimedByWorkCategoryId(@Param("workCateId") Long workCategoryId);
+
+
 }

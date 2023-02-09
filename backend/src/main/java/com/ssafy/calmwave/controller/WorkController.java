@@ -2,10 +2,7 @@ package com.ssafy.calmwave.controller;
 
 import com.ssafy.calmwave.config.jwt.JwtUtil;
 import com.ssafy.calmwave.domain.*;
-import com.ssafy.calmwave.dto.WorkCategoryDto;
-import com.ssafy.calmwave.dto.WorkPeriodRequestDto;
-import com.ssafy.calmwave.dto.WorkRequestDto;
-import com.ssafy.calmwave.dto.WorkResponseDto;
+import com.ssafy.calmwave.dto.*;
 import com.ssafy.calmwave.repository.WorkCategoryRepository;
 import com.ssafy.calmwave.repository.WorkRepository;
 import com.ssafy.calmwave.service.CategoryService;
@@ -93,12 +90,12 @@ public class WorkController {
      * @return List<WorkResponseDto>
      */
     @GetMapping("done")
-    @ApiOperation(value = "완료된 일 리스트", notes = "done", response = WorkResponseDto.class)
+    @ApiOperation(value = "완료된 일 리스트", notes = "done", response = WorkResponseDoneDto.class)
     public ResponseEntity<?> getDone(@RequestHeader(value = "AccessToken") String token) {
         User user = jwtUtil.getUser(token);
         List<Work> done = workService.getDone(user.getId());
-        List<WorkResponseDto> workResponseDtos = workService.convert(done);
-        return ResponseEntity.ok().body(workResponseDtos);
+        List<WorkResponseDoneDto> workResponseDoneDtos = workService.convertDone(done);
+        return ResponseEntity.ok().body(workResponseDoneDtos);
     }
 
     /**
@@ -207,6 +204,7 @@ public class WorkController {
             work.setTitle(workRequestDto.getTitle());
             work.setDescription(workRequestDto.getDescription());
             work.setDateAimed(workRequestDto.getDateAimed());
+            work.setTimeAimed(workRequestDto.getTimeAimed() * 60 * 60);
             Optional<WorkCategory> optionalWorkCategory = workCategoryRepository.findById(workRequestDto.getWorkCateId());
             if (optionalWorkCategory.isPresent()) {
                 WorkCategory workCategory = optionalWorkCategory.get();

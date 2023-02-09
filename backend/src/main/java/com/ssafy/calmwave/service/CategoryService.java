@@ -58,7 +58,8 @@ public class CategoryService {
     public List<WorkCategoryDto> findByUserAndStatus(User user) {
         List<WorkCategoryDto> categoryDtos = categoryRepository.findByUserAndStatus(user.getId(), WorkCategoryStatus.VALID);
         for (WorkCategoryDto categoryDto : categoryDtos) {
-            categoryDto.setSumBusinessHours(workPeriodRepository.findTimediffByWorkCateId(categoryDto.getCateId()));
+            categoryDto.setNowBusinessHours(workPeriodRepository.findTimediffByWorkCateId(categoryDto.getCateId()));
+            categoryDto.setSumBusinessHours(workPeriodRepository.findSumOfTimeAimedByWorkCategoryId(categoryDto.getCateId()));
         }
         return categoryDtos;
     }
