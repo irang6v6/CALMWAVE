@@ -3,31 +3,48 @@ import Calendar from "react-calendar"
 import styles from "./MyCalendar.css"
 import React, { useState } from "react"
 import moment from "moment"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import CardHeader from "../UI/CardHeader/CardHeader"
+import { AiFillCloseCircle, AiFillEdit } from "react-icons/ai"
+import { modalActions,
+        openCategoryModal,
+        openCategoryDeleteModal,
+        openTaskDeleteModal,
+        openTaskModal,
+} from "../../store/door-store/modal-slice"
+
 
 export default function CalendarInfo({ todo, date }) {
+  const dispatch = useDispatch()
   // console.log(todo?.title)
   // const [date, setDate] = useState(new Date())
-  const finalDate = todo.finishedDate
+  const finalDate = todo.finishedDate ? todo.finishedDate.slice(0, 10) : ""
   const selectDate = moment(date)
-  // console.log(finalDate)
-  // console.log(selectDate)
-  // console.log(selectDate.diff(moment(finalDate).format("YYYY-MM-DD"), "day"))
-  // console.log(moment(finalDate).format("YYYY-MM-DD"))
-  // console.log(moment(date).format("YYYY-MM-DD"))
-  // console.log(moment(date).diff(moment(finalDate).format("YYYY-MM-DD"), "day"))
-  // console.log(moment(finalDate).diff(moment(date).format("YYYY-MM-DD"), "day"))
-  // console.log(todo)
 
   // const daysRemaining = moment(date).diff(moment(finalDate).format("YYYY-MM-DD"), "day");
-  const daysRemaining = selectDate.diff(moment(finalDate).format("YYYY-MM-DD"), "day");
-  let dDayLabel = "D";
+  const daysRemaining = selectDate.diff(
+    moment(finalDate).format("YYYY-MM-DD"),
+    "day"
+  )
+  let dDayLabel = "D"
   if (daysRemaining === 0) {
-    dDayLabel += "-Day";
+    dDayLabel += "-Day"
   } else if (daysRemaining <= 0) {
-    dDayLabel += `-${-daysRemaining}`;
+    dDayLabel += `-${-daysRemaining}`
   } else {
-    dDayLabel += `+${daysRemaining}`;
+    dDayLabel += `+${daysRemaining}`
+  }
+
+  const openDeleteModal = function () {
+      dispatch(modalActions.setFormData({ data:todo }))
+      dispatch(openTaskDeleteModal())
+  }
+
+  const openModal = function () {
+    dispatch(modalActions.setFormData({ data:todo }))
+      dispatch(modalActions.setIsTask())
+      dispatch(modalActions.setIsUpdate())
+      dispatch(openTaskModal())
   }
 
   //   const selectDay = (selectedDate) => {
@@ -40,15 +57,27 @@ export default function CalendarInfo({ todo, date }) {
 
   return (
     <div className="todo-box">
+      {/* <CardHeader data={todo} cardType={true} /> */}
       <div className="todo-content">
         <b>▶ {todo?.title}</b> &nbsp; <br />
         {todo?.description}
         <br />
         <br />
-        목표일자 : {todo?.finishedDate} &nbsp; ({dDayLabel})
+        목표일자 : {finalDate} &nbsp; ({dDayLabel})
       </div>
       <p>카테고리: {todo?.categoryId}</p>
-      
+
+      <div className={`${styles[`card-header-icon-container`]}`}>
+        <AiFillEdit
+          className={`${styles[`card-header-icon`]}`}
+          onClick={openModal}
+        />
+        <AiFillCloseCircle
+          className={`${styles[`card-header-icon`]}`}
+          onClick={openDeleteModal}
+        />
+      </div>
+
     </div>
   )
 }
