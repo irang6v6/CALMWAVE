@@ -8,6 +8,7 @@ import CalendarInfo from "./CalendarInfo"
 import { BsPlusLg } from "react-icons/bs"
 import { modalActions } from "../../store/door-store/modal-slice"
 import { openTaskModal } from "../../store/door-store/modal-slice"
+import { AxiosGetCalendar, calendarActions } from "../../store/calendar-slice"
 
 export default function MyCalendar(props) {
   const dispatch = useDispatch()
@@ -16,7 +17,35 @@ export default function MyCalendar(props) {
   const selectedDate = moment(date)
 
   // 리덕스에 있는 todolist데이터 가져오기
-  const todolist = useSelector((state) => state.calendar.taskList)
+  // const todolist = useSelector((state) => state.calendar.taskList)
+  const {
+    taskList: todolist,
+    isLoading,
+    isError,
+    selectedDate: RTKSelectedDate,
+  } = useSelector((state) => state.calendar)
+  // console.log(todolist)
+  useEffect(
+    function () {
+      const d = new Date(selectedDate)
+      dispatch(
+        calendarActions.changeDate(
+          `${d.getFullYear()}-${d.getMonth() + 1}-${d.getDate()}`
+        )
+      )
+    },
+    [selectedDate, dispatch, calendarActions]
+  )
+  useEffect(
+    function () {
+      if (RTKSelectedDate) {
+        const a = RTKSelectedDate.split("-")
+        dispatch(AxiosGetCalendar(a[0], a[1], a[2]))
+      }
+    },
+    [RTKSelectedDate, dispatch]
+  )
+
   // console.log(todolist, "<<<<")
 
   // 선택하고 생성한 투두 그 날짜에 추가되도록
