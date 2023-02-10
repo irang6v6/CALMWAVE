@@ -9,6 +9,7 @@ import taskSlice from "./task-slice"
 import todosSlice from "./todos-slice"
 import tokenSlice from "./token-slice"
 import userSlice from "./user-slice"
+import calendarSlice from "./calendar-slice"
 
 const store = configureStore({
   reducer: {
@@ -21,6 +22,7 @@ const store = configureStore({
     dragtask: dragTaskSlice,
     token: tokenSlice,
     modal: modalSlice,
+    calendar: calendarSlice,
   },
 })
 

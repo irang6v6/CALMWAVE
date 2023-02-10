@@ -13,47 +13,26 @@ export default function MyCalendar(props) {
   const dispatch = useDispatch()
   const [date, setDate] = useState(new Date())
   const [activeDate, setActiveDate] = useState(new Date())
+  const selectedDate = moment(date)
 
-  const todolist = useSelector((state) => state.task.taskList)
-  console.log(todolist, "<<<<")
+  // 리덕스에 있는 todolist데이터 가져오기
+  const todolist = useSelector((state) => state.calendar.taskList)
+  // console.log(todolist, "<<<<")
 
+  // 선택하고 생성한 투두 그 날짜에 추가되도록
+  // const selectedTodos = todolist.filter(todo => {
+  //   return (
+  //     moment(todo.createdDate).format("YYYY-MM-DD") === selectedDate ||
+  //     moment(todo.finishedDate).format("YYYY-MM-DD") === selectedDate
+  //   )
+  // })
+
+  // 투두 생성 모달
   const openCreateTaskModal = function () {
     dispatch(modalActions.resetFormData())
     dispatch(modalActions.setIsCreate())
     dispatch(openTaskModal())
   }
-
-  // const setCalendar = () => {
-  //   console.log(selectedDate)
-  //   (moment(date).format("YYYY-MM-DD"))
-  //   if (todolist) {
-  //     return
-  //   }
-  // }
-
-  // return todolist
-  //   .filter((todo) => todo.createdDate === selectedDate)
-  //   .map((todo, index) =>
-  //   <div key={todo.id}>{todo.title}<br/>{todo.finishedDate}</div>
-  //   )
-  // }
-
-  // const setCalendar = (selectedDate) => {
-  //   console.log(selectedDate)
-  //   return  todolist
-  //     .filter((todo) => todo.createdDate <= selectedDate <= todo.finishedDate)
-  //     .map((todo, index) => (
-  //       <CalendarInfo
-  //         key={todo.id}
-  //         todo={todo}
-  //         />
-  //     ))
-
-  // return todolist
-  //   .filter((todo) => todo.createdDate === selectedDate)
-  //   .map((todo, index) =>
-  //   <div key={todo.id}>{todo.title}<br/>{todo.finishedDate}</div>
-  //   )
 
   return (
     <div className="MyCalendar">
@@ -79,7 +58,6 @@ export default function MyCalendar(props) {
             if (moment(date).format("LLLL").split(",")[0] === "Saturday") {
               return "highlight-saturday"
             } else if (moment(date).format("LLLL").split(",")[0] === "Sunday") {
-              // console.log(todolist)
               return "highlight-sunday"
             }
           }}
@@ -87,19 +65,40 @@ export default function MyCalendar(props) {
 
         <div className="right-box">
           <div className="select-date-wrap">
+            {/* 선택한 날짜 */}
             <div className="select-date">
               {moment(date).format("YYYY년 MM월 DD일")}
             </div>
           </div>
 
+          {/* 선택한 날짜의 투두리스트 */}
           <div className="select-todolist">
             {todolist
               ? todolist
-                  .filter(
-                    (todo) =>
-                      todo?.createdDate?.slice(0, 10) ===
-                      moment(date).format("YYYY-MM-DD")
-                  )
+                  .filter((todo) => {
+                    // todo?.createdDate?.slice(0, 10) ===
+                    // moment(date).format("YYYY-MM-DD")
+
+                    // moment(date).isBetween(
+                    //   moment(todo?.createdDate),
+                    //   moment(todo?.finishedDate),
+                    //   null,
+                    //   "[]"
+                    // )
+                    if (todo.finishedDate) {
+                      return (
+                        new Date(todo.createdDate).getDate() <=
+                          new Date(selectedDate).getDate() &&
+                        new Date(selectedDate).getDate() <=
+                          new Date(todo.finishedDate).getDate()
+                      )
+                    } else {
+                      return (
+                        new Date(todo.createdDate).toString() ===
+                        new Date(selectedDate).toString()
+                      )
+                    }
+                  })
                   .map((todo, index) => (
                     <CalendarInfo
                       key={`calendar-task-${todo.id}-${Math.random()}`}
@@ -116,10 +115,6 @@ export default function MyCalendar(props) {
           >
             <BsPlusLg className={`${styles[`play-icon`]}`} />
           </div>
-
-          
-
-
         </div>
       </div>
     </div>
