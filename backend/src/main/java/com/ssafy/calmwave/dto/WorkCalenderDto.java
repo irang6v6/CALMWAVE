@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 public class WorkCalenderDto {
     private Long workId;
     private Long workCateId;
-    private String cateName;
     private String title;
     private String description;
     private WorkStatus status;

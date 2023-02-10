@@ -1,6 +1,7 @@
 package com.ssafy.calmwave.domain;
 
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
 import javax.persistence.Column;
@@ -27,11 +28,20 @@ public class Posture {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "dtype", nullable = false, length = 1)
-    private String dtype;
+    @Column(name = "c_name", nullable = false)
+    private String cName;
 
+    @CreationTimestamp
     @Column(name = "date_created", nullable = false)
     private Instant dateCreated;
+
+    public String getcName() {
+        return cName;
+    }
+
+    public void setcName(String cName) {
+        this.cName = cName;
+    }
 
     public Long getId() {
         return id;
@@ -47,14 +57,6 @@ public class Posture {
 
     public void setUser(User user) {
         this.user = user;
-    }
-
-    public String getDtype() {
-        return dtype;
-    }
-
-    public void setDtype(String dtype) {
-        this.dtype = dtype;
     }
 
     public Instant getDateCreated() {
