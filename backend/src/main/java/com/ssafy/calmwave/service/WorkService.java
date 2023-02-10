@@ -131,7 +131,6 @@ public class WorkService {
         LocalDate searchDate= LocalDate.of(year,month,day);
         Date date= Date.valueOf(searchDate);
         List<WorkCalenderDto> works = workRepository.findByUserIdAndDate(userId, date);
-        works.addAll(workRepository.findPastWorkByUserIdAndDate(userId, date));
         return works;
     }
 }

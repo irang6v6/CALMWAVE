@@ -19,17 +19,23 @@ public interface WorkRepository extends JpaRepository<Work, Long> {
     void deleteAllByWorkCateId(Long cateId);
 
 
-    @Query("SELECT new com.ssafy.calmwave.dto.WorkCalenderDto(w.id, w.workCate.id, w.title, w.description, w.status, w.dateCreated, w.dateAimed) "
+    @Query(value = "SELECT DISTINCT new com.ssafy.calmwave.dto.WorkCalenderDto(w.id, w.workCate.id, w.title, w.description, w.status, w.dateCreated, w.dateAimed) "
             + "FROM Work w "
             + "WHERE w.user.id = :userId "
-            + "AND (:searchDate BETWEEN DATE(w.dateCreated) AND COALESCE(DATE(w.dateAimed), DATE(w.dateCreated)))")
-    List<WorkCalenderDto> findByUserIdAndDate(@Param("userId") Long userId, @Param("searchDate") Date searchDate);
-
-    @Query("SELECT new com.ssafy.calmwave.dto.WorkCalenderDto(pw.id, pw.workCate.id, pw.title, pw.description, pw.status, pw.dateCreated, pw.dateAimed) "
+            + "AND (:searchDate BETWEEN DATE(w.dateCreated) AND COALESCE(DATE(w.dateAimed), DATE(w.dateCreated))) "
+            + "UNION "
+            + "SELECT DISTINCT new com.ssafy.calmwave.dto.WorkCalenderDto(pw.id, pw.workCate.id, pw.title, pw.description, pw.status, pw.dateCreated, pw.dateAimed) "
             + "FROM PastWork pw "
             + "WHERE pw.user.id = :userId "
-            + "AND (:searchDate BETWEEN DATE(pw.dateCreated) AND COALESCE(DATE(pw.dateAimed), DATE(pw.dateCreated)))")
-    List<WorkCalenderDto> findPastWorkByUserIdAndDate(@Param("userId") Long userId, @Param("searchDate") Date searchDate);
+            + "AND (:searchDate BETWEEN DATE(pw.dateCreated) AND COALESCE(DATE(pw.dateAimed), DATE(pw.dateCreated)))",
+            nativeQuery = true)
+    List<WorkCalenderDto> findByUserIdAndDate(@Param("userId") Long userId, @Param("searchDate") Date searchDate);
+
+//    @Query("SELECT new com.ssafy.calmwave.dto.WorkCalenderDto(pw.id, pw.workCate.id, pw.title, pw.description, pw.status, pw.dateCreated, pw.dateAimed) "
+//            + "FROM PastWork pw "
+//            + "WHERE pw.user.id = :userId "
+//            + "AND (:searchDate BETWEEN DATE(pw.dateCreated) AND COALESCE(DATE(pw.dateAimed), DATE(pw.dateCreated)))")
+//    List<WorkCalenderDto> findPastWorkByUserIdAndDate(@Param("userId") Long userId, @Param("searchDate") Date searchDate);
 
 }
 
