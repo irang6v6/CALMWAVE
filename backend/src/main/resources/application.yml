@@ -91,7 +91,7 @@ spring:
       hibernate:
         #        show_sql: true
         format_sql: true
-    open-in-view: false
+    open-in-view: true
 
   logging.level:
     org.hibernate.SQL: debug
