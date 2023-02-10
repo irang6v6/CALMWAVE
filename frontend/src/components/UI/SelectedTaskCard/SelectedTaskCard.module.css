@@ -3,7 +3,7 @@
   border-radius: 8px;
   padding: 5px;
   margin: 8px 12px 8px 12px;
-  background-color: rgba(111, 111, 111, 0.8);
+  background-color: rgba(70, 70, 70, 0.9);
   color: white;
   -webkit-user-drag: element;
   transition: 0.4s;
@@ -22,6 +22,12 @@
 .selected-task-card-container.hover.select {
   transform: scale(0%);
   transition: 0.3s;
+}
+
+.selected-card-body-container {
+  box-sizing: border-box;
+  /* border: solid 1px black; */
+  margin: 10px 8px 10px 8px;
 }
 
 @keyframes imhere {

@@ -9,6 +9,7 @@ import { selectedTaskActions } from "../../../store/door-store/selected-task-sli
 
 function SelectedTask() {
   const { selectedTaskList } = useSelector((state) => state.doorstask)
+  const categoryList = useSelector((state) => state.category.categoryList)
   const { taskList } = useSelector((state) => state.task)
   const dispatch = useDispatch()
 
@@ -39,12 +40,21 @@ function SelectedTask() {
       }
     })
 
+    // const localData = JSON.parse(window.localStorage.getItem("todo"))
+    // console.log(localData)
+    // if (localData) {
+    //   if (localData.filter((e) => e.column === "In Progress")[0]) {
+    //     console.log(localData.filter((e) => e.column === "In Progress")[0])
+    //   }
+      // todoSend.push(inProgress)
+    // }
     dispatch(todoActions.changeTodos(todoSend))
     localStorage.setItem("todo", JSON.stringify(todoSend))
+    localStorage.setItem("category", JSON.stringify(categoryList))
   }
   return (
     <>
-      <div className={`${styles[`door-title-container`]}`}>선택한 업무들</div>
+      <div className={`${styles[`door-title-container`]}`}>선택한 업무</div>
       <div className={`${styles[`selected-task-container`]}`}>
         {selectedTaskList.map((task, idx) => {
           return (

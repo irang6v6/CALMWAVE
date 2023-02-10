@@ -98,18 +98,18 @@ function CategoryTask(props) {
   return (
     <>
       <div className={`${styles[`door-title-container`]}`}>
-        해당 카테고리의 업무들
+        업무
       </div>
       <div className={`${styles[`epic-task-container`]}`}>
         <div className={`${styles[`door-tab-container`]}`}>
           <div className={AlltabClasses} onClick={selectAll}>
-            모두
+            ALL
           </div>
           <div className={TodotabClasses} onClick={selectTodo}>
-            미완료
+            To Do
           </div>
           <div className={CompletetabClasses} onClick={selectDone}>
-            완료
+            Done
           </div>
         </div>
         {categoryTaskList.map((task, idx) => {
@@ -125,7 +125,7 @@ function CategoryTask(props) {
           className={`${styles[`create-task`]}`}
           onClick={openCreateTaskModal}
         >
-          <BsPlusLg className={`${styles[`play-icon`]}`} />
+          <BsPlusLg className={`${styles[`create-icon`]}`} />
         </div>
       </div>
     </>

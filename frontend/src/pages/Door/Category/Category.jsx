@@ -6,6 +6,7 @@ import {
   openCategoryModal,
   modalActions,
 } from "../../../store/door-store/modal-slice"
+import { BsPlusLg } from "react-icons/bs"
 
 const Category = function Category() {
   const dispatch = useDispatch()
@@ -20,7 +21,6 @@ const Category = function Category() {
     <>
       <div className={`${styles[`cam-container`]}`}>카테고리</div>
       <div className={`${styles[`category-container`]}`}>
-        <div onClick={newCategory}>ㅎㅇ</div>
         {categoryList.map((category, idx) => {
           return (
             <CategoryCard
@@ -30,6 +30,9 @@ const Category = function Category() {
             />
           )
         })}
+        <div className={`${styles[`create-category`]}`} onClick={newCategory}>
+          <BsPlusLg className={`${styles[`create-icon`]}`} />
+        </div>
       </div>
     </>
   )

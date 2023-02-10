@@ -11,6 +11,7 @@ import {
   // AxiosGetDones,
   AxiosGetTodos,
 } from "../../../store/task-slice"
+import { todoActions } from "../../../store/todos-slice"
 
 function TaskForm() {
   const dispatch = useDispatch()
@@ -70,6 +71,7 @@ function TaskForm() {
           dispatch(closeModal())
         })
     } else {
+      console.log(dateInput, categoryInput, selectedCategoryId)
       axios({
         method: "post",
         url: `/v1/task/update`,
@@ -87,6 +89,11 @@ function TaskForm() {
         })
         .then(() => {
           // dispatch(AxiosGetDones())
+        })
+        .then(() => {
+          const editedcateID = categoryInput || selectedCategoryId
+          const editedData = [formData.id, titleInput, descriptionInput, dateInput ? dateInput + `T18:00:00` : "", storyPointInput, editedcateID]
+          dispatch(todoActions.editTodo(editedData))
         })
         .then(() => {
           dispatch(closeModal())
@@ -164,6 +171,7 @@ function TaskForm() {
           // type="number"
           id="task-category"
           onChange={categoryChangeHandler}
+          value={selectedCategoryId}
         >
           {categoryList.map((cate) => {
             return (

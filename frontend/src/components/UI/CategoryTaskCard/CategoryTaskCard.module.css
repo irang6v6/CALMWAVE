@@ -15,12 +15,16 @@
 .task-card-container.hover {
   transform: scale(103%);
 }
-.task-card-container.select {
+/* .task-card-container.select {
   box-shadow: 3px 3px 3px 3px rgba(12, 210, 189, 1);
-}
+} */
 .task-card-container.hover.select {
   box-shadow: rgba(12, 210, 189, 1);
   transform: scale(103%);
+}
+
+.selected-card {
+  background-color: rgba(70, 70, 70, 0.9);
 }
 
 @keyframes imhere {

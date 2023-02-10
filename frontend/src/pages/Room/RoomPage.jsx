@@ -12,6 +12,7 @@ import Video from "../../components/Video/Video"
 import NightSky from "../../components/Canvas/NightSky/NightSky"
 import { useCustomWidthHeight } from "../../hooks/custom/useCustomWidthHeight"
 import { todoActions } from "../../store/todos-slice"
+import { categoryActions } from "../../store/category-slice"
 
 export const RoomPage = () => {
   const todos = useSelector((state) => state.todos.todos)
@@ -22,6 +23,7 @@ export const RoomPage = () => {
 
   useEffect(() => {
     dispatch(todoActions.recallTodos())
+    dispatch(categoryActions.recallCategory())
   }, [dispatch])
 
   useEffect(() => {
@@ -30,6 +32,7 @@ export const RoomPage = () => {
 
   const backToHome = () => {
     window.localStorage.removeItem("todo")
+    window.localStorage.removeItem("category")
   }
 
   const alignTodosInColumn = (columnName) => {
@@ -38,6 +41,7 @@ export const RoomPage = () => {
       .map((todo, index) => (
         <TodoCard
           key={todo.id}
+          todo={todo}
           id={todo.id}
           title={todo.title}
           currentColumn={todo.column}

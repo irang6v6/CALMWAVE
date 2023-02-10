@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { useClasses } from "../../../hooks/custom/useClasses"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
 import CardBody from "../CardBody/CardBody"
-import CardFooter from "../CardFooter/CardFooter"
+// import CardFooter from "../CardFooter/CardFooter"
 import CardHeader from "../CardHeader/CardHeader"
 import styles from "./CategoryTaskCard.module.css"
 import { useEffect } from "react"
@@ -18,7 +18,7 @@ function CategoryTaskCard({ task, idx }) {
   )
   const selected =
     selectedTaskList.findIndex((val) => val.id === task.id) !== -1
-
+  
   useEffect(
     function () {
       customSelect(selected)
@@ -38,19 +38,20 @@ function CategoryTaskCard({ task, idx }) {
       })
     )
   }
+  console.log(selected)
 
   return (
     <div
-      className={`${classes}`}
+      className={`${classes}
+      ${selected && styles["selected-card"]}`}
       onClick={toggleWorkHandler}
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
     >
       <CardHeader data={task} cardType={cardType} />
-      <div>{task.description}</div>
       <div>{task.businessHours}</div>
-      <CardBody />
-      <CardFooter />
+      <CardBody data={task} />
+      {/* <CardFooter /> */}
     </div>
   )
 }

@@ -1,10 +1,14 @@
 import { useRef, useState, useEffect } from "react"
 import { useDrag, useDrop } from "react-dnd"
-import styles from "./TodoCard.module.css"
 import { useSelector, useDispatch } from "react-redux"
+import { AiFillCloseCircle, AiFillEdit } from "react-icons/ai"
 import { todoActions } from "../../store/todos-slice"
+import { modalActions } from "../../store/door-store/modal-slice"
+import { openTaskModal, openTaskDeleteModal } from "../../store/door-store/modal-slice"
+import styles from "./TodoCard.module.css"
 import useApi from "../../hooks/http/use-api"
 export default function TodoCard({
+  todo,
   id,
   title,
   index,
@@ -34,8 +38,16 @@ export default function TodoCard({
     return () => clearInterval(interval)
   }, [running])
 
-  const deleteTodo = () => {
-    dispatch(todoActions.deleteTodo(id))
+  const openDeleteModal = () => {
+    dispatch(modalActions.setFormData({ data:todo }))
+    dispatch(openTaskDeleteModal())
+  }
+
+  const openModal = () => {
+    dispatch(modalActions.setFormData({ data:todo }))
+    dispatch(modalActions.setIsTask())
+    dispatch(modalActions.setIsUpdate())
+    dispatch(openTaskModal())
   }
 
   const moveCardHandler = (dragItem, hoverId) => {
@@ -170,12 +182,10 @@ export default function TodoCard({
           } else if (item.currentColumn === "In Progress") {
             const workPeriodStartPoint = new Date(
               startWorkingDate + 9 * 60 * 60 * 1000
-            )
-              .toISOString()
+            ).toISOString()
             const workPeriodEndPoint = new Date(
               currentTime + 9 * 60 * 60 * 1000
-            )
-              .toISOString()
+            ).toISOString()
             workPeriodHandler(workPeriodStartPoint, workPeriodEndPoint)
             dispatch(todoActions.setProgress(false))
           }
@@ -215,7 +225,6 @@ export default function TodoCard({
             ? `bg-wb-nightsky-8 txt-wb-mint-10`
             : `bg-cw-yellow-10`
         }
-        ${isDragging ? styles["todo-grabbing"] : styles["todo-grab"]}
         `}
     >
       <span>{title}</span>
@@ -235,9 +244,10 @@ export default function TodoCard({
           )}
           <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
           <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
-          <button onClick={deleteTodo} className={`${styles["deleteButton"]}`}>
-            X
-          </button>
+          <div className={`${styles["buttons"]}`}>
+            <AiFillEdit onClick={openModal} />
+            <AiFillCloseCircle onClick={openDeleteModal} />
+          </div>
         </div>
       ) : (
         <div>

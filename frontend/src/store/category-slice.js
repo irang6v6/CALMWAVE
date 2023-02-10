@@ -13,6 +13,12 @@ const categorySlice = createSlice({
   name: "category",
   initialState,
   reducers: {
+    recallCategory(state, action) {
+      const localData = JSON.parse(window.localStorage.getItem("category"))
+      if (localData) {
+        state.categoryList = localData
+        }
+    },
     addCategory(state, action) {
       state.categoryList.push(action.payload.newCategory)
     },

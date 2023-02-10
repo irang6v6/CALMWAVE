@@ -42,7 +42,7 @@
   transition: 0.4s;
 }
 
-.play-icon {
+.create-icon {
   width: auto;
   height: 100%;
 }
@@ -70,8 +70,10 @@
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
-  background-color: black;
-  color: wheat;
+  background-color: #394c78;
+  color: #fde07d;
+
+  border-radius: 5px;
 }
 
 .tab-item {
@@ -79,10 +81,11 @@
   padding: 10px;
   border-radius: 6px;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .tab-item.select {
-  background-color: blue;
+  /* background-color: #394c78; */
   animation-name: itsme;
   animation-duration: 0.3s;
 }

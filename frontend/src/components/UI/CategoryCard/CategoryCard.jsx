@@ -127,11 +127,11 @@ function CategoryCard({ category, idx }) {
       {/* 카드 헤더에 onSetting이랑 onDelete 넣어줘야 함. */}
       <CardHeader data={category} cardType={cardType} />
       {/* <CardBody data={category} /> */}
-      <CardFooter
+      {category.id === selectedCategoryId ? <CardFooter
         data={category}
         big={category.sumBusinessHours}
         small={category.sumBusinessHours}
-      />
+      /> : <></>}
     </div>
   )
 }
