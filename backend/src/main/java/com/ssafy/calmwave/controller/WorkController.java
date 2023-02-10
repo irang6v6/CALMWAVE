@@ -47,7 +47,7 @@ public class WorkController {
         HttpStatus status;
         User user = jwtUtil.getUser(token);
         Work work = workService.convert(user, workRequestDto);
-        if (work != null) {
+        if (work != null && work.getWorkCate().getStatus() == WorkCategoryStatus.VALID) {
             workService.save(work);
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
