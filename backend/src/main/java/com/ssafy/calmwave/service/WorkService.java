@@ -2,10 +2,7 @@ package com.ssafy.calmwave.service;
 
 import com.ssafy.calmwave.config.jwt.JwtUtil;
 import com.ssafy.calmwave.domain.*;
-import com.ssafy.calmwave.dto.WorkCategoryDto;
-import com.ssafy.calmwave.dto.WorkRequestDto;
-import com.ssafy.calmwave.dto.WorkResponseDoneDto;
-import com.ssafy.calmwave.dto.WorkResponseDto;
+import com.ssafy.calmwave.dto.*;
 import com.ssafy.calmwave.repository.WorkCategoryRepository;
 import com.ssafy.calmwave.repository.WorkPeriodRepository;
 import com.ssafy.calmwave.repository.WorkRepository;
@@ -13,8 +10,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -64,12 +64,12 @@ public class WorkService {
         WorkCategory workCategory = byId1.get();
         work.setWorkCate(workCategory);
         Optional<LocalDateTime> dateAimed = workRequestDto.getDateAimed();
-        if(dateAimed.isPresent()){
+        if (dateAimed.isPresent()) {
             work.setDateAimed(dateAimed.get());
         }
         Optional<Long> timeAimed = workRequestDto.getTimeAimed();
-        if(timeAimed.isPresent()){
-            work.setTimeAimed(timeAimed.get()*60*60);
+        if (timeAimed.isPresent()) {
+            work.setTimeAimed(timeAimed.get() * 60 * 60);
         }
         return work;
     }
@@ -114,7 +114,24 @@ public class WorkService {
     }
 
     public List<WorkResponseDoneDto> convertDone(List<Work> done) {
-        List<WorkResponseDoneDto> list = done.stream().map(m -> new WorkResponseDoneDto(m.getId(), m.getTitle(), m.getDescription(), m.getStatus(), m.getDateCreated(),m.getDateFinished(), m.getDateAimed(), m.getTimeAimed(), m.getWorkOrder(), workPeriodRepository.findTimediffByWorkId(m.getId()), new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder()))).collect(Collectors.toList());
+        List<WorkResponseDoneDto> list = done.stream().map(m -> new WorkResponseDoneDto(m.getId(), m.getTitle(), m.getDescription(), m.getStatus(), m.getDateCreated(), m.getDateFinished(), m.getDateAimed(), m.getTimeAimed(), m.getWorkOrder(), workPeriodRepository.findTimediffByWorkId(m.getId()), new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder()))).collect(Collectors.toList());
         return list;
+    }
+
+    /**
+     * calender에서 조회하는 날짜에 따른 work List 리턴
+     *
+     * @param userId
+     * @param year
+     * @param month
+     * @param day
+     * @return
+     */
+    public List<WorkCalenderDto> findByUserIdAndDate(Long userId, int year, int month, int day) {
+        LocalDate searchDate= LocalDate.of(year,month,day);
+        Date date= Date.valueOf(searchDate);
+        List<WorkCalenderDto> works = workRepository.findByUserIdAndDate(userId, date);
+        works.addAll(workRepository.findPastWorkByUserIdAndDate(userId, date));
+        return works;
     }
 }

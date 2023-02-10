@@ -31,8 +31,8 @@ spring:
   redis:
     lettuce:
       pool:
-        max-active: 5 # pool에 할당될 수 있는 커넥션 최대수
-        max-idle: 5 # pool의 'idle' 커넥션 최대수
+        max-active: 5
+        max-idle: 5
         min-idle: 2
     host: localhost
     port: 6379
@@ -42,12 +42,11 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        #        show_sql: true
         format_sql: true
+        open-in-view: true
 
   logging.level:
     org.hibernate.SQL: debug
-  #  org.hibernate.type: trace
 
 my:
   secret: ${JWT_SECRET_KEY}
@@ -78,8 +77,8 @@ spring:
   redis:
     lettuce:
       pool:
-        max-active: 5 # pool에 할당될 수 있는 커넥션 최대수
-        max-idle: 5 # pool의 'idle' 커넥션 최대수
+        max-active: 5
+        max-idle: 5
         min-idle: 2
     host: i8a105.p.ssafy.io
     port: 3092
@@ -89,13 +88,11 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        #        show_sql: true
         format_sql: true
     open-in-view: true
 
   logging.level:
     org.hibernate.SQL: debug
-  #  org.hibernate.type: trace
 
 my:
   secret: ${JWT_SECRET_KEY}

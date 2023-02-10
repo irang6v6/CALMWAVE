@@ -19,10 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RestController
@@ -107,7 +104,7 @@ public class WorkController {
     @PostMapping("order")
     public ResponseEntity<?> updateComponentOrder(@RequestBody List<Long> workIDs) {
         List<Work> works = workRepository.findAllById(workIDs);
-        int order=0;
+        int order = 0;
         for (Long workID : workIDs) {
             Optional<Work> optionalWork = workRepository.findById(workID);
             Work work = optionalWork.get();
@@ -205,27 +202,27 @@ public class WorkController {
             work.setDescription(workRequestDto.getDescription());
 
             Optional<LocalDateTime> dateAimed = workRequestDto.getDateAimed();
-            if(dateAimed.isPresent()){
+            if (dateAimed.isPresent()) {
                 work.setDateAimed(dateAimed.get());
             }
             Optional<Long> timeAimed = workRequestDto.getTimeAimed();
-            if(timeAimed.isPresent()){
-                work.setTimeAimed(timeAimed.get()*60*60);
+            if (timeAimed.isPresent()) {
+                work.setTimeAimed(timeAimed.get() * 60 * 60);
             }
 
             Optional<WorkCategory> optionalWorkCategory = workCategoryRepository.findById(workRequestDto.getWorkCateId());
             if (optionalWorkCategory.isPresent()) {
                 WorkCategory workCategory = optionalWorkCategory.get();
-                if(workService.checkCateValid(optionalWorkCategory,token)){
+                if (workService.checkCateValid(optionalWorkCategory, token)) {
                     work.setWorkCate(workCategory);
                     workService.save(work);
                     resultMap.put("result", "ok");
                     status = HttpStatus.ACCEPTED;
-                }else{
+                } else {
                     resultMap.put("result", "카테고리가 삭제되었거나 다른 유저의 카테고리를 참조했습니다.");
                     status = HttpStatus.INTERNAL_SERVER_ERROR;
                 }
-            }else{
+            } else {
                 resultMap.put("result", "다른 유저의 업무를 참조했습니다.");
                 status = HttpStatus.INTERNAL_SERVER_ERROR;
             }
@@ -263,5 +260,12 @@ public class WorkController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
+    @GetMapping("{year}/{month}/{day}")
+    @ApiOperation(value = "", notes = "")
+    public ResponseEntity<?> getAllTodo(@RequestHeader(value = "AccessToken") String token, @PathVariable("year") int year, @PathVariable("month") int month, @PathVariable("day") int day) {
+        User user = jwtUtil.getUser(token);
+        List<WorkCalenderDto> workCalenderDtos = workService.findByUserIdAndDate(user.getId(), year, month, day);
+        return ResponseEntity.ok().body(workCalenderDtos);
+    }
 
 }
