@@ -5,6 +5,7 @@ import com.ssafy.calmwave.domain.User;
 import com.ssafy.calmwave.domain.Work;
 import com.ssafy.calmwave.dto.CalendarRequestDto;
 import com.ssafy.calmwave.dto.WorkCalenderDto;
+import com.ssafy.calmwave.dto.WorkDto;
 import com.ssafy.calmwave.service.WorkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -32,8 +33,8 @@ public class CalendarController {
     @ApiOperation(value = "", notes = "")
     public ResponseEntity<?> getAllTodo(@RequestHeader(value = "AccessToken") String token, @PathVariable("year") int year, @PathVariable("month") int month, @PathVariable("day") int day) {
         User user = jwtUtil.getUser(token);
-        List<WorkCalenderDto> workCalenderDtos = workService.findByUserIdAndDate(user.getId(), year, month, day);
-        return ResponseEntity.ok().body(workCalenderDtos);
+        List<WorkDto> list = workService.findByUserIdAndDate(user.getId(), year, month, day);
+        return ResponseEntity.ok().body(list);
     }
 
     @PostMapping("/update")

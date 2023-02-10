@@ -3,6 +3,7 @@ package com.ssafy.calmwave.service;
 import com.ssafy.calmwave.config.jwt.JwtUtil;
 import com.ssafy.calmwave.domain.*;
 import com.ssafy.calmwave.dto.*;
+import com.ssafy.calmwave.repository.PastWorkRepository;
 import com.ssafy.calmwave.repository.WorkCategoryRepository;
 import com.ssafy.calmwave.repository.WorkPeriodRepository;
 import com.ssafy.calmwave.repository.WorkRepository;
@@ -13,8 +14,6 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -30,6 +29,7 @@ public class WorkService {
     private final CategoryService categoryService;
     private final WorkCategoryRepository workCategoryRepository;
     private final WorkPeriodRepository workPeriodRepository;
+    private final PastWorkRepository pastWorkRepository;
 
     public Work save(Work work) {
         return workRepository.save(work);
@@ -127,10 +127,15 @@ public class WorkService {
      * @param day
      * @return
      */
-    public List<WorkCalenderDto> findByUserIdAndDate(Long userId, int year, int month, int day) {
-        LocalDate searchDate= LocalDate.of(year,month,day);
-        Date date= Date.valueOf(searchDate);
-        List<WorkCalenderDto> works = workRepository.findByUserIdAndDate(userId, date);
-        return works;
+    public List<WorkDto> findByUserIdAndDate(Long userId, int year, int month, int day) {
+        LocalDate searchDate = LocalDate.of(year, month, day);
+        Date date = Date.valueOf(searchDate);
+//        List<WorkCalenderDto> works = workRepository.findByUserIdAndDate(userId, date);
+        List<WorkDto> workDtoList = workRepository.findByUserIdAndBetweenDateCreatedAndDateAimed(userId, date);
+        List<WorkDto> workDtoList1 = pastWorkRepository.findByUserIdAndBetweenDateCreatedAndDateAimed(userId, date);
+        for (WorkDto w : workDtoList1) {
+            workDtoList.add(w);
+        }
+        return workDtoList;
     }
 }
