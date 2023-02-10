@@ -14,7 +14,7 @@ import new_logo from "../../assets/new_logo.png"
 const OPENVIDU_SERVER_URL = "https://i8a105.p.ssafy.io:8443/"
 const OPENVIDU_SERVER_SECRET = "WAVES"
 
-export default function Video() {
+export default function Video(props) {
   const user = useSelector((state) => state.user.userData)
   const progress = useSelector((state) => state.todos.onProgress)
   const [mySessionId, setMySessionId] = useState(`Session${user.id}`)
@@ -198,6 +198,7 @@ export default function Video() {
                 <UserVideoComponent
                   streamManager={publisher}
                   className={`${!view && styles[`visi-hidden`]}`}
+                  videoRef={props.videoRef}
                 />
                 <img
                   src={new_logo}

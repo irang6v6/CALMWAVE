@@ -18,6 +18,7 @@ export const RoomPage = () => {
   const progress = useSelector((state) => state.todos.onProgress)
   const dispatch = useDispatch()
   const doorRef = useRef(null)
+  const videoRef = useRef(null)
   const { width, height } = useCustomWidthHeight(doorRef)
 
   useEffect(() => {
@@ -58,21 +59,23 @@ export const RoomPage = () => {
       <div ref={doorRef} className={`${styles["todobox-container"]}`}>
         <DndProvider backend={HTML5Backend}>
           <div className={`${styles["todo-container"]}`}>
-            <TodoColumn title="To do">
-              {alignTodosInColumn("To do")}
-            </TodoColumn>
+            <TodoColumn title="To do">{alignTodosInColumn("To do")}</TodoColumn>
           </div>
-          <div className={`${styles["cam-progress-container"]}
-          ${progress && styles["cam-progress-container-focused"]}`}>
+          <div
+            className={`${styles["cam-progress-container"]}
+          ${progress && styles["cam-progress-container-focused"]}`}
+          >
             <div className={`${styles[`cam-container`]}`}>
-              <Video />
+              <Video videoRef={videoRef} />
             </div>
             <TodoColumn title="In Progress">
               {alignTodosInColumn("In Progress")}
             </TodoColumn>
           </div>
-          <div className={`${styles["done-container"]}
-          ${!progress && styles["done-container-focused"]}`}>
+          <div
+            className={`${styles["done-container"]}
+          ${!progress && styles["done-container-focused"]}`}
+          >
             <TodoColumn title="Done">
               {alignTodosInColumn("Done")}
               <NavLink
