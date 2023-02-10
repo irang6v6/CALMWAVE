@@ -260,12 +260,6 @@ public class WorkController {
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
-    @GetMapping("{year}/{month}/{day}")
-    @ApiOperation(value = "", notes = "")
-    public ResponseEntity<?> getAllTodo(@RequestHeader(value = "AccessToken") String token, @PathVariable("year") int year, @PathVariable("month") int month, @PathVariable("day") int day) {
-        User user = jwtUtil.getUser(token);
-        List<WorkCalenderDto> workCalenderDtos = workService.findByUserIdAndDate(user.getId(), year, month, day);
-        return ResponseEntity.ok().body(workCalenderDtos);
-    }
+
 
 }
