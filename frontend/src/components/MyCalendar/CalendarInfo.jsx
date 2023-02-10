@@ -51,6 +51,7 @@ export default function CalendarInfo({ todo, date }) {
       dispatch(modalActions.setIsUpdate())
       dispatch(openTaskModal())
   }
+  console.log(todo.category)
 
   //   const selectDay = (selectedDate) => {
   //     return todolist
@@ -71,7 +72,7 @@ export default function CalendarInfo({ todo, date }) {
         생성일자 : {todo?.createdDate}<br/>
         목표일자 : {finalDate? `${finalDate} (${dDayLabel})`:`없음`}
       </div>
-      <p>카테고리: {todo?.categoryId}</p>
+      <p>카테고리: {todo?.category.cateName}</p>
 
       <div className={`${styles[`card-header-icon-container`]}`}>
         <AiFillEdit
