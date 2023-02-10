@@ -14,6 +14,7 @@ import {
 
 function TaskForm() {
   const dispatch = useDispatch()
+  const categoryList = useSelector((state) => state.category.categoryList)
   const { formData, isLoading, isCreate } = useSelector((state) => state.modal)
   const [titleRef, descriptionRef, dateRef, storyPointRef, categoryRef] = [
     useRef(null),
@@ -26,9 +27,10 @@ function TaskForm() {
   const [descriptionInput, descriptionChangeHandler, descriptionSetTrigger] =
     useInput(descriptionRef)
   const [dateInput, dateChangeHandler, dateSetTrigger] = useInput(dateRef)
-  const [storyPointInput, storyPointChangeHandler, storyPointSetTrigger] = useInput(storyPointRef)
-  const [categoryInput, categoryChangeHandler, categorySetTrigger] = useInput(categoryRef)
-
+  const [storyPointInput, storyPointChangeHandler, storyPointSetTrigger] =
+    useInput(storyPointRef)
+  const [categoryInput, categoryChangeHandler, categorySetTrigger] =
+    useInput(categoryRef)
 
   const { selectedCategoryId } = useSelector((state) => state.category)
   const FormTitle = isCreate ? `업무 생성` : `업무 수정`
@@ -109,7 +111,14 @@ function TaskForm() {
       storyPointSetTrigger(formData?.finishedDate || 0)
       categorySetTrigger(formData?.finishedDate || 0)
     },
-    [formData, titleSetTrigger, descriptionSetTrigger, dateSetTrigger,storyPointSetTrigger,categorySetTrigger]
+    [
+      formData,
+      titleSetTrigger,
+      descriptionSetTrigger,
+      dateSetTrigger,
+      storyPointSetTrigger,
+      categorySetTrigger,
+    ]
   )
 
   return (
@@ -150,12 +159,20 @@ function TaskForm() {
         />
 
         <label htmlFor="task-category">카테고리</label>
-        <input
+        <select
           ref={categoryRef}
-          type="number"
+          // type="number"
           id="task-category"
           onChange={categoryChangeHandler}
-        />
+        >
+          {categoryList.map((cate) => {
+            return (
+              <option value={cate.id} key={`select-category-${cate.id}`}>
+                {cate.title}
+              </option>
+            )
+          })}
+        </select>
 
         <button>{isLoading ? <SpinnerDots /> : `완료`}</button>
       </form>

@@ -116,7 +116,7 @@ export const submitModal = function (requestData) {
         dispatch(modalActions.resetFormData())
       })
       .catch((err) => {
-        dispatch(modalActions.toggleIsLoading())
+        dispatch(modalActions.setNotLoading())
         dispatch(modalActions.setIsError())
         dispatch(modalActions.resetFormData())
       })
