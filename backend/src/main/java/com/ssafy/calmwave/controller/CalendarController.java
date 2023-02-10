@@ -37,7 +37,7 @@ public class CalendarController {
         return ResponseEntity.ok().body(list);
     }
 
-    @PostMapping("/update")
+    @PostMapping("update")
     @ApiOperation(value = "", notes = "")
     public ResponseEntity<?> join(@RequestHeader(value = "AccessToken") String token, @RequestBody CalendarRequestDto calendarRequestDto) {
         Map<String, Object> resultMap = new HashMap<>();
