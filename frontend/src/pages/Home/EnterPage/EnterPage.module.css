@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dancing+Script:wght@700&family=Do+Hyeon&family=Dokdo&family=Dongle:wght@700&family=East+Sea+Dokdo&family=Exo+2:wght@500&family=Gamja+Flower&family=Gothic+A1:wght@600;700&family=Gowun+Dodum&family=Hahmlet:wght@600&family=Heebo&family=Nanum+Brush+Script&family=Nanum+Pen+Script&family=PT+Sans:ital,wght@1,700&family=Stylish&family=Sunflower:wght@500;700&family=Ubuntu:ital,wght@0,400;0,500;1,400;1,500&family=Zeyada&display=swap');
+
 .container {
   box-sizing: border-box;
   width: 100%;
@@ -74,16 +76,18 @@
   margin: 10% 0px 20px 0px;
   display: block;
   color: #001930;
-  /* white-space: nowrap; */
+  /* font-family: 'Nanum Brush Script', cursive; */
+  font-family: 'Gowun Dodum', sans-serif;
 }
 
 .slogun-en {
   font-size: 1.5rem;
-  font-weight: 600;
+  font-weight: 500;
   margin: 5px 10px 20px 10px;
   display: block;
   color: #001930;
    /* white-space: nowrap; */
+   font-family: 'Ubuntu', sans-serif;
 }
 
 /* Button */

@@ -5,6 +5,7 @@
   flex-direction: column;
   align-items: center;
   background: #001930;
+  font-family: 'Gowun Dodum', sans-serif;
 }
 
 .inner {
@@ -34,6 +35,10 @@
   background: rgba(166, 250, 255, 0.25);
   color: white;
   padding: 0 1% 0 1%;
+}
+
+.method-description{
+  font-size: 1.1rem;
 }
 
 .pomodoro-img{

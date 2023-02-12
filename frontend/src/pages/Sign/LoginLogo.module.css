@@ -5,15 +5,15 @@
   flex-direction: column;
   box-sizing: border-box;
   border-radius: 100%;
-  background-color: rgba(230, 246, 255);
+  background-color: rgba(230, 246, 255, 0.9);
   width: 45vh;
   height: 45vh;
   box-shadow: 3px 10px 5px 3px rgba(2, 45, 82, 0.2);
 }
 .logo-img {
   display: block;
-  width: auto;
-  height: 25vh;
+  width: 80%;
+  /* height: 25vh; */
   transition: 0.5s;
 }
 /* .logo-calm:hover {
@@ -169,20 +169,23 @@
 }
 
 .logo-wave {
-  font-family: "Black Han Sans", sans-serif;
+  /* font-family: "Black Han Sans", sans-serif;
   font-size: 3.3rem;
-  color: rgb(59, 123, 177);
+  color: rgb(59, 123, 177); */
+  width: 70%;
   transition: 0.5s;
   display: inline-block;
-  text-shadow: 1px 1px 2px rgba(2, 45, 82, 0.5);
-  cursor: pointer;
+  /* text-shadow: 1px 1px 2px rgba(2, 45, 82, 0.5); */
+  /* cursor: pointer;
   transform: translate(0, 17px) scale(98%);
   user-select: none;
 
   animation-name: toktok;
   animation-duration: 1s;
   animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation-direction: alternate; */
+  margin-top: 5%;
+  margin-bottom: 5%;
 }
 
 @keyframes toktok {

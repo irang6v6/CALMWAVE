@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dancing+Script:wght@700&family=Do+Hyeon&family=Dokdo&family=Dongle:wght@700&family=East+Sea+Dokdo&family=Exo+2:wght@500&family=Gamja+Flower&family=Gothic+A1:wght@600;700&family=Gowun+Dodum&family=Hahmlet:wght@600&family=Heebo&family=Nanum+Brush+Script&family=Nanum+Pen+Script&family=PT+Sans:ital,wght@1,700&family=Stylish&family=Sunflower:wght@500;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Zeyada&display=swap');
+
 .container {
   display: flex;
   justify-content: center;
@@ -8,6 +10,7 @@
   background: #001930;
   text-align: center;
   /* border: 5px solid #ff0000; */
+  font-family: 'Gowun Dodum', sans-serif;
 }
 
 .inner {
