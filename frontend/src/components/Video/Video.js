@@ -13,8 +13,13 @@ import new_logo from "../../assets/new_logo.png"
 
 const OPENVIDU_SERVER_URL = "https://i8a105.p.ssafy.io:8443/"
 const OPENVIDU_SERVER_SECRET = "WAVES"
+const tmPose = window.tmPose
+const modelURL =
+  "https://teachablemachine.withgoogle.com/models/5kCzQ3Epp/model.json"
+const metadataURL =
+  "https://teachablemachine.withgoogle.com/models/5kCzQ3Epp/metadata.json"
 
-export default function Video() {
+export default function Video(props) {
   const user = useSelector((state) => state.user.userData)
   const progress = useSelector((state) => state.todos.onProgress)
   const [mySessionId, setMySessionId] = useState(`${user.id}-${Date.now()}`)
@@ -23,6 +28,10 @@ export default function Video() {
   /* eslint-disable */
   const [OV, setOV] = useState()
   const [view, setView] = useState(true)
+
+  const [model, setModel] = useState(null)
+  const [webcam, setWebcam] = useState(null)
+  const [posture, setPosture] = useState("")
 
   // 최초 진입 시 세션 접속
   useEffect(() => {
@@ -40,6 +49,56 @@ export default function Video() {
       leaveSession()
     }
   }, [session])
+  useEffect(function () {
+    settingModel()
+    initialSet()
+  }, [])
+
+  useEffect(
+    function () {
+      if (props.videoRef) {
+        loop()
+      }
+    },
+    [props.videoRef.current]
+  )
+
+  const settingModel = async function () {
+    const a = await tmPose.load(modelURL, metadataURL)
+    setModel(() => a)
+  }
+
+  const initialSet = async function () {
+    const size = 200
+    const wc = await new tmPose.Webcam(200, 200, true)
+    setWebcam(() => wc)
+  }
+
+  const loop = async function (timestamp) {
+    if (props.videoRef) {
+      webcam.update()
+      predict()
+      await webcam.setup()
+      await webcam.play()
+      window.requestAnimationFrame(loop)
+    }
+  }
+  const predict = async function () {
+    if (!props.videoRef.current) {
+      return
+    }
+    const { pose, posenetOutput } = await model.estimatePose(
+      props.videoRef.current
+    ) // posenetOutput : 좌표에 관한 내용이 들어가 있음.
+    const prediction = await model.predict(posenetOutput)
+
+    for (let i = 0; i < 4; i++) {
+      const rtPosture = prediction[i]
+      if (rtPosture.probability.toFixed(2) > 0.99) {
+        console.log(rtPosture, "<<<<")
+      }
+    }
+  }
 
   // 토큰 반환 (추가 예정)
   const getToken = async () => {
@@ -213,6 +272,7 @@ export default function Video() {
                 <UserVideoComponent
                   streamManager={publisher}
                   className={`${!view && styles[`visi-hidden`]}`}
+                  videoRef={props.videoRef}
                 />
                 <img
                   src={new_logo}
