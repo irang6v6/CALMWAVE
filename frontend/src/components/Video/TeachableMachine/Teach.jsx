@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import { Model } from "./TeachModel"
-
 const tmPose = window.tmPose
+/* eslint-disable */
 const tmModel = new Model()
 
 export default class Teach extends Component {
@@ -103,6 +103,7 @@ export default class Teach extends Component {
   }
 
   async predict() {
+    /* eslint-disable */
     const { pose, posenetOutput } = await this.model.estimatePose(this.videoRef)
     const prediction = await this.model.predict(posenetOutput)
     // const predictionsList = prediction.map((res, i) => (

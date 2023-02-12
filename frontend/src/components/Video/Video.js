@@ -32,12 +32,13 @@ export default function Video(props) {
   const [model, setModel] = useState(null)
   const [webcam, setWebcam] = useState(null)
   const [posture, setPosture] = useState("")
+  const [check, setCheck] = useState(0)
 
   // 최초 진입 시 세션 접속
   useEffect(() => {
     joinSession()
   }, [])
-      
+
   // 페이지 변동에 따른 세션 종료
   useEffect(() => {
     const handleBeforeUnload = () => {
@@ -52,16 +53,8 @@ export default function Video(props) {
   useEffect(function () {
     settingModel()
     initialSet()
+    console.log("이건 1회만")
   }, [])
-
-  useEffect(
-    function () {
-      if (props.videoRef) {
-        loop()
-      }
-    },
-    [props.videoRef.current]
-  )
 
   const settingModel = async function () {
     const a = await tmPose.load(modelURL, metadataURL)
@@ -69,20 +62,26 @@ export default function Video(props) {
   }
 
   const initialSet = async function () {
-    const size = 200
-    const wc = await new tmPose.Webcam(200, 200, true)
+    let w = null
+    let h = null
+    if (props.videoRef) {
+      w = props.videoRef.offsetWidth
+      h = props.videoRef.offsetHeight
+      // console.log(w, h)
+    }
+    const wc = await new tmPose.Webcam(w || 200, h || 200, true)
     setWebcam(() => wc)
   }
 
   const loop = async function (timestamp) {
-    if (props.videoRef) {
+    if (props.videoRef && webcam) {
       webcam.update()
       predict()
       await webcam.setup()
       await webcam.play()
-      window.requestAnimationFrame(loop)
     }
   }
+
   const predict = async function () {
     if (!props.videoRef.current) {
       return
@@ -91,14 +90,30 @@ export default function Video(props) {
       props.videoRef.current
     ) // posenetOutput : 좌표에 관한 내용이 들어가 있음.
     const prediction = await model.predict(posenetOutput)
-
     for (let i = 0; i < 4; i++) {
       const rtPosture = prediction[i]
-      if (rtPosture.probability.toFixed(2) > 0.99) {
-        console.log(rtPosture, "<<<<")
+      if (rtPosture.probability.toFixed(2) > 0.99999999) {
+        console.log(rtPosture, `이게 체크입니다 : ${check}`)
       }
     }
   }
+
+  // 데이터 0.5초에 한 번 확인 할 예정.
+  useEffect(
+    function () {
+      let aniId = null
+      setTimeout(function () {
+        if (props.videoRef) {
+          aniId = window.requestAnimationFrame(loop)
+          setCheck((val) => val + 1)
+        }
+      }, 500)
+      return function () {
+        window.cancelAnimationFrame(aniId)
+      }
+    },
+    [props.videoRef, loop]
+  )
 
   // 토큰 반환 (추가 예정)
   const getToken = async () => {
@@ -263,9 +278,9 @@ export default function Video(props) {
             {publisher === undefined ? (
               <AiFillVideoCamera
                 onClick={reJoinSession}
-                className={`${styles[`videobox-icon`]}
-                ${styles['icon-animation']}
-                `}
+                className={`${styles[`videobox-icon`]} ${
+                  styles["icon-animation"]
+                }`}
               />
             ) : (
               <>

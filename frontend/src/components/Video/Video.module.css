@@ -116,7 +116,7 @@
 }
 
 .icon-animation {
-  -webkit-animation: 3s ease 0s normal forward 1 fadein;
+  -webkit-animation: 3s ease 0s normal forwards 1 fadein;
   animation: 3s ease 0s normal forwards 1 fadein;
 }
 

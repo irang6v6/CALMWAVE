@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import Teach from "./TeachableMachine/Teach"
 
 export default class OpenViduVideoComponent extends Component {
   constructor(props) {
