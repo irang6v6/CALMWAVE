@@ -16,10 +16,9 @@ import { modalActions,
 
 export default function CalendarInfo({ todo, date }) {
   const dispatch = useDispatch()
-  // console.log(todo?.title)
 
   // 업무 목표날짜
-  const finalDate = todo.finishedDate ? todo.finishedDate.slice(0, 10) : ""
+  const finalDate = todo.dateAimed ? todo.dateAimed.slice(0, 10) : ""
 
   // 캘린더에서 선택한 날짜
   const selectDate = moment(date)
@@ -51,7 +50,6 @@ export default function CalendarInfo({ todo, date }) {
       dispatch(modalActions.setIsUpdate())
       dispatch(openTaskModal())
   }
-  console.log(todo.category)
 
   //   const selectDay = (selectedDate) => {
   //     return todolist
@@ -69,10 +67,10 @@ export default function CalendarInfo({ todo, date }) {
         {todo?.description}
         <br />
         <br />
-        생성일자 : {todo?.createdDate}<br/>
+        생성일자 : {todo?.dateCreated}<br/>
         목표일자 : {finalDate? `${finalDate} (${dDayLabel})`:`없음`}
       </div>
-      <p>카테고리: {todo?.category.cateName}</p>
+      <p>카테고리: {todo?.cateName}</p>
 
       <div className={`${styles[`card-header-icon-container`]}`}>
         <AiFillEdit

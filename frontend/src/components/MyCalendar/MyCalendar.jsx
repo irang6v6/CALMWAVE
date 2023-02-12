@@ -24,7 +24,7 @@ export default function MyCalendar(props) {
     isError,
     selectedDate: RTKSelectedDate,
   } = useSelector((state) => state.calendar)
-  // console.log(todolist)
+  console.log(todolist)
   useEffect(
     function () {
       const d = new Date(selectedDate)
@@ -104,30 +104,30 @@ export default function MyCalendar(props) {
           <div className="select-todolist">
             {todolist
               ? todolist
-                  .filter((todo) => {
-                    // todo?.createdDate?.slice(0, 10) ===
-                    // moment(date).format("YYYY-MM-DD")
+                  // .filter((todo) => {
+                  //   // todo?.createdDate?.slice(0, 10) ===
+                  //   // moment(date).format("YYYY-MM-DD")
 
-                    // moment(date).isBetween(
-                    //   moment(todo?.createdDate),
-                    //   moment(todo?.finishedDate),
-                    //   null,
-                    //   "[]"
-                    // )
-                    if (todo.finishedDate) {
-                      return (
-                        new Date(todo.createdDate).getDate() <=
-                          new Date(selectedDate).getDate() &&
-                        new Date(selectedDate).getDate() <=
-                          new Date(todo.finishedDate).getDate()
-                      )
-                    } else {
-                      return (
-                        new Date(todo.createdDate).toString() ===
-                        new Date(selectedDate).toString()
-                      )
-                    }
-                  })
+                  //   // moment(date).isBetween(
+                  //   //   moment(todo?.createdDate),
+                  //   //   moment(todo?.finishedDate),
+                  //   //   null,
+                  //   //   "[]"
+                  //   // )
+                  //   if (todo.finishedDate) {
+                  //     return (
+                  //       new Date(todo.createdDate).getDate() <=
+                  //         new Date(selectedDate).getDate() &&
+                  //       new Date(selectedDate).getDate() <=
+                  //         new Date(todo.finishedDate).getDate()
+                  //     )
+                  //   } else {
+                  //     return (
+                  //       new Date(todo.createdDate).toString() ===
+                  //       new Date(selectedDate).toString()
+                  //     )
+                  //   }
+                  // })
                   .map((todo, index) => (
                     <CalendarInfo
                       key={`calendar-task-${todo.id}-${Math.random()}`}
