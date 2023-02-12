@@ -21,4 +21,5 @@ public class WorkCalenderDto {
     private WorkStatus status;
     private LocalDateTime dateCreated;
     private LocalDateTime dateAimed;
+    private Long timeAimed;
 }

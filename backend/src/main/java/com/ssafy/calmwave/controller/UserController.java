@@ -168,7 +168,6 @@ public class UserController {
         Map<String, Object> resultMap = new HashMap<>();
         userService.updateUser(userInfoDto);
         resultMap.put("result", "ok");
-
         return ResponseEntity.status(HttpStatus.ACCEPTED).body(resultMap);
     }
 }

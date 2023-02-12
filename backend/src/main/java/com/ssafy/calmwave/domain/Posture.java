@@ -1,21 +1,18 @@
 package com.ssafy.calmwave.domain;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.Instant;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import java.time.LocalDateTime;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "posture")
 @NoArgsConstructor
+@Getter @Setter
 public class Posture {
 
     @Id
@@ -27,42 +24,16 @@ public class Posture {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Column(name = "dtype", nullable = false, length = 1)
-    private String dtype;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "cName", nullable = false)
+    private PostureCName cName;
 
+    @CreationTimestamp
     @Column(name = "date_created", nullable = false)
-    private Instant dateCreated;
+    private LocalDateTime dateCreated;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
+    public Posture(User user, PostureCName cName) {
         this.user = user;
+        this.cName = cName;
     }
-
-    public String getDtype() {
-        return dtype;
-    }
-
-    public void setDtype(String dtype) {
-        this.dtype = dtype;
-    }
-
-    public Instant getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Instant dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
 }
