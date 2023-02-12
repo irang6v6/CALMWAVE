@@ -127,12 +127,12 @@ public class WorkService {
      * @param day
      * @return
      */
-    public List<WorkDto> findByUserIdAndDate(Long userId, int year, int month, int day) {
+    public List<WorkCalenderDto> findByUserIdAndDate(Long userId, int year, int month, int day) {
         LocalDate searchDate = LocalDate.of(year, month, day);
         Date date = Date.valueOf(searchDate);
-        List<WorkDto> workDtoList = workRepository.findByUserIdAndBetweenDateCreatedAndDateAimed(userId, date);
-        List<WorkDto> workDtoList1 = pastWorkRepository.findByUserIdAndBetweenDateCreatedAndDateAimed(userId, date);
-        for (WorkDto w : workDtoList1) {
+        List<WorkCalenderDto> workDtoList = workRepository.findByUserIdAndDate(userId, date);
+        List<WorkCalenderDto> workDtoList1 = workRepository.findPastWorkByUserIdAndDate(userId, date);
+        for (WorkCalenderDto w : workDtoList1) {
             workDtoList.add(w);
         }
         return workDtoList;

@@ -33,7 +33,7 @@ public class CalendarController {
     @ApiOperation(value = "", notes = "")
     public ResponseEntity<?> getAllTodo(@RequestHeader(value = "AccessToken") String token, @PathVariable("year") int year, @PathVariable("month") int month, @PathVariable("day") int day) {
         User user = jwtUtil.getUser(token);
-        List<WorkDto> list = workService.findByUserIdAndDate(user.getId(), year, month, day);
+        List<WorkCalenderDto> list = workService.findByUserIdAndDate(user.getId(), year, month, day);
         return ResponseEntity.ok().body(list);
     }
 
