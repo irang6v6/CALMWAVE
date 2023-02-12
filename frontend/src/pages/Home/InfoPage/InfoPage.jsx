@@ -1,6 +1,6 @@
 import styles from "./InfoPage.module.css"
 import React from "react"
-import doorImg from "../../../assets/door.png"
+import doorImg from "../../../assets/doorimg.png"
 import { VscTriangleDown } from "react-icons/vsc"
 
 function InfoPage(props) {

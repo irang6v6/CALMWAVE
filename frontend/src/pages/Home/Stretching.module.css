@@ -18,6 +18,10 @@
   color: white;
 }
 
+.header-text{
+  font-size: 1.7rem;
+}
+
 .chart-wrap {
   display: flex;
   justify-content: center;

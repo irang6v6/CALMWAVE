@@ -20,10 +20,16 @@
   z-index: 22;
   top: 90vh;
   left: 90vw;
-  border-radius: 8px;
+  border-radius: 10px;
   background-color: aquamarine;
   padding: 15px;
+  font-weight: 500;
 }
 .go-up:hover {
   cursor: pointer;
+}
+
+.go-up-icon{
+  font-size: 1.5rem;
+  font-weight: 900;
 }

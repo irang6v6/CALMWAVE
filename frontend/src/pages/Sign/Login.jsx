@@ -128,7 +128,7 @@ function Login(props) {
           <br />
           <div className={`${styles["label-container"]}`}>
             <label htmlFor="email" className={`${styles["form-label"]}`}>
-              <span>Email</span>
+              <span>이메일</span>
             </label>
             <span
               className={`${styles["change-button"]}`}
@@ -149,7 +149,7 @@ function Login(props) {
           />
           <br />
           <label htmlFor="pw" className={`${styles["form-label"]}`}>
-            Password
+            비밀번호
           </label>
           <br />
           <input

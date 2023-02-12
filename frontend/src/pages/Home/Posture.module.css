@@ -17,6 +17,10 @@
   color: white;
 }
 
+.header-text{
+  font-size: 1.7rem;
+}
+
 .left-box {
   width: 50%;
   text-align: center;

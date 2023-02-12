@@ -18,6 +18,7 @@ import { AxiosGetCategory } from "../../store/category-slice"
 import NavIcon from "../../components/NavIcon/NavIcon"
 import { AxiosGetTodos } from "../../store/task-slice"
 import axios from "axios"
+// import { VscArrowUp } from "react-icons/vsc"
 
 function HomePage() {
   const dispatch = useDispatch()
@@ -136,7 +137,8 @@ function HomePage() {
         <Stress refVal={stressRef} goNext={goLast} />
         {/* <LastPage refVal={LastRef} /> */}
         <div className={`${styles["go-up"]}`} onClick={goUp}>
-          위로!
+          {/* <VscArrowUp className={`${styles[`go-up-icon`]}`}/> */}
+          TOP
         </div>
         {/* <div className={`${styles["intro-page"]}`}>
         <div className={`${styles["left-box"]}`}>

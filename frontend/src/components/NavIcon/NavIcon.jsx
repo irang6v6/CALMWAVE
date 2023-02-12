@@ -14,6 +14,7 @@ import { useEffect, useState } from "react"
 import useApi from "../../hooks/http/use-api"
 import { LOGOUTandRESETLOCALSTORAGE } from "../../store/token-slice"
 import { SpinnerDots } from "../UI/Spinner"
+import logoimg from "../../assets/reallogo.png"
 
 function NavIcon() {
   const dispatch = useDispatch()
@@ -54,7 +55,7 @@ function NavIcon() {
   return (
     <>
       <NavLink to={`/`} className={`${styles[`logo-on-top`]}`}>
-        CALM WAVE
+        <img src={logoimg} alt="캄웨이브 로고" className={`${styles[`logo-img`]}`}/>
       </NavLink>
       <div className={`${styles["nav-icon-container"]}`}>
         {logoutLoading ? (

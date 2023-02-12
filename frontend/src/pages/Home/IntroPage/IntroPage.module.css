@@ -2,12 +2,14 @@
   display: flex;
   height: 100vh;
   justify-content: center;
+  flex-direction: column;
   align-items: center;
   background: #001930;
 }
 
 .inner {
   display: flex;
+  /* flex-direction: column; */
   width: 90%;
   height: 70%;
   justify-content: space-around;
@@ -15,22 +17,42 @@
   /* border: 1px solid #000; */
 }
 
+.header-text{
+  color: white;
+  font-size: 1.7rem;
+}
+
 .work-box{
   border: 3px solid #ffffff;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   align-items: center;
+  text-align: center;
   width: 25%;
-  height: 80%;
+  height: 85%;
   border-radius: 20px;
   background: rgba(166, 250, 255, 0.25);
   color: white;
   padding: 0 1% 0 1%;
 }
 
+.pomodoro-img{
+  width: 100%;
+}
+
+.gtd-img{
+  width: 50%;
+  margin-bottom: 5%;
+}
+
+.time-box-img{
+  width: 50%;
+  margin-bottom: 5%;
+}
+
 .work-box img{
-  width: 45%;
+  /* width: 45%; */
+  
 }
 
 .text-wrap {

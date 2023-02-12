@@ -9,7 +9,7 @@ function Stretching(props) {
   return (
     <div ref={props.refVal} className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
-        <h2>결과페이지에서 확인할 수 있는 다양한 나의 기록</h2>
+        <p className={`${styles["header-text"]}`}>결과페이지에서 확인할 수 있는 다양한 나의 기록</p>
         <div className={`${styles["chart-wrap"]}`}>
           <div className={`${styles["chart"]}`}><img src={chart1} alt="차트1"/>
             <p>이번 주 목표 달성도</p>

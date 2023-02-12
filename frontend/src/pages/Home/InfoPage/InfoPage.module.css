@@ -12,7 +12,7 @@
 
 .inner {
   width: 80%;
-  height: 70%;
+  /* height: 70%; */
   /* border: 1px solid #7e3636; */
   display: flex;
   flex-direction: column;
@@ -25,21 +25,21 @@
 
 .container p {
   line-height: 200%;
-  font-size: 170%;
+  font-size: 1.7rem;
   color: white;
   margin-bottom: 3%
 }
 
 
 .door-img{
-  width: 70%;
+  width: 90%;
 }
 
 .go-down {
   box-sizing: border-box;
   padding: 20px;
   position: absolute;
-  top: 185%;
+  top: 190%;
   /* background-color: #0084ff; */
   transform: translate(0, 0px);
 

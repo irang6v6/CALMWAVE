@@ -12,6 +12,14 @@
   text-decoration: none;
 }
 
+.logo-img{
+  width: 20%;
+  padding: 2%;
+  display: inline-block;
+
+  /* border: 1px solid #ffffff; */
+}
+
 .nav-icon-container {
   box-sizing: border-box;
   padding: 15px;

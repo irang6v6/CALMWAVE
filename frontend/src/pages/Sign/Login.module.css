@@ -18,8 +18,9 @@
   transition: 0.4s;
 }
 .form-label {
+  color: rgb(197, 197, 197);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   transition: 0.4s;
   margin: 10px 0 0 0;
 }
@@ -116,6 +117,7 @@
 }
 
 .change-button {
+  color: rgb(226, 226, 226);
   font-size: 1.1rem;
   font-weight: 600;
   margin-left: auto;
@@ -124,7 +126,7 @@
 }
 .change-button:hover {
   cursor: pointer;
-  color: rgba(52, 105, 174);
+  color: rgb(173, 208, 255);
   transform: scale(105%) translate(-1px, 5px);
 }
 
