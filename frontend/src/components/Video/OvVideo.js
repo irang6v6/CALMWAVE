@@ -23,10 +23,6 @@ export default class OpenViduVideoComponent extends Component {
     return (
       <>
         <video autoPlay={true} ref={this.props.videoRef}></video>
-        <Teach
-          videoRef={this.props.videoRef}
-          streamManager={this.props.streamManager}
-        />
       </>
     )
   }
