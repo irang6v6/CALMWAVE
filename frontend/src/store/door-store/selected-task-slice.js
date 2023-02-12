@@ -71,7 +71,7 @@ const selectedTaskSlice = createSlice({
 
       state.selectedTaskList =
         localData?.filter((todo) => {
-          return todo.column === "To do"
+          return todo.column !== "Done"
         }) || []
     },
     filteringAfterCategoryDelete(state, action) {

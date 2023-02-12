@@ -38,7 +38,6 @@ function CategoryTaskCard({ task, idx }) {
       })
     )
   }
-  console.log(selected)
 
   return (
     <div

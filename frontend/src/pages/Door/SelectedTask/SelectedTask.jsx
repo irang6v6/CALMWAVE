@@ -20,7 +20,8 @@ function SelectedTask() {
   const sendTodayTodo = () => {
     let todoSend = []
     selectedTaskList.forEach((task) => {
-      if (task.column === "To do") {
+      if (task.column !== "Done") {
+        console.log(task)
         todoSend.push({
           ...task,
           startWorkingDate: task.startWorkingDate ? task.startWorkingDate : 0,
@@ -40,14 +41,6 @@ function SelectedTask() {
       }
     })
 
-    // const localData = JSON.parse(window.localStorage.getItem("todo"))
-    // console.log(localData)
-    // if (localData) {
-    //   if (localData.filter((e) => e.column === "In Progress")[0]) {
-    //     console.log(localData.filter((e) => e.column === "In Progress")[0])
-    //   }
-      // todoSend.push(inProgress)
-    // }
     dispatch(todoActions.changeTodos(todoSend))
     localStorage.setItem("todo", JSON.stringify(todoSend))
     localStorage.setItem("category", JSON.stringify(categoryList))

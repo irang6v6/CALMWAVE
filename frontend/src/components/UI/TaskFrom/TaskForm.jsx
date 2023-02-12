@@ -36,10 +36,11 @@ function TaskForm() {
   const { selectedCategoryId } = useSelector((state) => state.category)
   const FormTitle = isCreate ? `업무 생성` : `업무 수정`
 
+  const beforeStoryPoint = formData?.storyPoint / 3600
+
   const submitHandler = function (event) {
     event.preventDefault()
     dispatch(modalActions.toggleIsLoading())
-    console.log(isLoading)
     if (isCreate) {
       axios({
         method: "post",
@@ -71,7 +72,6 @@ function TaskForm() {
           dispatch(closeModal())
         })
     } else {
-      console.log(dateInput, categoryInput, selectedCategoryId)
       axios({
         method: "post",
         url: `/v1/task/update`,
@@ -79,8 +79,8 @@ function TaskForm() {
           workId: formData.id,
           title: titleInput,
           description: descriptionInput,
-          dateAimed: dateInput ? dateInput + `T18:00:00` : "", //'T'18:00:00.000'Z'
-          timeAimed: storyPointInput,
+          dateAimed: dateInput ? dateInput.substring(0, 10) + `T18:00:00` : "", //'T'18:00:00.000'Z'
+          timeAimed: storyPointInput || beforeStoryPoint,
           workCateId: categoryInput || selectedCategoryId,
         },
       })
@@ -114,9 +114,9 @@ function TaskForm() {
     function () {
       titleSetTrigger(formData?.title || "")
       descriptionSetTrigger(formData?.description || "")
-      dateSetTrigger(formData?.finishedDate || "")
-      storyPointSetTrigger(formData?.finishedDate || 0)
-      categorySetTrigger(formData?.finishedDate || 0)
+      dateSetTrigger(formData?.finishedDate.substr(0, 10) || "")
+      storyPointSetTrigger(parseInt(formData?.storyPoint / 3600) || 0)
+      categorySetTrigger(formData?.categoryId || 0)
     },
     [
       formData,
@@ -171,7 +171,7 @@ function TaskForm() {
           // type="number"
           id="task-category"
           onChange={categoryChangeHandler}
-          value={selectedCategoryId}
+          value={categoryInput || selectedCategoryId}
         >
           {categoryList.map((cate) => {
             return (

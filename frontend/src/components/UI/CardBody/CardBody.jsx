@@ -5,8 +5,9 @@ function CardBody({ data }) {
   console.log(data)
   return (
     <div className={`${styles[`card-body-container`]}`}>
-      <div>{data.description}</div>
-      <div>Story Point : {data.storyPoint ? data.storyPoint : "not selected"}</div>
+      <div>세부내용 : {data.description}</div>
+      <div>목표시간 : {data.storyPoint ? parseInt(data?.storyPoint / 3600) : "미지정"}</div>
+      <div>목표일자 : {data.finishedDate ? data.finishedDate.substr(0, 10) : "미지정"}</div>
       <div className={`${styles[`card-body-data`]}`}>
         {/* {data?.description || "빈 설명입니다~~"} */}
       </div>
