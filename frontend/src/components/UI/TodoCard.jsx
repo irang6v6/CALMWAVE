@@ -4,7 +4,10 @@ import { useSelector, useDispatch } from "react-redux"
 import { AiFillCloseCircle, AiFillEdit } from "react-icons/ai"
 import { todoActions } from "../../store/todos-slice"
 import { modalActions } from "../../store/door-store/modal-slice"
-import { openTaskModal, openTaskDeleteModal } from "../../store/door-store/modal-slice"
+import {
+  openTaskModal,
+  openTaskDeleteModal,
+} from "../../store/door-store/modal-slice"
 import styles from "./TodoCard.module.css"
 import useApi from "../../hooks/http/use-api"
 export default function TodoCard({
@@ -39,12 +42,12 @@ export default function TodoCard({
   }, [running])
 
   const openDeleteModal = () => {
-    dispatch(modalActions.setFormData({ data:todo }))
+    dispatch(modalActions.setFormData({ data: todo }))
     dispatch(openTaskDeleteModal())
   }
 
   const openModal = () => {
-    dispatch(modalActions.setFormData({ data:todo }))
+    dispatch(modalActions.setFormData({ data: todo }))
     dispatch(modalActions.setIsTask())
     dispatch(modalActions.setIsUpdate())
     dispatch(openTaskModal())
@@ -227,23 +230,39 @@ export default function TodoCard({
         }
         `}
     >
-      <span>{title}</span>
-      <span>{description}</span>
+      <div className={`${styles["card-header"]}`}>
+        <div
+          className={`${styles[`card-header-lights`]}
+        bg-cat-${todo?.category?.cateColor || todo?.cateColor}`}
+        />
+        <div className={`${styles["card-header-title"]}`}>
+          <span>{title}</span>
+        </div>
+      </div>
       {currentColumn !== "In Progress" ? (
         <div>
-          {time + currentTime - startTime >= 3600000 ? (
+          <div className={`${styles["times"]}`}>
+            {time + currentTime - startTime >= 3600000 ? (
+              <span>
+                {(
+                  "0" +
+                  Math.floor(((time + currentTime - startTime) / 3600000) % 60)
+                ).slice(-2)}
+                :
+              </span>
+            ) : (
+              <span></span>
+            )}
+            <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
+            <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
             <span>
-              {(
-                "0" +
-                Math.floor(((time + currentTime - startTime) / 3600000) % 60)
-              ).slice(-2)}
-              :
+              {todo.storyPoint
+                ? ` / ${("0" + parseInt(todo?.storyPoint / 3600)).slice(
+                    -2
+                  )}:00:00`
+                : ""}
             </span>
-          ) : (
-            <span></span>
-          )}
-          <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-          <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
+          </div>
           <div className={`${styles["buttons"]}`}>
             <AiFillEdit onClick={openModal} />
             <AiFillCloseCircle onClick={openDeleteModal} />
@@ -251,30 +270,42 @@ export default function TodoCard({
         </div>
       ) : (
         <div>
-          {time + currentTime - startTime >= 3600000 ? (
+          <span>{description}</span>
+          <div className={`${styles["times"]}`}>
+            {time + currentTime - startTime >= 3600000 ? (
+              <span>
+                {(
+                  "0" +
+                  Math.floor(((time + currentTime - startTime) / 3600000) % 60)
+                ).slice(-2)}
+                :
+              </span>
+            ) : (
+              <span></span>
+            )}
             <span>
               {(
                 "0" +
-                Math.floor(((time + currentTime - startTime) / 3600000) % 60)
+                Math.floor(((time + currentTime - startTime) / 60000) % 60)
               ).slice(-2)}
               :
             </span>
-          ) : (
-            <span></span>
-          )}
-          <span>
-            {(
-              "0" + Math.floor(((time + currentTime - startTime) / 60000) % 60)
-            ).slice(-2)}
-            :
-          </span>
-          <span>
-            {(
-              "0" + Math.floor(((time + currentTime - startTime) / 1000) % 60)
-            ).slice(-2)}
-          </span>
+            <span>
+              {(
+                "0" + Math.floor(((time + currentTime - startTime) / 1000) % 60)
+              ).slice(-2)}
+            </span>
+            <span>
+              {todo.storyPoint
+                ? ` / ${("0" + parseInt(todo?.storyPoint / 3600)).slice(
+                    -2
+                  )}:00:00`
+                : ""}
+            </span>
+          </div>
         </div>
       )}
+      <span></span>
     </div>
   )
 }

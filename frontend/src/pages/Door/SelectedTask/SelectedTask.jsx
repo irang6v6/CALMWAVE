@@ -17,6 +17,15 @@ function SelectedTask() {
     dispatch(selectedTaskActions.recallSelectedTodoTaskList())
   }, [dispatch])
 
+  const sumStoryPoints = () => {
+    let sum = 0;
+    for (let i = 0; i < selectedTaskList.length; i++) {
+      sum += selectedTaskList[i].storyPoint;
+    }
+    console.log(sum)
+    return parseInt(sum / 3600);
+  }
+
   const sendTodayTodo = () => {
     let todoSend = []
     selectedTaskList.forEach((task) => {
@@ -47,7 +56,7 @@ function SelectedTask() {
   }
   return (
     <>
-      <div className={`${styles[`door-title-container`]}`}>선택한 업무</div>
+      <div className={`${styles[`door-title-container`]}`}>선택한 업무 {sumStoryPoints() ? `- ${sumStoryPoints()}시간` : ''}</div>
       <div className={`${styles[`selected-task-container`]}`}>
         {selectedTaskList.map((task, idx) => {
           return (
