@@ -4,13 +4,36 @@
   width: 100%;
   min-width: 500px;
   max-width: 800px;
-  padding: 80px;
-  height: 100%;
+  padding: 50px 80px 80px 80px;
+  height: 150%;
   background-color: aliceblue;
   display: flex;
   flex-direction: column;
   /* align-items: center; */
+  justify-content: center;
   font-size: 2.77rem;
+  font-family: 'Gowun Dodum', sans-serif;
+  border-radius: 20px;
+  border: 4px solid #9bbaff;
+  /* text-align: center; */
+}
+
+.header-text{
+  text-align: center;
+  margin-bottom: 5%;
+  font-size: 2rem;
+}
+
+.body-text{
+  font-size: 1.7rem;
+}
+
+.input-form{
+  margin-bottom: 3%;
+}
+
+.ok-btn{
+  margin-top: 3%;
 }
 
 .task-form-input-container {

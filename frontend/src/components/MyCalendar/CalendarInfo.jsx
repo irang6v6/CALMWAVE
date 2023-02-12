@@ -39,13 +39,29 @@ export default function CalendarInfo({ todo, date }) {
 
   // 삭제모달 호출
   const openDeleteModal = function () {
-      dispatch(modalActions.setFormData({ data:todo }))
+    const editedData = {
+      id: todo.id,
+      title: todo.title,
+      description: todo.description,
+      categoryId: todo.workCateId,
+      finishedDate: todo.dateAimed,
+      // storyPoint: todo.timeAimed,
+    }
+      dispatch(modalActions.setFormData({ data: editedData }))
       dispatch(openTaskDeleteModal())
   }
 
   // 수정 모달 호출
   const openModal = function () {
-    dispatch(modalActions.setFormData({ data:todo }))
+    const editedData = {
+      id: todo.id,
+      title: todo.title,
+      description: todo.description,
+      categoryId: todo.workCateId,
+      finishedDate: todo.dateAimed,
+      // storyPoint: todo.timeAimed,
+    }
+    dispatch(modalActions.setFormData({ data:editedData }))
       dispatch(modalActions.setIsTask())
       dispatch(modalActions.setIsUpdate())
       dispatch(openTaskModal())

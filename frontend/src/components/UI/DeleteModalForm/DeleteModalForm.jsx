@@ -72,9 +72,15 @@ function DeleteModalForm({ cardType, cardId }) {
   return (
     <>
       <div className={`${styles[`delete-modal-container`]}`}>
-        <div>삭제 고?</div>
-        <div>삭제 고?</div>
-        <div onClick={deleteCategoryTaskHandler}>삭제 버튼임</div>
+        <div className={`${styles[`recheck`]}`}>
+          삭제하시겠습니까?
+        </div>
+        <div
+          onClick={deleteCategoryTaskHandler}
+          className={`${styles[`delete-btn`]}`}
+        >
+          삭제하기
+        </div>
       </div>
     </>
   )

@@ -130,48 +130,53 @@ function TaskForm() {
 
   return (
     <div className={`${styles[`task-form-container`]}`}>
-      <div>{FormTitle}</div>
+      <div className={`${styles[`header-text`]}`}>{FormTitle}</div>
       <form
         className={`${styles[`task-form-input-container`]}`}
         onSubmit={submitHandler}
       >
-        <label htmlFor="task-title">Title</label>
+        <label htmlFor="task-title" className={`${styles[`body-text`]}`}>Title</label>
         <input
           ref={titleRef}
           type="text"
           id="task-title"
           onChange={titleChangeHandler}
+          className={`${styles[`input-form`]}`}
         />
-        <label htmlFor="task-description">Description</label>
+        <label htmlFor="task-description" className={`${styles[`body-text`]}`}>Description</label>
         <input
           ref={descriptionRef}
           type="text"
           id="task-description"
           onChange={descriptionChangeHandler}
+          className={`${styles[`input-form`]}`}
         />
-        <label htmlFor="task-date">D-Day</label>
+        <label htmlFor="task-date" className={`${styles[`body-text`]}`}>D-Day</label>
         <input
           ref={dateRef}
           type="date"
           id="task-date"
           onChange={dateChangeHandler}
+          className={`${styles[`input-form`]}`}
         />
 
-        <label htmlFor="task-storypoint">Storypoint</label>
+        <label htmlFor="task-storypoint" className={`${styles[`body-text`]}`}>Storypoint</label>
         <input
           ref={storyPointRef}
           type="number"
           id="task-storypoint"
           onChange={storyPointChangeHandler}
+          className={`${styles[`input-form`]}`}
         />
 
-        <label htmlFor="task-category">카테고리</label>
+        <label htmlFor="task-category" className={`${styles[`body-text`]}`}>카테고리</label>
         <select
           ref={categoryRef}
           // type="number"
           id="task-category"
           onChange={categoryChangeHandler}
           value={categoryInput || selectedCategoryId}
+          className={`${styles[`input-form`]}`}
         >
           {categoryList.map((cate) => {
             return (
@@ -182,7 +187,7 @@ function TaskForm() {
           })}
         </select>
 
-        <button>{isLoading ? <SpinnerDots /> : `완료`}</button>
+        <button className={`${styles[`ok-btn`]}`}>{isLoading ? <SpinnerDots /> : `완료`}</button>
       </form>
     </div>
   )
