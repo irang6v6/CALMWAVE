@@ -1,8 +1,10 @@
 import { useEffect } from "react"
+import { useDispatch } from "react-redux"
 import { useNavigate, useSearchParams } from "react-router-dom"
 import { setAccess, setRefresh } from "../../store/token-slice"
 
 function OauthLoad() {
+  const dispatch = useDispatch()
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   /* eslint-diabled */
@@ -12,8 +14,8 @@ function OauthLoad() {
       const RefreshToken = searchParams.get("RefreshToken")
       // const userid = searchParams.get("userid")
       console.log(AccessToken, RefreshToken)
-      setAccess(AccessToken)
-      setRefresh(RefreshToken)
+      dispatch(setAccess(AccessToken))
+      dispatch(setRefresh(RefreshToken))
       navigate("/")
     },
     [searchParams, navigate]
