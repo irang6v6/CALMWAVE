@@ -10,6 +10,7 @@
 
   animation: imhere;
   animation-duration: 0.4s;
+  position: relative;
 }
 
 .task-card-container.hover {
@@ -25,6 +26,13 @@
 
 .selected-card {
   background-color: rgba(70, 70, 70, 0.9);
+}
+
+.done-tag {
+  position: absolute;
+  bottom: 6%;
+  right: 4%;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 @keyframes imhere {

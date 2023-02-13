@@ -48,7 +48,7 @@ function CategoryTaskCard({ task, idx }) {
       onMouseLeave={toggleHover}
     >
       <CardHeader data={task} cardType={cardType} />
-      <div>{task.businessHours}</div>
+      <div className={`${styles["done-tag"]}`}>{task.column === "Done" ? "완료됨" : ""}</div>
       <CardBody data={task} />
       {/* <CardFooter /> */}
     </div>

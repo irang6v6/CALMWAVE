@@ -10,6 +10,7 @@ import { closeModal } from "../../../store/door-store/modal-slice"
 import { AxiosGetTodos } from "../../../store/task-slice"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
 import { todoActions } from "../../../store/todos-slice"
+import { calendarActions } from "../../../store/calendar-slice"
 
 function DeleteModalForm({ cardType, cardId }) {
   const dispatch = useDispatch()
@@ -32,6 +33,7 @@ function DeleteModalForm({ cardType, cardId }) {
           // 삭제되는 친구들ㅇ르 selectedTask에서 제외해줘야 함.
           dispatch(selectedTaskActions.filteringAfterTaskDelete(formData.id))
           dispatch(todoActions.deleteTodo(formData.id))
+          dispatch(calendarActions.deleteCalender(formData.id))
         })
         .then(() => {
           dispatch(closeModal())
