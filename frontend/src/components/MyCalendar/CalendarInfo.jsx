@@ -21,7 +21,7 @@ export default function CalendarInfo({ todo, date }) {
   const finalDate = todo.dateAimed ? todo.dateAimed.slice(0, 10) : ""
 
   // 스토리포인트 계산
-  const storyPoints = todo.timeAimed / 3600
+  // const storyPoints = todo.timeAimed / 3600
 
   // 캘린더에서 선택한 날짜
   const selectDate = moment(date)
@@ -88,7 +88,8 @@ export default function CalendarInfo({ todo, date }) {
         <br />
         <br />
         {/* 생성일자 : {todo?.dateCreated}<br/> */}
-        목표시간 : {storyPoints}<br/>
+        {/* 목표시간 : {storyPoints}<br/> */}
+        목표시간 : {todo?.timeAimed ? parseInt(todo?.timeAimed / 3600) : "미지정"}<br/>
         목표일자 : {finalDate? `${finalDate} (${dDayLabel})`:`없음`}
       </div>
       <p>카테고리: {todo?.cateName}</p>
