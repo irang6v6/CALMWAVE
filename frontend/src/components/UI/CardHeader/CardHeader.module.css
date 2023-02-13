@@ -22,12 +22,17 @@
   min-width: 33px;
   box-sizing: border-box;
   border-radius: 100%;
-  transition: 0.3s;
-  box-shadow: 0 0 12px 2px rgba(255, 255, 255, 1);
+  transition: 0.4s; 
+  /* box-shadow: 0 0 12px 2px rgba(255, 255, 255, 1); */
   margin-right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
+  transform: scale(100%);
+}
+
+.card-header-lights:hover {
+  transform: scale(104%);
 }
 
 .card-header-title {

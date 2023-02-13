@@ -52,7 +52,7 @@ function TaskForm() {
           title: titleInput,
           description: descriptionInput,
           dateAimed: dateInput ? dateInput + `T18:00:00` : "", //'T'18:00:00.000'Z'
-          timeAimed: storyPointInput,
+          timeAimed: parseInt(storyPointInput) * 3600,
           workCateId: categoryInput || selectedCategoryId,
         },
       })
@@ -98,7 +98,7 @@ function TaskForm() {
                 ...formData,
                 title: titleInput,
                 description: descriptionInput,
-                storyPoint: parseInt(storyPointInput),
+                storyPoint: parseInt(storyPointInput) * 3600,
                 categoryId: categoryInput,
                 category: categoryList.filter(
                   (cate) => cate.id === parseInt(categoryInput)
@@ -123,7 +123,7 @@ function TaskForm() {
             titleInput,
             descriptionInput,
             dateInput ? dateInput + `T18:00:00` : "",
-            storyPointInput,
+            parseInt(storyPointInput) * 3600,
             editedcateID,
           ]
           dispatch(todoActions.editTodo(editedData))

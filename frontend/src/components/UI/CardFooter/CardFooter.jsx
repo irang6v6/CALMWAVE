@@ -12,7 +12,7 @@ function CardFooter({ data, big, small }) {
         canvasWidth={width}
         canvasHeight={height}
         bgColor={`rgba(255, 255, 255, 1)`}
-        fillColor={`rgba(52, 104, 199, 1)`}
+        fillColor={`#394c78`}
         maxPoint={big}
         nowPoint={small}
       />

@@ -14,6 +14,7 @@ function CategoryCard({ category, idx }) {
   const { categoryList, selectedCategoryId } = useSelector(
     (state) => state.category
   )
+  const { taskList } = useSelector((state) => state.task)
   /* eslint-disable */
   const [togglehover, toggleselect, customselect, classes] = useClasses(
     styles,
@@ -114,6 +115,14 @@ function CategoryCard({ category, idx }) {
       categoryActions.changeSelected({ selectedCategoryId: category.id })
     )
   }
+  const sumTime = () => {
+    const todos = taskList.filter((e) => e.categoryId === category.id)
+    let sum = 0
+    for (let i = 0; i < todos.length; i++) {
+      sum += todos[i].time
+    }
+    return parseInt(sum / 1000)
+  }
 
   return (
     <div
@@ -130,7 +139,7 @@ function CategoryCard({ category, idx }) {
       {category.id === selectedCategoryId ? <CardFooter
         data={category}
         big={category.sumBusinessHours}
-        small={category.sumBusinessHours}
+        small={sumTime()}
       /> : <></>}
     </div>
   )

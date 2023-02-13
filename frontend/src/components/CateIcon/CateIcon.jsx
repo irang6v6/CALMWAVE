@@ -26,7 +26,7 @@ const CateIcon = ({ value }) => {
     case 9:
       return <GiBaseballBat />
     case 10:
-      return <GiPumpkinLantern />
+      return <GiPumpkinLantern /> 
     default:
       return null
   }

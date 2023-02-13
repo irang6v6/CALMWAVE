@@ -55,6 +55,9 @@
   transition: 0.3s;
   box-shadow: 0 0 12px 2px rgba(255, 255, 255, 1);
   margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-header {

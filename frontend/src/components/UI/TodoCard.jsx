@@ -10,6 +10,7 @@ import {
 } from "../../store/door-store/modal-slice"
 import styles from "./TodoCard.module.css"
 import useApi from "../../hooks/http/use-api"
+import CateIcon from "../CateIcon/CateIcon"
 export default function TodoCard({
   todo,
   id,
@@ -237,7 +238,11 @@ export default function TodoCard({
         <div
           className={`${styles[`card-header-lights`]}
         bg-cat-${todo?.category?.cateColor || todo?.cateColor}`}
-        />
+        >
+          {" "}
+          <CateIcon value={todo?.category?.cateIcon || todo?.cateIcon} />{" "}
+        </div>
+
         <div className={`${styles["card-header-title"]}`}>
           <span>{title}</span>
         </div>
@@ -246,7 +251,10 @@ export default function TodoCard({
         <div>
           <div className={`${styles["times"]}`}>
             {time >= 3600000 ? (
-              <span>{Math.floor((time / 3600000) % 60)}:</span>
+              <span>
+                {Math.floor((time / 3600000) % 60)}
+                {"시간 "}
+              </span>
             ) : (
               <span></span>
             )}
@@ -325,13 +333,10 @@ export default function TodoCard({
               <span>총 업무시간: </span>
               {time + currentTime - startTime >= 3600000 ? (
                 <span>
-                  {(
-                    "0" +
-                    Math.floor(
-                      ((time + currentTime - startTime) / 3600000) % 60
-                    )
-                  ).slice(-2)}
-                  시간
+                  {Math.floor(
+                    ((time + currentTime - startTime) / 3600000) % 60
+                  )}
+                  {"시간 "}
                 </span>
               ) : (
                 <span></span>
