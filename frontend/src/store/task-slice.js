@@ -116,7 +116,7 @@ export const AxiosGetTodos = function () {
                     ? "Done"
                     : task?.status,
                 finishedDate: task?.dateAimed,
-                time: task?.totalTime,
+                time: (task?.totalTime * 1000),
                 workOrder: task?.workOrder,
                 storyPoint: task?.timeAimed,
               }
@@ -143,7 +143,7 @@ export const AxiosGetTodos = function () {
                   isSelected: false,
                   column: task?.status === "TODO" ? "To do" : "Done",
                   finishedDate: task?.dateAimed,
-                  time: task?.totalTime || 0,
+                  time: (task?.totalTime * 1000) || 0,
                   workOrder: task?.workOrder,
                   startWorkingDate: "",
                   endWorkingDate: "",

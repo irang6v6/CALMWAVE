@@ -1,7 +1,7 @@
 import styles from "./CategoryForm.module.css"
 import { memo, useRef } from "react"
 import { useInput } from "../../../hooks/custom/useInput"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { SpinnerDots } from "../Spinner"
 import { useDispatch, useSelector } from "react-redux"
 // import { submitModal } from "../../../store/door-store/modal-slice"
@@ -13,6 +13,8 @@ import {
 import { closeModal, modalActions } from "../../../store/door-store/modal-slice"
 import { AxiosGetTodos } from "../../../store/task-slice"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
+import CateIcon from "../../CateIcon/CateIcon"
+import CateIconArray from "../../CateIcon/CateIconArray"
 
 function CategoryForm() {
   const dispatch = useDispatch()
@@ -22,6 +24,7 @@ function CategoryForm() {
   const [titleInput, titleChangeHandler, titleSetTrigger] = useInput(titleRef)
   /* eslint-disable */
   const [colorInput, colorChangeHandler, colorSetTrigger] = useInput(colorRef)
+  const [icon, setIcon] = useState(0)
   const FormTitle = isCreate ? `카테고리 생성` : `카테고리 수정`
 
   const submitHandler = function (event) {
@@ -36,7 +39,7 @@ function CategoryForm() {
         data: {
           cateName: `${titleInput}`,
           cateColor: `${colorInput}`,
-          cateIcon: 0,
+          cateIcon: `${icon}`,
           // cateOrder: 0,
         },
       })
@@ -65,7 +68,7 @@ function CategoryForm() {
         url: `/v1/category/update`,
         data: {
           cateColor: `${colorInput}`,
-          cateIcon: 0,
+          cateIcon: `${icon}`,
           cateName: `${titleInput}`,
           cateId: formData?.id,
           // cateOrder: 0,
@@ -84,7 +87,12 @@ function CategoryForm() {
           dispatch(
             selectedTaskActions.updateCategoryChanged({
               cateId: formData.id,
-              cate: { ...formData, cateColor: colorInput, title: titleInput },
+              cate: {
+                ...formData,
+                cateColor: colorInput,
+                title: titleInput,
+                cateIcon: icon,
+              },
             })
           )
         })
@@ -103,6 +111,7 @@ function CategoryForm() {
     function () {
       titleSetTrigger(formData?.title || "")
       colorSetTrigger(formData?.cateColor || 0)
+      setIcon(formData?.category?.cateIcon || formData?.cateIcon || 0)
     },
     [formData, titleSetTrigger]
   )
@@ -114,7 +123,9 @@ function CategoryForm() {
         className={`${styles[`category-form-input-container`]}`}
         onSubmit={submitHandler}
       >
-        <label htmlFor="category-title" className={`${styles[`body-text`]}`}>title</label>
+        <label htmlFor="category-title" className={`${styles[`body-text`]}`}>
+          title
+        </label>
         <input
           ref={titleRef}
           type="text"
@@ -122,7 +133,9 @@ function CategoryForm() {
           onChange={titleChangeHandler}
           className={`${styles[`input-form`]}`}
         />
-        <label htmlFor="category-color" className={`${styles[`body-text`]}`}>category color</label>
+        <label htmlFor="category-color" className={`${styles[`body-text`]}`}>
+          category color
+        </label>
         <select
           name="category-color-set"
           id="category-color"
@@ -137,6 +150,18 @@ function CategoryForm() {
           <option value="5"></option>
           <option value="6"></option>
         </select>
+        <div>
+          <input type="hidden" />
+          {CateIconArray.map((icon) => (
+            <button
+              key={icon.value}
+              onClick={() => setIcon(icon.value)}
+              className={`${styles[`icon-button`]}`}
+            >
+              <CateIcon value={icon.value} />
+            </button>
+          ))}
+        </div>
         <button disabled={isLoading} className={`${styles[`ok-btn`]}`}>
           {isLoading ? <SpinnerDots /> : `완료`}
         </button>

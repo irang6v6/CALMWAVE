@@ -92,7 +92,8 @@ const selectedTaskSlice = createSlice({
           return {
             ...task,
             category : action.payload.cate,
-            categoryId : action.payload.cateId
+            categoryId : action.payload.cateId,
+            categoryIcon : action.payload.cateIcon
           } 
         } else {
           return task

@@ -178,6 +178,9 @@ export default function TodoCard({
       const dropResult = monitor.getDropResult()
       if (dropResult) {
         if (dropResult.title) {
+          if (dropResult.title === item.currentColumn) {
+            return
+          }
           let now = 0
           if (dropResult.title === "In Progress") {
             now = Date.now()
@@ -242,24 +245,25 @@ export default function TodoCard({
       {currentColumn !== "In Progress" ? (
         <div>
           <div className={`${styles["times"]}`}>
-            {time + currentTime - startTime >= 3600000 ? (
-              <span>
-                {(
-                  "0" +
-                  Math.floor(((time + currentTime - startTime) / 3600000) % 60)
-                ).slice(-2)}
-                :
-              </span>
+            {time >= 3600000 ? (
+              <span>{Math.floor((time / 3600000) % 60)}:</span>
             ) : (
               <span></span>
             )}
-            <span>{("0" + Math.floor((time / 60000) % 60)).slice(-2)}:</span>
-            <span>{("0" + Math.floor((time / 1000) % 60)).slice(-2)}</span>
+            {time >= 60000 ? (
+              <span>
+                {Math.floor((time / 60000) % 60)}
+                {"분 "}
+              </span>
+            ) : (
+              <span>
+                {Math.floor((time / 1000) % 60)}
+                {"초 "}
+              </span>
+            )}
             <span>
               {todo.storyPoint
-                ? ` / ${("0" + parseInt(todo?.storyPoint / 3600)).slice(
-                    -2
-                  )}:00:00`
+                ? ` / ${parseInt(todo?.storyPoint / 3600)}시간`
                 : ""}
             </span>
           </div>
@@ -272,36 +276,83 @@ export default function TodoCard({
         <div>
           <span>{description}</span>
           <div className={`${styles["times"]}`}>
-            {time + currentTime - startTime >= 3600000 ? (
+            <div>
+              <span>현재 집중시간: </span>
+              {time + currentTime - startTime >= 3600000 ? (
+                <span>
+                  {(
+                    "0" +
+                    Math.floor(
+                      ((Number(String(time).slice(-3)) +
+                        currentTime -
+                        startTime) /
+                        3600000) %
+                        60
+                    )
+                  ).slice(-2)}
+                  :
+                </span>
+              ) : (
+                <span></span>
+              )}
               <span>
                 {(
                   "0" +
-                  Math.floor(((time + currentTime - startTime) / 3600000) % 60)
+                  Math.floor(
+                    ((Number(String(time).slice(-3)) +
+                      currentTime -
+                      startTime) /
+                      60000) %
+                      60
+                  )
                 ).slice(-2)}
                 :
               </span>
-            ) : (
-              <span></span>
-            )}
-            <span>
-              {(
-                "0" +
-                Math.floor(((time + currentTime - startTime) / 60000) % 60)
-              ).slice(-2)}
-              :
-            </span>
-            <span>
-              {(
-                "0" + Math.floor(((time + currentTime - startTime) / 1000) % 60)
-              ).slice(-2)}
-            </span>
-            <span>
-              {todo.storyPoint
-                ? ` / ${("0" + parseInt(todo?.storyPoint / 3600)).slice(
-                    -2
-                  )}:00:00`
-                : ""}
-            </span>
+              <span>
+                {(
+                  "0" +
+                  Math.floor(
+                    ((Number(String(time).slice(-3)) +
+                      currentTime -
+                      startTime) /
+                      1000) %
+                      60
+                  )
+                ).slice(-2)}
+              </span>
+            </div>
+            <div>
+              <span>총 업무시간: </span>
+              {time + currentTime - startTime >= 3600000 ? (
+                <span>
+                  {(
+                    "0" +
+                    Math.floor(
+                      ((time + currentTime - startTime) / 3600000) % 60
+                    )
+                  ).slice(-2)}
+                  시간
+                </span>
+              ) : (
+                <span></span>
+              )}
+              {time + currentTime - startTime >= 60000 ? (
+                <span>
+                  {Math.floor(((time + currentTime - startTime) / 60000) % 60)}
+                  {"분 "}
+                </span>
+              ) : (
+                <span>
+                  {Math.floor(((time + currentTime - startTime) / 1000) % 60)}
+                  {"초"}
+                </span>
+              )}
+              <span>
+                {todo.storyPoint
+                  ? ` / ${parseInt(todo?.storyPoint / 3600)}시간`
+                  : ""}
+              </span>
+            </div>
           </div>
         </div>
       )}

@@ -25,6 +25,9 @@
   transition: 0.3s;
   box-shadow: 0 0 12px 2px rgba(255, 255, 255, 1);
   margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .card-header-title {
@@ -57,4 +60,13 @@
   transform: scale(120%);
   opacity: 1;
   cursor: pointer;
+}
+
+.category-icon {
+  box-sizing: border-box;
+  min-height: 20px;
+  min-width: 20px;
+  margin: auto;
+  transition: 0.3s;
+  opacity: 0.9;
 }

@@ -57,7 +57,7 @@ const calendarSlice = createSlice({
     },
     deleteCalender(state, action) {
       const id = action.payload
-      state.taskList = state.taskList.filter((cal => cal.id !== id))
+      state.taskList = state.taskList.filter((cal => cal.workId !== id))
     }
   },
 })

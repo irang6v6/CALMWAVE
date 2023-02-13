@@ -9,6 +9,7 @@ import {
   openTaskDeleteModal,
   openTaskModal,
 } from "../../../store/door-store/modal-slice"
+import CateIcon from "../../CateIcon/CateIcon"
 
 function CardHeader({ data, cardType, deleteSelectedTaskList }) {
   const dispatch = useDispatch()
@@ -43,9 +44,13 @@ function CardHeader({ data, cardType, deleteSelectedTaskList }) {
   return (
     <div className={`${styles[`card-header-container`]}`}>
       <div className={`${styles[`card-header-header`]}`}>
-        <div className={
-          `${styles[`card-header-lights`]}
-        bg-cat-${data?.category?.cateColor || data?.cateColor}`} />
+        <div
+          className={`${styles[`card-header-lights`]}
+        bg-cat-${data?.category?.cateColor || data?.cateColor}`}
+        >
+          {" "}
+          <CateIcon value={data?.category?.cateIcon || data?.cateIcon} />{" "}
+        </div>
 
         <div className={`${styles[`card-header-title`]}`}>
           {data?.title || "빈 카드 제목"}
