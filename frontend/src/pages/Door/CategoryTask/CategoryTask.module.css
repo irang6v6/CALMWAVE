@@ -94,7 +94,7 @@
   0% {
     transform: scale(80%);
   }
-  30% {
+  /* 30% {
     transform: scale(102%);
   }
   50% {
@@ -105,7 +105,7 @@
   }
   90% {
     transform: scale(88%);
-  }
+  } */
   100% {
     transform: scale(100%);
   }
