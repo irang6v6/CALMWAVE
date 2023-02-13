@@ -1,5 +1,6 @@
 package com.ssafy.calmwave.domain;
 
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
@@ -12,10 +13,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.Setter;
 
 @Entity
 @Table(name = "expression")
 @NoArgsConstructor
+@Getter @Setter
 public class Expression {
 
     @Id
@@ -30,6 +33,10 @@ public class Expression {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "work_id", nullable = false)
     private Work work;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "past_work_id")
+    private PastWork pastWork;
 
     @Column(name = "date_created", nullable = false)
     private Instant dateCreated;
@@ -54,93 +61,4 @@ public class Expression {
 
     @Column(name = "surprised")
     private Double surprised;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Work getWork() {
-        return work;
-    }
-
-    public void setWork(Work work) {
-        this.work = work;
-    }
-
-    public Instant getDateCreated() {
-        return dateCreated;
-    }
-
-    public void setDateCreated(Instant dateCreated) {
-        this.dateCreated = dateCreated;
-    }
-
-    public Double getNeutral() {
-        return neutral;
-    }
-
-    public void setNeutral(Double neutral) {
-        this.neutral = neutral;
-    }
-
-    public Double getHappy() {
-        return happy;
-    }
-
-    public void setHappy(Double happy) {
-        this.happy = happy;
-    }
-
-    public Double getSad() {
-        return sad;
-    }
-
-    public void setSad(Double sad) {
-        this.sad = sad;
-    }
-
-    public Double getAngry() {
-        return angry;
-    }
-
-    public void setAngry(Double angry) {
-        this.angry = angry;
-    }
-
-    public Double getFearful() {
-        return fearful;
-    }
-
-    public void setFearful(Double fearful) {
-        this.fearful = fearful;
-    }
-
-    public Double getDisgusted() {
-        return disgusted;
-    }
-
-    public void setDisgusted(Double disgusted) {
-        this.disgusted = disgusted;
-    }
-
-    public Double getSurprised() {
-        return surprised;
-    }
-
-    public void setSurprised(Double surprised) {
-        this.surprised = surprised;
-    }
-
 }

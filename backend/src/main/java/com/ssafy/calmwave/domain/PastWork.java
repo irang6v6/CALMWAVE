@@ -1,5 +1,6 @@
 package com.ssafy.calmwave.domain;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -16,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PastWork {
     @Id
-    @Column(name = "work_id")
+    @Column(name = "past_work_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 

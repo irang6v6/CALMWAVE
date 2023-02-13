@@ -1,5 +1,6 @@
 package com.ssafy.calmwave.dto;
 
+import com.querydsl.core.annotations.QueryProjection;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -19,6 +20,7 @@ public class WorkCategoryDto {
     private Optional<Long> sumBusinessHours;
     private Optional<Long> nowBusinessHours;
 
+    @QueryProjection
     public WorkCategoryDto(Long cateId, String cateName, int cateColor, int cateIcon, int cateOrder) {
         this.cateId = cateId;
         this.cateName = cateName;

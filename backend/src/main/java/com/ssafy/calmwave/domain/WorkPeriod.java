@@ -1,8 +1,11 @@
 package com.ssafy.calmwave.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import java.net.PasswordAuthentication;
+import javax.annotation.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.time.Instant;
@@ -16,11 +19,16 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.security.core.parameters.P;
 
 @Entity
 @Table(name = "work_period")
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter @Setter
 public class WorkPeriod {
 
     @Id
@@ -28,9 +36,15 @@ public class WorkPeriod {
     @Column(name = "work_period_id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "work_id", nullable = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "work_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Work work;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JoinColumn(name = "past_work_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private PastWork pastWork;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "user_id", nullable = false)
@@ -41,46 +55,6 @@ public class WorkPeriod {
 
     @Column(name = "end_time", nullable = false)
     private LocalDateTime endTime;
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Work getWork() {
-        return work;
-    }
-
-    public void setWork(Work work) {
-        this.work = work;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public LocalDateTime getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(LocalDateTime endTime) {
-        this.endTime = endTime;
-    }
-
-    public LocalDateTime getStartTime() {
-        return startTime;
-    }
-
-    public void setStartTime(LocalDateTime startTime) {
-        this.startTime = startTime;
-    }
 
     @Builder
     public WorkPeriod(Work work, User user, LocalDateTime startTime, LocalDateTime endTime) {
