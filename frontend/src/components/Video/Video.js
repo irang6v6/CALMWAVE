@@ -19,6 +19,8 @@ const modelURL =
 const metadataURL =
   "https://teachablemachine.withgoogle.com/models/5kCzQ3Epp/metadata.json"
 
+let frameIDs = []
+
 export default function Video(props) {
   const user = useSelector((state) => state.user.userData)
   const progress = useSelector((state) => state.todos.onProgress)
@@ -50,31 +52,37 @@ export default function Video(props) {
       leaveSession()
     }
   }, [session])
-  useEffect(function () {
-    settingModel()
-    initialSet()
-    console.log("이건 1회만")
-  }, [])
+
+  useEffect(
+    function () {
+      if (props.videoRef.current) {
+        settingModel()
+        sizeSet()
+      }
+    },
+    [props.videoRef.current]
+  )
 
   const settingModel = async function () {
     const a = await tmPose.load(modelURL, metadataURL)
     setModel(() => a)
   }
 
-  const initialSet = async function () {
+  const sizeSet = async function () {
     let w = null
     let h = null
-    if (props.videoRef) {
-      w = props.videoRef.offsetWidth
-      h = props.videoRef.offsetHeight
+    if (props.videoRef.current) {
+      w = props.videoRef.current.offsetWidth
+      h = props.videoRef.current.offsetHeight
       // console.log(w, h)
     }
-    const wc = await new tmPose.Webcam(w || 200, h || 200, true)
+    const wc = await new tmPose.Webcam(w || 300, h || 200, true)
     setWebcam(() => wc)
   }
 
   const loop = async function (timestamp) {
-    if (props.videoRef && webcam) {
+    if (props.videoRef.current && webcam) {
+      sizeSet()
       webcam.update()
       predict()
       await webcam.setup()
@@ -83,33 +91,37 @@ export default function Video(props) {
   }
 
   const predict = async function () {
-    if (!props.videoRef.current) {
+    if (!model) {
       return
     }
     const { pose, posenetOutput } = await model.estimatePose(
       props.videoRef.current
     ) // posenetOutput : 좌표에 관한 내용이 들어가 있음.
     const prediction = await model.predict(posenetOutput)
+    // console.log(posenetOutput)
     for (let i = 0; i < 4; i++) {
       const rtPosture = prediction[i]
       if (rtPosture.probability.toFixed(2) > 0.99999999) {
-        console.log(rtPosture, `이게 체크입니다 : ${check}`)
+        console.log(rtPosture, `체크 : ${check}`)
       }
     }
   }
-
-  // 데이터 0.5초에 한 번 확인 할 예정.
+  // 데이터 0.2초에 한 번 확인 할 예정.
   useEffect(
     function () {
-      let aniId = null
       setTimeout(function () {
-        if (props.videoRef) {
-          aniId = window.requestAnimationFrame(loop)
+        if (props.videoRef.current) {
+          const aniId = window.requestAnimationFrame(loop)
           setCheck((val) => val + 1)
+          frameIDs.push(aniId)
         }
-      }, 500)
+      }, 100)
       return function () {
-        window.cancelAnimationFrame(aniId)
+        let frameID
+        if (frameIDs) {
+          frameID = frameIDs.shift()
+          window.cancelAnimationFrame(frameID)
+        }
       }
     },
     [props.videoRef, loop]

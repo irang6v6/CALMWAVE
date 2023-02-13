@@ -101,10 +101,11 @@
 
 .visi-hidden {
   /* visibility: hidden; */
-  /* position: absolute;
-  z-index: -40; */
+  position: absolute;
+  z-index: -40;
   /* transform: scale(0%); */
-  content-visibility: hidden;
+  /* content-visibility: hidden; */
+  opacity: 0;
 }
 
 .display-none {
