@@ -33,7 +33,9 @@ export default function Video(props) {
 
   const [model, setModel] = useState(null)
   const [webcam, setWebcam] = useState(null)
-  const [posture, setPosture] = useState("")
+  // const [posture, setPosture] = useState("")
+  const [isBad, setIsBad] = useState(false)
+  const [badCnt, setBadCnt] = useState(0)
   const [check, setCheck] = useState(0)
 
   // 최초 진입 시 세션 접속
@@ -83,10 +85,10 @@ export default function Video(props) {
   const loop = async function (timestamp) {
     if (props.videoRef.current && webcam) {
       sizeSet()
-      webcam.update()
+      // await webcam.update()
       predict()
-      await webcam.setup()
-      await webcam.play()
+      // await webcam.setup()
+      // await webcam.play()
     }
   }
 
@@ -98,11 +100,21 @@ export default function Video(props) {
       props.videoRef.current
     ) // posenetOutput : 좌표에 관한 내용이 들어가 있음.
     const prediction = await model.predict(posenetOutput)
-    // console.log(posenetOutput)
+    // console.log(prediction)
     for (let i = 0; i < 4; i++) {
       const rtPosture = prediction[i]
-      if (rtPosture.probability.toFixed(2) > 0.99999999) {
-        console.log(rtPosture, `체크 : ${check}`)
+      const veryBad = i !== 2 ? true : false
+      if (rtPosture.probability.toFixed(2) > 0.999999) {
+        setIsBad((oldVal) => {
+          if (oldVal && veryBad) {
+            setBadCnt((val) => val + 1)
+          } else {
+            setBadCnt(() => 0)
+          }
+          return veryBad
+        })
+        console.log(`isBad : ${isBad}, badCnt : ${badCnt}`)
+        // console.log(webcam)
       }
     }
   }
@@ -125,6 +137,14 @@ export default function Video(props) {
       }
     },
     [props.videoRef, loop]
+  )
+  useEffect(
+    function () {
+      if (badCnt > 600) {
+        console.error("자세가 많이 구리네요")
+      }
+    },
+    [badCnt]
   )
 
   // 토큰 반환 (추가 예정)
