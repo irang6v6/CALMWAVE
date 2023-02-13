@@ -1,7 +1,8 @@
 .logo-on-top {
   box-sizing: border-box;
-  left: 25px;
-  top: 15px;
+  left: 27px;
+  top: 27px;
+  width: 20%;
   position: fixed;
   z-index: 80;
 
@@ -12,8 +13,8 @@
   text-decoration: none;
 }
 
-.logo-img{
-  width: 20%;
+.logo-img {
+  width: 100%;
   padding: 2%;
   display: inline-block;
 
