@@ -8,8 +8,21 @@ import org.springframework.data.repository.query.Param;
 import java.util.Optional;
 
 public interface WorkPeriodRepository extends JpaRepository<WorkPeriod, Long> {
+    /**
+     * 특정 workId의 일한 시간의 총합
+     * @param workId
+     * @return
+     */
     @Query(value = "SELECT (SUM(TIME_TO_SEC(t.endTime) - TIME_TO_SEC(t.startTime))) AS timediff FROM WorkPeriod t where t.work.id = :workId")
     Optional<Long> findTimediffByWorkId(@Param("workId") Long workId);
+
+    /**
+     * 특정 user의 업무별
+     * @param userId
+     * @return
+     */
+    @Query(value = "SELECT (SUM(TIME_TO_SEC(t.endTime) - TIME_TO_SEC(t.startTime))) AS timediff FROM WorkPeriod t where t.user.id = :userId and t.work.id is not null")
+    Optional<Long> findTimediffByUserId(@Param("userId") Long userId);
 
     @Query(value = "SELECT (SUM(TIME_TO_SEC(t.endTime) - TIME_TO_SEC(t.startTime))) AS timediff FROM WorkPeriod t join Work w on t.work.id = w.id where w.workCate.id = :workCateId")
     Optional<Long> findTimediffByWorkCateId(@Param("workCateId") Long workCateId);

@@ -8,11 +8,15 @@ import com.ssafy.calmwave.dto.WorkResponseDto;
 import com.ssafy.calmwave.service.DataService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ResponseHeader;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -49,6 +53,23 @@ public class DataController {
         User user = jwtUtil.getUser(token);
         List<DoneTaskDto> doneTaskDtos = dataService.findDoneTaskForDateRange(user.getId(), start_date, end_date);
         return ResponseEntity.ok().body(doneTaskDtos);
+    }
+
+    @GetMapping("result")
+    @ApiOperation(value = "", notes = "")
+    public ResponseEntity<?> resultPage(@RequestHeader(value = "AccessToken") String token) {
+        Map<String, Object> resultMap = new HashMap<>();
+        HttpStatus status;
+        User user = jwtUtil.getUser(token);
+        if (user!=null) {
+
+            resultMap.put("result", "ok");
+            status = HttpStatus.ACCEPTED;
+        } else {
+            resultMap.put("result", "same email already exists");
+            status = HttpStatus.INTERNAL_SERVER_ERROR;
+        }
+        return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
 
 }
