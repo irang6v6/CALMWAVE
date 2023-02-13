@@ -24,6 +24,24 @@ function HomePage() {
   const dispatch = useDispatch()
   const [isInitial, setIsInitial] = useState(true)
 
+  const [infoScroll, setInfoScroll] = useState(false)
+  const scrollTaskManageHandler = function () {
+    if (window.scrollY >= canvasHeight * 1.4) {
+      setInfoScroll(true)
+    } else {
+      setInfoScroll(false)
+    }
+  }
+  useEffect(
+    function () {
+      window.addEventListener("scroll", scrollTaskManageHandler)
+      return function () {
+        window.removeEventListener("scroll", scrollTaskManageHandler)
+      }
+    },
+    [scrollTaskManageHandler]
+  )
+
   const [canvasWidth, setCanvasWidth] = useState(0)
   const [canvasHeight, setCanvasHeight] = useState(0)
   const pageRef = useRef(null)
@@ -122,7 +140,11 @@ function HomePage() {
             background={`rgba(32, 38, 38, 1) `}
           />
         </div> */}
-        <IntroPage refVal={worktimeRef} goNext={goTodo} />
+        <IntroPage
+          refVal={worktimeRef}
+          goNext={goTodo}
+          scrollTrigger={infoScroll}
+        />
         <TaskManagePage refVal={todoRef} goNext={goPosture} />
         <Posture refVal={postureRef} goNext={goStreching} />
         <Stretching refVal={stretchRef} goNext={goStress} />

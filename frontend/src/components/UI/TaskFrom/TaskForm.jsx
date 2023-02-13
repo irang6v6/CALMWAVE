@@ -82,7 +82,7 @@ function TaskForm() {
           workId: formData.id,
           title: titleInput,
           description: descriptionInput,
-          dateAimed: dateInput ? dateInput.substring(0, 10) + `T18:00:00` : "", //'T'18:00:00.000'Z'
+          dateAimed: dateInput ? dateInput?.substring(0, 10) + `T18:00:00` : "", //'T'18:00:00.000'Z'
           timeAimed: storyPointInput || beforeStoryPoint,
           workCateId: categoryInput || selectedCategoryId,
         },
