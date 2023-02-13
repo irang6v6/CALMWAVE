@@ -13,10 +13,12 @@ import {
 } from "../../../store/task-slice"
 import { todoActions } from "../../../store/todos-slice"
 import { calendarActions } from "../../../store/calendar-slice"
+import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
 
 function TaskForm() {
   const dispatch = useDispatch()
   const categoryList = useSelector((state) => state.category.categoryList)
+  const { selectedTaskList } = useSelector((state) => state.doorstask)
   const { formData, isLoading, isCreate } = useSelector((state) => state.modal)
   const [titleRef, descriptionRef, dateRef, storyPointRef, categoryRef] = [
     useRef(null),
@@ -58,7 +60,7 @@ function TaskForm() {
           dispatch(AxiosGetTodos())
         })
         .then(() => {
-          // dispatch(AxiosGetDones())
+          //
         })
         .then(() => {
           dispatch(closeModal())
@@ -89,11 +91,41 @@ function TaskForm() {
           dispatch(AxiosGetTodos())
         })
         .then(() => {
-          // dispatch(AxiosGetDones())
+          dispatch(
+            selectedTaskActions.updateTaskChanged({
+              id: formData.id,
+              newTask: {
+                ...formData,
+                title: titleInput,
+                description: descriptionInput,
+                storyPoint: storyPointInput,
+                categoryId: categoryInput,
+                category: categoryList.filter(
+                  (cate) => cate.id === parseInt(categoryInput)
+                )[0],
+              },
+            })
+          )
+          console.log("카테고리 리스트 : ", categoryList)
+          console.log("골라진 doorstask", selectedTaskList)
+          console.log("골라진 카테고리 인풋 : ", categoryInput)
+          console.log(
+            "골라진 id를 기반으로 고른 category : ",
+            categoryList.filter(
+              (cate) => cate.id === parseInt(categoryInput)
+            )[0]
+          )
         })
         .then(() => {
           const editedcateID = categoryInput || selectedCategoryId
-          const editedData = [formData.id, titleInput, descriptionInput, dateInput ? dateInput + `T18:00:00` : "", storyPointInput, editedcateID]
+          const editedData = [
+            formData.id,
+            titleInput,
+            descriptionInput,
+            dateInput ? dateInput + `T18:00:00` : "",
+            storyPointInput,
+            editedcateID,
+          ]
           dispatch(todoActions.editTodo(editedData))
           dispatch(calendarActions.editCalender(editedData))
         })
@@ -137,7 +169,9 @@ function TaskForm() {
         className={`${styles[`task-form-input-container`]}`}
         onSubmit={submitHandler}
       >
-        <label htmlFor="task-title" className={`${styles[`body-text`]}`}>Title</label>
+        <label htmlFor="task-title" className={`${styles[`body-text`]}`}>
+          Title
+        </label>
         <input
           ref={titleRef}
           type="text"
@@ -145,7 +179,9 @@ function TaskForm() {
           onChange={titleChangeHandler}
           className={`${styles[`input-form`]}`}
         />
-        <label htmlFor="task-description" className={`${styles[`body-text`]}`}>Description</label>
+        <label htmlFor="task-description" className={`${styles[`body-text`]}`}>
+          Description
+        </label>
         <input
           ref={descriptionRef}
           type="text"
@@ -153,7 +189,9 @@ function TaskForm() {
           onChange={descriptionChangeHandler}
           className={`${styles[`input-form`]}`}
         />
-        <label htmlFor="task-date" className={`${styles[`body-text`]}`}>D-Day</label>
+        <label htmlFor="task-date" className={`${styles[`body-text`]}`}>
+          D-Day
+        </label>
         <input
           ref={dateRef}
           type="date"
@@ -162,7 +200,9 @@ function TaskForm() {
           className={`${styles[`input-form`]}`}
         />
 
-        <label htmlFor="task-storypoint" className={`${styles[`body-text`]}`}>Storypoint</label>
+        <label htmlFor="task-storypoint" className={`${styles[`body-text`]}`}>
+          Storypoint
+        </label>
         <input
           ref={storyPointRef}
           type="number"
@@ -171,7 +211,9 @@ function TaskForm() {
           className={`${styles[`input-form`]}`}
         />
 
-        <label htmlFor="task-category" className={`${styles[`body-text`]}`}>카테고리</label>
+        <label htmlFor="task-category" className={`${styles[`body-text`]}`}>
+          카테고리
+        </label>
         <select
           ref={categoryRef}
           // type="number"
@@ -189,7 +231,9 @@ function TaskForm() {
           })}
         </select>
 
-        <button className={`${styles[`ok-btn`]}`}>{isLoading ? <SpinnerDots /> : `완료`}</button>
+        <button className={`${styles[`ok-btn`]}`}>
+          {isLoading ? <SpinnerDots /> : `완료`}
+        </button>
       </form>
     </div>
   )

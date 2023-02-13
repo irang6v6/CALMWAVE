@@ -46,11 +46,12 @@
   min-width: 66px;
   display: flex;
   flex-direction: row;
+  justify-content: space-evenly;
 }
 .card-header-icon {
   box-sizing: border-box;
-  min-height: 20px;
-  min-width: 20px;
+  min-height: 24px;
+  min-width: 24px;
   margin: 2px;
   transition: 0.3s;
   opacity: 0.9;

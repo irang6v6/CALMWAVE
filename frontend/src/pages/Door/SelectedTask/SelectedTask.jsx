@@ -1,11 +1,11 @@
-import { useEffect } from "react"
+// import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { NavLink } from "react-router-dom"
 import SelectedTaskCard from "../../../components/UI/SelectedTaskCard/SelectedTaskCard"
 import styles from "./SelectedTask.module.css"
 import { BsFillPlayFill } from "react-icons/bs"
 import { todoActions } from "../../../store/todos-slice"
-import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
+// import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
 
 function SelectedTask() {
   const { selectedTaskList } = useSelector((state) => state.doorstask)
@@ -13,16 +13,16 @@ function SelectedTask() {
   const { taskList } = useSelector((state) => state.task)
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    dispatch(selectedTaskActions.recallSelectedTodoTaskList())
-  }, [dispatch])
+  // useEffect(() => {
+  //   dispatch(selectedTaskActions.recallSelectedTodoTaskList())
+  // }, [dispatch])
 
   const sumStoryPoints = () => {
-    let sum = 0;
+    let sum = 0
     for (let i = 0; i < selectedTaskList.length; i++) {
-      sum += selectedTaskList[i].storyPoint;
+      sum += selectedTaskList[i].storyPoint
     }
-    return parseInt(sum / 3600);
+    return parseInt(sum / 3600)
   }
 
   const sendTodayTodo = () => {
@@ -54,7 +54,9 @@ function SelectedTask() {
   }
   return (
     <>
-      <div className={`${styles[`door-title-container`]}`}>선택한 업무 {sumStoryPoints() ? `- ${sumStoryPoints()}시간` : ''}</div>
+      <div className={`${styles[`door-title-container`]}`}>
+        선택한 업무 {sumStoryPoints() ? `- ${sumStoryPoints()}시간` : ""}
+      </div>
       <div className={`${styles[`selected-task-container`]}`}>
         {selectedTaskList.map((task, idx) => {
           return (

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit"
 import axios from "axios"
+import { selectedTaskActions } from "./door-store/selected-task-slice"
 
 const initialState = {
   onProgress: false,
@@ -11,7 +12,6 @@ const initialState = {
     //   createdDate: "2023-02-09",
     //   finishedDate: "2023-02-11",
     //   categoryId: "1",
-
     // },
     // {
     //   id:2,
@@ -20,7 +20,6 @@ const initialState = {
     //   createdDate: "2023-02-09",
     //   finishedDate: "2023-02-12",
     //   categoryId: "1",
-
     // },
     // {
     //   id:3,
@@ -29,7 +28,6 @@ const initialState = {
     //   createdDate: "2023-02-09",
     //   finishedDate: "2023-02-09",
     //   categoryId: "1",
-
     // },
     // {
     //   id:4,
@@ -38,7 +36,6 @@ const initialState = {
     //   createdDate: "2023-02-01",
     //   finishedDate: "2023-02-15",
     //   categoryId: "1",
-
     // },
     // {
     //   id:5,
@@ -47,7 +44,6 @@ const initialState = {
     //   createdDate: "2023-01-30",
     //   finishedDate: "2023-02-20",
     //   categoryId: "1",
-
     // },
     // {
     //   id:6,
@@ -56,7 +52,6 @@ const initialState = {
     //   createdDate: "2023-02-10",
     //   finishedDate: "2023-02-11",
     //   categoryId: "1",
-
     // },
     // {
     //   id:7,
@@ -65,7 +60,6 @@ const initialState = {
     //   createdDate: "2023-02-10",
     //   finishedDate: "2023-02-12",
     //   categoryId: "1",
-
     // },
   ],
 }
@@ -97,7 +91,7 @@ export const AxiosGetTodos = function () {
       url: `/v1/task/todo`,
     })
       .then((res) => {
-        console.log(res, "TODO")
+        // console.log(res, "TODO")
         dispatch(
           taskActions.changeTaskList(
             res.data.map((task) => {
@@ -129,7 +123,7 @@ export const AxiosGetTodos = function () {
           method: "get",
           url: `/v1/task/done`,
         }).then((res) => {
-          console.log(res, "DONE")
+          // console.log(res, "DONE")
           dispatch(
             taskActions.pushTaskList(
               res.data.map((task) => {
@@ -153,6 +147,9 @@ export const AxiosGetTodos = function () {
             )
           )
         })
+      })
+      .then(() => {
+        dispatch(selectedTaskActions.recallSelectedTodoTaskList())
       })
       .catch((err) => {
         console.log(err)

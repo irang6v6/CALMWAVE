@@ -99,7 +99,19 @@ const selectedTaskSlice = createSlice({
           return task
         }
       })
-    }
+      localStorage.setItem("todo", JSON.stringify(state.selectedTaskList))
+    },
+    updateTaskChanged(state, action) {
+      // console.log("업데이트 됨?", action.payload)
+      state.selectedTaskList = state.selectedTaskList.map((task) => {
+        if (task.id === action.payload.id) {
+          return action.payload.newTask
+        } else {
+          return task
+        }
+      })
+      localStorage.setItem("todo", JSON.stringify(state.selectedTaskList))
+    },
   },
 })
 
