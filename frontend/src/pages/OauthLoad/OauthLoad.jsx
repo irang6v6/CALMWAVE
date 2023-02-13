@@ -14,8 +14,8 @@ function OauthLoad() {
       const RefreshToken = searchParams.get("RefreshToken")
       // const userid = searchParams.get("userid")
       console.log(AccessToken, RefreshToken)
-      dispatch(setAccess(AccessToken))
-      dispatch(setRefresh(RefreshToken))
+      dispatch(setAccess(`Bearer ` + AccessToken))
+      dispatch(setRefresh(`Bearer ` + RefreshToken))
       navigate("/")
     },
     [searchParams, navigate]
