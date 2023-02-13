@@ -1,12 +1,11 @@
 package com.ssafy.calmwave.repository;
 
-import com.ssafy.calmwave.dto.DoneTaskDto;
-
+import com.ssafy.calmwave.dto.DoneWorkDto;
 import java.util.List;
 
 public interface DataCustomRepository {
 
-    List<DoneTaskDto> findDoneTaskForToday(Long id);
+    List<DoneWorkDto> findDoneWorkForToday(Long id);
 
-    List<DoneTaskDto> findDoneTaskForDateRange(Long id, String startDate, String endDate);
+    List<DoneWorkDto> findDoneWorkForDateRange(Long id, String startDate, String endDate);
 }

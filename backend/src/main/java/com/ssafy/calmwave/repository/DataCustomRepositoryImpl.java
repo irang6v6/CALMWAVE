@@ -1,27 +1,17 @@
 package com.ssafy.calmwave.repository;
 
-import com.querydsl.core.types.Expression;
 import com.querydsl.core.types.ExpressionUtils;
-import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.Expressions;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
-import com.ssafy.calmwave.domain.QPastWork;
-import com.ssafy.calmwave.domain.QWork;
-import com.ssafy.calmwave.domain.QWorkCategory;
-import com.ssafy.calmwave.domain.QWorkPeriod;
 import com.ssafy.calmwave.domain.WorkStatus;
-import com.ssafy.calmwave.dto.DoneTaskDto;
-import com.ssafy.calmwave.dto.QDoneTaskDto;
-import com.ssafy.calmwave.dto.QWorkCategoryDto;
-import com.ssafy.calmwave.dto.WorkCategoryDto;
+import com.ssafy.calmwave.dto.DoneWorkDto;
 
-import java.time.format.DateTimeFormatter;
+import com.ssafy.calmwave.dto.QDoneWorkDto;
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 import static com.ssafy.calmwave.domain.QPastWork.*;
 import static com.ssafy.calmwave.domain.QWork.*;
@@ -37,9 +27,9 @@ public class DataCustomRepositoryImpl implements DataCustomRepository {
     }
 
     @Override
-    public List<DoneTaskDto> findDoneTaskForToday(Long id) {
+    public List<DoneWorkDto> findDoneWorkForToday(Long id) {
         return queryFactory
-            .select(new QDoneTaskDto(
+            .select(new QDoneWorkDto(
                     work.id,
                     work.title,
                     work.description,
@@ -109,12 +99,12 @@ public class DataCustomRepositoryImpl implements DataCustomRepository {
     }
 
     @Override
-    public List<DoneTaskDto> findDoneTaskForDateRange(Long id, String startDate, String endDate) {
+    public List<DoneWorkDto> findDoneWorkForDateRange(Long id, String startDate, String endDate) {
         LocalDate start = LocalDate.of(Integer.valueOf(startDate.substring(0, 4)), Integer.valueOf(startDate.substring(4, 6)), Integer.valueOf(startDate.substring(6, 8)));
         LocalDate end = LocalDate.of(Integer.valueOf(endDate.substring(0, 4)), Integer.valueOf(endDate.substring(4, 6)), Integer.valueOf(endDate.substring(6, 8))).plusDays(1);
 
         return queryFactory
-            .select(new QDoneTaskDto(
+            .select(new QDoneWorkDto(
                 pastWork.id,
                 pastWork.title,
                 pastWork.description,

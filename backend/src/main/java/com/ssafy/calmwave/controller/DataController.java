@@ -2,9 +2,7 @@ package com.ssafy.calmwave.controller;
 
 import com.ssafy.calmwave.config.jwt.JwtUtil;
 import com.ssafy.calmwave.domain.User;
-import com.ssafy.calmwave.dto.DoneTaskDto;
-import com.ssafy.calmwave.dto.WorkCalenderDto;
-import com.ssafy.calmwave.dto.WorkResponseDto;
+import com.ssafy.calmwave.dto.DoneWorkDto;
 import com.ssafy.calmwave.service.DataService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -29,12 +27,12 @@ public class DataController {
      * @param token
      * @return List<DoneTaskDto>
      */
-    @GetMapping("mypage/done-tasks/today")
-    @ApiOperation(value = "오늘 하루 끝낸 일들 리스트", notes = "", response = DoneTaskDto.class)
-    public ResponseEntity<?> getDoneTaskForToday(@RequestHeader(value = "AccessToken") String token) {
+    @GetMapping("mypage/done-works/today")
+    @ApiOperation(value = "오늘 하루 끝낸 일들 리스트", notes = "", response = DoneWorkDto.class)
+    public ResponseEntity<?> getDoneWorkForToday(@RequestHeader(value = "AccessToken") String token) {
         User user = jwtUtil.getUser(token);
-        List<DoneTaskDto> doneTaskDtos = dataService.findDoneTaskForToday(user.getId());
-        return ResponseEntity.ok().body(doneTaskDtos);
+        List<DoneWorkDto> doneWorkDtos = dataService.findDoneWorkForToday(user.getId());
+        return ResponseEntity.ok().body(doneWorkDtos);
     }
 
     /**
@@ -44,11 +42,11 @@ public class DataController {
      * @return List<DoneTaskDto>
      */
     @GetMapping("mypage/done-tasks/{start_date}/{end_date}")
-    @ApiOperation(value = "주어진 날짜 범위 기준 끝낸 일들 리스트", notes = "", response = DoneTaskDto.class)
-    public ResponseEntity<?> getDoneTaskForDateRange(@RequestHeader(value = "AccessToken") String token, @PathVariable("start_date") String start_date, @PathVariable("end_date") String end_date) {
+    @ApiOperation(value = "주어진 날짜 범위 기준 끝낸 일들 리스트", notes = "", response = DoneWorkDto.class)
+    public ResponseEntity<?> getDoneWorkForDateRange(@RequestHeader(value = "AccessToken") String token, @PathVariable("start_date") String start_date, @PathVariable("end_date") String end_date) {
         User user = jwtUtil.getUser(token);
-        List<DoneTaskDto> doneTaskDtos = dataService.findDoneTaskForDateRange(user.getId(), start_date, end_date);
-        return ResponseEntity.ok().body(doneTaskDtos);
+        List<DoneWorkDto> doneWorkDtos = dataService.findDoneWorkForDateRange(user.getId(), start_date, end_date);
+        return ResponseEntity.ok().body(doneWorkDtos);
     }
 
 }

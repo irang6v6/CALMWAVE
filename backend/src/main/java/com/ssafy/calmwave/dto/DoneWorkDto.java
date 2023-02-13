@@ -1,15 +1,13 @@
 package com.ssafy.calmwave.dto;
 
 import com.querydsl.core.annotations.QueryProjection;
-import com.ssafy.calmwave.domain.WorkCategory;
 import com.ssafy.calmwave.domain.WorkStatus;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 @Data
-public class DoneTaskDto {
+public class DoneWorkDto {
 
     private Long id;
     private String title;
@@ -25,7 +23,7 @@ public class DoneTaskDto {
     private String cateName;
 
     @QueryProjection
-    public DoneTaskDto(Long id, String title, String description, WorkStatus status,
+    public DoneWorkDto(Long id, String title, String description, WorkStatus status,
         LocalDateTime dateCreated, LocalDateTime dateFinished, LocalDateTime dateAimed,
         Long timeAimed,
         int workOrder, Long totalTime, Long cateId, String cateName) {
