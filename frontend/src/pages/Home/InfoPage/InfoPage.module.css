@@ -68,8 +68,13 @@
 }
 .img-container {
   /* background-color: aliceblue; */
-  padding: 50px;
+  padding: 70px 40px 30px 40px;
   perspective: 100vw;
+  /* width: 90%; */
+  height: 78%;
+  position: absolute;
+  top: 105%;
+  left: 5%;
 }
 .info-img {
   box-sizing: border-box;
@@ -77,27 +82,70 @@
   margin: 20px;
   height: 100%;
 
-  box-shadow: -10px 10px 10px 2px rgba(25, 25, 25, 0.2), -2px 0px 0px 0px #888;
-  /* border: solid black 5px; */
+  box-shadow: -10px 10px 10px 2px rgba(255, 255, 255, 0.5),
+    -2px 0px 0px 0px #888;
+  border: solid white 3px;
+  border-radius: 8px;
   z-index: 30;
-  transform: rotateY(0deg);
+  /* transform: rotateY(0deg); */
 
   animation-name: zidx-n-spin;
-  animation-duration: 2s;
+  animation-duration: 15s;
+  /* animation-iteration-count: infinite; */
+  animation-direction: normal;
+  /* animation-timing-function: ease-in-out; */
+  /* animation-delay: 1s; */
+  will-change: contents;
+}
+.dsc-container {
+  box-sizing: border-box;
+  height: 70vh;
+  width: 30%;
+  background-color: rgba(0, 16, 36, 0.5);
+  border-radius: 17px;
+  padding: 20px 25px 20px 25px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  line-height: 200%;
+  font-size: 1.7rem;
+  color: white;
+  margin-bottom: 3%;
+  z-index: 81;
+  position: absolute;
+  top: 115%;
+
+  left: 55%;
+
+  animation-name: shukshuk;
+  animation-duration: 15s;
   animation-iteration-count: infinite;
-  animation-direction: alternate;
-  animation-timing-function: ease-in-out;
-  animation-delay: 1s;
+  animation-direction: normal;
+  /* animation-timing-function: ease; */
 }
 
 @keyframes zidx-n-spin {
-  60%,
-  100% {
-    transform: translate(-80px, 0px) scale(95%) rotateY(40deg);
-    box-shadow: -10px 10px 10px 2px rgba(25, 25, 25, 0.2), -2px 0px 0px 0px #888;
-    z-index: 30;
-    overflow: visible;
-    height: 100%;
-    padding: 20px;
+  0%,
+  80% {
+    /* transform: none; */
+  }
+  20%,
+  60% {
+    transform: rotateY(30deg);
+    /* box-shadow: -10px 10px 10px 2px rgba(25, 25, 25, 0.2), -2px 0px 0px 0px #888; */
+    /* overflow: visible; */
+  }
+}
+
+@keyframes shukshuk {
+  0%,
+  80% {
+    transform: none;
+  }
+  20%,
+  60% {
+    transform: translateX(12vw);
   }
 }

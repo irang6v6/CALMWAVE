@@ -82,7 +82,7 @@ function TaskForm() {
           workId: formData.id,
           title: titleInput,
           description: descriptionInput,
-          dateAimed: dateInput ? dateInput.substring(0, 10) + `T18:00:00` : "", //'T'18:00:00.000'Z'
+          dateAimed: dateInput ? dateInput?.substring(0, 10) + `T18:00:00` : "", //'T'18:00:00.000'Z'
           timeAimed: storyPointInput || beforeStoryPoint,
           workCateId: categoryInput || selectedCategoryId,
         },
@@ -148,7 +148,7 @@ function TaskForm() {
     function () {
       titleSetTrigger(formData?.title || "")
       descriptionSetTrigger(formData?.description || "")
-      dateSetTrigger(formData?.finishedDate.substr(0, 10) || "")
+      dateSetTrigger(formData?.finishedDate?.substr(0, 10) || "")
       storyPointSetTrigger(parseInt(formData?.storyPoint / 3600) || 0)
       categorySetTrigger(formData?.categoryId || 0)
     },
