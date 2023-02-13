@@ -5,8 +5,10 @@ import com.ssafy.calmwave.domain.User;
 import com.ssafy.calmwave.dto.DoneTaskDto;
 import com.ssafy.calmwave.dto.WorkCalenderDto;
 import com.ssafy.calmwave.dto.WorkResponseDto;
+import com.ssafy.calmwave.repository.WorkRepository;
 import com.ssafy.calmwave.service.DataService;
 import com.ssafy.calmwave.service.WorkPeriodService;
+import com.ssafy.calmwave.service.WorkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ResponseHeader;
@@ -26,6 +28,7 @@ import java.util.Map;
 public class DataController {
 
     private final JwtUtil jwtUtil;
+    private final WorkService workService;
     private final DataService dataService;
     private final WorkPeriodService workPeriodService;
 
@@ -64,11 +67,20 @@ public class DataController {
         HttpStatus status;
         User user = jwtUtil.getUser(token);
         if (user!=null) {
+            Long id=user.getId();
             resultMap.put("result", "ok");
-            resultMap.put("todayTotalWorkTime",workPeriodService.findTimediffByUserId(user.getId()));
+            resultMap.put("todayTotalWorkTime",workPeriodService.findTodayWorkTimeByUserId(id));
+            resultMap.put("totalAimedTime",workService.findTotalTimeAimedByUserId(id));
             resultMap.put("averagePostureAlert",3);
-            resultMap.put("pieChartByWork",workPeriodService.findWorkDurationByUserId(user.getId()));
-            resultMap.put("pieChartByCategory",workPeriodService.findWorkDurationByUserAndCategory(user.getId()));
+            resultMap.put("pieChartByWork",workPeriodService.findWorkDurationByUserId(id));
+            resultMap.put("pieChartByCategory",workPeriodService.findWorkDurationByUserAndCategory(id));
+            resultMap.put("radarChart",workPeriodService.findWorkDurationByUserIdForRadarChart(id));
+            resultMap.put("numOfTotalWork",workService.getTodo(id).size()+workService.getDone(id).size());
+            resultMap.put("numOfUnfinished",workService.getTodo(id).size());
+            resultMap.put("numOfDone",workService.getDone(id).size());
+            resultMap.put("percentOfTodoAndDone",workService.getPercentOfTodoAndDone(id));
+            resultMap.put("percentOfWorkTimeAndAimedTime",workService.getPercentOfTotalAndAimedTime(id));
+            resultMap.put("schedulerData",workPeriodService.findByWorkInAndStartTimeAfter(workService.findAllByUser(id)));
             status = HttpStatus.ACCEPTED;
         } else {
             resultMap.put("result", "same email already exists");

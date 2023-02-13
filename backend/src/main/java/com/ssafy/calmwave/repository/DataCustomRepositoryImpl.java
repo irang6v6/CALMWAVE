@@ -84,7 +84,7 @@ public class DataCustomRepositoryImpl implements DataCustomRepository {
             .fetch();
     }
 
-    private static LocalDateTime calculateStartOfToday(LocalDateTime now) {
+    public static LocalDateTime calculateStartOfToday(LocalDateTime now) {
         LocalDateTime midnight = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 0, 0, 0);
         LocalDateTime four = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 4, 0, 0);
         LocalDateTime yesterday = now.minusDays(1);
