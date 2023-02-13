@@ -16,8 +16,8 @@ function UserInfo() {
       <div className={`${styles[`myinfo-box`]}`}>
         <div className={`${styles[`info-text`]}`}>
           <h3> My Profile </h3>
-          {/* <h1> {userinfo.userData.nickname} </h1> */}
-          <h1> Haneejo </h1>
+          <h1> {userinfo.userData.nickname} </h1>
+          {/* <h1> Haneejo </h1> */}
           <a href="#none" className={`${styles[`userInfoEdit`]}`}>
             회원정보 수정
           </a>

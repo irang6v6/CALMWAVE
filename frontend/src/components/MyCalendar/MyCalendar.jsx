@@ -102,46 +102,20 @@ export default function MyCalendar(props) {
 
           {/* 선택한 날짜의 투두리스트 */}
           <div className="select-todolist">
-            {todolist
-              ? todolist
-                  // .filter((todo) => {
-                  //   // todo?.createdDate?.slice(0, 10) ===
-                  //   // moment(date).format("YYYY-MM-DD")
-
-                  //   // moment(date).isBetween(
-                  //   //   moment(todo?.createdDate),
-                  //   //   moment(todo?.finishedDate),
-                  //   //   null,
-                  //   //   "[]"
-                  //   // )
-                  //   if (todo.finishedDate) {
-                  //     return (
-                  //       new Date(todo.createdDate).getDate() <=
-                  //         new Date(selectedDate).getDate() &&
-                  //       new Date(selectedDate).getDate() <=
-                  //         new Date(todo.finishedDate).getDate()
-                  //     )
-                  //   } else {
-                  //     return (
-                  //       new Date(todo.createdDate).toString() ===
-                  //       new Date(selectedDate).toString()
-                  //     )
-                  //   }
-                  // })
-                  .map((todo, index) => (
-                    <CalendarInfo
+            {todolist && todolist.length > 0
+              ? todolist.map((todo, index) => (
+                  <CalendarInfo
                       key={`calendar-task-${todo.id}-${Math.random()}`}
                       todo={todo}
                       date={date}
-                    />
-                  ))
-              : <p>등록된 업무가 없습니다.</p> }
+                      />
+               )) : <div className="nowork-text">등록된 업무가 없습니다.</div>}
           </div>
 
           {/* <div
             className={`${styles[`create-task`]}`}
             onClick={openCreateTaskModal}
-          >
+            >
             <BsPlusLg className={`${styles[`play-icon`]}`} />
           </div> */}
         </div>
@@ -149,3 +123,28 @@ export default function MyCalendar(props) {
     </div>
   )
 }
+
+// .filter((todo) => {
+//   // todo?.createdDate?.slice(0, 10) ===
+//   // moment(date).format("YYYY-MM-DD")
+
+//   // moment(date).isBetween(
+//   //   moment(todo?.createdDate),
+//   //   moment(todo?.finishedDate),
+//   //   null,
+//   //   "[]"
+//   // )
+//   if (todo.finishedDate) {
+//     return (
+//       new Date(todo.createdDate).getDate() <=
+//         new Date(selectedDate).getDate() &&
+//       new Date(selectedDate).getDate() <=
+//         new Date(todo.finishedDate).getDate()
+//     )
+//   } else {
+//     return (
+//       new Date(todo.createdDate).toString() ===
+//       new Date(selectedDate).toString()
+//     )
+//   }
+// })
