@@ -20,6 +20,9 @@ export default function CalendarInfo({ todo, date }) {
   // 업무 목표날짜
   const finalDate = todo.dateAimed ? todo.dateAimed.slice(0, 10) : ""
 
+  // 스토리포인트 계산
+  const storyPoints = todo.timeAimed / 3600
+
   // 캘린더에서 선택한 날짜
   const selectDate = moment(date)
 
@@ -39,13 +42,14 @@ export default function CalendarInfo({ todo, date }) {
 
   // 삭제모달 호출
   const openDeleteModal = function () {
+    console.log(todo)
     const editedData = {
-      id: todo.id,
+      id: todo.workId,
       title: todo.title,
       description: todo.description,
       categoryId: todo.workCateId,
       finishedDate: todo.dateAimed,
-      // storyPoint: todo.timeAimed,
+      storyPoint: todo.timeAimed,
     }
       dispatch(modalActions.setFormData({ data: editedData }))
       dispatch(openTaskDeleteModal())
@@ -54,12 +58,12 @@ export default function CalendarInfo({ todo, date }) {
   // 수정 모달 호출
   const openModal = function () {
     const editedData = {
-      id: todo.id,
+      id: todo.workId,
       title: todo.title,
       description: todo.description,
       categoryId: todo.workCateId,
       finishedDate: todo.dateAimed,
-      // storyPoint: todo.timeAimed,
+      storyPoint: todo.timeAimed,
     }
     dispatch(modalActions.setFormData({ data:editedData }))
       dispatch(modalActions.setIsTask())
@@ -83,7 +87,8 @@ export default function CalendarInfo({ todo, date }) {
         {todo?.description}
         <br />
         <br />
-        생성일자 : {todo?.dateCreated}<br/>
+        {/* 생성일자 : {todo?.dateCreated}<br/> */}
+        목표시간 : {storyPoints}<br/>
         목표일자 : {finalDate? `${finalDate} (${dDayLabel})`:`없음`}
       </div>
       <p>카테고리: {todo?.cateName}</p>
