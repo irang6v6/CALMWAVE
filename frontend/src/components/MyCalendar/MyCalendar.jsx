@@ -5,7 +5,7 @@ import React, { useState, useEffect } from "react"
 import moment from "moment"
 import { useSelector, useDispatch } from "react-redux"
 import CalendarInfo from "./CalendarInfo"
-import { BsPlusLg } from "react-icons/bs"
+// import { BsPlusLg } from "react-icons/bs"
 import { modalActions } from "../../store/door-store/modal-slice"
 import { openTaskModal } from "../../store/door-store/modal-slice"
 import { AxiosGetCalendar, calendarActions } from "../../store/calendar-slice"
@@ -138,12 +138,12 @@ export default function MyCalendar(props) {
               : null}
           </div>
 
-          <div
+          {/* <div
             className={`${styles[`create-task`]}`}
             onClick={openCreateTaskModal}
           >
             <BsPlusLg className={`${styles[`play-icon`]}`} />
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
