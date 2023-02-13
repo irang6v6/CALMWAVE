@@ -52,6 +52,7 @@ export default function Video(props) {
     return () => {
       window.removeEventListener("beforeunload", handleBeforeUnload)
       leaveSession()
+      cancelAnimationFrame(props.videoRef.current)
     }
   }, [session])
 
@@ -138,6 +139,7 @@ export default function Video(props) {
     },
     [props.videoRef, loop]
   )
+
   useEffect(
     function () {
       if (badCnt > 600) {

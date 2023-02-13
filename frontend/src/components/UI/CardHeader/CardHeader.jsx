@@ -43,9 +43,10 @@ function CardHeader({ data, cardType, deleteSelectedTaskList }) {
   return (
     <div className={`${styles[`card-header-container`]}`}>
       <div className={`${styles[`card-header-header`]}`}>
-        <div className={
-          `${styles[`card-header-lights`]}
-        bg-cat-${data?.category?.cateColor || data?.cateColor}`} />
+        <div
+          className={`${styles[`card-header-lights`]}
+        bg-cat-${data?.category?.cateColor || data?.cateColor}`}
+        />
 
         <div className={`${styles[`card-header-title`]}`}>
           {data?.title || "빈 카드 제목"}

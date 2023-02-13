@@ -18,7 +18,8 @@ function CategoryTaskCard({ task, idx }) {
   )
   const selected =
     selectedTaskList.findIndex((val) => val.id === task.id) !== -1
-  
+  const doneFlag = task.column === "Done"
+
   useEffect(
     function () {
       customSelect(selected)
@@ -42,14 +43,21 @@ function CategoryTaskCard({ task, idx }) {
   return (
     <div
       className={`${classes}
-      ${selected && styles["selected-card"]}`}
-      onClick={toggleWorkHandler}
+      ${
+        selected
+          ? styles["selected-card"]
+          : doneFlag
+          ? styles[`done-card`]
+          : null
+      }`}
       onMouseEnter={toggleHover}
       onMouseLeave={toggleHover}
     >
       <CardHeader data={task} cardType={cardType} />
-      <div className={`${styles["done-tag"]}`}>{task.column === "Done" ? "완료됨" : ""}</div>
-      <CardBody data={task} />
+      <div className={`${styles["done-tag"]}`}>
+        {task.column === "Done" ? "완료됨" : ""}
+      </div>
+      <CardBody data={task} onClick={toggleWorkHandler} />
       {/* <CardFooter /> */}
     </div>
   )
