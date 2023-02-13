@@ -109,19 +109,20 @@ function CategoryForm() {
 
   return (
     <div className={`${styles[`category-form-container`]}`}>
-      <div>{FormTitle}</div>
+      <div className={`${styles[`header-text`]}`}>{FormTitle}</div>
       <form
         className={`${styles[`category-form-input-container`]}`}
         onSubmit={submitHandler}
       >
-        <label htmlFor="category-title">title</label>
+        <label htmlFor="category-title" className={`${styles[`body-text`]}`}>title</label>
         <input
           ref={titleRef}
           type="text"
           id="category-title"
           onChange={titleChangeHandler}
+          className={`${styles[`input-form`]}`}
         />
-        <label htmlFor="category-color">category color</label>
+        <label htmlFor="category-color" className={`${styles[`body-text`]}`}>category color</label>
         <select
           name="category-color-set"
           id="category-color"
@@ -136,7 +137,7 @@ function CategoryForm() {
           <option value="5"></option>
           <option value="6"></option>
         </select>
-        <button disabled={isLoading}>
+        <button disabled={isLoading} className={`${styles[`ok-btn`]}`}>
           {isLoading ? <SpinnerDots /> : `완료`}
         </button>
       </form>
