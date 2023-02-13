@@ -85,7 +85,7 @@
 }
 
 .tab-item.select {
-  /* background-color: #394c78; */
+  font-size: 1.5rem;
   animation-name: itsme;
   animation-duration: 0.3s;
 }

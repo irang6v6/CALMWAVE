@@ -30,6 +30,29 @@ const calendarSlice = createSlice({
     setNotError(state, action) {
       state.isError = false
     },
+    editCalender(state, action) {
+      const [
+        editedId,
+        editedTitle,
+        editedDescription,
+        editedDateAimed,
+        editedTimeAimed,
+        editedCateId,
+      ] = action.payload
+      state.taskList = state.taskList.map((cal) => {
+        if (cal.id === editedId) {
+          return {
+            ...cal,
+            title: editedTitle,
+            description: editedDescription,
+            dateAimed: editedDateAimed,
+            timeAimed: editedTimeAimed,
+            workCateId: editedCateId,
+          }
+        }
+        return cal
+      })
+    },
   },
 })
 

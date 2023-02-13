@@ -2,7 +2,6 @@ import styles from "./CardBody.module.css"
 import { memo } from "react"
 
 function CardBody({ data }) {
-  console.log(data)
   return (
     <div className={`${styles[`card-body-container`]}`}>
       <div>세부내용 : {data.description}</div>

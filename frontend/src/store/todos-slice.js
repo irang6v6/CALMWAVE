@@ -33,7 +33,14 @@ const todosSlice = createSlice({
       state.todos = state.todos.filter((todo) => todo.id !== id)
     },
     editTodo(state, action) {
-      const [editedId, editedTitle, editedDescription, editedDateAimed, editedTimeAimed, editedCateId] = action.payload
+      const [
+        editedId,
+        editedTitle,
+        editedDescription,
+        editedDateAimed,
+        editedTimeAimed,
+        editedCateId,
+      ] = action.payload
       state.todos = state.todos.map((todo) => {
         if (todo.id === editedId) {
           return {
@@ -48,8 +55,7 @@ const todosSlice = createSlice({
         }
         return todo
       })
-      console.log(state.todos)
-    }
+    },
   },
 })
 

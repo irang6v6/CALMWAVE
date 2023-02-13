@@ -22,7 +22,6 @@ function SelectedTask() {
     for (let i = 0; i < selectedTaskList.length; i++) {
       sum += selectedTaskList[i].storyPoint;
     }
-    console.log(sum)
     return parseInt(sum / 3600);
   }
 
@@ -30,7 +29,6 @@ function SelectedTask() {
     let todoSend = []
     selectedTaskList.forEach((task) => {
       if (task.column !== "Done") {
-        console.log(task)
         todoSend.push({
           ...task,
           startWorkingDate: task.startWorkingDate ? task.startWorkingDate : 0,

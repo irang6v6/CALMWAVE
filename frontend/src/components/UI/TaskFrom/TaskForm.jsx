@@ -12,6 +12,7 @@ import {
   AxiosGetTodos,
 } from "../../../store/task-slice"
 import { todoActions } from "../../../store/todos-slice"
+import { calendarActions } from "../../../store/calendar-slice"
 
 function TaskForm() {
   const dispatch = useDispatch()
@@ -94,6 +95,7 @@ function TaskForm() {
           const editedcateID = categoryInput || selectedCategoryId
           const editedData = [formData.id, titleInput, descriptionInput, dateInput ? dateInput + `T18:00:00` : "", storyPointInput, editedcateID]
           dispatch(todoActions.editTodo(editedData))
+          dispatch(calendarActions.editCalender(editedData))
         })
         .then(() => {
           dispatch(closeModal())
