@@ -39,7 +39,6 @@ const calendarSlice = createSlice({
         editedTimeAimed,
         editedCateId,
       ] = action.payload
-      console.log("before", state.taskList)
       state.taskList = state.taskList.map((cal) => {
         if (cal.workId === editedId) {
           return {
@@ -53,7 +52,6 @@ const calendarSlice = createSlice({
         }
         return cal
       })
-      console.log("after", state.taskList)
     },
     deleteCalender(state, action) {
       const id = action.payload

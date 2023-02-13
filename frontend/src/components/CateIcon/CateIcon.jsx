@@ -3,7 +3,8 @@ import { IoDocumentOutline, IoStar } from "react-icons/io5"
 import { BsCheck2Square, BsArrowRepeat } from "react-icons/bs"
 import { FaCarrot } from "react-icons/fa"
 import { FaCat } from "react-icons/fa"
-import { IoIosHeart }from "react-icons/io"
+import { IoIosHeart } from "react-icons/io"
+import { GiBaseballBat, GiPumpkinLantern } from "react-icons/gi"
 const CateIcon = ({ value }) => {
   switch (value) {
     case 1:
@@ -22,6 +23,10 @@ const CateIcon = ({ value }) => {
       return <FaCat />
     case 8:
       return <IoIosHeart />
+    case 9:
+      return <GiBaseballBat />
+    case 10:
+      return <GiPumpkinLantern />
     default:
       return null
   }

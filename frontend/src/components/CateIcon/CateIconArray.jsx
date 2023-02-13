@@ -12,6 +12,8 @@ const CateIconArray = [
   { value: 6, label: "FaCarrot" },
   { value: 7, label: "FaCat" },
   { value: 8, label: "IoIosHeart" },
+  { value: 9, label: "GiBaseballBat" },
+  { value: 10, label: "GiPumpkinLantern"}
 ]
 
 export default CateIconArray

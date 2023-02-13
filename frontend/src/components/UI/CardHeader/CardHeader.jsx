@@ -56,16 +56,20 @@ function CardHeader({ data, cardType, deleteSelectedTaskList }) {
           {data?.title || "빈 카드 제목"}
         </div>
       </div>
-      <div className={`${styles[`card-header-icon-container`]}`}>
-        <AiFillEdit
-          className={`${styles[`card-header-icon`]}`}
-          onClick={openModal}
-        />
-        <AiFillCloseCircle
-          className={`${styles[`card-header-icon`]}`}
-          onClick={openDeleteModal}
-        />
-      </div>
+      {data.column !== "Done" ? (
+        <div className={`${styles[`card-header-icon-container`]}`}>
+          <AiFillEdit
+            className={`${styles[`card-header-icon`]}`}
+            onClick={openModal}
+          />
+          <AiFillCloseCircle
+            className={`${styles[`card-header-icon`]}`}
+            onClick={openDeleteModal}
+          />
+        </div>
+      ) : (
+        <span></span>
+      )}
     </div>
   )
 }

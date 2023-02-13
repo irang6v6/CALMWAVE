@@ -98,7 +98,7 @@ function TaskForm() {
                 ...formData,
                 title: titleInput,
                 description: descriptionInput,
-                storyPoint: storyPointInput,
+                storyPoint: parseInt(storyPointInput),
                 categoryId: categoryInput,
                 category: categoryList.filter(
                   (cate) => cate.id === parseInt(categoryInput)
@@ -148,7 +148,7 @@ function TaskForm() {
     function () {
       titleSetTrigger(formData?.title || "")
       descriptionSetTrigger(formData?.description || "")
-      dateSetTrigger(formData?.finishedDate.substr(0, 10) || "")
+      dateSetTrigger(formData?.finishedDate?.substr(0, 10) || "")
       storyPointSetTrigger(parseInt(formData?.storyPoint / 3600) || 0)
       categorySetTrigger(formData?.categoryId || 0)
     },
