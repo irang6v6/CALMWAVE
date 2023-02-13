@@ -194,7 +194,7 @@ export default function TodoCard({
           }
           if (dropResult.title === "Done") {
             statusToDoneHandler()
-          } else if (dropResult.title === "To do") {
+          } else if (dropResult.title !== "Done") {
             statusToTodoHandler()
           }
           changeTodoState(

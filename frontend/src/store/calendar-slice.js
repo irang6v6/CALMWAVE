@@ -39,19 +39,21 @@ const calendarSlice = createSlice({
         editedTimeAimed,
         editedCateId,
       ] = action.payload
+      console.log("before", state.taskList)
       state.taskList = state.taskList.map((cal) => {
-        if (cal.id === editedId) {
+        if (cal.workId === editedId) {
           return {
             ...cal,
             title: editedTitle,
             description: editedDescription,
             dateAimed: editedDateAimed,
             timeAimed: editedTimeAimed,
-            workCateId: editedCateId,
+            workCateId: editedCateId, 
           }
         }
         return cal
       })
+      console.log("after", state.taskList)
     },
   },
 })
