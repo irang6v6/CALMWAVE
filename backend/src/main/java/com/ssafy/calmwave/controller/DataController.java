@@ -6,6 +6,7 @@ import com.ssafy.calmwave.dto.DoneTaskDto;
 import com.ssafy.calmwave.dto.WorkCalenderDto;
 import com.ssafy.calmwave.dto.WorkResponseDto;
 import com.ssafy.calmwave.service.DataService;
+import com.ssafy.calmwave.service.WorkPeriodService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ResponseHeader;
@@ -26,6 +27,7 @@ public class DataController {
 
     private final JwtUtil jwtUtil;
     private final DataService dataService;
+    private final WorkPeriodService workPeriodService;
 
     /**
      * 오늘 하루(오늘 새벽 4시부터 내일 새벽 4시까지) 끝낸 일 조회
@@ -62,8 +64,11 @@ public class DataController {
         HttpStatus status;
         User user = jwtUtil.getUser(token);
         if (user!=null) {
-
             resultMap.put("result", "ok");
+            resultMap.put("todayTotalWorkTime",workPeriodService.findTimediffByUserId(user.getId()));
+            resultMap.put("averagePostureAlert",3);
+            resultMap.put("pieChartByWork",workPeriodService.findWorkDurationByUserId(user.getId()));
+            resultMap.put("pieChartByCategory",workPeriodService.findWorkDurationByUserAndCategory(user.getId()));
             status = HttpStatus.ACCEPTED;
         } else {
             resultMap.put("result", "same email already exists");
