@@ -25,7 +25,7 @@ public class DataController {
      * 오늘 하루(오늘 새벽 4시부터 내일 새벽 4시까지) 끝낸 일 조회
      *
      * @param token
-     * @return List<DoneTaskDto>
+     * @return List<DoneWorkDto>
      */
     @GetMapping("mypage/done-works/today")
     @ApiOperation(value = "오늘 하루 끝낸 일들 리스트", notes = "", response = DoneWorkDto.class)
@@ -39,9 +39,9 @@ public class DataController {
      * 주어진 날짜 범위 (start_date의 새벽 4시부터 end_date의 다음날의 새벽 4시까지) 기준 끝낸 일 조회
      *
      * @param token
-     * @return List<DoneTaskDto>
+     * @return List<DoneWorkDto>
      */
-    @GetMapping("mypage/done-tasks/{start_date}/{end_date}")
+    @GetMapping("mypage/done-works/{start_date}/{end_date}")
     @ApiOperation(value = "주어진 날짜 범위 기준 끝낸 일들 리스트", notes = "", response = DoneWorkDto.class)
     public ResponseEntity<?> getDoneWorkForDateRange(@RequestHeader(value = "AccessToken") String token, @PathVariable("start_date") String start_date, @PathVariable("end_date") String end_date) {
         User user = jwtUtil.getUser(token);
