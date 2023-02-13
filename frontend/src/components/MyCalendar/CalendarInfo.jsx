@@ -6,13 +6,13 @@ import moment from "moment"
 import { useSelector, useDispatch } from "react-redux"
 import CardHeader from "../UI/CardHeader/CardHeader"
 import { AiFillCloseCircle, AiFillEdit } from "react-icons/ai"
-import { modalActions,
-        openCategoryModal,
-        openCategoryDeleteModal,
-        openTaskDeleteModal,
-        openTaskModal,
+import {
+  modalActions,
+  openCategoryModal,
+  openCategoryDeleteModal,
+  openTaskDeleteModal,
+  openTaskModal,
 } from "../../store/door-store/modal-slice"
-
 
 export default function CalendarInfo({ todo, date }) {
   const dispatch = useDispatch()
@@ -51,8 +51,8 @@ export default function CalendarInfo({ todo, date }) {
       finishedDate: todo.dateAimed,
       storyPoint: todo.timeAimed,
     }
-      dispatch(modalActions.setFormData({ data: editedData }))
-      dispatch(openTaskDeleteModal())
+    dispatch(modalActions.setFormData({ data: editedData }))
+    dispatch(openTaskDeleteModal())
   }
 
   // 수정 모달 호출
@@ -65,10 +65,10 @@ export default function CalendarInfo({ todo, date }) {
       finishedDate: todo.dateAimed,
       storyPoint: todo.timeAimed,
     }
-    dispatch(modalActions.setFormData({ data:editedData }))
-      dispatch(modalActions.setIsTask())
-      dispatch(modalActions.setIsUpdate())
-      dispatch(openTaskModal())
+    dispatch(modalActions.setFormData({ data: editedData }))
+    dispatch(modalActions.setIsTask())
+    dispatch(modalActions.setIsUpdate())
+    dispatch(openTaskModal())
   }
 
   //   const selectDay = (selectedDate) => {
@@ -83,16 +83,27 @@ export default function CalendarInfo({ todo, date }) {
     <div className="todo-box">
       {/* <CardHeader data={todo} cardType={true} /> */}
       <div className="todo-content">
-        <b>▶ {todo?.title}</b><br />
-        {todo?.description}
+        <b>▶ {todo?.title}</b>
+        <br />
+        세부내용 : {todo?.description}
         <br />
         <br />
         {/* 생성일자 : {todo?.dateCreated}<br/> */}
         {/* 목표시간 : {storyPoints}<br/> */}
-        목표시간 : {todo?.timeAimed ? parseInt(todo?.timeAimed / 3600) : "미지정"}<br/>
-        목표일자 : {finalDate? `${finalDate} (${dDayLabel})`:`없음`}
+        목표시간 :{" "}
+        {todo?.timeAimed ? parseInt(todo?.timeAimed / 3600) : "미지정"}
+        <br />
+        {/* 목표일자 : {finalDate? `${finalDate} (${dDayLabel})`:`없음`} <br/> */}
+        카테고리: {todo?.cateName}
+        <br />
+        {todo?.status === "DONE" ? (
+          <span>완료된 업무</span>
+        ) : (
+          <span>
+            목표일자 : {finalDate ? `${finalDate} (${dDayLabel})` : `없음`}
+          </span>
+        )}
       </div>
-      <p>카테고리: {todo?.cateName}</p>
 
       <div className={`${styles[`card-header-icon-container`]}`}>
         <AiFillEdit
