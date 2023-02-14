@@ -1,4 +1,5 @@
 .task-form-container {
+  position: relative;
   box-sizing: border-box;
   outline: none;
   width: 100%;
@@ -25,6 +26,11 @@
   display: none;
 } */
 
+.modal-close-button{
+  position: absolute;
+  top: 5%;
+  right: 7%;
+}
 
 
 .header-text {

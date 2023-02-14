@@ -15,6 +15,7 @@ import { AxiosGetTodos } from "../../../store/task-slice"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
 import CateIcon from "../../CateIcon/CateIcon"
 import CateIconArray from "../../CateIcon/CateIconArray"
+import { AiOutlineClose } from "react-icons/ai"
 
 function CategoryForm() {
   const dispatch = useDispatch()
@@ -128,8 +129,18 @@ function CategoryForm() {
     [formData, titleSetTrigger]
   )
 
+  const onCloseModal = function () {
+    dispatch(closeModal())
+  }
+
+
   return (
     <div className={`${styles[`category-form-container`]}`}>
+      <AiOutlineClose
+            className={`${styles[`modal-close-button`]}`}
+            onClick={onCloseModal}
+          />
+
       <div className={`${styles[`header-text`]}`}>{FormTitle}</div>
       <form
         className={`${styles[`category-form-input-container`]}`}
