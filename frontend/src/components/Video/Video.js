@@ -63,11 +63,9 @@ export default function Video(props) {
 
   useEffect(
     function () {
-      console.log(props.videoRef)
       if (props.videoRef.current && session) {
         settingModel()
         sizeSet()
-        console.log("티쳐블 세팅")
       }
     },
     [props.videoRef.current, session]
@@ -95,7 +93,6 @@ export default function Video(props) {
       sizeSet()
       // await webcam.update()
       predict()
-      console.log("is it work?")
       // await webcam.setup()
       // await webcam.play()
     }
@@ -124,8 +121,7 @@ export default function Video(props) {
           }
         })
         setNowPosture((oldPosture) => rtPosture.className)
-        console.log(`isBad : ${nowPosture}, badCnt : ${badCnt}`)
-        // console.log(webcam)
+        console.log(`자세 : ${nowPosture}, 몇프레임째(600당 10초) : ${badCnt}`)
       }
     }
   }
@@ -163,7 +159,7 @@ export default function Video(props) {
             className: requestPosture,
           },
         }).then(() => {
-          console.log("ㅎㅇ")
+          console.log("안좋은 자세 ㅎㅇ")
         })
       } else if (nowPosture === "left" && badCnt > 54000) {
         console.log("워메 자리를 얼마나 비우능교")
@@ -175,13 +171,12 @@ export default function Video(props) {
             className: "left",
           },
         }).then(() => {
-          console.log("호잇호잇")
+          console.log("자리비움 호잇호잇")
         })
       }
       return function () {
         const source = axios.CancelToken.source()
         source.cancel("cancelling in cleanup")
-        console.log("클린업 함수 =================")
       }
     },
     [badCnt, nowPosture]
