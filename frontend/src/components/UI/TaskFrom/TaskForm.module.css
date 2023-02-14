@@ -5,7 +5,7 @@
   min-width: 500px;
   max-width: 800px;
   padding: 50px 80px 80px 80px;
-  height: 170%;
+  height: 900px;
   background-color: rgb(9, 33, 53);
   display: flex;
   flex-direction: column;
@@ -18,7 +18,14 @@
   box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.5);
   /* text-align: center; */
   color: white;
+  /* overflow-y: scroll */
 }
+
+/* .task-form-container::-webkit-scrollbar {
+  display: none;
+} */
+
+
 
 .header-text {
   text-align: center;

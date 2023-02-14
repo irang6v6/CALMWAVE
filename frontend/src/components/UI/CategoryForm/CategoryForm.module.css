@@ -1,7 +1,7 @@
 .category-form-container {
   box-sizing: border-box;
   outline: none;
-  width: 100%;
+  width: 800px;
   min-width: 500px;
   max-width: 800px;
   padding: 40px 80px;
@@ -16,6 +16,11 @@
   border: 4px solid #ffffff;
   box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.5);
   color: white;
+  overflow-y: scroll
+}
+
+.category-form-container::-webkit-scrollbar {
+  display: none;
 }
 
 .category-form-input-container {
