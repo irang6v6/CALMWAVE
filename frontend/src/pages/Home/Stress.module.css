@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   /* background-color: #001930; */
-  font-family: 'Gowun Dodum', sans-serif;
+  font-family: "Gowun Dodum", sans-serif;
 }
 
 .inner {
@@ -19,27 +19,24 @@
   color: white;
 }
 
-.inner h1{
+.inner h1 {
   /* font-weight: bolder; */
 }
 
-.shortcut-container{
-  text-align:center;
+.shortcut-container {
+  text-align: center;
   width: auto;
-
 }
 
-.shortcut-container img{
+.shortcut-container img {
   display: inline-block;
   width: 50%;
 }
 
-.enter-btn{
-
+.enter-btn {
 }
 
-.mypage-btn{
-
+.mypage-btn {
 }
 
 .img-wrap {
@@ -64,10 +61,10 @@
   /* background-color: #0084ff; */
   transform: translate(0, 0px);
 
-  animation-name: tongtong;
+  /* animation-name: tongtong;
   animation-duration: 0.6s;
   animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation-direction: alternate; */
 }
 
 .go-down-icon {

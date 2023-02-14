@@ -147,7 +147,7 @@ export default function Video(props) {
 
   useEffect(
     function () {
-      if (nowPosture !== "normal" && nowPosture !== "left" && badCnt > 600) {
+      if (nowPosture !== "normal" && nowPosture !== "left" && badCnt > 6000) {
         setBadCnt(() => 0)
         console.log("아따 자세 안좋당께 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
         // 액시오스 요청
