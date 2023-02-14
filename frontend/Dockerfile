@@ -3,4 +3,6 @@ WORKDIR /usr/src/app
 COPY ./package* /usr/src/app/
 RUN npm install
 COPY ./ /usr/src/app/
-CMD ["npm","run","start"]
+RUN npm run build
+RUN npm install -g serve
+CMD ["npx", "serve", "-s", "build"]
