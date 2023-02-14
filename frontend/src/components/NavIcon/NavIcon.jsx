@@ -49,13 +49,18 @@ function NavIcon() {
       },
       function () {
         dispatch(LOGOUTandRESETLOCALSTORAGE())
+        setIsLogin(() => false)
       }
     )
   }
   return (
     <>
       <NavLink to={`/`} className={`${styles[`logo-on-top`]}`}>
-        <img src={logoimg} alt="캄웨이브 로고" className={`${styles[`logo-img`]}`}/>
+        <img
+          src={logoimg}
+          alt="캄웨이브 로고"
+          className={`${styles[`logo-img`]}`}
+        />
       </NavLink>
       <div className={`${styles["nav-icon-container"]}`}>
         {logoutLoading ? (

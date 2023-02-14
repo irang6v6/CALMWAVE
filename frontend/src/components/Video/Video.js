@@ -20,7 +20,7 @@ const metadataURL =
   "https://teachablemachine.withgoogle.com/models/5kCzQ3Epp/metadata.json"
 
 let frameIDs = []
-let intervalIDs = []
+// let intervalIDs = []
 
 export default function Video(props) {
   const user = useSelector((state) => state.user.userData)
@@ -63,12 +63,14 @@ export default function Video(props) {
 
   useEffect(
     function () {
-      if (props.videoRef.current) {
+      console.log(props.videoRef)
+      if (props.videoRef.current && session) {
         settingModel()
         sizeSet()
+        console.log("티쳐블 세팅")
       }
     },
-    [props.videoRef.current]
+    [props.videoRef.current, session]
   )
 
   const settingModel = async function () {
@@ -93,6 +95,7 @@ export default function Video(props) {
       sizeSet()
       // await webcam.update()
       predict()
+      console.log("is it work?")
       // await webcam.setup()
       // await webcam.play()
     }
@@ -143,19 +146,45 @@ export default function Video(props) {
         }
       }
     },
-    [props.videoRef, loop]
+    [props.videoRef.current, loop]
   )
 
   useEffect(
     function () {
       if (nowPosture !== "normal" && nowPosture !== "left" && badCnt > 600) {
         setBadCnt(() => 0)
-        console.log("아따 자세 안좋당께")
+        console.log("아따 자세 안좋당께 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+        // 액시오스 요청
+        const requestPosture = nowPosture
+        axios({
+          method: "post",
+          url: "/v1/posture/save",
+          data: {
+            className: requestPosture,
+          },
+        }).then(() => {
+          console.log("ㅎㅇ")
+        })
       } else if (nowPosture === "left" && badCnt > 54000) {
         console.log("워메 자리를 얼마나 비우능교")
+        // 액시오스 요청
+        axios({
+          method: "post",
+          url: "/v1/posture/save",
+          data: {
+            className: "left",
+          },
+        }).then(() => {
+          console.log("호잇호잇")
+        })
+      }
+      return function () {
+        const source = axios.CancelToken.source()
+        source.cancel("cancelling in cleanup")
+        console.log("클린업 함수 =================")
       }
     },
-    [badCnt]
+    [badCnt, nowPosture]
   )
 
   // 토큰 반환 (추가 예정)
