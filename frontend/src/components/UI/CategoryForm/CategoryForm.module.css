@@ -117,14 +117,14 @@ select option[value="6"] {
 
 .icon-button:hover {
   transform: scale(1.05);
-  border: 3px solid #84b9ff;
+  border: 3px solid rgba(20, 255, 255, 0.5);
 }
 
 .icon-button.active {
   /* background-color: gray;
   color: white; */
   transform: scale(1.05);
-  border: 3px solid #84b9ff;
+  border: 3px solid rgba(74, 194, 55, 0.66);
 }
 
 .icon-button > svg {

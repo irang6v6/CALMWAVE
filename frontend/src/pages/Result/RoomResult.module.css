@@ -32,6 +32,19 @@
   height: 100%;
   width: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
   background-color: rgba(255, 255, 255, 0.5);
   border-radius: 8px;
+}
+
+.graph {
+  height: 300px;
+  width: 300px;
+  margin: 30px;
+}
+.text {
+  color: white;
 }
