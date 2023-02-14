@@ -69,38 +69,38 @@
 .img-container {
   /* background-color: aliceblue; */
   padding: 70px 40px 30px 40px;
-  perspective: 100vw;
-  /* width: 90%; */
-  height: 78%;
   position: absolute;
-  top: 105%;
-  left: 5%;
+  top: 103%;
+  left: -8%;
+  width: 80%;
+  height: 73%;
+  perspective: 100vw;
 }
 .info-img {
   box-sizing: border-box;
   padding: 0;
   margin: 20px;
   height: 100%;
+  width: fit-content;
 
   box-shadow: -10px 10px 10px 2px rgba(255, 255, 255, 0.5),
     -2px 0px 0px 0px #888;
   border: solid white 3px;
   border-radius: 8px;
   z-index: 30;
-  /* transform: rotateY(0deg); */
+  opacity: 0;
 
   animation-name: zidx-n-spin;
-  animation-duration: 15s;
-  /* animation-iteration-count: infinite; */
+  animation-fill-mode: forwards;
+  animation-duration: 1.3s;
+  animation-delay: 0.1s;
   animation-direction: normal;
-  /* animation-timing-function: ease-in-out; */
-  /* animation-delay: 1s; */
-  will-change: contents;
+  animation-timing-function: ease-in-out;
 }
 .dsc-container {
   box-sizing: border-box;
   height: 70vh;
-  width: 30%;
+  width: 40%;
   background-color: rgba(0, 16, 36, 0.5);
   border-radius: 17px;
   padding: 20px 25px 20px 25px;
@@ -117,35 +117,30 @@
   position: absolute;
   top: 115%;
 
-  left: 55%;
+  left: 50%;
 
   animation-name: shukshuk;
-  animation-duration: 15s;
-  animation-iteration-count: infinite;
+  opacity: 0;
+  animation-duration: 2s;
+  animation-delay: 1.1s;
+  /* animation-iteration-count: infinite; */
   animation-direction: normal;
-  /* animation-timing-function: ease; */
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
 }
 
 @keyframes zidx-n-spin {
-  0%,
-  80% {
-    /* transform: none; */
-  }
-  20%,
-  60% {
-    transform: rotateY(30deg);
+  to {
+    transform: rotateY(30deg) scale(90%);
+    opacity: 1;
     /* box-shadow: -10px 10px 10px 2px rgba(25, 25, 25, 0.2), -2px 0px 0px 0px #888; */
     /* overflow: visible; */
   }
 }
 
 @keyframes shukshuk {
-  0%,
-  80% {
-    transform: none;
-  }
-  20%,
-  60% {
-    transform: translateX(12vw);
+  to {
+    transform: translateX(5vw);
+    opacity: 1;
   }
 }

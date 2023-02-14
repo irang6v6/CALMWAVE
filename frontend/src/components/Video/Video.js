@@ -20,6 +20,7 @@ const metadataURL =
   "https://teachablemachine.withgoogle.com/models/5kCzQ3Epp/metadata.json"
 
 let frameIDs = []
+let intervalIDs = []
 
 export default function Video(props) {
   const user = useSelector((state) => state.user.userData)
@@ -33,10 +34,14 @@ export default function Video(props) {
 
   const [model, setModel] = useState(null)
   const [webcam, setWebcam] = useState(null)
-  // const [posture, setPosture] = useState("")
-  const [isBad, setIsBad] = useState(false)
+  // const [posture, setPosture] = useState({
+  //   normal: 0,
+  //   tilted: 0,
+  //   turtle: 0,
+  //   left: 0,
+  // })
+  const [nowPosture, setNowPosture] = useState("normal")
   const [badCnt, setBadCnt] = useState(0)
-  const [check, setCheck] = useState(0)
 
   // 최초 진입 시 세션 접속
   useEffect(() => {
@@ -104,17 +109,19 @@ export default function Video(props) {
     // console.log(prediction)
     for (let i = 0; i < 4; i++) {
       const rtPosture = prediction[i]
-      const veryBad = i !== 2 ? true : false
       if (rtPosture.probability.toFixed(2) > 0.999999) {
-        setIsBad((oldVal) => {
-          if (oldVal && veryBad) {
-            setBadCnt((val) => val + 1)
+        // nowPosture, setNowPosture, posture, setPosture, badCnt, setBadCnt
+        // if nowposture가 rtPosture.class와 같다면
+        // posture를 덮어서 갱신.
+        setBadCnt((val) => {
+          if (nowPosture === rtPosture.className) {
+            return val + 1
           } else {
-            setBadCnt(() => 0)
+            return 0
           }
-          return veryBad
         })
-        console.log(`isBad : ${isBad}, badCnt : ${badCnt}`)
+        setNowPosture((oldPosture) => rtPosture.className)
+        console.log(`isBad : ${nowPosture}, badCnt : ${badCnt}`)
         // console.log(webcam)
       }
     }
@@ -125,7 +132,6 @@ export default function Video(props) {
       setTimeout(function () {
         if (props.videoRef.current) {
           const aniId = window.requestAnimationFrame(loop)
-          setCheck((val) => val + 1)
           frameIDs.push(aniId)
         }
       }, 100)
@@ -142,8 +148,11 @@ export default function Video(props) {
 
   useEffect(
     function () {
-      if (badCnt > 600) {
-        console.error("자세가 많이 구리네요")
+      if (nowPosture !== "normal" && nowPosture !== "left" && badCnt > 600) {
+        setBadCnt(() => 0)
+        console.log("아따 자세 안좋당께")
+      } else if (nowPosture === "left" && badCnt > 54000) {
+        console.log("워메 자리를 얼마나 비우능교")
       }
     },
     [badCnt]

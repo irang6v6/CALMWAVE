@@ -1,5 +1,5 @@
 import styles from "./HomePage.module.css"
-import React from "react"
+import React, { useCallback } from "react"
 import EnterPage from "./EnterPage/EnterPage"
 import InfoPage from "./InfoPage/InfoPage"
 import IntroPage from "./IntroPage/IntroPage"
@@ -24,14 +24,38 @@ function HomePage() {
   const dispatch = useDispatch()
   const [isInitial, setIsInitial] = useState(true)
 
-  const [infoScroll, setInfoScroll] = useState(false)
-  const scrollTaskManageHandler = function () {
-    if (window.scrollY >= canvasHeight * 1.4) {
-      setInfoScroll(true)
-    } else {
-      setInfoScroll(false)
-    }
-  }
+  const [canvasWidth, setCanvasWidth] = useState(
+    document.documentElement.clientWidth
+  )
+  const [canvasHeight, setCanvasHeight] = useState(
+    document.documentElement.clientHeight
+  )
+  const [infoScroll, setInfoScroll] = useState(
+    window.scrollY >= canvasHeight * 0.5
+  )
+  const [introScroll, setIntroScroll] = useState(
+    window.scrollY >= canvasHeight * 1.4
+  )
+  const scrollInfoManageHandler = useCallback(
+    function () {
+      if (window.scrollY >= canvasHeight * 0.4) {
+        setInfoScroll(() => true)
+      } else if (window.scrollY <= canvasHeight * 0.1) {
+        setInfoScroll(() => false)
+      }
+    },
+    [canvasHeight]
+  )
+  const scrollTaskManageHandler = useCallback(
+    function () {
+      if (window.scrollY >= canvasHeight * 1.4) {
+        setIntroScroll(() => true)
+      } else if (window.scrollY <= canvasHeight * 1.1) {
+        setIntroScroll(() => false)
+      }
+    },
+    [canvasHeight]
+  )
   useEffect(
     function () {
       window.addEventListener("scroll", scrollTaskManageHandler)
@@ -41,9 +65,16 @@ function HomePage() {
     },
     [scrollTaskManageHandler]
   )
+  useEffect(
+    function () {
+      window.addEventListener("scroll", scrollInfoManageHandler)
+      return function () {
+        window.removeEventListener("scroll", scrollInfoManageHandler)
+      }
+    },
+    [scrollInfoManageHandler]
+  )
 
-  const [canvasWidth, setCanvasWidth] = useState(0)
-  const [canvasHeight, setCanvasHeight] = useState(0)
   const pageRef = useRef(null)
   const secondRef = useRef(null)
   const [worktimeRef, todoRef, postureRef, stretchRef, stressRef, LastRef] = [
@@ -132,7 +163,11 @@ function HomePage() {
             // background={`rgba(31, 31, 36)`}
           />
         </div> */}
-        <InfoPage refVal={secondRef} goNext={goWorkTime} />
+        <InfoPage
+          refVal={secondRef}
+          goNext={goWorkTime}
+          scrollTrigger={infoScroll}
+        />
         {/* <div className={`${styles["wave-container"]}`}>
           <NightSky
             canvasWidth={canvasWidth}
@@ -143,7 +178,7 @@ function HomePage() {
         <IntroPage
           refVal={worktimeRef}
           goNext={goTodo}
-          scrollTrigger={infoScroll}
+          scrollTrigger={introScroll}
         />
         <TaskManagePage refVal={todoRef} goNext={goPosture} />
         <Posture refVal={postureRef} goNext={goStreching} />
