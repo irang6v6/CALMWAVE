@@ -1,14 +1,15 @@
 package com.ssafy.calmwave.controller;
 
 import com.ssafy.calmwave.config.jwt.JwtUtil;
+import com.ssafy.calmwave.domain.PostureCName;
 import com.ssafy.calmwave.domain.User;
 import com.ssafy.calmwave.dto.DoneWorkDto;
 import com.ssafy.calmwave.service.DataService;
+import com.ssafy.calmwave.service.PostureService;
 import com.ssafy.calmwave.service.WorkPeriodService;
 import com.ssafy.calmwave.service.WorkService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ResponseHeader;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ public class DataController {
     private final JwtUtil jwtUtil;
     private final WorkService workService;
     private final DataService dataService;
+    private final PostureService postureService;
     private final WorkPeriodService workPeriodService;
 
     /**
@@ -75,6 +77,8 @@ public class DataController {
             resultMap.put("numOfTotalWork", workService.getTodo(id).size() + workService.getDone(id).size());
             resultMap.put("numOfUnfinished", workService.getTodo(id).size());
             resultMap.put("numOfDone", workService.getDone(id).size());
+            resultMap.put("numOfTurtle", postureService.countByUserAndPostureCName(user, PostureCName.turtle));
+            resultMap.put("numOfTilted", postureService.countByUserAndPostureCName(user, PostureCName.tilted));
             resultMap.put("percentOfTodoAndDone", workService.getPercentOfTodoAndDone(id));
             resultMap.put("percentOfWorkTimeAndAimedTime", workService.getPercentOfTotalAndAimedTime(id));
             resultMap.put("schedulerData", workPeriodService.findByWorkInAndStartTimeAfter(workService.findAllByUser(id)));
