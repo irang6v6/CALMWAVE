@@ -303,12 +303,17 @@ function Signup(props) {
         userNickname,
         resetState
       )
-
       // 성공적으로 회원가입 시
       // props.onLogin() // 로그인 창으로 넘겨주기
       // 회원가입 실패 시
     } else {
-      console.log("유효하지 않음~")
+      setOnNicknameTouched(() => true)
+      setOnEmailTouched(() => true)
+      setOnPasswordTouched(() => true)
+      setOnPassword2Touched(() => true)
+      if (!emailIsValid && emailDupValid !== true) {
+        setEmailDupValid(() => false)
+      }
     }
   }
   const toggleToLogin = function (event) {

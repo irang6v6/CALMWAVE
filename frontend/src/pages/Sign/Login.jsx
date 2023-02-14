@@ -122,11 +122,12 @@ function Login(props) {
   const onSubmitHandler = function (event) {
     event.preventDefault()
     if (emailIsValid && passwordIsValid) {
+      props.onLogin(userEmail, userPassword)
     } else {
-      console.log("유효하지 않음~")
+      setOnEmailTouched(() => true)
+      setOnPasswordTouched(() => true)
       return
     }
-    props.onLogin(userEmail, userPassword)
   }
 
   const onInputEmailHandler = function () {
