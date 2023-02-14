@@ -68,7 +68,7 @@ function NavIcon() {
         ) : isLogin ? (
           <>
             <NavLink
-              to={`/door`}
+              to={`/room`}
               className={
                 openMenu
                   ? `${styles[`nav-icon-play`]} ${styles[`play-open`]}`

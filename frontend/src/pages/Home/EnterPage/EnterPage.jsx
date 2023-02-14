@@ -8,8 +8,32 @@ import LogoImg from "../../../assets/logo_imgonly.png"
 import { VscTriangleDown } from "react-icons/vsc"
 import startbtn from "../../../assets/enter_start.png"
 import mypagebtn from "../../../assets/enter_mypage.png"
+import { useSelector } from "react-redux"
+import { useState,useEffect } from "react"
 
 function EnterPage(props) {
+  // const dispatch = useDispatch()
+  const id = useSelector((state) => state.user.userData.id)
+  const [isLogin, setIsLogin] = useState(
+    id ? true : false || localStorage.getItem("Access") ? true : false
+  )
+
+  useEffect(
+    function () {
+      setIsLogin(() =>
+        id
+          ? true
+          : false ||
+            (localStorage.getItem("Access") && localStorage.getItem("Refresh"))
+          ? true
+          : false
+      )
+    },
+    [id]
+  )
+
+
+
   return (
     <div className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
@@ -28,7 +52,7 @@ function EnterPage(props) {
             </span>
             <div className={`${styles["icon-wrap"]}`}>
               <NavLink
-                to={`/door`}
+                to={isLogin ? '/door' : '/sign'}
                 className={`${styles[`shortcut-container`]}`}
               >
                 {/* <AiFillPlayCircle className={`${styles[`icons`]}`} /> */}
@@ -36,8 +60,8 @@ function EnterPage(props) {
               </NavLink>
 
               <NavLink
-                to={`/profile`}
-                className={`${styles[`shortcut-container`]}`}
+                to={isLogin ? '/profile' : '/sign'}
+                className={styles['shortcut-container']}
               >
                 {/* <AiFillInfoCircle className={`${styles[`icons`]}`} /> */}
                 <img src={mypagebtn} alt="마이페이지" className={`${styles[`enter-btn`]}`}/>
