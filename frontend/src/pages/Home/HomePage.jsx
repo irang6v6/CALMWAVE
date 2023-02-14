@@ -19,7 +19,6 @@ import NavIcon from "../../components/NavIcon/NavIcon"
 import { AxiosGetTodos } from "../../store/task-slice"
 import { AxiosGetUser } from "../../store/user-slice"
 import axios from "axios"
-import { AxiosGetUser } from "../../store/user-slice"
 // import { VscArrowUp } from "react-icons/vsc"
 
 /* eslint-disable */
