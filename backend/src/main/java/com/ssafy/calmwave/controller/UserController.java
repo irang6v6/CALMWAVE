@@ -43,6 +43,7 @@ public class UserController {
 
     /**
      * 회원가입
+     *
      * @param user
      * @return "ok" or "이미 회원에 등록된 이메일 주소입니다."
      */
@@ -52,7 +53,7 @@ public class UserController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         User findUser = userService.findByUsername(user.getUsername());
-        if (findUser == null) {
+        if (findUser == null && userService.isValidEmail(user.getUsername())) {
             user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
             user.setRole("ROLE_USER");
             user.setDeleted((Byte.parseByte("0")));
@@ -60,12 +61,11 @@ public class UserController {
             userRepository.save(user);
 
             //기본 카테고리 생성
-            categoryService.save(new WorkCategory("기본",user,0,0, WorkCategoryStatus.VALID));
-
+            categoryService.save(new WorkCategory("기본", user, 0, 0, WorkCategoryStatus.VALID));
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
         } else {
-            resultMap.put("result", "이미 회원에 등록된 이메일 주소입니다.");
+            resultMap.put("result", "이미 등록된 이메일이거나 정상적인 이메일 형식이 아닙니다.");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
@@ -73,6 +73,7 @@ public class UserController {
 
     /**
      * 이메일 중복검사
+     *
      * @param email
      * @return true/false 통과(DB에 중복된 email이 없음)일때 true
      */
@@ -82,11 +83,11 @@ public class UserController {
         Map<String, Object> resultMap = new HashMap<>();
         HttpStatus status;
         User user = userService.findByUsername(email);
-        if (user == null) {
+        if (user == null && userService.isValidEmail(email)) {
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
         } else {
-            resultMap.put("result", "same email already exists");
+            resultMap.put("result", "이미 등록된 이메일이거나 정상적인 이메일 형식이 아닙니다.");
             status = HttpStatus.INTERNAL_SERVER_ERROR;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
@@ -94,6 +95,7 @@ public class UserController {
 
     /**
      * 로그아웃
+     *
      * @param token
      * @return "result":"ok"
      */
@@ -118,6 +120,7 @@ public class UserController {
 
     /**
      * 회원 정보 조회
+     *
      * @param token
      * @return UserInfoDto
      */
@@ -140,6 +143,7 @@ public class UserController {
 
     /**
      * 회원 탈퇴-민감정보를 지우고 invalidate status로 변경
+     *
      * @param token
      * @return "ok"
      */
@@ -159,6 +163,7 @@ public class UserController {
 
     /**
      * 사용자 설정 변경
+     *
      * @param userInfoDto (Long userId,String nickname,String stretchingIntervalMin)
      * @return
      */
