@@ -7,7 +7,7 @@ function CardBody({ data, onClick }) {
       <div>세부내용 : {data.description}</div>
       <div>
         목표시간 :{" "}
-        {data.storyPoint ? parseInt(data?.storyPoint / 3600) : "미지정"}
+        {data.storyPoint ? parseInt(data?.storyPoint) / 3600 : "미지정"}
       </div>
       <div>
         목표일자 :{" "}

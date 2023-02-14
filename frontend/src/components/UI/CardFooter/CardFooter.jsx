@@ -14,7 +14,7 @@ function CardFooter({ data, big, small }) {
         bgColor={`rgba(255, 255, 255, 1)`}
         fillColor={`#394c78`}
         maxPoint={big}
-        nowPoint={small}
+        nowPoint={Math.min(big, small)}
       />
     </div>
   )

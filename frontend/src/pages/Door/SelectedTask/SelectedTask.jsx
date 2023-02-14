@@ -1,6 +1,7 @@
 // import { useEffect } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { NavLink } from "react-router-dom"
+import { useDrop } from "react-dnd"
 import SelectedTaskCard from "../../../components/UI/SelectedTaskCard/SelectedTaskCard"
 import styles from "./SelectedTask.module.css"
 import { BsFillPlayFill } from "react-icons/bs"
@@ -52,12 +53,18 @@ function SelectedTask() {
     localStorage.setItem("todo", JSON.stringify(todoSend))
     localStorage.setItem("category", JSON.stringify(categoryList))
   }
+
+  const [, drop] = useDrop({
+    accept: "Task",
+    drop: () => ({ title: 'selectedTask' }),
+  })
+
   return (
     <>
       <div className={`${styles[`door-title-container`]}`}>
         선택한 업무 {sumStoryPoints() ? `- ${sumStoryPoints()}시간` : ""}
       </div>
-      <div className={`${styles[`selected-task-container`]}`}>
+      <div ref={drop} className={`${styles[`selected-task-container`]}`}>
         {selectedTaskList.map((task, idx) => {
           return (
             <SelectedTaskCard

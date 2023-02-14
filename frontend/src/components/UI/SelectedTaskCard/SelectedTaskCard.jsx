@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { useDispatch } from "react-redux"
+import { useDrag } from "react-dnd"
 import useAnimation from "../../../hooks/custom/useAnimation"
 import { useClasses } from "../../../hooks/custom/useClasses"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
@@ -29,10 +30,33 @@ function SelectedTaskCard({ task, idx }) {
     }
   }
 
+  const [{ isDragging }, drag] = useDrag({
+    type: "Task",
+    item: { idx, task }, // time
+    end: (item, monitor) => {
+      const dropResult = monitor.getDropResult()
+      console.log(dropResult)
+      if (dropResult) {
+        if (dropResult.title === "selectedTask") {
+          return
+        }
+      }
+      close()
+    },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  })
+
+  const opacity = isDragging ? 0.6 : 1
+
+
   return (
     <>
       {isRender && (
         <div
+          ref={drag}
+          style={{ opacity }}
           className={classes}
           // onClick={close}
           onTransitionEnd={toggleWorkHandler}
@@ -45,11 +69,11 @@ function SelectedTaskCard({ task, idx }) {
             deleteSelectedTaskList={close}
           />
           {/* <div>{task.title}</div> */}
-          <div className={`${styles[`selected-card-body-container`]}`}>
+          {/* <div className={`${styles[`selected-card-body-container`]}`}>
 
-            {/* <div>{task.description}</div> */}
+            <div>{task.description}</div>
 
-          </div>
+          </div> */}
           <div>{task.businessHours}</div>
           {/* <div>{task.categoryId}</div> */}
           {/* <CardFooter /> */}

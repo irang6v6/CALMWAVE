@@ -52,7 +52,7 @@ function TaskForm() {
           title: titleInput,
           description: descriptionInput,
           dateAimed: dateInput ? dateInput + `T18:00:00` : "", //'T'18:00:00.000'Z'
-          timeAimed: parseInt(storyPointInput) * 3600,
+          timeAimed: storyPointInput,
           workCateId: categoryInput || selectedCategoryId,
         },
       })

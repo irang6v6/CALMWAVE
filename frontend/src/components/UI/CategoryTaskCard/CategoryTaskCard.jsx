@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useClasses } from "../../../hooks/custom/useClasses"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
@@ -5,7 +6,7 @@ import CardBody from "../CardBody/CardBody"
 // import CardFooter from "../CardFooter/CardFooter"
 import CardHeader from "../CardHeader/CardHeader"
 import styles from "./CategoryTaskCard.module.css"
-import { useEffect } from "react"
+import { useDrag } from "react-dnd"
 
 /* eslint-disable */
 function CategoryTaskCard({ task, idx }) {
@@ -40,8 +41,33 @@ function CategoryTaskCard({ task, idx }) {
     )
   }
 
+  const [{ isDragging }, drag] = useDrag({
+    type: "Task",
+    item: { idx, task }, // time
+    end: (item, monitor) => {
+      const dropResult = monitor.getDropResult()
+      // console.log(dropResult)
+      if (selected) {
+        return
+      }
+      if (dropResult) {
+        if (dropResult.title === "selectedTask") {
+          toggleWorkHandler()
+        }
+      }
+    },
+    collect: (monitor) => ({
+      isDragging: monitor.isDragging(),
+    }),
+  })
+
+  const opacity = isDragging ? 0.6 : 1
+
   return (
     <div
+      onClick={toggleWorkHandler}
+      ref={drag}
+      style={{ opacity }}
       className={`${classes}
       ${
         selected
@@ -57,7 +83,7 @@ function CategoryTaskCard({ task, idx }) {
       <div className={`${styles["done-tag"]}`}>
         {task.column === "Done" ? "완료됨" : ""}
       </div>
-      <CardBody data={task} onClick={toggleWorkHandler} />
+      <CardBody data={task} />
       {/* <CardFooter /> */}
     </div>
   )

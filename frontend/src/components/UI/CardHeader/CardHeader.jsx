@@ -15,7 +15,8 @@ function CardHeader({ data, cardType, deleteSelectedTaskList }) {
   const dispatch = useDispatch()
   // const { isModal, isTask, isDelete, isLoading, isError, formData } =
   //   useSelector((state) => state.modal)
-  const openModal = function () {
+  const openModal = function (e) {
+    e.stopPropagation()
     dispatch(modalActions.setFormData({ data }))
     if (cardType) {
       dispatch(modalActions.setIsTask())
@@ -27,7 +28,8 @@ function CardHeader({ data, cardType, deleteSelectedTaskList }) {
       dispatch(openCategoryModal())
     }
   }
-  const openDeleteModal = function () {
+  const openDeleteModal = function (e) {
+    e.stopPropagation()
     if (deleteSelectedTaskList) {
       deleteSelectedTaskList()
       return

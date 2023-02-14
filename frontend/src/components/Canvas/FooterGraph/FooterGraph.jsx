@@ -19,7 +19,7 @@ function FooterGraph({
     canvasWidth,
     canvasHeight,
     maxPoint || 100,
-    nowPoint || 70
+    nowPoint || 0
   )
   const animate = function (ctx) {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight)
