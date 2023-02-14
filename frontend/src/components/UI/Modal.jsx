@@ -2,9 +2,9 @@ import { useEffect } from "react"
 import { useState } from "react"
 import ReactDOM from "react-dom"
 import styles from "./Modal.module.css"
-import { AiOutlineClose } from "react-icons/ai"
+// import { AiOutlineClose } from "react-icons/ai"
 import { useDispatch, useSelector } from "react-redux"
-import { closeModal } from "../../store/door-store/modal-slice"
+// import { closeModal } from "../../store/door-store/modal-slice"
 import { SpinnerDots } from "./Spinner"
 import DeleteModalForm from "./DeleteModalForm/DeleteModalForm"
 import CategoryForm from "./CategoryForm/CategoryForm"
@@ -38,18 +38,18 @@ function Modal() {
     },
     [isModal]
   )
-  const onCloseModal = function () {
-    dispatch(closeModal())
-  }
+  // const onCloseModal = function () {
+  //   dispatch(closeModal())
+  // }
 
   return (
     <>
       {ReactDOM.createPortal(
         <div className={classes}>
-          <AiOutlineClose
+          {/* <AiOutlineClose
             className={`${styles[`modal-close-button`]}`}
             onClick={onCloseModal}
-          />
+          /> */}
           <div className={contentClasses}>
             {isLoading ? (
               <SpinnerDots />

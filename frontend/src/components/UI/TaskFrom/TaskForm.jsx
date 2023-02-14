@@ -14,6 +14,7 @@ import {
 import { todoActions } from "../../../store/todos-slice"
 import { calendarActions } from "../../../store/calendar-slice"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
+import { AiOutlineClose } from "react-icons/ai"
 
 function TaskForm() {
   const dispatch = useDispatch()
@@ -167,8 +168,16 @@ function TaskForm() {
     ]
   )
 
+  const onCloseModal = function () {
+    dispatch(closeModal())
+  }
+
   return (
     <div className={`${styles[`task-form-container`]}`}>
+      <AiOutlineClose
+            className={`${styles[`modal-close-button`]}`}
+            onClick={onCloseModal}
+          />
       <div className={`${styles[`header-text`]}`}>{FormTitle}</div>
       <form
         className={`${styles[`task-form-input-container`]}`}

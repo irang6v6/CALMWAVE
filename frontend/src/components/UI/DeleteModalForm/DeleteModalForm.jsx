@@ -11,6 +11,7 @@ import { AxiosGetTodos } from "../../../store/task-slice"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
 import { todoActions } from "../../../store/todos-slice"
 import { calendarActions } from "../../../store/calendar-slice"
+import { AiOutlineClose } from "react-icons/ai"
 
 function DeleteModalForm({ cardType, cardId }) {
   const dispatch = useDispatch()
@@ -71,9 +72,19 @@ function DeleteModalForm({ cardType, cardId }) {
     }
   }
 
+  const onCloseModal = function () {
+    dispatch(closeModal())
+  }
+
+
   return (
     <>
       <div className={`${styles[`delete-modal-container`]}`}>
+      <AiOutlineClose
+            className={`${styles[`modal-close-button`]}`}
+            onClick={onCloseModal}
+          />
+
         <div className={`${styles[`recheck`]}`}>
           삭제하시겠습니까?
         </div>
