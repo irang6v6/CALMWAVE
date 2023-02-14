@@ -48,7 +48,7 @@ function TaskManagePage(props) {
               그러다 거북이가 친구하자 하겠어요
             </div>
             <div className={`${styles["alert-box"]}`}>
-              허리피자! 허리 수술 6000만원
+              허리피자! 허리 수술 6,000만원
             </div>
             <div className={`${styles["alert-box"]}`}>
               띵동! 스트레칭 할 시간이예요 ~

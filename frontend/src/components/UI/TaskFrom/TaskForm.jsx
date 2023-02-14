@@ -44,6 +44,11 @@ function TaskForm() {
   const submitHandler = function (event) {
     event.preventDefault()
     dispatch(modalActions.toggleIsLoading())
+    if (!titleInput) {
+      window.alert("제목을 입력해주세요")
+      dispatch(closeModal())
+      return
+    }
     if (isCreate) {
       axios({
         method: "post",

@@ -19,6 +19,7 @@ import CateIconArray from "../../CateIcon/CateIconArray"
 function CategoryForm() {
   const dispatch = useDispatch()
   const { formData, isLoading, isCreate } = useSelector((state) => state.modal)
+  const categoryList = useSelector((state) => state.category.categoryList)
   const [titleRef] = [useRef(null)]
   const [colorRef] = [useRef(null)]
   const [titleInput, titleChangeHandler, titleSetTrigger] = useInput(titleRef)
@@ -30,6 +31,16 @@ function CategoryForm() {
   const submitHandler = function (event) {
     event.preventDefault()
     if (isLoading) {
+      return
+    }
+    if (!titleInput) {
+      window.alert("제목을 입력해주세요")
+      dispatch(closeModal())
+      return
+    }
+    if (categoryList.every(item => item.title === titleInput && (!formData || item.id !== formData.id))) {
+      window.alert("동일한 제목을 사용할 수 없습니다")
+      dispatch(closeModal())
       return
     }
     if (isCreate && titleInput) {
@@ -59,7 +70,8 @@ function CategoryForm() {
           // dispatch(modalActions.toggleIsLoading())
         })
         .catch((err) => {
-          console.log(err, "<<<<<<<<<<<<")
+          window.alert("동일한 제목을 사용할 수 없습니다")
+          dispatch(closeModal())
           dispatch(modalActions.setNotLoading())
         })
     } else if (titleInput) {
