@@ -59,8 +59,8 @@
   justify-content: center;
   width: 90%;
   height: 100vh;
-  /* border: 3px solid #ffffff;
-  background-color: rgba(166, 250, 255, 0.25); */
+  /* border: 1px solid #ffffff; */
+  /* background-color: rgba(166, 250, 255, 0.25); */
   border-radius: 20px;
   margin: 0 auto;
   overflow-y: scroll
@@ -70,7 +70,14 @@
   display: none;
 }
 
-.userInfoEdit {
+.my-calendar{
+  /* border: 1px solid #ffffff; */
+  display: flex;
+  /* justify-content: center; */
+  align-items:flex-start;
+}
+
+/* .userInfoEdit {
   color: white;
   text-decoration: none;
-}
+} */
