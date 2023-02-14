@@ -14,6 +14,14 @@
   align-items: center;
   box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.5);
   color: white;
+  position:relative;
+}
+
+.modal-close-button{
+  position: absolute;
+  top: 5%;
+  right: 5%;
+  font-size: 1.5rem;;
 }
 
 .recheck{

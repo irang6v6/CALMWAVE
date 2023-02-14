@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import OpenViduVideoComponent from "./OvVideo"
 
+/* eslint-disable */
 export default class UserVideoComponent extends Component {
   // getNicknameTag() {
   //     // Gets the nickName of the user

@@ -17,7 +17,7 @@
 
 .go-up {
   position: fixed;
-  z-index: 22;
+  z-index: 85;
   top: 90vh;
   left: 90vw;
   border-radius: 10px;
