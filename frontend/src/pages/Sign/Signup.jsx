@@ -56,6 +56,20 @@ function Signup(props) {
   )
   const [buttonClasses, setButtonClasses] = useState(`${styles["form-button"]}`)
 
+  const [nicknameValidMessage, setNicknameValidMessage] = useState("")
+  const [nicknameValidMessageClasses, setNicknameValidMessageClasses] =
+    useState(styles[`valid-message`])
+  const [emailValidMessage, setEmailValidMessage] = useState("")
+  const [emailValidMessageClasses, setEmailValidMessageClasses] = useState(
+    styles[`valid-message`]
+  )
+  const [password1ValidMessage, setPassword1ValidMessage] = useState("")
+  const [password1ValidMessageClasses, setPassword1ValidMessageClasses] =
+    useState(styles[`valid-message`])
+  const [password2ValidMessage, setPassword2ValidMessage] = useState("")
+  const [password2ValidMessageClasses, setPassword2ValidMessageClasses] =
+    useState(styles[`valid-message`])
+
   useEffect(
     function () {
       const { status: validStatus, message: validMessage } =
@@ -63,12 +77,19 @@ function Signup(props) {
       setNickIsValid(() => validStatus)
       if (validStatus) {
         setNicknameClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
+        setNicknameValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`valid`]}`
+        )
       } else if (!onNicknameTouched) {
         setNicknameClasses(() => `${styles["form-input"]}`)
+        setNicknameValidMessageClasses(() => `${styles[`valid-message`]}`)
       } else if (onNicknameTouched) {
         setNicknameClasses(() => `${styles["form-input"]} ${styles["invalid"]}`)
+        setNicknameValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`invalid`]}`
+        )
       }
-      console.log(validMessage)
+      setNicknameValidMessage(() => validMessage)
     },
     [onNicknameTouched, userNickname]
   )
@@ -79,12 +100,19 @@ function Signup(props) {
       setEmailIsValid(() => validStatus)
       if (validStatus) {
         setEmailClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
+        setEmailValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`valid`]}`
+        )
       } else if (!onEmailTouched) {
         setEmailClasses(() => `${styles["form-input"]}`)
+        setEmailValidMessageClasses(() => `${styles[`valid-message`]}`)
       } else if (onEmailTouched) {
         setEmailClasses(() => `${styles["form-input"]} ${styles["invalid"]}`)
+        setEmailValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`invalid`]}`
+        )
       }
-      console.log(validMessage)
+      setEmailValidMessage(() => validMessage)
     },
     [onEmailTouched, useremail]
   )
@@ -95,12 +123,19 @@ function Signup(props) {
       setPasswordIsValid(() => validStatus)
       if (validStatus) {
         setPasswordClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
+        setPassword1ValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`valid`]}`
+        )
       } else if (!onPasswordTouched) {
         setPasswordClasses(() => `${styles["form-input"]}`)
+        setPassword1ValidMessageClasses(() => `${styles[`valid-message`]}`)
       } else if (onPasswordTouched) {
         setPasswordClasses(() => `${styles["form-input"]} ${styles["invalid"]}`)
+        setPassword1ValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`invalid`]}`
+        )
       }
-      console.log(validMessage)
+      setPassword1ValidMessage(() => validMessage)
     },
     [onPasswordTouched, userpassword]
   )
@@ -109,34 +144,55 @@ function Signup(props) {
     function () {
       if (userpassword2.trim().length === 0 && !onPassword2Touched) {
         setPassword2Classes(() => `${styles["form-input"]}`)
+        setPassword2ValidMessageClasses(() => styles[`valid-message`])
+        const validMessage = "2차 비밀번호는 필수 입력 값입니다."
+        setPassword2ValidMessage(() => validMessage)
         return
       }
       if (userpassword2.trim().length === 0 && onPassword2Touched) {
         setPassword2Classes(
           () => `${styles["form-input"]} ${styles["invalid"]}`
         )
+        setPassword2ValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`invalid`]}`
+        )
         const validMessage = "2차 비밀번호는 필수 입력 값입니다."
-        console.log(validMessage)
+        setPassword2ValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`invalid`]}`
+        )
+        setPassword2ValidMessage(() => validMessage)
         return
       }
       if (!passwordIsValid) {
         setPassword2Classes(
           () => `${styles["form-input"]} ${styles["invalid"]}`
         )
+        setPassword2ValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`invalid`]}`
+        )
+        setPassword2ValidMessage(() => "1차 비밀번호가 유효하지 않습니다.")
         return
       }
       setPassword2IsValid(() => userpassword === userpassword2)
       if (password2IsValid) {
         setPassword2Classes(() => `${styles["form-input"]} ${styles["valid"]}`)
+        setPassword2ValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`valid`]}`
+        )
+        setPassword2ValidMessage(() => "2차 비밀번호가 유효합니다.")
         return
       } else if (!onPassword2Touched) {
         setPassword2Classes(() => `${styles["form-input"]}`)
+        setPassword2ValidMessageClasses(() => `${styles[`valid-message`]}`)
       } else if (onPassword2Touched) {
         setPassword2Classes(
           () => `${styles["form-input"]} ${styles["invalid"]}`
         )
+        setPassword2ValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`invalid`]}`
+        )
         const validMessage = "2차 비밀번호가 일치하지 않습니다."
-        console.log(validMessage)
+        setPassword2ValidMessage(() => validMessage)
       }
     },
     [
@@ -332,6 +388,10 @@ function Signup(props) {
             placeholder="2~8자로 적어주세요."
           />
           <br />
+          <span className={nicknameValidMessageClasses}>
+            {nicknameValidMessage}
+          </span>
+          <br />
           <div className={`${styles["label-container"]}`}>
             <br />
             <label htmlFor="signup-email" className={`${styles["form-label"]}`}>
@@ -361,6 +421,8 @@ function Signup(props) {
             readOnly={emailDupValid}
           />
           <br />
+          <span className={emailValidMessageClasses}>{emailValidMessage}</span>
+          <br />
           <label htmlFor="signup-pw" className={`${styles["form-label"]}`}>
             비밀번호
           </label>
@@ -376,6 +438,10 @@ function Signup(props) {
             placeholder="영어, 특수문자, 숫자가 반드시 포함된 8~16자야 합니다."
           />
           <br />
+          <span className={password1ValidMessageClasses}>
+            {password1ValidMessage}
+          </span>
+          <br />
           <label htmlFor="signup-pw2" className={`${styles["form-label"]}`}>
             비밀번호 확인
           </label>
@@ -390,6 +456,11 @@ function Signup(props) {
             maxLength="16"
             placeholder="비밀번호와 일치해야 합니다."
           />
+          <br />
+          <span className={password2ValidMessageClasses}>
+            {password2ValidMessage}
+          </span>
+          <br />
           <br />
         </div>
         <div className={`${styles["button-container"]}`}>

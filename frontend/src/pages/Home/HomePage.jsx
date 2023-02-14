@@ -5,8 +5,8 @@ import InfoPage from "./InfoPage/InfoPage"
 import IntroPage from "./IntroPage/IntroPage"
 import TaskManagePage from "./TaskManagePage/TaskManagePage"
 import Posture from "./Posture"
-import Stretching from "./Streching"
-import Stress from "./Stress"
+import ResultPage from "./ResultPage"
+// import Stress from "./Stress"
 // import LastPage from "./LastPage"
 // import Wave from "../../components/Canvas/Wave/Wave"
 import { useRef, useState, useEffect } from "react" //
@@ -17,9 +17,11 @@ import { useDispatch } from "react-redux"
 import { AxiosGetCategory } from "../../store/category-slice"
 import NavIcon from "../../components/NavIcon/NavIcon"
 import { AxiosGetTodos } from "../../store/task-slice"
+import { AxiosGetUser } from "../../store/user-slice"
 import axios from "axios"
 // import { VscArrowUp } from "react-icons/vsc"
 
+/* eslint-disable */
 function HomePage() {
   const dispatch = useDispatch()
   const [isInitial, setIsInitial] = useState(true)
@@ -48,9 +50,9 @@ function HomePage() {
   )
   const scrollTaskManageHandler = useCallback(
     function () {
-      if (window.scrollY >= canvasHeight * 1.4) {
+      if (window.scrollY >= window.innerHeight * 1.4) {
         setIntroScroll(() => true)
-      } else if (window.scrollY <= canvasHeight * 1.1) {
+      } else if (window.scrollY <= window.innerHeight * 1.1) {
         setIntroScroll(() => false)
       }
     },
@@ -97,6 +99,7 @@ function HomePage() {
       }
       dispatch(AxiosGetCategory())
       dispatch(AxiosGetTodos())
+      dispatch(AxiosGetUser())
     },
     [dispatch, isInitial]
   )
@@ -182,19 +185,9 @@ function HomePage() {
         />
         <TaskManagePage refVal={todoRef} goNext={goPosture} />
         <Posture refVal={postureRef} goNext={goStreching} />
-        <Stretching refVal={stretchRef} goNext={goStress} />
+        <ResultPage refVal={stretchRef} />
 
-        <div className={`${styles["wave-container"]}`}>
-          <NightSky
-            canvasWidth={canvasWidth}
-            canvasHeight={canvasHeight}
-            background={`rgb(31, 31, 34)`}
-          />
-        </div>
-        <Stress refVal={stressRef} goNext={goLast} />
-        {/* <LastPage refVal={LastRef} /> */}
         <div className={`${styles["go-up"]}`} onClick={goUp}>
-          {/* <VscArrowUp className={`${styles[`go-up-icon`]}`}/> */}
           TOP
         </div>
         {/* <div className={`${styles["intro-page"]}`}>

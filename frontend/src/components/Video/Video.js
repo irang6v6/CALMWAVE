@@ -20,7 +20,7 @@ const metadataURL =
   "https://teachablemachine.withgoogle.com/models/5kCzQ3Epp/metadata.json"
 
 let frameIDs = []
-let intervalIDs = []
+// let intervalIDs = []
 
 export default function Video(props) {
   const user = useSelector((state) => state.user.userData)
@@ -63,12 +63,12 @@ export default function Video(props) {
 
   useEffect(
     function () {
-      if (props.videoRef.current) {
+      if (props.videoRef.current && session) {
         settingModel()
         sizeSet()
       }
     },
-    [props.videoRef.current]
+    [props.videoRef.current, session]
   )
 
   const settingModel = async function () {
@@ -121,8 +121,7 @@ export default function Video(props) {
           }
         })
         setNowPosture((oldPosture) => rtPosture.className)
-        console.log(`isBad : ${nowPosture}, badCnt : ${badCnt}`)
-        // console.log(webcam)
+        console.log(`자세 : ${nowPosture}, 몇프레임째(600당 10초) : ${badCnt}`)
       }
     }
   }
@@ -143,19 +142,44 @@ export default function Video(props) {
         }
       }
     },
-    [props.videoRef, loop]
+    [props.videoRef.current, loop]
   )
 
   useEffect(
     function () {
-      if (nowPosture !== "normal" && nowPosture !== "left" && badCnt > 600) {
+      if (nowPosture !== "normal" && nowPosture !== "left" && badCnt > 6000) {
         setBadCnt(() => 0)
-        console.log("아따 자세 안좋당께")
+        console.log("아따 자세 안좋당께 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+        // 액시오스 요청
+        const requestPosture = nowPosture
+        axios({
+          method: "post",
+          url: "/v1/posture/save",
+          data: {
+            className: requestPosture,
+          },
+        }).then(() => {
+          console.log("안좋은 자세 ㅎㅇ")
+        })
       } else if (nowPosture === "left" && badCnt > 54000) {
         console.log("워메 자리를 얼마나 비우능교")
+        // 액시오스 요청
+        axios({
+          method: "post",
+          url: "/v1/posture/save",
+          data: {
+            className: "left",
+          },
+        }).then(() => {
+          console.log("자리비움 호잇호잇")
+        })
+      }
+      return function () {
+        const source = axios.CancelToken.source()
+        source.cancel("cancelling in cleanup")
       }
     },
-    [badCnt]
+    [badCnt, nowPosture]
   )
 
   // 토큰 반환 (추가 예정)

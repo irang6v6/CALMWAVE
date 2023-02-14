@@ -187,12 +187,12 @@ function TaskForm() {
         <label htmlFor="task-description" className={`${styles[`body-text`]}`}>
           Description
         </label>
-        <input
+        <textarea
           ref={descriptionRef}
-          type="text"
           id="task-description"
+          rows={5}
           onChange={descriptionChangeHandler}
-          className={`${styles[`input-form`]}`}
+          className={`${styles[`input-form2`]}`}
         />
         <label htmlFor="task-date" className={`${styles[`body-text`]}`}>
           D-Day

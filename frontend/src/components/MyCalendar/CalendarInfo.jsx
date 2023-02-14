@@ -105,13 +105,13 @@ export default function CalendarInfo({ todo, date }) {
         )}
       </div>
 
-      <div className={`${styles[`card-header-icon-container`]}`}>
+      <div className="card-header-icon-container">
         <AiFillEdit
-          className={`${styles[`card-header-icon`]}`}
+          className="card-header-icon"
           onClick={openModal}
         />
         <AiFillCloseCircle
-          className={`${styles[`card-header-icon`]}`}
+          className="card-header-icon"
           onClick={openDeleteModal}
         />
       </div>
