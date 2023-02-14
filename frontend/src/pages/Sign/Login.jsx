@@ -2,8 +2,7 @@ import { useEffect, useState, useRef } from "react"
 import { emailValidation, passwordValidation } from "../../utils/validation"
 import styles from "./Login.module.css"
 import googleLogo from "../../assets/google_social.png"
-import kakaoLogo from "../../assets/kakao_social.png"
-import naverLogo from "../../assets/naver_social.png"
+
 /* eslint-disable */
 import {
   SpinnerStir,
@@ -28,11 +27,21 @@ function Login(props) {
   )
   const [emailRef, passwordRef] = [useRef(), useRef()]
 
+  const [emailValidMessage, setEmailValidMessage] = useState("")
+  const [passwordValidMessage, setPasswordValidMessage] = useState("")
+  const [loginFailedMessage, setLoginFailedMessage] = useState("")
+  const [emailValidMessageClasses, setEmailValidMessageClasses] = useState(
+    `${styles[`valid-message`]}`
+  )
+  const [passwordValidMessageClasses, setPasswordValidMessageClasses] =
+    useState(styles[`valid-message`])
+
   useEffect(
     function () {
       const { status: validStatus, message: validMessage } =
         emailValidation(userEmail)
       setEmailIsValid(() => validStatus)
+      setEmailValidMessage(() => validMessage)
       if (validStatus) {
         setEmailClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
       } else if (!onEmailTouched) {
@@ -48,6 +57,7 @@ function Login(props) {
       const { status: validStatus, message: validMessage } =
         passwordValidation(userPassword)
       setPasswordIsValid(() => validStatus)
+      setPasswordValidMessage(() => validMessage)
       if (validStatus) {
         setPasswordClasses(() => `${styles["form-input"]} ${styles["valid"]}`)
       } else if (!onPasswordTouched) {
@@ -68,6 +78,34 @@ function Login(props) {
       }
     },
     [emailIsValid, passwordIsValid]
+  )
+
+  useEffect(
+    function () {
+      if (!onEmailTouched) {
+        setEmailValidMessageClasses(() => styles[`valid-message`])
+      } else if (emailIsValid && onEmailTouched) {
+        setEmailValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`valid`]}`
+        )
+      } else {
+        setEmailValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`invalid`]}`
+        )
+      }
+      if (!onPasswordTouched) {
+        setPasswordValidMessageClasses(() => styles[`valid-message`])
+      } else if (passwordIsValid && onPasswordTouched) {
+        setPasswordValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`valid`]}`
+        )
+      } else {
+        setPasswordValidMessageClasses(
+          () => `${styles[`valid-message`]} ${styles[`invalid`]}`
+        )
+      }
+    },
+    [onEmailTouched, onPasswordTouched, emailIsValid, passwordIsValid]
   )
 
   const resetState = function () {
@@ -148,6 +186,9 @@ function Login(props) {
             maxLength="255"
           />
           <br />
+          <span className={emailValidMessageClasses}>{emailValidMessage}</span>
+          <br />
+          <br />
           <label htmlFor="pw" className={`${styles["form-label"]}`}>
             비밀번호
           </label>
@@ -163,31 +204,24 @@ function Login(props) {
             maxLength="16"
           />
           <br />
+          <span className={passwordValidMessageClasses}>
+            {passwordValidMessage}
+          </span>
+          <br />
+          <br />
         </div>
         <div className={`${styles["button-container"]}`}>
-          {props.isLoading ? (
-            <SpinnerDots />
-          ) : (
-            <button className={buttonClasses}>로그인</button>
-          )}
+          <button className={buttonClasses}>
+            {props.isLoading ? <SpinnerDots /> : "로그인"}
+          </button>
         </div>
-        <div className={`${styles["social-container"]}`}>
+        <div className={`${styles["social-container"]}`} onClick={googleLogin}>
           <img
             alt="구글"
             src={googleLogo}
             className={`${styles["social-image"]}`}
-            onClick={googleLogin}
           />
-          <img
-            alt="카카오"
-            src={kakaoLogo}
-            className={`${styles["social-image"]}`}
-          />
-          <img
-            alt="네이버"
-            src={naverLogo}
-            className={`${styles["social-image"]}`}
-          />
+          <div className={`${styles[`social-login-txt`]}`}>구글 로그인</div>
         </div>
       </form>
     </div>

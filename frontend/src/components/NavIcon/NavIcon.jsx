@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom"
+import { NavLink, useNavigate } from "react-router-dom"
 import styles from "./NavIcon.module.css"
 import {
   IoLogOut,
@@ -17,6 +17,7 @@ import { SpinnerDots } from "../UI/Spinner"
 import logoimg from "../../assets/reallogo.png"
 
 function NavIcon() {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
   const id = useSelector((state) => state.user.userData.id)
   const [isLogin, setIsLogin] = useState(
@@ -50,6 +51,7 @@ function NavIcon() {
       function () {
         dispatch(LOGOUTandRESETLOCALSTORAGE())
         setIsLogin(() => false)
+        navigate("/")
       }
     )
   }
@@ -68,7 +70,7 @@ function NavIcon() {
         ) : isLogin ? (
           <>
             <NavLink
-              to={`/door`}
+              to={`/room`}
               className={
                 openMenu
                   ? `${styles[`nav-icon-play`]} ${styles[`play-open`]}`
