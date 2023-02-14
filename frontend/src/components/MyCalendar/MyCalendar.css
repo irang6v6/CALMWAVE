@@ -240,9 +240,9 @@
 
   .react-calendar__tile--active {
     background: #b1d9ff;
-    color: white;
+    color: rgb(0, 0, 0);
     border: 1px;
-    font-weight: bolder;
+    font-weight: 800;
     border-radius: 9999px;
     background-color: #6f48eb33;
   }
@@ -327,4 +327,11 @@
 
   .nowork-text{
     color: white;
+  }
+
+  .card-header-icon{
+    /* border: 1px solid #000; */
+    /* padding: 1%; */
+    font-size: 1.3rem;
+    margin-left: 10px;
   }

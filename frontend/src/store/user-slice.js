@@ -8,8 +8,8 @@ const initialState = {
   isLogin: localStorage.getItem("isLogin") || false,
   userData: {
     id: 0, // String일 수도 있음.
-    nickname: "스트링 형태",
-    username: "이메일 형태",
+    nickname: "",
+    username: "",
     stretchingIntervalMin: 50, // 스트레칭 시간 Number
     dateRegistered: "Date 형태인듯", // 데이트 형태
   },

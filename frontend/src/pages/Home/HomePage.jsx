@@ -17,6 +17,7 @@ import { useDispatch } from "react-redux"
 import { AxiosGetCategory } from "../../store/category-slice"
 import NavIcon from "../../components/NavIcon/NavIcon"
 import { AxiosGetTodos } from "../../store/task-slice"
+import { AxiosGetUser } from "../../store/user-slice"
 import axios from "axios"
 // import { VscArrowUp } from "react-icons/vsc"
 
@@ -97,6 +98,7 @@ function HomePage() {
       }
       dispatch(AxiosGetCategory())
       dispatch(AxiosGetTodos())
+      dispatch(AxiosGetUser())
     },
     [dispatch, isInitial]
   )
