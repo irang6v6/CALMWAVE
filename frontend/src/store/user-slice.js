@@ -36,6 +36,7 @@ const UserSlice = createSlice({
     },
     resetUserData(state, action) {
       state.userData = {}
+      state.isLogin = false
     },
     // updateStretchingIntervalTime(state, action) {
     //   state.stretchingIntervalTime = action.payload.stretchingIntervalTime
@@ -91,6 +92,9 @@ export const AxiosLogout = function () {
     })
       .then((res) => {
         dispatch(LOGOUTandRESETLOCALSTORAGE())
+      })
+      .then(() => {
+        dispatch(userActions.resetUserData())
       })
       .catch((err) => {
         console.log(err)

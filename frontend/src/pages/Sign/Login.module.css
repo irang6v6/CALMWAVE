@@ -83,16 +83,20 @@
   border-radius: 6px;
   border: none;
   border-color: rgba(255, 255, 255, 0);
-  background-color: rgba(222, 222, 222, 0.95);
+  /* background-color: rgba(222, 222, 222, 0.95); */
+  background-color: rgba(253, 201, 33, 0.95);
   transition: 0.5s;
   width: 15vw;
   margin: 8px 0 8px 0;
   padding: 10px 35px 10px 35px;
-  pointer-events: none;
+  cursor: pointer;
   height: 5.3vh;
 }
 
 .form-button:hover {
+  transform: scale(105%);
+}
+.button-invalid:hover {
   transform: scale(105%);
 }
 .input-container {

@@ -26,7 +26,7 @@ function CategoryForm() {
   const [titleInput, titleChangeHandler, titleSetTrigger] = useInput(titleRef)
   /* eslint-disable */
   const [colorInput, colorChangeHandler, colorSetTrigger] = useInput(colorRef)
-  const [icon, setIcon] = useState(0)
+  const [selectedIcon, setselectedIcon] = useState(0)
   const FormTitle = isCreate ? `카테고리 생성` : `카테고리 수정`
 
   const submitHandler = function (event) {
@@ -51,7 +51,7 @@ function CategoryForm() {
         data: {
           cateName: `${titleInput}`,
           cateColor: `${colorInput}`,
-          cateIcon: `${icon}`,
+          cateIcon: `${selectedIcon}`,
           // cateOrder: 0,
         },
       })
@@ -81,7 +81,7 @@ function CategoryForm() {
         url: `/v1/category/update`,
         data: {
           cateColor: `${colorInput}`,
-          cateIcon: `${icon}`,
+          cateIcon: `${selectedIcon}`,
           cateName: `${titleInput}`,
           cateId: formData?.id,
           // cateOrder: 0,
@@ -104,7 +104,7 @@ function CategoryForm() {
                 ...formData,
                 cateColor: colorInput,
                 title: titleInput,
-                cateIcon: icon,
+                cateIcon: selectedIcon,
               },
             })
           )
@@ -124,7 +124,7 @@ function CategoryForm() {
     function () {
       titleSetTrigger(formData?.title || "")
       colorSetTrigger(formData?.cateColor || 0)
-      setIcon(formData?.category?.cateIcon || formData?.cateIcon || 0)
+      setselectedIcon(formData?.category?.cateIcon || formData?.cateIcon || 0)
     },
     [formData, titleSetTrigger]
   )
@@ -178,8 +178,8 @@ function CategoryForm() {
           {CateIconArray.map((icon) => (
             <button
               key={icon.value}
-              onClick={() => setIcon(icon.value)}
-              className={`${styles[`icon-button`]}`}
+              onClick={(e) => { e.preventDefault(); setselectedIcon(icon.value);}}
+              className={`${styles[`icon-button`]} ${icon.value === selectedIcon ? styles.active : ""}`}
             >
               <CateIcon value={icon.value} />
             </button>

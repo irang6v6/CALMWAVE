@@ -10,6 +10,8 @@ import DeleteModalForm from "./DeleteModalForm/DeleteModalForm"
 import CategoryForm from "./CategoryForm/CategoryForm"
 import TaskForm from "./TaskFrom/TaskForm"
 
+/* eslint-disable */
+
 function Modal() {
   const dispatch = useDispatch()
   const { isModal, isTask, isDelete, isLoading, isError, formData, isCreate } =
