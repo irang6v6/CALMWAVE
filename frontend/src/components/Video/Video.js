@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useSelector } from "react-redux"
 import { OpenVidu } from "openvidu-browser"
 import axios from "axios"
@@ -9,7 +9,10 @@ import {
   AiFillEyeInvisible,
   AiFillVideoCamera,
 } from "react-icons/ai"
+import { GiTurtle } from "react-icons/gi"
 import new_logo from "../../assets/new_logo.png"
+// import buttonAlarm from "../../assets/alarm/buttonalarm.mp3"
+import pinThree from "../../assets/alarm/pin3.mp3"
 
 const OPENVIDU_SERVER_URL = "https://i8a105.p.ssafy.io:8443/"
 const OPENVIDU_SERVER_SECRET = "WAVES"
@@ -20,7 +23,7 @@ const metadataURL =
   "https://teachablemachine.withgoogle.com/models/5kCzQ3Epp/metadata.json"
 
 let frameIDs = []
-let intervalIDs = []
+// let intervalIDs = []
 
 export default function Video(props) {
   const user = useSelector((state) => state.user.userData)
@@ -41,6 +44,7 @@ export default function Video(props) {
   //   left: 0,
   // })
   const [nowPosture, setNowPosture] = useState("normal")
+  const audioRef = useRef(null)
   const [badCnt, setBadCnt] = useState(0)
 
   // 최초 진입 시 세션 접속
@@ -63,13 +67,32 @@ export default function Video(props) {
 
   useEffect(
     function () {
-      if (props.videoRef.current) {
+      if (props.videoRef.current && session) {
         settingModel()
         sizeSet()
       }
     },
-    [props.videoRef.current]
+    [props.videoRef.current, session]
   )
+
+  const prevNowPosture = useRef("normal")
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (
+        nowPosture !== "normal" &&
+        nowPosture !== prevNowPosture.current
+      ) {
+        console.log("ALARM")
+        prevNowPosture.current = nowPosture
+        audioRef.current.src = pinThree
+        audioRef.current.play()
+      }
+    }, 5000)
+    return function () {
+      clearInterval(interval)
+    }
+  }, [nowPosture])
 
   const settingModel = async function () {
     const a = await tmPose.load(modelURL, metadataURL)
@@ -88,15 +111,30 @@ export default function Video(props) {
     setWebcam(() => wc)
   }
 
-  const loop = async function (timestamp) {
-    if (props.videoRef.current && webcam) {
+  // const loop = async function (timestamp) {
+  //   if (props.videoRef.current && webcam) {
+  //     sizeSet()
+  //     // await webcam.update()
+  //     predict()
+  //     // await webcam.setup()
+  //     // await webcam.play()
+  //   }
+  // }
+
+  useEffect(() => {
+    settingModel()
+    sizeSet()
+  }, [])
+
+  useEffect(() => {
+    function handleResize() {
       sizeSet()
-      // await webcam.update()
-      predict()
-      // await webcam.setup()
-      // await webcam.play()
     }
-  }
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   const predict = async function () {
     if (!model) {
@@ -109,7 +147,7 @@ export default function Video(props) {
     // console.log(prediction)
     for (let i = 0; i < 4; i++) {
       const rtPosture = prediction[i]
-      if (rtPosture.probability.toFixed(2) > 0.999999) {
+      if (rtPosture.probability.toFixed(2) > 0.9999) {
         // nowPosture, setNowPosture, posture, setPosture, badCnt, setBadCnt
         // if nowposture가 rtPosture.class와 같다면
         // posture를 덮어서 갱신.
@@ -121,41 +159,69 @@ export default function Video(props) {
           }
         })
         setNowPosture((oldPosture) => rtPosture.className)
-        console.log(`isBad : ${nowPosture}, badCnt : ${badCnt}`)
-        // console.log(webcam)
+        console.log(`자세 : ${nowPosture}, 몇프레임째(600당 10초) : ${badCnt}`)
       }
     }
   }
-  // 데이터 0.2초에 한 번 확인 할 예정.
+
   useEffect(
     function () {
-      setTimeout(function () {
-        if (props.videoRef.current) {
+      function loop(timestamp) {
+        if (props.videoRef.current && webcam) {
+          sizeSet()
+          predict()
+        }
+        if (frameIDs.length > 0) {
           const aniId = window.requestAnimationFrame(loop)
           frameIDs.push(aniId)
         }
-      }, 100)
+      }
       return function () {
         let frameID
-        if (frameIDs) {
+        if (frameIDs.length > 0) {
           frameID = frameIDs.shift()
           window.cancelAnimationFrame(frameID)
         }
       }
     },
-    [props.videoRef, loop]
+    [props.videoRef.current, webcam, predict]
   )
 
   useEffect(
     function () {
-      if (nowPosture !== "normal" && nowPosture !== "left" && badCnt > 600) {
+      if (nowPosture !== "normal" && nowPosture !== "left" && badCnt > 6000) {
         setBadCnt(() => 0)
-        console.log("아따 자세 안좋당께")
+        console.log("아따 자세 안좋당께 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
+        // 액시오스 요청
+        const requestPosture = nowPosture
+        axios({
+          method: "post",
+          url: "/v1/posture/save",
+          data: {
+            className: requestPosture,
+          },
+        }).then(() => {
+          console.log("안좋은 자세 ㅎㅇ")
+        })
       } else if (nowPosture === "left" && badCnt > 54000) {
         console.log("워메 자리를 얼마나 비우능교")
+        // 액시오스 요청
+        axios({
+          method: "post",
+          url: "/v1/posture/save",
+          data: {
+            className: "left",
+          },
+        }).then(() => {
+          console.log("자리비움 호잇호잇")
+        })
+      }
+      return function () {
+        const source = axios.CancelToken.source()
+        source.cancel("cancelling in cleanup")
       }
     },
-    [badCnt]
+    [badCnt, nowPosture]
   )
 
   // 토큰 반환 (추가 예정)
@@ -360,7 +426,15 @@ export default function Video(props) {
         <div
           className={`${styles["info-container"]}
         ${progress && styles["info-container_focused"]}`}
-        ></div>
+        >
+          <audio ref={audioRef} />
+          <GiTurtle
+            className={`${styles[`info-icon`]} ${
+              nowPosture !== "normal" && styles[`posture-info`]
+            }`}
+            // onClick={playAlarm}
+          />
+        </div>
       </div>
     </>
   )

@@ -5,11 +5,11 @@ import { LOGOUTandRESETLOCALSTORAGE } from "./token-slice"
 const initialState = {
   isLoading: false,
   isError: false,
-  isLogin: localStorage.getItem("isLogin") || false,
+  isLogin: false,
   userData: {
     id: 0, // String일 수도 있음.
-    nickname: "스트링 형태",
-    username: "이메일 형태",
+    nickname: "",
+    username: "",
     stretchingIntervalMin: 50, // 스트레칭 시간 Number
     dateRegistered: "Date 형태인듯", // 데이트 형태
   },
@@ -36,6 +36,7 @@ const UserSlice = createSlice({
     },
     resetUserData(state, action) {
       state.userData = {}
+      state.isLogin = false
     },
     // updateStretchingIntervalTime(state, action) {
     //   state.stretchingIntervalTime = action.payload.stretchingIntervalTime
@@ -91,6 +92,10 @@ export const AxiosLogout = function () {
     })
       .then((res) => {
         dispatch(LOGOUTandRESETLOCALSTORAGE())
+      })
+      .then(() => {
+        dispatch(userActions.resetUserData())
+        dispatch(userActions.setEndLoading())
       })
       .catch((err) => {
         console.log(err)

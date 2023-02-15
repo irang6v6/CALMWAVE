@@ -1,44 +1,116 @@
 import styles from "./UserInfo.module.css"
 import MyCalendar from "../../../components/MyCalendar/MyCalendar"
 import userlevel from "../../../assets/award.png"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
+import { useEffect, useState } from "react"
+// import axios from "axios"
+import { AxiosGetUser } from "../../../store/user-slice"
+import { AxiosGetCategory } from "../../../store/category-slice"
+import axios from "axios"
+import CateIcon from "../../../components/CateIcon/CateIcon"
 // import CalendarInfo from "../../../components/MyCalendar/CalendarInfo"
 // import NightSky from "../../../components/Canvas/NightSky/NightSky"
 
-
-
 function UserInfo() {
+  const { categoryList } = useSelector((state) => state.category)
+  const userinfo = useSelector((state) => state.user)
+  const dispatch = useDispatch()
+  const [isInitial, setIsInitial] = useState(true)
 
-  const userinfo = useSelector(state => state.user);
+  const id = useSelector((state) => state.user?.userData?.id)
+  const [isLogin, setIsLogin] = useState(
+    id ? true : false || localStorage.getItem("Access") ? true : false
+  )
+
+  useEffect(function () {
+    if (localStorage.getItem("Access") && localStorage.getItem("Refresh")) {
+      axios.defaults.headers.common["AccessToken"] =
+        localStorage.getItem("Access")
+      axios.defaults.headers.common["RefreshToken"] =
+        localStorage.getItem("Refresh")
+    }
+  }, [])
+
+  useEffect(
+    function () {
+      setIsLogin(() =>
+        id
+          ? true
+          : false ||
+            (localStorage.getItem("Access") && localStorage.getItem("Refresh"))
+          ? true
+          : false
+      )
+    },
+    [id]
+  )
+
+  useEffect(
+    function () {
+      if (isInitial) {
+        setIsInitial(() => false)
+      }
+      if (isLogin) {
+        dispatch(AxiosGetUser())
+        dispatch(AxiosGetCategory())
+      }
+    },
+    [dispatch, isInitial, isLogin]
+  )
+
+  const [XY, setXY] = useState({ x: 0, y: 0 })
+  const mouseMoveHandler = function (e) {
+    setXY({ x: e.clientX + 10, y: e.clientY + 10 })
+  }
 
   return (
     <div className={`${styles[`routercontainer1`]}`}>
       <div className={`${styles[`myinfo-box`]}`}>
         <div className={`${styles[`info-text`]}`}>
-          <h3> My Profile </h3>
+          <h2> My Profile </h2>
           <h1> {userinfo.userData.nickname} </h1>
-          {/* <h1> Haneejo </h1> */}
-          {/* <a href="#none" className={`${styles[`userInfoEdit`]}`}>
-            회원정보 수정
-          </a> */}
         </div>
 
         <div className={`${styles[`myimg-box`]}`}>
-          <img src={userlevel} alt="" className={`${styles[`my-img`]}`}/>
+          <img src={userlevel} alt="" className={`${styles[`my-img`]}`} />
         </div>
-
-        <p className={`${styles[`welcome-msg`]}`}>Haneejo님, 환영합니다.</p>
+        <div>
+          <div className={`${styles[`welcome-msg`]}`}>
+            {userinfo.userData.nickname} 님, 환영합니다.
+          </div>
+          <div className={styles[`icon-container`]}>
+            {categoryList.map((cate) => {
+              return (
+                <div
+                  key={`cate-icon-in-profile-${cate.id}`}
+                  className={styles[`hover-container`]}
+                  onMouseMove={mouseMoveHandler}
+                >
+                  <CateIcon
+                    value={cate.cateIcon}
+                    className={`bg-cat-${cate.cateColor} ${styles[`iconz`]}`}
+                  />
+                  <div
+                    className={styles[`hover-text`]}
+                    style={{ position: "absolute", left: XY.x, top: XY.y }}
+                  >
+                    {cate.title}
+                  </div>
+                </div>
+              )
+            })}
+          </div>
         </div>
+      </div>
 
       <div className={`${styles["info-Box"]}`}>
         <div className={`${styles["my-calendar"]}`}>
-        <MyCalendar/>
+          <MyCalendar />
         </div>
 
         <div className={`${styles["calendar-info"]}`}>
-        {/* <CalendarInfo/> */}
+          {/* <CalendarInfo/> */}
         </div>
-
       </div>
     </div>
   )

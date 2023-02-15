@@ -34,7 +34,7 @@
   text-decoration: none;
   width: auto;
   min-height: 17%;
-  background-color: rgba(78, 167, 253, 0.8);
+  background-color: rgba(87, 87, 87, 0.8);
   color: white;
   padding: 18px;
   border-radius: 11px;
@@ -49,8 +49,8 @@
 
 .create-task:hover {
   transform: scale(102%);
-  background-color: rgba(150, 167, 253, 0.8);
-  color: rgba(180, 22, 70, 0.8);
+  background-color: rgba(7, 33, 56, 0.8);
+  color: white;
 }
 
 .door-tab-container {

@@ -83,6 +83,7 @@
   margin: 8px auto 8px auto;
   padding: 10px 35px 10px 35px;
   justify-self: center;
+  height: 5.3vh;
 }
 
 .form-button:hover {
@@ -109,7 +110,7 @@
 
   box-sizing: border-box;
   border-radius: 5px;
-  background-color: rgba(222, 222, 222, 0.95);
+  background-color: rgba(222, 222, 222, 0.87);
   padding: 3px 7px 3px 7px;
 }
 .email-dup-check-yet:hover {
@@ -188,10 +189,29 @@
   border-radius: 6px;
   border: none;
   border-color: rgba(255, 255, 255, 0);
-  background-color: rgba(222, 222, 222, 0.95);
+  /* background-color: rgba(222, 222, 222, 0.95); */
+  background-color: rgba(253, 201, 33, 0.95);
   transition: 0.5s;
   width: 15vw;
   margin: 8px 0 8px 0;
   padding: 10px 35px 10px 35px;
-  pointer-events: none;
+  cursor: pointer;
+  height: 5.3vh;
+}
+.button-invalid:hover {
+  transform: scale(105%);
+}
+
+.valid-message {
+  color: rgba(222, 222, 222, 0.95);
+  box-sizing: border-box;
+  margin: 10px 10px 10px 10px;
+  padding: 5px 0;
+  font-weight: 600;
+}
+.valid-message.valid {
+  color: #8bd5ff;
+}
+.valid-message.invalid {
+  color: #ff6567;
 }

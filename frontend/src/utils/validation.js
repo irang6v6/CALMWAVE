@@ -99,7 +99,7 @@ function emailValidation(email) {
     return { status: false, message: "이메일은 필수 입력 값입니다." }
   }
   if (email !== "" && email !== undefined && regex.test(email)) {
-    return { status: true, message: "유효한 이메일입니다." }
+    return { status: true, message: "유효한 이메일 형식입니다." }
   }
   return { status: false, message: "유효하지 않은 이메일 형식입니다." }
 }
@@ -128,7 +128,7 @@ function nicknameValidation(val) {
   if (nicknameRules.test(val)) {
     return { status: true, message: "유효한 닉네임 입니다." }
   }
-  return { status: false, message: "유효하지 않은 닉네임입니다." }
+  return { status: false, message: "특수문자를 제외한 2~8자로 입력 바랍니다." }
 }
 
 export { idValidation, passwordValidation, emailValidation, nicknameValidation }

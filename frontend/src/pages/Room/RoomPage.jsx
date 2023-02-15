@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 import { NavLink } from "react-router-dom"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
-import { BsFillPlayFill } from "react-icons/bs"
+import { BsFillStopFill } from "react-icons/bs"
 import styles from "./RoomPage.module.css"
 import TodoColumn from "../../components/UI/TodoColumn"
 import TodoCard from "../../components/UI/TodoCard"
@@ -34,6 +34,7 @@ export const RoomPage = () => {
   const backToHome = () => {
     window.localStorage.removeItem("todo")
     window.localStorage.removeItem("category")
+    dispatch(todoActions.setProgress(false))
   }
 
   const alignTodosInColumn = (columnName) => {
@@ -54,6 +55,10 @@ export const RoomPage = () => {
         />
       ))
   }
+
+  useEffect(function () {
+    Notification.requestPermission()
+  }, [])
 
   return (
     <>
@@ -83,11 +88,11 @@ export const RoomPage = () => {
             <TodoColumn title="Done">
               {alignTodosInColumn("Done")}
               <NavLink
-                to={`/`}
+                to={`/result`}
                 className={`${styles[`lets-go-home`]}`}
                 onClick={backToHome}
               >
-                <BsFillPlayFill className={`${styles[`play-icon`]}`} />
+                <BsFillStopFill className={`${styles[`play-icon`]}`} />
               </NavLink>
             </TodoColumn>
           </div>

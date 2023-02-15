@@ -1,20 +1,35 @@
+.canvas-container {
+  width: 100vw;
+  height: 100vh;
+  z-index: -20;
+  position: absolute;
+}
+
 .container {
   width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #001930;
-  font-family: 'Gowun Dodum', sans-serif;
+  /* background: #001930; */
+  font-family: "Gowun Dodum", sans-serif;
 }
 
 .inner {
+  width: 100%;
+  max-width: 1600px;
+  min-width: 1100px;
   width: 80%;
-  height: 70%;
+  height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  /* border: 1px solid #000; */
+  /* border: 1px solid #fff; */
+}
+
+@keyframes hihi {
+  100% {
+  }
 }
 
 .left-box {
@@ -43,32 +58,44 @@
   display: inline-block;
   width: 100%;
   margin-bottom: 80%;
-
 }
 
-.turtle-img{
+.turtle-img {
 }
 
-.stretcing-img{
+.stretcing-img {
 }
 
 .alert-wrap {
   /* border: 1px solid #ffffff; */
   width: 60%;
-
 }
 
 .alert-img {
   width: 70%;
   /* height: 80%; */
+  transform: translate(0, 10px);
+  opacity: 0;
+  animation-name: floating;
+  animation-delay: 0.1s;
+  animation-fill-mode: forwards;
+  animation-duration: 1.2s;
 }
 
-.alert-text{
+.alert-text {
   color: white;
   position: absolute;
   bottom: 15%;
   font-size: 1.4rem;
-  text-shadow: -2px 0px rgb(0, 0, 0), 0px 2px rgb(0, 0, 0), 2px 0px rgb(0, 0, 0), 0px -2px rgb(0, 0, 0);
+  text-shadow: -2px 0px rgb(0, 0, 0), 0px 2px rgb(0, 0, 0), 2px 0px rgb(0, 0, 0),
+    0px -2px rgb(0, 0, 0);
+
+  transform: translate(0, 10px);
+  opacity: 0;
+  animation-name: floating;
+  animation-delay: 0.5s;
+  animation-fill-mode: forwards;
+  animation-duration: 1.2s;
 }
 
 .alert-box {
@@ -101,7 +128,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-top: 5%;
+  /* margin-top: 5%; */
+  transform: translate(0, 10px);
+  opacity: 0;
+  animation-name: floating;
+  animation-delay: 1.5s;
+  animation-fill-mode: forwards;
+  animation-duration: 1.2s;
 }
 
 /* .img-wrap {
@@ -129,14 +162,14 @@
   box-sizing: border-box;
   padding: 20px;
   position: absolute;
-  top: 385%;
+  top: 390%;
   /* background-color: #0084ff; */
   transform: translate(0, 0px);
 
-  animation-name: tongtong;
+  /* animation-name: tongtong;
   animation-duration: 0.6s;
   animation-iteration-count: infinite;
-  animation-direction: alternate;
+  animation-direction: alternate; */
 }
 
 .go-down-icon {
@@ -152,5 +185,12 @@
 @keyframes tongtong {
   to {
     transform: translate(0, -10px) scale(100%);
+  }
+}
+
+@keyframes floating {
+  to {
+    transform: translate(0, -10px);
+    opacity: 1;
   }
 }
