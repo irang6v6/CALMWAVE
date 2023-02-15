@@ -17,7 +17,15 @@
   border: 4px solid #ffffff;
   box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.5);
   color: white;
+  overflow-y: scroll;
 }
+
+.category-form-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+
 
 .modal-close-button{
   position: absolute;
@@ -123,6 +131,11 @@ select option[value="6"] {
 
 }
 
+.cate-icon{
+  text-align: center;
+  /* white-space: nowrap; */
+}
+
 .icon-button:hover {
   transform: scale(1.05);
   border: 3px solid rgba(20, 255, 255, 0.5);
@@ -132,7 +145,7 @@ select option[value="6"] {
   /* background-color: gray;
   color: white; */
   transform: scale(1.05);
-  border: 3px solid rgba(74, 194, 55, 0.66);
+  border: 3px solid rgba(20, 255, 255, 0.5);
 }
 
 .icon-button > svg {

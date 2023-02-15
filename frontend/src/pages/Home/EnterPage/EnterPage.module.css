@@ -100,15 +100,52 @@
 .icon-wrap {
   /* border: 1px solid #000; */
   padding: 5px 10px 5px 10px;
-  width: 100%;
+  /* width: 100%; */
   display: flex;
   flex-direction: row;
   justify-content: center;
+  /* align-items: center; */
   margin: 5% 0 5% 0;
 }
 
 .enter-btn {
   width: 100%;
+}
+
+.enterbtn{
+  /* border: 1px solid #000; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  padding: 20px 30px;
+  font-size: 1.2rem;
+  background-color: #C6E3FF;
+  border-radius: 50px;
+  color: #00386D;
+  font-weight: bold;
+  white-space: nowrap;
+  box-shadow: 2px 2px 2px 2px rgb(6, 37, 58, 0.5);
+}
+
+.enterbtn:hover{
+  background-color: #00386D;
+  color: white;
+  transition: all 0.5s;
+  
+}
+
+
+
+.start-icon{
+  font-size: 1.5rem;
+  margin-top: 2%;
+}
+
+.mypage-icon{
+  font-size: 1.5rem;
+ margin-top: 3%;
+ margin-right: 3%;
 }
 
 .shortcut-container {
