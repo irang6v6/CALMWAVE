@@ -5,28 +5,28 @@ import { FaCarrot } from "react-icons/fa"
 import { FaCat } from "react-icons/fa"
 import { IoIosHeart } from "react-icons/io"
 import { GiBaseballBat, GiPumpkinLantern } from "react-icons/gi"
-const CateIcon = ({ value }) => {
+const CateIcon = ({ value, className }) => {
   switch (value) {
     case 1:
-      return <AiOutlineUnorderedList />
+      return <AiOutlineUnorderedList className={className} />
     case 2:
-      return <IoDocumentOutline />
+      return <IoDocumentOutline className={className} />
     case 3:
-      return <BsCheck2Square />
+      return <BsCheck2Square className={className} />
     case 4:
-      return <IoStar />
+      return <IoStar className={className} />
     case 5:
-      return <BsArrowRepeat />
+      return <BsArrowRepeat className={className} />
     case 6:
-      return <FaCarrot />
+      return <FaCarrot className={className} />
     case 7:
-      return <FaCat />
+      return <FaCat className={className} />
     case 8:
-      return <IoIosHeart />
+      return <IoIosHeart className={className} />
     case 9:
-      return <GiBaseballBat />
+      return <GiBaseballBat className={className} />
     case 10:
-      return <GiPumpkinLantern /> 
+      return <GiPumpkinLantern className={className} />
     default:
       return null
   }

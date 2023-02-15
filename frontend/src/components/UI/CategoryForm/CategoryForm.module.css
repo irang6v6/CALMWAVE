@@ -12,18 +12,25 @@
   flex-direction: column;
   /* align-items: center; */
   font-size: 2.77rem;
-  font-family: "Gowun Dodum", sans-serif;
+  font-family: 'Gowun Dodum', sans-serif;
   border-radius: 20px;
   border: 4px solid #ffffff;
   box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.5);
   color: white;
+  overflow-y: scroll;
 }
 
-.modal-close-button {
+.category-form-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+.modal-close-button{
   position: absolute;
-  top: 7%;
+  top:7%;
   right: 7%;
-  cursor: pointer;
 }
 
 .category-form-input-container {
@@ -35,17 +42,17 @@
   /* align-items: center; */
 }
 
-.header-text {
+.header-text{
   text-align: center;
   margin-bottom: 5%;
   font-size: 2rem;
 }
 
-.body-text {
+.body-text{
   font-size: 1.7rem;
 }
 
-.input-form {
+.input-form{
   padding: 1%;
   margin-bottom: 3%;
   border-radius: 10px;
@@ -69,10 +76,8 @@
   font-size: 1.1rem;
   border: none;
   background: none;
-  background-color: #183d5e;
   color: white;
   border: 2px solid #ffffff;
-  cursor: pointer;
 }
 
 .ok-btn:hover {
@@ -88,27 +93,27 @@ select option {
 }
 
 select option[value="1"] {
-  background: #008fd6;
+  background :#008FD6;
 }
 
 select option[value="2"] {
-  background: #00dae8;
+  background: #00DAE8;
 }
 
 select option[value="3"] {
-  background: #4ce6b8;
+  background:#4CE6B8;
 }
 
 select option[value="4"] {
-  background: #fdd85d;
+  background: #FDD85D;
 }
 
 select option[value="5"] {
-  background: #fd975d;
+  background: #FD975D;
 }
 
 select option[value="6"] {
-  background: #ff383b;
+  background: #FF383B;
 }
 
 .icon-button {
@@ -123,10 +128,15 @@ select option[value="6"] {
   cursor: pointer;
   transition: all 0.3s;
   margin: 35px 3px 10px 3px;
+
+}
+
+.cate-icon{
+  text-align: center;
+  /* white-space: nowrap; */
 }
 
 .icon-button:hover {
-  cursor: pointer;
   transform: scale(1.05);
   border: 3px solid rgba(20, 255, 255, 0.5);
 }
@@ -135,10 +145,10 @@ select option[value="6"] {
   /* background-color: gray;
   color: white; */
   transform: scale(1.05);
-  border: 3px solid rgba(74, 194, 55, 0.66);
+  border: 3px solid rgba(20, 255, 255, 0.5);
 }
 
 .icon-button > svg {
-  height: 30px;
+  height: 30px  ;
   width: 30px;
 }

@@ -14,21 +14,22 @@
   align-items: center;
   box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.5);
   color: white;
-  position:relative;
+  position: relative;
 }
 
-.modal-close-button{
+.modal-close-button {
   position: absolute;
   top: 5%;
   right: 5%;
-  font-size: 1.5rem;;
+  font-size: 1.5rem;
+  cursor: pointer;
 }
 
-.recheck{
+.recheck {
   font-weight: 600;
 }
 
-.delete-btn{
+.delete-btn {
   /* border: 1px solid #000; */
   padding: 3% 1%;
   width: 30%;
@@ -40,7 +41,7 @@
   cursor: pointer;
 }
 
-.delete-btn:hover{
+.delete-btn:hover {
   background-color: #ff6c6c;
   color: white;
 }

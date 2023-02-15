@@ -136,16 +136,22 @@ function CategoryForm() {
 
   return (
     <div className={`${styles[`category-form-container`]}`}>
+
+      {/* 닫기 모달 */}
       <AiOutlineClose
             className={`${styles[`modal-close-button`]}`}
             onClick={onCloseModal}
           />
 
+      {/* 카테고리 생성 및 수정 header */}
       <div className={`${styles[`header-text`]}`}>{FormTitle}</div>
+
+      {/* 폼 시작 */}
       <form
         className={`${styles[`category-form-input-container`]}`}
         onSubmit={submitHandler}
       >
+
         <label htmlFor="category-title" className={`${styles[`body-text`]}`}>
           title
         </label>
@@ -156,9 +162,11 @@ function CategoryForm() {
           onChange={titleChangeHandler}
           className={`${styles[`input-form`]}`}
         />
+
         <label htmlFor="category-color" className={`${styles[`body-text`]}`}>
           category color
         </label>
+
         <select
           name="category-color-set"
           id="category-color"
@@ -173,7 +181,8 @@ function CategoryForm() {
           <option value="5"></option>
           <option value="6"></option>
         </select>
-        <div>
+
+        <div className={`${styles[`cate-icon`]}`}>
           <input type="hidden" />
           {CateIconArray.map((icon) => (
             <button

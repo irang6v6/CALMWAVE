@@ -33,10 +33,12 @@
 .task-card-container.hover {
   transform: scale(103%);
 }
+
 .task-card-container.hover.done-card {
   color: rgba(0, 0, 0, 0.8);
   font-weight: 500;
 }
+
 /* .task-card-container.select {
   box-shadow: 3px 3px 3px 3px rgba(12, 210, 189, 1);
 } */

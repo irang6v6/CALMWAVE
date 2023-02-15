@@ -6,10 +6,13 @@ import { NavLink } from "react-router-dom"
 import LogoImg from "../../../assets/logo_imgonly.png"
 // import { AiFillPlayCircle, AiFillInfoCircle, AiFillEdit } from "react-icons/ai"
 import { VscTriangleDown } from "react-icons/vsc"
-import startbtn from "../../../assets/enter_start.png"
-import mypagebtn from "../../../assets/enter_mypage.png"
+// import startbtn from "../../../assets/enter_start.png"
+// import mypagebtn from "../../../assets/enter_mypage.png"
 import { useSelector } from "react-redux"
 import { useState, useEffect } from "react"
+import { BsFillCaretRightFill } from "react-icons/bs"
+import { GiHamburgerMenu } from "react-icons/gi"
+
 
 function EnterPage(props) {
   // const dispatch = useDispatch()
@@ -58,11 +61,15 @@ function EnterPage(props) {
                 className={`${styles[`shortcut-container`]}`}
               >
                 {/* <AiFillPlayCircle className={`${styles[`icons`]}`} /> */}
-                <img
+                {/* <img
                   src={startbtn}
                   alt="룸 입장"
                   className={`${styles[`enter-btn`]}`}
-                />
+                /> */}
+                <div className={`${styles[`enterbtn`]}`}>
+                  <BsFillCaretRightFill className={`${styles[`start-icon`]}`}/>
+                  START
+                </div>
               </NavLink>
 
               <NavLink
@@ -70,11 +77,15 @@ function EnterPage(props) {
                 className={styles["shortcut-container"]}
               >
                 {/* <AiFillInfoCircle className={`${styles[`icons`]}`} /> */}
-                <img
+                {/* <img
                   src={mypagebtn}
                   alt="마이페이지"
                   className={`${styles[`enter-btn`]}`}
-                />
+                /> */}
+                <div className={`${styles[`enterbtn`]}`}>
+                  <GiHamburgerMenu className={`${styles[`mypage-icon`]}`}/>
+                  MYPAGE
+                </div>
               </NavLink>
             </div>
           </div>

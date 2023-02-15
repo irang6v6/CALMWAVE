@@ -1,6 +1,5 @@
 import styles from "./TaskManagePage.module.css"
 import React from "react"
-import alertimg from "../../../assets/alert.png"
 import cuteturtle from "../../../assets/cuteturtle.png"
 import stretching from "../../../assets/stretching.png"
 import angryface from "../../../assets/angryface.png"
