@@ -74,18 +74,19 @@
   display: flex;
   width: 0%;
   transition: all 0.35s ease-out;
-  /* flex-direction: column;
+  flex-direction: column;
   visibility: hidden;
   align-items: center;
   justify-content: center;
-  opacity: 0; */
+  color: white;
+  opacity: 0;
 }
 
 .info-container_focused {
   width: 100%;
-  /* visibility: visible;
+  visibility: visible;
   opacity: 1;
-  transition: opacity 1s ease-in-out; */
+  transition: opacity 1s ease-in-out;
 }
 
 .videobox-icon {
@@ -143,4 +144,14 @@
   100% {
     opacity: 1;
   }
+}
+
+.info-icon {
+  min-height: 100px;
+  min-width: 100px;
+  transition: color 3s ease-in-out;
+}
+
+.posture-info {
+  color: red;
 }

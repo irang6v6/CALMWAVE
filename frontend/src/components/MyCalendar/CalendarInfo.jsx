@@ -42,7 +42,7 @@ export default function CalendarInfo({ todo, date }) {
 
   // 삭제모달 호출
   const openDeleteModal = function () {
-    console.log(todo)
+    // console.log(todo)
     const editedData = {
       id: todo.workId,
       title: todo.title,
@@ -106,10 +106,7 @@ export default function CalendarInfo({ todo, date }) {
       </div>
 
       <div className="card-header-icon-container">
-        <AiFillEdit
-          className="card-header-icon"
-          onClick={openModal}
-        />
+        <AiFillEdit className="card-header-icon" onClick={openModal} />
         <AiFillCloseCircle
           className="card-header-icon"
           onClick={openDeleteModal}

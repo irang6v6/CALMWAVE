@@ -10,7 +10,7 @@ export class LightSource {
       canvasWidth / 48 > 48 ? 48 : canvasWidth / 48 < 24 ? 24 : canvasWidth / 48 // 공 사이즈
   }
   drawRadialGradientBehindLightSource(ctx, color) {
-    const gradientRadius = this.radius * 18 // 그라데이션 범위
+    const gradientRadius = this.radius * 13.3 // 그라데이션 범위
     const gradient = ctx.createRadialGradient(
       this.centerX,
       this.centerY,
@@ -19,7 +19,7 @@ export class LightSource {
       this.centerY,
       gradientRadius
     )
-    gradient.addColorStop(0, "rgb(74, 121, 182)") // 그라데이션 중앙색 느낌
+    gradient.addColorStop(0, "rgba(198, 229, 255, 0.44)") // 그라데이션 중앙색 느낌
     gradient.addColorStop(1, color) // 그라데이션 끝 색
     ctx.fillStyle = gradient
     ctx.arc(this.centerX, this.centerY, gradientRadius, 0, PI2)
@@ -27,7 +27,7 @@ export class LightSource {
   }
   drawLightSource(ctx) {
     ctx.beginPath()
-    ctx.fillStyle = "#1D58A4"
+    ctx.fillStyle = "rgba(0, 25, 48, 0.7)"
     ctx.arc(this.centerX, this.centerY, this.radius, 0, PI2)
     ctx.fill()
   }

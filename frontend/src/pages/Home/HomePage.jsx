@@ -3,9 +3,8 @@ import React, { useCallback } from "react"
 import EnterPage from "./EnterPage/EnterPage"
 import InfoPage from "./InfoPage/InfoPage"
 import IntroPage from "./IntroPage/IntroPage"
-import TaskManagePage from "./TaskManagePage/TaskManagePage"
-import Posture from "./Posture"
-import ResultPage from "./ResultPage"
+import AlarmPage from "./AlarmPage/AlarmPage"
+import ResultPage from "./ResultPage/ResultPage"
 // import Stress from "./Stress"
 // import LastPage from "./LastPage"
 // import Wave from "../../components/Canvas/Wave/Wave"
@@ -38,6 +37,9 @@ function HomePage() {
   const [introScroll, setIntroScroll] = useState(
     window.scrollY >= canvasHeight * 1.4
   )
+  const [alarmScroll, setAlarmScroll] = useState(
+    window.scrollY >= canvasHeight * 2.4
+  )
   const scrollInfoManageHandler = useCallback(
     function () {
       if (window.scrollY >= canvasHeight * 0.4) {
@@ -46,9 +48,9 @@ function HomePage() {
         setInfoScroll(() => false)
       }
     },
-    [canvasHeight]
+    [scrollY]
   )
-  const scrollTaskManageHandler = useCallback(
+  const scrollIntroHandler = useCallback(
     function () {
       if (window.scrollY >= window.innerHeight * 1.4) {
         setIntroScroll(() => true)
@@ -56,16 +58,28 @@ function HomePage() {
         setIntroScroll(() => false)
       }
     },
-    [canvasHeight]
+    [scrollY]
+  )
+  const scrollAlarmHandler = useCallback(
+    function () {
+      if (window.scrollY >= window.innerHeight * 2.4) {
+        setAlarmScroll(() => true)
+        console.log("보여랏")
+      } else if (window.scrollY <= window.innerHeight * 1.1) {
+        setAlarmScroll(() => false)
+        console.log("사라져랏")
+      }
+    },
+    [scrollY]
   )
   useEffect(
     function () {
-      window.addEventListener("scroll", scrollTaskManageHandler)
+      window.addEventListener("scroll", scrollIntroHandler)
       return function () {
-        window.removeEventListener("scroll", scrollTaskManageHandler)
+        window.removeEventListener("scroll", scrollIntroHandler)
       }
     },
-    [scrollTaskManageHandler]
+    [scrollIntroHandler]
   )
   useEffect(
     function () {
@@ -76,13 +90,19 @@ function HomePage() {
     },
     [scrollInfoManageHandler]
   )
+  useEffect(
+    function () {
+      window.addEventListener("scroll", scrollAlarmHandler)
+      return function () {
+        window.removeEventListener("scroll", scrollAlarmHandler)
+      }
+    },
+    [scrollAlarmHandler]
+  )
 
   const pageRef = useRef(null)
   const secondRef = useRef(null)
-  const [worktimeRef, todoRef, postureRef, stretchRef, stressRef, LastRef] = [
-    useRef(null),
-    useRef(null),
-    useRef(null),
+  const [worktimeRef, todoRef, stretchRef] = [
     useRef(null),
     useRef(null),
     useRef(null),
@@ -125,18 +145,14 @@ function HomePage() {
   const goTodo = function () {
     todoRef.current.scrollIntoView({ behavior: "smooth" })
   }
-  const goPosture = function () {
-    postureRef.current.scrollIntoView({ behavior: "smooth" })
-  }
   const goStreching = function () {
     stretchRef.current.scrollIntoView({ behavior: "smooth" })
   }
-  const goStress = function () {
-    stressRef.current.scrollIntoView({ behavior: "smooth" })
-  }
-  const goLast = function () {
-    LastRef.current.scrollIntoView({ behavior: "smooth" })
-  }
+
+  useEffect(function () {
+    Notification.requestPermission()
+  }, [])
+
   return (
     <>
       <NavIcon />
@@ -148,55 +164,26 @@ function HomePage() {
             background={`rgb(31, 31, 34)`}
           />
         </div>
-
-        {/* <Wave
-            canvasWidth={canvasWidth}
-            canvasHeight={canvasHeight}
-            background={`rgb(31, 31, 34)`}
-            // background={`rgba(31, 31, 36)`}
-          /> */}
-        {/* </div> */}
         <EnterPage goNext={goSecond} />
-        {/* <div className={`${styles["wave-container"]}`}>
-          <DiagonalWave
-            canvasWidth={canvasWidth}
-            canvasHeight={canvasHeight}
-            leftColor={`rgba(255, 255, 255, 0)`}
-            rightColor={`rgba(29, 88, 164, 0.66)`}
-            // background={`rgba(31, 31, 36)`}
-          />
-        </div> */}
         <InfoPage
           refVal={secondRef}
           goNext={goWorkTime}
           scrollTrigger={infoScroll}
         />
-        {/* <div className={`${styles["wave-container"]}`}>
-          <NightSky
-            canvasWidth={canvasWidth}
-            canvasHeight={canvasHeight}
-            background={`rgba(32, 38, 38, 1) `}
-          />
-        </div> */}
         <IntroPage
           refVal={worktimeRef}
           goNext={goTodo}
           scrollTrigger={introScroll}
         />
-        <TaskManagePage refVal={todoRef} goNext={goPosture} />
-        <Posture refVal={postureRef} goNext={goStreching} />
+        <AlarmPage
+          refVal={todoRef}
+          goNext={goStreching}
+          scrollTrigger={alarmScroll}
+        />
         <ResultPage refVal={stretchRef} />
-
         <div className={`${styles["go-up"]}`} onClick={goUp}>
           TOP
         </div>
-        {/* <div className={`${styles["intro-page"]}`}>
-        <div className={`${styles["left-box"]}`}>
-          <img className={`${styles["logoImg"]}`} src={logoImg} alt="logoimg"></img>
-          </div>
-        <div className={`${styles["right-box"]}`}>
-          </div>
-      </div> */}
       </div>
     </>
   )

@@ -1,13 +1,11 @@
-.MyCalendar{
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
-    width: 100%;
-    margin-top: 10%;
-    border: 1px solid #ffffff;
+
+.MyCalendar {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
 }
 
-.calender-container{
+.calender-container {
   display: flex;
   width: 100%;
   justify-content: center;
@@ -15,130 +13,121 @@
   border: 1px solid #ff3f3f;
 }
 
-
 /* 캘린더 wrap (배경) */
 .react-calendar {
-    width: 40%;
-    height: 70%;
-    padding: 20px;
-    background-color: rgb(223, 242, 255);
-    /* border: 1px solid #000; */
-    border-radius: 30px;
-    /* border: 5px solid #8edbff; */
-    color: #222;
-    font-family: Arial, Helvetica, sans-serif;
-    line-height: 1.125em;
-    /* box-shadow: 3px 3px 3px 3px rgb(184, 184, 184); */
-    margin-right: 10%;
-    margin-top: 8%;
-  }
-  
-  .react-calendar--doubleView {
-    width: 700px;
-  }
-  .react-calendar--doubleView .react-calendar__viewContainer {
-    display: flex;
-    margin: -0.5em;
-  }
-  .react-calendar--doubleView .react-calendar__viewContainer > * {
-    width: 50%;
-    margin: 0.5em;
-  }
-  .react-calendar,
-  .react-calendar *,
-  .react-calendar *:before,
-  .react-calendar *:after {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+  width: 40%;
+  height: 70%;
+  padding: 20px;
+  background-color: rgb(223, 242, 255);
+  /* border: 1px solid #000; */
+  border-radius: 30px;
+  /* border: 5px solid #8edbff; */
+  color: #222;
+  font-family: Arial, Helvetica, sans-serif;
+  line-height: 1.125em;
+  /* box-shadow: 3px 3px 3px 3px rgb(184, 184, 184); */
+  margin-right: 10%;
+  margin-top: 8%;
+}
 
+.react-calendar--doubleView {
+  width: 700px;
+}
+.react-calendar--doubleView .react-calendar__viewContainer {
+  display: flex;
+  margin: -0.5em;
+}
+.react-calendar--doubleView .react-calendar__viewContainer > * {
+  width: 50%;
+  margin: 0.5em;
+}
+.react-calendar,
+.react-calendar *,
+.react-calendar *:before,
+.react-calendar *:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
 
-  /* 각 일자 디자인 */
-  .react-calendar button {
-    margin: 0;
-    border: 0;
-    outline: none;
-    background-color: rgb(223, 242, 255);
-    /* border: 1px solid #000; */
-  }
-  .react-calendar button:enabled:hover {
-    cursor: pointer;
-  }
+/* 각 일자 디자인 */
+.react-calendar button {
+  margin: 0;
+  border: 0;
+  outline: none;
+  background-color: rgb(223, 242, 255);
+  /* border: 1px solid #000; */
+}
+.react-calendar button:enabled:hover {
+  cursor: pointer;
+}
 
+.react-calendar__navigation {
+  display: flex;
+  height: 44px;
+  margin-bottom: 1em;
+}
 
+/* 캘린더 네비 */
+.react-calendar__navigation button {
+  color: #18344e;
+  min-width: 44px;
+  background: none;
+  font-size: 16px;
+  margin-top: 8px;
+  font-weight: bold;
+}
 
-  .react-calendar__navigation {
-    display: flex;
-    height: 44px;
-    margin-bottom: 1em;
-  }
-  
+/* 캘린더 네비 화살표 */
+.react-calendar__navigation button:enabled:hover,
+.react-calendar__navigation button:enabled:focus {
+  /* background-color: #ffffff; */
+  /* border: 1px solid #000; */
+}
 
-  /* 캘린더 네비 */
-  .react-calendar__navigation button {
-    color: #18344e;
-    min-width: 44px;
-    background: none;
-    font-size: 16px;
-    margin-top: 8px;
-    font-weight: bold;
-  }
-  
+/* 월 화 수 목 금 토 일 */
+.react-calendar__month-view__weekdays {
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-size: 0.75em;
+  margin-bottom: 2%;
+}
 
-  /* 캘린더 네비 화살표 */
-  .react-calendar__navigation button:enabled:hover,
-  .react-calendar__navigation button:enabled:focus {
-    /* background-color: #ffffff; */
-    /* border: 1px solid #000; */
-  }
+/* 요일 밑의 밑줄 지우기 */
+abbr[title] {
+  text-decoration: none;
+}
 
-  
-  /* 월 화 수 목 금 토 일 */
-  .react-calendar__month-view__weekdays {
-    text-align: center;
-    text-transform: uppercase;
-    font-weight: bold;
-    font-size: 0.75em;
-    margin-bottom: 2%;
-  }
+/* 머임 */
+.react-calendar__tile {
+  max-width: 100%;
+  padding: 10px 6.6667px;
+  border-radius: 9999px;
+  text-align: center;
+  line-height: 16px;
+}
 
-  
-  /* 요일 밑의 밑줄 지우기 */
-  abbr[title] {
-    text-decoration: none;
-  }
-  
-  
-  /* 머임 */
-  .react-calendar__tile {
-    max-width: 100%;
-    padding: 10px 6.6667px;
-    border-radius: 9999px;
-    text-align: center;
-    line-height: 16px;
-  }
+/* 일자 호버 */
+.react-calendar__tile:enabled:hover,
+.react-calendar__tile:enabled:focus {
+  color: black;
+  font-weight: bolder;
+  transform: scale(1);
+  background-color: #6f48eb33;
+  background-color: #b1d9ff;
+  color: white;
+}
 
-  /* 일자 호버 */
-  .react-calendar__tile:enabled:hover,
-  .react-calendar__tile:enabled:focus {
-    color: black;
-    font-weight: bolder;
-    transform: scale(1.0);
-    background-color: #6f48eb33;
-    background-color: #b1d9ff;
-    color: white;
-  }
-  
-  /* .react-calendar__tile--now {
+/* .react-calendar__tile--now {
     border: 1px;
     background-color: #6f48eb33;
     font-weight: bolder;
     color: #4094bf;
     border-radius: 9999px;
   } */
-  
-  /* .react-calendar__tile--active {
+
+/* .react-calendar__tile--active {
     border: 1px;
     font-weight: bolder;
     border-radius: 9999px;
@@ -149,7 +138,7 @@
     border: 1px;
     border-color: #6f48eb33;
   } */
-  /* .highlight {
+/* .highlight {
     image-rendering: crisp-edges;
     backface-visibility: hidden;
     transform: translateZ(0);
@@ -177,135 +166,131 @@
     background-position: center;
     color: transparent;
   } */
-  
 
-  /* 일요일 빨간색, 토요일 파란색 */
-  .highlight-sunday {
-    color: red;
-  }
-  .highlight-saturday {
-    color: blue;
+/* 일요일 빨간색, 토요일 파란색 */
+.highlight-sunday {
+  color: red;
+}
+.highlight-saturday {
+  color: blue;
+}
+.react-calendar__navigation__prev2-button,
+.react-calendar__navigation__next2-button {
+  display: none;
+}
 
+.react-calendar__navigation button:disabled {
+  /* background-color: #f0f0f0; */
+}
 
-  }
-  .react-calendar__navigation__prev2-button,
-  .react-calendar__navigation__next2-button {
-    display: none;
-  }
-
-  .react-calendar__navigation button:disabled {
-    /* background-color: #f0f0f0; */
-  }
-
-  /* .react-calendar__month-view__days__day--weekend {
+/* .react-calendar__month-view__days__day--weekend {
     color: #d10000;
   } */
-  
-  .react-calendar__month-view__days__day--neighboringMonth {
-    color: #757575;
-  }
 
-  .react-calendar__tile:disabled {
-    background-color: #cf3333;
-  }
+.react-calendar__month-view__days__day--neighboringMonth {
+  color: #757575;
+}
 
-  /* .react-calendar__tile:enabled:hover,
+.react-calendar__tile:disabled {
+  background-color: #cf3333;
+}
+
+/* .react-calendar__tile:enabled:hover,
   .react-calendar__tile:enabled:focus {
     background-color: #b1d9ff;
     color: white;
   } */
 
-  
-  /* 오늘날짜 */
-  .react-calendar__tile--now {
-    background: #ff947a;
-    border: 1px;
-    background-color: #6f48eb33;
-    font-weight: bolder;
-    color: #4094bf;
-    border-radius: 9999px;
-    border: 1px solid #000;
-  }
-  
+/* 오늘날짜 */
+.react-calendar__tile--now {
+  background: #ff947a;
+  border: 1px;
+  background-color: #6f48eb33;
+  font-weight: bolder;
+  color: #4094bf;
+  border-radius: 9999px;
+  border: 1px solid #000;
+}
 
-  /* 오늘 날짜 호버 */
-  /* .react-calendar__tile--now:enabled:hover,
+/* 오늘 날짜 호버 */
+/* .react-calendar__tile--now:enabled:hover,
   .react-calendar__tile--now:enabled:focus {
     background-color: #ffb1b1;
   } */
 
-  /* .react-calendar__tile--hasActive {
+/* .react-calendar__tile--hasActive {
     background-color: #76ff7d;
   } */
-  /* .react-calendar__tile--hasActive:enabled:hover,
+/* .react-calendar__tile--hasActive:enabled:hover,
   .react-calendar__tile--hasActive:enabled:focus {
     background-color: #119c2f;
   } */
 
-  .react-calendar__tile--active {
-    background: #b1d9ff;
-    color: rgb(0, 0, 0);
-    border: 1px;
-    font-weight: 800;
-    border-radius: 9999px;
-    background-color: #6f48eb33;
-  }
-  .react-calendar__tile--active:enabled:hover,
-  .react-calendar__tile--active:enabled:focus {
-    background: #b1d9ff;
-    color: white;
-  }
-  .react-calendar--selectRange .react-calendar__tile--hover {
-    background-color: #bb2c2c;
-  }
+.react-calendar__tile--active {
+  background: #b1d9ff;
+  color: rgb(0, 0, 0);
+  border: 1px;
+  font-weight: 800;
+  border-radius: 9999px;
+  background-color: #6f48eb33;
+}
+.react-calendar__tile--active:enabled:hover,
+.react-calendar__tile--active:enabled:focus {
+  background: #b1d9ff;
+  color: white;
+}
+.react-calendar--selectRange .react-calendar__tile--hover {
+  background-color: #bb2c2c;
+}
 
-  .right-box{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    /* border: 3px solid #da2222; */
-    width: 60%;
-    height: 500px;
-    /* text-align: center; */
-  }
+.right-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* border: 3px solid #da2222; */
+  width: 60%;
+  height: 500px;
+  /* text-align: center; */
+}
 
-  .select-date-wrap{
-    /* border: 1px solid #000; */
-    width: 100%;
-    /* border: 1px solid #000; */
-    /* border-radius: 20px; */
-    text-align: center;
-    margin-top: 10px;
-    /* background-color: rgb(223, 242, 255); */
-    /* box-shadow: 3px 3px 3px 3px rgb(209, 209, 209); */
-    padding: 1%;
-    height: auto;
-  }
+.select-date-wrap {
+  /* border: 1px solid #000; */
+  width: 100%;
+  /* border: 1px solid #000; */
+  /* border-radius: 20px; */
+  text-align: center;
+  margin-top: 10px;
+  /* background-color: rgb(223, 242, 255); */
+  /* box-shadow: 3px 3px 3px 3px rgb(209, 209, 209); */
+  padding: 1%;
+  height: auto;
+}
 
-  .select-date{
-    font-weight: 600;
-    font-size: 1.5rem;
-    white-space: nowrap;
-    color: white;
-  }
+.select-date {
+  font-weight: 600;
+  font-size: 1.5rem;
+  white-space: nowrap;
+  color: white;
+}
 
-  .select-todolist{
-    margin-top: 5%;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    /* justify-content: center; */
-    align-items: center;
-    /* line-height: 250%; */
-    /* border: 1px solid #000; */
-    /* border: 4px solid #8edbff; */
-    /* border-radius: 10px; */
-    /* background-color: rgb(255, 255, 255); */
-    /* overflow: hidden; */
-    /* overflow: scroll; */
-    overflow-y: scroll
-  }
+.select-todolist {
+  margin-top: 5%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  align-items: center;
+  /* line-height: 250%; */
+  /* border: 1px solid #000; */
+  /* border: 4px solid #8edbff; */
+  /* border-radius: 10px; */
+  /* background-color: rgb(255, 255, 255); */
+  /* overflow: hidden; */
+  /* overflow: scroll; */
+  overflow-y: scroll;
+}
+
 
   .select-todolist::-webkit-scrollbar {
     display: none;
@@ -326,17 +311,35 @@
     /* box-shadow: 3px 3px 3px 3px rgb(180, 180, 180); */
   }
 
-  .todo-content{
-    
-  }
 
-  .nowork-text{
-    color: white;
-  }
+.todo-box {
+  display: flex;
+  justify-content: space-between;
+  /* border: 1px solid #000; */
+  width: 70%;
+  padding: 5%;
+  /* padding-bottom: 5%; */
+  border-radius: 10px;
+  background-color: #fff;
+  margin-bottom: 10px;
+  box-shadow: 3px 3px 3px 3px rgb(180, 180, 180);
+}
 
-  .card-header-icon{
-    /* border: 1px solid #000; */
-    /* padding: 1%; */
-    font-size: 1.3rem;
-    margin-left: 10px;
-  }
+.todo-content {
+}
+
+.nowork-text {
+  color: white;
+}
+
+.card-header-icon {
+  /* border: 1px solid #000; */
+  /* padding: 1%; */
+  font-size: 1.3rem;
+  margin-left: 10px;
+  transition: 0.2s;
+}
+.card-header-icon:hover {
+  cursor: pointer;
+  transform: scale(110%);
+}

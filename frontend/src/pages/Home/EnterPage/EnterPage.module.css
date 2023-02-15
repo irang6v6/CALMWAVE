@@ -26,7 +26,7 @@
 
 .left-box {
   box-sizing: border-box;
-  margin: 0px 3.5% 0px 3.5%;
+  margin: 0px 0% 0px 0%;
   width: 50%;
   /* width: auto; */
   height: 70%;
@@ -181,7 +181,7 @@
 .go-down {
   box-sizing: border-box;
   position: absolute;
-  top: 85%;
+  top: 88%;
   /* background-color: #0084ff; */
   transform: translate(0, 0px);
 
