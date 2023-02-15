@@ -69,7 +69,6 @@ export const AxiosGetCalendar = function (year, month, day) {
       url: `/v1/calendar/${year}/${month}/${day}`,
     })
       .then((res) => {
-        console.log(res)
         dispatch(calendarActions.changeTaskList(res.data))
       })
       .then(() => {

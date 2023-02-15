@@ -48,3 +48,21 @@
 .text {
   color: white;
 }
+
+.lets-go-home {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 25%;
+  max-height: 80px;
+  background-color: rgba(87, 87, 87, 0.8);
+  color: white;
+  border-radius: 11px;
+  transition: 0.4s;
+}
+
+.play-icon {
+  width: auto;
+  min-height: 40px;
+}

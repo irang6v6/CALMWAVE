@@ -26,7 +26,6 @@ const tokenSlice = createSlice({
 
 export const setAccess = function (acc) {
   return async function (dispatch) {
-    console.log(acc)
     dispatch(tokenActions.changeAccess(acc))
     localStorage.setItem("Access", acc)
     axios.defaults.headers.common["AccessToken"] =
