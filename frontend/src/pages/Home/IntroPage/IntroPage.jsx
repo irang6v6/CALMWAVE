@@ -19,8 +19,8 @@ function IntroPage(props) {
             Calm Wave, 이렇게 이용해보세요
           </div>
           <div className={`${styles["inner"]}`}>
-            <div className={`${styles["work-box"]}`}>
-              <div>GTD</div>
+            <div className={`${styles["work-box1"]}`}>
+              <div className={`${styles[`type-text`]}`}>GTD</div>
               <img src={gtd} alt="gtd" className={`${styles["gtd-img"]}`} />
               <div className={`${styles["method-description"]}`}>
                 <div>
@@ -41,8 +41,8 @@ function IntroPage(props) {
               </div>
             </div>
 
-            <div className={`${styles["work-box"]}`}>
-              <div>타임박스</div>
+            <div className={`${styles["work-box2"]}`}>
+              <div className={`${styles[`type-text`]}`}>타임박스</div>
               <img
                 src={timeblock}
                 alt="타임블럭"
@@ -55,8 +55,9 @@ function IntroPage(props) {
                   줄여 주는 목표 지향적 시간 관리 전략입니다.
                 </div>
                 <br />
-                {/* 누구나 30분이면 끝낼 수 있는 작업을 제대로 통제하지 못해 하루를 다 보내고 나서야 끝낸 경험이 있을 것입니다.  */}
-                ‘타임박스’를 만든다는 것은 일정 시간 내에 특정한 <br />
+                누구나 30분이면 끝낼 수 있는 작업을 제대로 통제하지 못해 하루를
+                다 보내고 나서야 끝낸 경험이 있을 것입니다. ‘타임박스’를
+                만든다는 것은 일정 시간 내에 특정한 <br />
                 작업을 끝내겠다는 목표를 세우는 것을 말합니다.
                 <br />
                 업무 스케줄을 최대한 세분화해 그 우선순위에 따라
@@ -65,8 +66,8 @@ function IntroPage(props) {
               </div>
             </div>
 
-            <div className={`${styles["work-box"]}`}>
-              <div>포모도로</div>
+            <div className={`${styles["work-box3"]}`}>
+              <div className={`${styles[`type-text`]}`}>포모도로</div>
               <img
                 src={pomodoro}
                 alt="pomodoro"
@@ -77,10 +78,10 @@ function IntroPage(props) {
                   포모도로 기법은 단기간에 업무를 수행하고 <br />
                   업무 세션 사이에 휴식을 취하는 방법입니다.
                 </div>
-                {/* <br /> 포모도로 시간 관리 전략은 규칙적인 휴식을 취하는 것이
-            <br />
-            권장되므로 특히 본질적인 동기 부여를 이끌어 내 <br />
-            두뇌에도 좋습니다. <br /> */}
+                <br /> 포모도로 시간 관리 전략은 규칙적인 휴식을 취하는 것이
+                <br />
+                권장되므로 특히 본질적인 동기 부여를 이끌어 내 <br />
+                두뇌에도 좋습니다. <br />
                 <br />
                 25분간 일하고 5분간 휴식을 취하는 과정을
                 <br />

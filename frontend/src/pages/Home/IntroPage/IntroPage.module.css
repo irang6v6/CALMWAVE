@@ -13,11 +13,11 @@
 
 .inner {
   box-sizing: border-box;
-  margin: 3% 0 7% 0;
+  margin: 20px 0 7% 0;
   display: flex;
   /* flex-direction: column; */
   width: 100%;
-  height: 95%;
+  height: 70%;
   justify-content: center;
   align-items: center;
   /* border: 1px solid #000; */
@@ -42,7 +42,7 @@
   color: white;
   font-size: 2.2rem;
   opacity: 0;
-  transform: translate(0, 30px);
+  transform: translate(0, 20px);
   height: 5%;
 
   animation-name: floating;
@@ -52,12 +52,18 @@
 }
 @keyframes floating {
   to {
-    transform: translate(0, -20px);
+    transform: translate(0, -10px);
     opacity: 1;
   }
 }
 
-.work-box {
+.type-text {
+  font-size: 2.2rem;
+  font-weight: 600;
+  height: 15%;
+}
+
+.work-box1 {
   /* border: 3px solid #ffffff; */
   display: flex;
   flex-direction: column;
@@ -67,6 +73,7 @@
   height: 85%;
   /* border-radius: 20px; */
   opacity: 0;
+  transform: translate(0, 20px);
 
   color: white;
   padding: 0 1% 0 1%;
@@ -76,22 +83,74 @@
   animation-fill-mode: forwards;
   animation-duration: 1.2s;
 }
+.work-box2 {
+  /* border: 3px solid #ffffff; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 33.33%;
+  height: 85%;
+  /* border-radius: 20px; */
+  opacity: 0;
+  transform: translate(0, 20px);
+
+  color: white;
+  padding: 0 1% 0 1%;
+
+  animation-name: floating;
+  animation-delay: 2.9s;
+  animation-fill-mode: forwards;
+  animation-duration: 1.2s;
+}
+.work-box3 {
+  /* border: 3px solid #ffffff; */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 33.33%;
+  height: 85%;
+  /* border-radius: 20px; */
+  opacity: 0;
+  transform: translate(0, 20px);
+
+  color: white;
+  padding: 0 1% 0 1%;
+
+  animation-name: floating;
+  animation-delay: 3.1s;
+  animation-fill-mode: forwards;
+  animation-duration: 1.2s;
+}
 
 .method-description {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
+  overflow-y: scroll;
+  box-sizing: border-box;
+  background-color: rgba(19, 19, 19, 0.33);
+  border-radius: 9px;
+  padding: 8px 11px 8px 11px;
+  width: 100%;
+  height: 48%;
+  color: rgba(211, 211, 222, 0.99);
+}
+.method-description::-webkit-scrollbar {
+  display: none;
 }
 
 .pomodoro-img {
-  width: 100%;
+  height: 33%;
+  margin-bottom: 5%;
 }
 
 .gtd-img {
-  width: 50%;
+  height: 33%;
   margin-bottom: 5%;
 }
 
 .time-box-img {
-  width: 50%;
+  height: 33%;
   margin-bottom: 5%;
 }
 

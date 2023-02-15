@@ -109,7 +109,7 @@ export default function Video(props) {
     // console.log(prediction)
     for (let i = 0; i < 4; i++) {
       const rtPosture = prediction[i]
-      if (rtPosture.probability.toFixed(2) > 0.999999) {
+      if (rtPosture.probability.toFixed(2) > 0.9999) {
         // nowPosture, setNowPosture, posture, setPosture, badCnt, setBadCnt
         // if nowposture가 rtPosture.class와 같다면
         // posture를 덮어서 갱신.
@@ -125,15 +125,13 @@ export default function Video(props) {
       }
     }
   }
-  // 데이터 0.2초에 한 번 확인 할 예정.
+
   useEffect(
     function () {
-      setTimeout(function () {
-        if (props.videoRef.current) {
-          const aniId = window.requestAnimationFrame(loop)
-          frameIDs.push(aniId)
-        }
-      }, 100)
+      if (props.videoRef.current) {
+        const aniId = window.requestAnimationFrame(loop)
+        frameIDs.push(aniId)
+      }
       return function () {
         let frameID
         if (frameIDs) {
