@@ -10,7 +10,6 @@ import { useCustomWidthHeight } from "../../../hooks/custom/useCustomWidthHeight
 
 // scrollTrigger, refVal, goNext
 function AlarmPage(props) {
-  console.log(props.scrollTrigger)
   const { width, height } = useCustomWidthHeight(props.refVal)
   return (
     <>

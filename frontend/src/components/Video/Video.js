@@ -88,7 +88,7 @@ export default function Video(props) {
         audioRef.current.src = pinThree
         audioRef.current.play()
       }
-    }, 5000)
+    }, 15000)
     return function () {
       clearInterval(interval)
     }
@@ -176,6 +176,13 @@ export default function Video(props) {
           frameIDs.push(aniId)
         }
       }
+      setTimeout(function () {
+        if (props.videoRef.current) {
+          const aniId = window.requestAnimationFrame(loop)
+          frameIDs.push(aniId)
+        }
+      }, 1000)
+      
       return function () {
         let frameID
         if (frameIDs.length > 0) {

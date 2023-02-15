@@ -112,13 +112,6 @@ function SignPage({ pageRef }) {
     setNeedToast(() => false)
   }
 
-  useEffect(
-    function () {
-      console.log(needToast, "ㅎㅇ")
-    },
-    [needToast]
-  )
-
   return (
     <div ref={pageRef} className={`${styles["sign-container"]}`}>
       <LoginLogo />
