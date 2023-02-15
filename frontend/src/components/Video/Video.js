@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import { useSelector } from "react-redux"
 import { OpenVidu } from "openvidu-browser"
 import axios from "axios"
@@ -9,7 +9,10 @@ import {
   AiFillEyeInvisible,
   AiFillVideoCamera,
 } from "react-icons/ai"
+import { GiTurtle } from "react-icons/gi"
 import new_logo from "../../assets/new_logo.png"
+// import buttonAlarm from "../../assets/alarm/buttonalarm.mp3"
+import pinThree from "../../assets/alarm/pin3.mp3"
 
 const OPENVIDU_SERVER_URL = "https://i8a105.p.ssafy.io:8443/"
 const OPENVIDU_SERVER_SECRET = "WAVES"
@@ -41,6 +44,7 @@ export default function Video(props) {
   //   left: 0,
   // })
   const [nowPosture, setNowPosture] = useState("normal")
+  const audioRef = useRef(null)
   const [badCnt, setBadCnt] = useState(0)
 
   // 최초 진입 시 세션 접속
@@ -71,6 +75,25 @@ export default function Video(props) {
     [props.videoRef.current, session]
   )
 
+  const prevNowPosture = useRef("normal")
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (
+        nowPosture !== "normal" &&
+        nowPosture !== prevNowPosture.current
+      ) {
+        console.log("ALARM")
+        prevNowPosture.current = nowPosture
+        audioRef.current.src = pinThree
+        audioRef.current.play()
+      }
+    }, 5000)
+    return function () {
+      clearInterval(interval)
+    }
+  }, [nowPosture])
+
   const settingModel = async function () {
     const a = await tmPose.load(modelURL, metadataURL)
     setModel(() => a)
@@ -88,15 +111,30 @@ export default function Video(props) {
     setWebcam(() => wc)
   }
 
-  const loop = async function (timestamp) {
-    if (props.videoRef.current && webcam) {
+  // const loop = async function (timestamp) {
+  //   if (props.videoRef.current && webcam) {
+  //     sizeSet()
+  //     // await webcam.update()
+  //     predict()
+  //     // await webcam.setup()
+  //     // await webcam.play()
+  //   }
+  // }
+
+  useEffect(() => {
+    settingModel()
+    sizeSet()
+  }, [])
+
+  useEffect(() => {
+    function handleResize() {
       sizeSet()
-      // await webcam.update()
-      predict()
-      // await webcam.setup()
-      // await webcam.play()
     }
-  }
+    window.addEventListener("resize", handleResize)
+    return () => {
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [])
 
   const predict = async function () {
     if (!model) {
@@ -128,21 +166,25 @@ export default function Video(props) {
   // 데이터 0.2초에 한 번 확인 할 예정.
   useEffect(
     function () {
-      setTimeout(function () {
-        if (props.videoRef.current) {
+      function loop(timestamp) {
+        if (props.videoRef.current && webcam) {
+          sizeSet()
+          predict()
+        }
+        if (frameIDs.length > 0) {
           const aniId = window.requestAnimationFrame(loop)
           frameIDs.push(aniId)
         }
-      }, 100)
+      }
       return function () {
         let frameID
-        if (frameIDs) {
+        if (frameIDs.length > 0) {
           frameID = frameIDs.shift()
           window.cancelAnimationFrame(frameID)
         }
       }
     },
-    [props.videoRef.current, loop]
+    [props.videoRef.current, webcam, predict]
   )
 
   useEffect(
@@ -384,7 +426,15 @@ export default function Video(props) {
         <div
           className={`${styles["info-container"]}
         ${progress && styles["info-container_focused"]}`}
-        ></div>
+        >
+          <audio ref={audioRef} />
+          <GiTurtle
+            className={`${styles[`info-icon`]} ${
+              nowPosture !== "normal" && styles[`posture-info`]
+            }`}
+            // onClick={playAlarm}
+          />
+        </div>
       </div>
     </>
   )
