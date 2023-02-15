@@ -80,15 +80,15 @@ export default function Video(props) {
   useEffect(() => {
     const interval = setInterval(() => {
       if (
-        nowPosture !== "normal" &&
-        nowPosture !== prevNowPosture.current
+        nowPosture !== "normal"
+        //  && nowPosture !== prevNowPosture.current
       ) {
-        console.log("ALARM")
+        // console.log("ALARM")
         prevNowPosture.current = nowPosture
         audioRef.current.src = pinThree
         audioRef.current.play()
       }
-    }, 15000)
+    }, 30000)
     return function () {
       clearInterval(interval)
     }
@@ -111,15 +111,15 @@ export default function Video(props) {
     setWebcam(() => wc)
   }
 
-  // const loop = async function (timestamp) {
-  //   if (props.videoRef.current && webcam) {
-  //     sizeSet()
-  //     // await webcam.update()
-  //     predict()
-  //     // await webcam.setup()
-  //     // await webcam.play()
-  //   }
-  // }
+  const loop = async function (timestamp) {
+    if (props.videoRef.current && webcam) {
+      sizeSet()
+      // await webcam.update()
+      predict()
+      // await webcam.setup()
+      // await webcam.play()
+    }
+  }
 
   useEffect(() => {
     settingModel()
@@ -144,7 +144,6 @@ export default function Video(props) {
       props.videoRef.current
     ) // posenetOutput : 좌표에 관한 내용이 들어가 있음.
     const prediction = await model.predict(posenetOutput)
-    // console.log(prediction)
     for (let i = 0; i < 4; i++) {
       const rtPosture = prediction[i]
       if (rtPosture.probability.toFixed(2) > 0.9999) {
@@ -159,23 +158,23 @@ export default function Video(props) {
           }
         })
         setNowPosture((oldPosture) => rtPosture.className)
-        console.log(`자세 : ${nowPosture}, 몇프레임째(600당 10초) : ${badCnt}`)
+        // console.log(`자세 : ${nowPosture}, 몇프레임째(600당 10초) : ${badCnt}`)
       }
     }
   }
 
   useEffect(
     function () {
-      function loop(timestamp) {
-        if (props.videoRef.current && webcam) {
-          sizeSet()
-          predict()
-        }
-        if (frameIDs.length > 0) {
-          const aniId = window.requestAnimationFrame(loop)
-          frameIDs.push(aniId)
-        }
-      }
+      // function loop(timestamp) {
+      //   if (props.videoRef.current && webcam) {
+      //     sizeSet()
+      //     predict()
+      //   }
+      //   if (frameIDs.length > 0) {
+      //     const aniId = window.requestAnimationFrame(loop)
+      //     frameIDs.push(aniId)
+      //   }
+      // }
       setTimeout(function () {
         if (props.videoRef.current) {
           const aniId = window.requestAnimationFrame(loop)
