@@ -137,6 +137,11 @@ function HomePage() {
   const goLast = function () {
     LastRef.current.scrollIntoView({ behavior: "smooth" })
   }
+
+  useEffect(function () {
+    Notification.requestPermission()
+  }, [])
+
   return (
     <>
       <NavIcon />

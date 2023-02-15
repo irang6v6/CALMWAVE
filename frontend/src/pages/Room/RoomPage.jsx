@@ -56,6 +56,10 @@ export const RoomPage = () => {
       ))
   }
 
+  useEffect(function () {
+    Notification.requestPermission()
+  }, [])
+
   return (
     <>
       <div className={`${styles[`canvas-container`]}`}>
