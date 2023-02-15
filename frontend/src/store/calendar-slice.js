@@ -47,7 +47,7 @@ const calendarSlice = createSlice({
             description: editedDescription,
             dateAimed: editedDateAimed,
             timeAimed: editedTimeAimed,
-            workCateId: editedCateId, 
+            workCateId: editedCateId,
           }
         }
         return cal
@@ -55,8 +55,8 @@ const calendarSlice = createSlice({
     },
     deleteCalender(state, action) {
       const id = action.payload
-      state.taskList = state.taskList.filter((cal => cal.workId !== id))
-    }
+      state.taskList = state.taskList.filter((cal) => cal.workId !== id)
+    },
   },
 })
 
@@ -69,7 +69,6 @@ export const AxiosGetCalendar = function (year, month, day) {
       url: `/v1/calendar/${year}/${month}/${day}`,
     })
       .then((res) => {
-        console.log(res)
         dispatch(calendarActions.changeTaskList(res.data))
       })
       .then(() => {

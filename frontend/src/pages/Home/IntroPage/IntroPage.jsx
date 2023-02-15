@@ -4,13 +4,8 @@ import pomodoro from "../../../assets/pomodoro.png"
 import gtd from "../../../assets/GTD.png"
 import timeblock from "../../../assets/timeblock.png"
 import { VscTriangleDown } from "react-icons/vsc"
-// import { useClasses } from "../../../hooks/custom/useClasses"
 
-// refVal, goNext, scrollTrigger
 function IntroPage(props) {
-  // const [PMDRtoggleHover, , , PMDRclasses] = useClasses(styles, "introduce-box")
-  // const [TBtoggleHover, , , TBclasses] = useClasses(styles, "introduce-box")
-  // const [GTDtoggleHover, , , GTDclasses] = useClasses(styles, "introduce-box")
   return (
     <div ref={props.refVal} className={`${styles["container"]}`}>
       {props.scrollTrigger ? (

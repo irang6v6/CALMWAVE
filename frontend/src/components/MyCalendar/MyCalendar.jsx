@@ -24,7 +24,7 @@ export default function MyCalendar(props) {
     isError,
     selectedDate: RTKSelectedDate,
   } = useSelector((state) => state.calendar)
-  console.log(todolist)
+  // console.log(todolist)
   useEffect(
     function () {
       const d = new Date(selectedDate)
@@ -102,14 +102,17 @@ export default function MyCalendar(props) {
 
           {/* 선택한 날짜의 투두리스트 */}
           <div className="select-todolist">
-            {todolist && todolist.length > 0
-              ? todolist.map((todo, index) => (
-                  <CalendarInfo
-                      key={`calendar-task-${todo.id}-${Math.random()}`}
-                      todo={todo}
-                      date={date}
-                      />
-               )) : <div className="nowork-text">등록된 업무가 없습니다.</div>}
+            {todolist && todolist.length > 0 ? (
+              todolist.map((todo, index) => (
+                <CalendarInfo
+                  key={`calendar-task-${todo.id}-${Math.random()}`}
+                  todo={todo}
+                  date={date}
+                />
+              ))
+            ) : (
+              <div className="nowork-text">등록된 업무가 없습니다.</div>
+            )}
           </div>
 
           {/* <div

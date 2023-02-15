@@ -22,7 +22,7 @@ export class Point {
     this.pointCenterY =
       this.AMPLITUDE * Math.sin(this.radian) + this.CENTER_LINE
     ctx.beginPath()
-    ctx.fillStyle = "#618BC0"
+    ctx.fillStyle = "rgba(198, 229, 255, 0.91)"
     ctx.arc(this.pointCenterX, this.pointCenterY, this.POINT_RADIUS, 0, PI2)
     ctx.fill()
   }

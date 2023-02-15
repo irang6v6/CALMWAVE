@@ -1,7 +1,7 @@
 import styles from "./ResultPage.module.css"
-import chart1 from "../../assets/chart1.png"
-import chart2 from "../../assets/chart2.png"
-import chart3 from "../../assets/chart3.png"
+import chart1 from "../../../assets/chart1.png"
+import chart2 from "../../../assets/chart2.png"
+import chart3 from "../../../assets/chart3.png"
 import React from "react"
 // import { VscTriangleDown } from "react-icons/vsc"
 
