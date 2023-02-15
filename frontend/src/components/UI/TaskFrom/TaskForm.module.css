@@ -26,12 +26,12 @@
   display: none;
 } */
 
-.modal-close-button{
+.modal-close-button {
   position: absolute;
   top: 5%;
   right: 7%;
+  cursor: pointer;
 }
-
 
 .header-text {
   text-align: center;
@@ -45,24 +45,20 @@
 }
 
 .input-form {
-  padding: 1%;
+  padding: 5px 10px 5px 10px;
   margin-bottom: 3%;
   border-radius: 10px;
-  height: 30px;
+  height: 35px;
   font-size: 1.2rem;
+  word-break: break-all;
 }
 
 .input-form2 {
   margin-bottom: 3%;
   border-radius: 10px;
-  padding: 1%;
-  /* height: 70px; */
+  padding: 5px 10px 5px 10px;
+  height: 70px;
   font-size: 1.2rem;
-  /* resize: vertical; */
-  /* vertical-align: top; */
-  /* text-align: left; */
-  /* white-space: normal; */
-  /* word-wrap: break-word; */
   word-break: break-all;
 }
 
@@ -79,7 +75,7 @@
   border: 2px solid #ffffff;
 }
 
-.TaskForm_input-form__McFi+{
+.TaskForm_input-form__McFi + {
   padding: 10%;
 }
 

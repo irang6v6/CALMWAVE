@@ -15,11 +15,12 @@ import useApi from "../../hooks/http/use-api"
 import { LOGOUTandRESETLOCALSTORAGE } from "../../store/token-slice"
 import { SpinnerDots } from "../UI/Spinner"
 import logoimg from "../../assets/reallogo.png"
+import { userActions } from "../../store/user-slice"
 
 function NavIcon() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
-  const id = useSelector((state) => state.user.userData.id)
+  const id = useSelector((state) => state.user.userData?.id)
   const [isLogin, setIsLogin] = useState(
     id ? true : false || localStorage.getItem("Access") ? true : false
   )
@@ -50,6 +51,7 @@ function NavIcon() {
       },
       function () {
         dispatch(LOGOUTandRESETLOCALSTORAGE())
+        dispatch(userActions.resetUserData())
         setIsLogin(() => false)
         navigate("/")
       }

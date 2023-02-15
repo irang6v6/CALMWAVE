@@ -95,6 +95,7 @@ export const AxiosLogout = function () {
       })
       .then(() => {
         dispatch(userActions.resetUserData())
+        dispatch(userActions.setEndLoading())
       })
       .catch((err) => {
         console.log(err)

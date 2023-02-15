@@ -25,7 +25,7 @@
 }
 
 .selected-card {
-  background-color: rgba(255, 254, 179, 0.66);
+  background-color: rgba(100, 255, 255, 0.5);
   /* background-color: rgba(144, 210, 111, 0.9); */
   color: black;
 }

@@ -175,9 +175,9 @@ function TaskForm() {
   return (
     <div className={`${styles[`task-form-container`]}`}>
       <AiOutlineClose
-            className={`${styles[`modal-close-button`]}`}
-            onClick={onCloseModal}
-          />
+        className={`${styles[`modal-close-button`]}`}
+        onClick={onCloseModal}
+      />
       <div className={`${styles[`header-text`]}`}>{FormTitle}</div>
       <form
         className={`${styles[`task-form-input-container`]}`}
