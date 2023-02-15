@@ -18,7 +18,7 @@ function OauthLoad() {
       dispatch(setRefresh(`Bearer ` + RefreshToken))
       navigate("/")
     },
-    [searchParams, navigate]
+    [searchParams, navigate, dispatch]
   )
   return (
     <>
