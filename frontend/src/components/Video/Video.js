@@ -9,7 +9,7 @@ import {
   AiFillEyeInvisible,
   AiFillVideoCamera,
 } from "react-icons/ai"
-// import { GiTurtle } from "react-icons/gi"
+import { useNotification } from "../../hooks/custom/useNotification"
 import { GiPianist, GiHighKick } from "react-icons/gi"
 import new_logo from "../../assets/new_logo.png"
 import buttonAlarm from "../../assets/alarm/buttonalarm.mp3"
@@ -92,13 +92,14 @@ export default function Video(props) {
           prevNowPosture.current = nowPosture
           audioRef.current.src = pinThree
           audioRef.current.play()
+          callNotification("자세 알람", "바른 자세를 유지해봅시다!")
         }
-      }, 30000)
+      }, 5000)
       return function () {
         clearInterval(interval)
       }
     }
-  }, [nowPosture])
+  }, [nowPosture, postureAlarm])
 
   useEffect(() => {
     let timeoutId
@@ -109,6 +110,7 @@ export default function Video(props) {
         if (Date.now() - startTime >= stretchingAlarmDelay * 60 * 1000) {
           audioRef.current.src = buttonAlarm
           audioRef.current.play()
+          callNotification("스트레칭 알람", "스트레칭할 시간이에요!")
           startTime = Date.now()
         }
         timeoutId = setTimeout(stretchingInterval, 1000)
@@ -382,6 +384,11 @@ export default function Video(props) {
     setStretchingAlarm(!stretchingAlarm)
   }
 
+  const callNotification = (title, body) => {
+    const notification = useNotification()
+    notification(title, body)
+  }
+
   // 카메라 변경 함수
   // async switchCamera() {
   //     try {
@@ -483,6 +490,7 @@ export default function Video(props) {
             <div className={`${styles[`stre-input-container`]}`}>
               <input
                 type="number"
+                min="1"
                 step="5"
                 value={stretchingAlarmDelay}
                 onChange={(e) => setStretchingAlarmDelay(e.target.value)}
