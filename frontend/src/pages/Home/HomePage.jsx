@@ -64,10 +64,8 @@ function HomePage() {
     function () {
       if (window.scrollY >= window.innerHeight * 2.4) {
         setAlarmScroll(() => true)
-        console.log("보여랏")
       } else if (window.scrollY <= window.innerHeight * 1.1) {
         setAlarmScroll(() => false)
-        console.log("사라져랏")
       }
     },
     [scrollY]

@@ -1,13 +1,13 @@
 import styles from "./AlarmPage.module.css"
 import React from "react"
-import alertimg from "../../../assets/alert.png"
+import bellImg from "../../../assets/bell.png"
 import cuteturtle from "../../../assets/cuteturtle.png"
 import stretching from "../../../assets/stretching.png"
 import angryface from "../../../assets/angryface.png"
 import { VscTriangleDown } from "react-icons/vsc"
 import Wave from "../../../components/Canvas/Wave/Wave"
 import { useCustomWidthHeight } from "../../../hooks/custom/useCustomWidthHeight"
-
+/* eslint-disable */
 // scrollTrigger, refVal, goNext
 function AlarmPage(props) {
   const { width, height } = useCustomWidthHeight(props.refVal)
@@ -25,7 +25,7 @@ function AlarmPage(props) {
           <div className={`${styles["inner"]}`}>
             <div className={`${styles["left-box"]}`}>
               <img
-                src={alertimg}
+                src={bellImg}
                 alt="알림 이미지"
                 className={`${styles["alert-img"]}`}
               />
