@@ -218,7 +218,7 @@ public class DataCustomRepositoryImpl implements DataCustomRepository {
             queryFactory
                 .select(pastWork.id.count())
                 .from(pastWork)
-                .where(pastWork.user.id.eq(pastWork.user.id)
+                .where(pastWork.user.id.eq(id)
                     , pastWork.dateAimed.goe(pastWork.dateFinished)
                     , pastWork.dateFinished.between(
                         LocalDateTime.of(start.getYear(), start.getMonth(), start.getDayOfMonth(),
