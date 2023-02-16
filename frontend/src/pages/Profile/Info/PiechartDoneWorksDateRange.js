@@ -65,7 +65,7 @@ function PiechartDoneWorksDateRange(props) {
   const lastMonthLastDayFormatted = formatDate(lastMonthLastDay)
   const thisMonthFirstDayFormatted = formatDate(thisMonthFirstDay)
   const thisMonthLastDayFormatted = formatDate(thisMonthLastDay)
-
+  /* eslint-disable */
   useEffect(function () {
     if (selected === "이번주") {
       if (dayOfWeek === 0 && hour <= 4) {
