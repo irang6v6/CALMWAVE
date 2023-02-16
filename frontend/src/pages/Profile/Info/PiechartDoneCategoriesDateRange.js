@@ -162,7 +162,8 @@ function PiechartDoneCategoriesDateRange(props) {
          * chart 색상
          */
         //colors={['red', 'aqua', 'orange']} // 커스터하여 사용할 때
-        colors={{ scheme: "blues" }} // nivo에서 제공해주는 색상 조합 사용할 때
+        colors={{ scheme: 'pastel2' }} // nivo에서 제공해주는 색상 조합 사용할 때
+        // yellow_orange_red, pastel2
         /**
          * pad border 두께 설정
          */
@@ -187,7 +188,7 @@ function PiechartDoneCategoriesDateRange(props) {
         /**
          * link label 연결되는 선 색상
          */
-        arcLinkLabelsColor={{ from: "color" }} // pad 색상에 따라감
+        arcLinkLabelsColor="white" // pad 색상에 따라감
         /**
          * label (pad에 표현되는 글씨) skip할 기준 각도
          */
@@ -203,7 +204,7 @@ function PiechartDoneCategoriesDateRange(props) {
            */
           labels: {
             text: {
-              fontSize: 14,
+              fontSize: 15,
               fill: "#000000",
             },
           },

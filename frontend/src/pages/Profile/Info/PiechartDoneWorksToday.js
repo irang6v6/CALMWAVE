@@ -67,7 +67,7 @@ function PiechartDoneWorksToday() {
          * chart 색상
          */
         //colors={['red', 'aqua', 'orange']} // 커스터하여 사용할 때
-        colors={{ scheme: "blues" }} // nivo에서 제공해주는 색상 조합 사용할 때
+        colors={{ scheme: "pastel2" }} // nivo에서 제공해주는 색상 조합 사용할 때
         /**
          * pad border 두께 설정
          */
@@ -92,7 +92,7 @@ function PiechartDoneWorksToday() {
         /**
          * link label 연결되는 선 색상
          */
-        arcLinkLabelsColor={{ from: "color" }} // pad 색상에 따라감
+        arcLinkLabelsColor="white" // pad 색상에 따라감
         /**
          * label (pad에 표현되는 글씨) skip할 기준 각도
          */
