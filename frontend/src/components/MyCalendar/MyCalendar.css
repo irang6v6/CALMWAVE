@@ -330,6 +330,9 @@ abbr[title] {
 
 .nowork-text {
   color: white;
+  /* border: 1px solid #000; */
+  font-size: 1.2rem;
+  margin-top: 20%;
 }
 
 .card-header-icon {
