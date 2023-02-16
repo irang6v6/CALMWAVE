@@ -3,8 +3,6 @@ package com.ssafy.calmwave.service;
 import com.ssafy.calmwave.config.jwt.JwtUtil;
 import com.ssafy.calmwave.domain.*;
 import com.ssafy.calmwave.dto.*;
-import com.ssafy.calmwave.repository.PastWorkRepository;
-import com.ssafy.calmwave.repository.WorkCategoryRepository;
 import com.ssafy.calmwave.repository.WorkPeriodRepository;
 import com.ssafy.calmwave.repository.WorkRepository;
 import lombok.RequiredArgsConstructor;
@@ -25,11 +23,8 @@ public class WorkService {
 
     private final JwtUtil jwtUtil;
     private final WorkRepository workRepository;
-    private final UserService userService;
     private final CategoryService categoryService;
-    private final WorkCategoryRepository workCategoryRepository;
     private final WorkPeriodRepository workPeriodRepository;
-    private final PastWorkRepository pastWorkRepository;
 
     public Work save(Work work) {
         return workRepository.save(work);
@@ -41,6 +36,10 @@ public class WorkService {
 
     public List<Work> getDone(Long userId) {
         return workRepository.findAllByUserIdAndStatusOrderByWorkOrder(userId, WorkStatus.DONE);
+    }
+
+    public List<Work> findAllByUser(Long userId) {
+        return workRepository.findAllByUserId(userId);
     }
 
     public Optional<Work> findById(Long workId) {
@@ -86,6 +85,11 @@ public class WorkService {
         return list;
     }
 
+    public List<WorkResponseDoneDto> convertDone(List<Work> done) {
+        List<WorkResponseDoneDto> list = done.stream().map(m -> new WorkResponseDoneDto(m.getId(), m.getTitle(), m.getDescription(), m.getStatus(), m.getDateCreated(), m.getDateFinished(), m.getDateAimed(), m.getTimeAimed(), m.getWorkOrder(), workPeriodRepository.findTimediffByWorkId(m.getId()), new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder()))).collect(Collectors.toList());
+        return list;
+    }
+
     /**
      * work의 user와 token의 user가 동일한지 (업무의 주인이 맞는지)확인
      *
@@ -113,10 +117,7 @@ public class WorkService {
         }
     }
 
-    public List<WorkResponseDoneDto> convertDone(List<Work> done) {
-        List<WorkResponseDoneDto> list = done.stream().map(m -> new WorkResponseDoneDto(m.getId(), m.getTitle(), m.getDescription(), m.getStatus(), m.getDateCreated(), m.getDateFinished(), m.getDateAimed(), m.getTimeAimed(), m.getWorkOrder(), workPeriodRepository.findTimediffByWorkId(m.getId()), new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder()))).collect(Collectors.toList());
-        return list;
-    }
+
 
     /**
      * calender에서 조회하는 날짜에 따른 work List 리턴
@@ -136,5 +137,41 @@ public class WorkService {
             workDtoList.add(w);
         }
         return workDtoList;
+    }
+
+    /**
+     * 전체 달성률
+     *
+     * @param id
+     * @return
+     */
+    public double getPercentOfTodoAndDone(Long id) {
+        List<Work> todo = getTodo(id);
+        List<Work> done = getDone(id);
+        double total = todo.size() + done.size();
+        double num = done.size();
+        return Math.round(num / total * 100); // percent
+    }
+
+    /**
+     * 총 업무시간 / 목표시간 %
+     *
+     * @param id
+     * @return
+     */
+    public long getPercentOfTotalAndAimedTime(Long id) {
+        Optional<Long> optionalSum = workPeriodRepository.findSumWorkTimeByUserId(id);
+        if (optionalSum.isPresent()) {
+            Double sum = (double) optionalSum.get();
+            Double aimed = (double) workRepository.findTotalTimeAimedByUserId(id);
+            return Math.round(sum / aimed * 100);
+        } else {
+            return 0;
+        }
+    }
+
+
+    public long findTotalTimeAimedByUserId(Long id) {
+        return workRepository.findTotalTimeAimedByUserId(id);
     }
 }

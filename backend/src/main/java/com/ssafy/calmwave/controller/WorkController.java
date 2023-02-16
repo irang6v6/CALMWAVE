@@ -16,11 +16,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
@@ -47,16 +44,19 @@ public class WorkController {
         HttpStatus status;
         User user = jwtUtil.getUser(token);
         Work work = workService.convert(user, workRequestDto);
-        if (work != null && work.getWorkCate().getStatus() == WorkCategoryStatus.VALID) {
+        if ("".equals(workRequestDto.getTitle().trim())) {
+            resultMap.put("result", "title is null");
+            status = HttpStatus.FORBIDDEN;
+        } else if (work != null && work.getWorkCate().getStatus() == WorkCategoryStatus.VALID) {
             workService.save(work);
             resultMap.put("result", "ok");
             status = HttpStatus.ACCEPTED;
         } else if (work.getWorkCate().getStatus() == WorkCategoryStatus.DELETED) {
             resultMap.put("result", "삭제된 카테고리입니다.");
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            status = HttpStatus.FORBIDDEN;
         } else {
             resultMap.put("result", "failed");
-            status = HttpStatus.INTERNAL_SERVER_ERROR;
+            status = HttpStatus.FORBIDDEN;
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
@@ -259,7 +259,6 @@ public class WorkController {
         }
         return new ResponseEntity<Map<String, Object>>(resultMap, status);
     }
-
 
 
 }

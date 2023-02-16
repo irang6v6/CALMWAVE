@@ -6,6 +6,8 @@ import com.ssafy.calmwave.domain.User;
 
 import java.util.Optional;
 import java.util.UUID;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -23,6 +25,20 @@ public class UserService {
         user.get().setUsername(UUID.randomUUID().toString());
         user.get().setPassword(UUID.randomUUID().toString());
         user.get().setDeleted(Byte.parseByte("1"));
+    }
+
+    /**
+     * Comment  : 정상적인 이메일 인지 검증.
+     */
+    public static boolean isValidEmail(String email) {
+        boolean err = false;
+        String regex = "^[_a-z0-9-]+(.[_a-z0-9-]+)*@(?:\\w+\\.)+\\w+$";
+        Pattern p = Pattern.compile(regex);
+        Matcher m = p.matcher(email);
+        if(m.matches()) {
+            err = true;
+        }
+        return err;
     }
 
     public void updateUser(UserInfoDto userInfoDto) {

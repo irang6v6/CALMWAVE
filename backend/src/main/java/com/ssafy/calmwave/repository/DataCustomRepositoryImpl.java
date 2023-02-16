@@ -49,13 +49,13 @@ public class DataCustomRepositoryImpl implements DataCustomRepository {
                             .from(workPeriod)
                             .where(workPeriod.work.id.eq(work.id)),
                         "totalTime"),
-                ExpressionUtils.as(
-                    JPAExpressions.select(
-                            workCategory.id
-                        )
-                        .from(workCategory)
-                        .where(workCategory.id.eq(work.workCate.id)),
-                    "workCate"),
+                    ExpressionUtils.as(
+                        JPAExpressions.select(
+                                workCategory.id
+                            )
+                            .from(workCategory)
+                            .where(workCategory.id.eq(work.workCate.id)),
+                        "workCate"),
                     ExpressionUtils.as(
                         JPAExpressions.select(
                                 workCategory.cateName
@@ -76,46 +76,56 @@ public class DataCustomRepositoryImpl implements DataCustomRepository {
             .fetch();
     }
 
-    private static LocalDateTime calculateStartOfToday(LocalDateTime now) {
-        LocalDateTime midnight = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 0, 0, 0);
-        LocalDateTime four = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 4, 0, 0);
+    public static LocalDateTime calculateStartOfToday(LocalDateTime now) {
+        LocalDateTime midnight = LocalDateTime.of(now.getYear(), now.getMonth(),
+            now.getDayOfMonth(), 0, 0, 0);
+        LocalDateTime four = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 4,
+            0, 0);
         LocalDateTime yesterday = now.minusDays(1);
-        if(!now.isBefore(midnight) && !now.isAfter(four))
-            return LocalDateTime.of(yesterday.getYear(), yesterday.getMonth(), yesterday.getDayOfMonth(),
+        if (!now.isBefore(midnight) && !now.isAfter(four)) {
+            return LocalDateTime.of(yesterday.getYear(), yesterday.getMonth(),
+                yesterday.getDayOfMonth(),
                 04, 00, 00);
-        else
+        } else {
             return LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(),
-            04, 00, 00);
+                04, 00, 00);
+        }
     }
 
     private static LocalDateTime calculateEndOfToday(LocalDateTime now) {
-        LocalDateTime midnight = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 0, 0, 0);
-        LocalDateTime four = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 4, 0, 0);
+        LocalDateTime midnight = LocalDateTime.of(now.getYear(), now.getMonth(),
+            now.getDayOfMonth(), 0, 0, 0);
+        LocalDateTime four = LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(), 4,
+            0, 0);
         LocalDateTime tomorrow = now.plusDays(1);
-        if(!now.isBefore(midnight) && !now.isAfter(four))
+        if (!now.isBefore(midnight) && !now.isAfter(four)) {
             return LocalDateTime.of(now.getYear(), now.getMonth(), now.getDayOfMonth(),
                 04, 00, 00);
-        else
+        } else {
             return LocalDateTime.of(tomorrow.getYear(), tomorrow.getMonth(),
-            tomorrow.getDayOfMonth(), 04, 00, 00);
+                tomorrow.getDayOfMonth(), 04, 00, 00);
+        }
     }
 
     @Override
     public List<DoneWorkDto> findDoneWorkForDateRange(Long id, String startDate, String endDate) {
-        LocalDate start = LocalDate.of(Integer.valueOf(startDate.substring(0, 4)), Integer.valueOf(startDate.substring(4, 6)), Integer.valueOf(startDate.substring(6, 8)));
-        LocalDate end = LocalDate.of(Integer.valueOf(endDate.substring(0, 4)), Integer.valueOf(endDate.substring(4, 6)), Integer.valueOf(endDate.substring(6, 8))).plusDays(1);
+        LocalDate start = LocalDate.of(Integer.valueOf(startDate.substring(0, 4)),
+            Integer.valueOf(startDate.substring(4, 6)), Integer.valueOf(startDate.substring(6, 8)));
+        LocalDate end = LocalDate.of(Integer.valueOf(endDate.substring(0, 4)),
+                Integer.valueOf(endDate.substring(4, 6)), Integer.valueOf(endDate.substring(6, 8)))
+            .plusDays(1);
 
         return queryFactory
             .select(new QDoneWorkDto(
-                pastWork.id,
-                pastWork.title,
-                pastWork.description,
-                pastWork.status,
-                pastWork.dateCreated,
-                pastWork.dateFinished,
-                pastWork.dateAimed,
-                pastWork.timeAimed,
-                pastWork.workOrder,
+                    pastWork.id,
+                    pastWork.title,
+                    pastWork.description,
+                    pastWork.status,
+                    pastWork.dateCreated,
+                    pastWork.dateFinished,
+                    pastWork.dateAimed,
+                    pastWork.timeAimed,
+                    pastWork.workOrder,
                     ExpressionUtils.as(
                         JPAExpressions.select(
                                 Expressions.numberTemplate(Long.class,
@@ -145,7 +155,8 @@ public class DataCustomRepositoryImpl implements DataCustomRepository {
                 pastWork.user.id.eq(id),
                 /*pastWork.status.eq(WorkStatus.DONE),*/
                 pastWork.dateFinished.between(
-                    LocalDateTime.of(start.getYear(), start.getMonth(), start.getDayOfMonth(), 04, 00,
+                    LocalDateTime.of(start.getYear(), start.getMonth(), start.getDayOfMonth(), 04,
+                        00,
                         00),
                     LocalDateTime.of(end.getYear(), end.getMonth(),
                         end.getDayOfMonth(), 04, 00, 00)))
@@ -170,8 +181,11 @@ public class DataCustomRepositoryImpl implements DataCustomRepository {
     @Override
     public List<DoneWorkDatesDto> findDoneWorkDatesForDateRange(Long id, String startDate,
         String endDate) {
-        LocalDate start = LocalDate.of(Integer.valueOf(startDate.substring(0, 4)), Integer.valueOf(startDate.substring(4, 6)), Integer.valueOf(startDate.substring(6, 8)));
-        LocalDate end = LocalDate.of(Integer.valueOf(endDate.substring(0, 4)), Integer.valueOf(endDate.substring(4, 6)), Integer.valueOf(endDate.substring(6, 8))).plusDays(1);
+        LocalDate start = LocalDate.of(Integer.valueOf(startDate.substring(0, 4)),
+            Integer.valueOf(startDate.substring(4, 6)), Integer.valueOf(startDate.substring(6, 8)));
+        LocalDate end = LocalDate.of(Integer.valueOf(endDate.substring(0, 4)),
+                Integer.valueOf(endDate.substring(4, 6)), Integer.valueOf(endDate.substring(6, 8)))
+            .plusDays(1);
 
         return queryFactory
             .select(new QDoneWorkDatesDto(
@@ -194,23 +208,26 @@ public class DataCustomRepositoryImpl implements DataCustomRepository {
     @Override
     public Long findDoneBeforeAimWorksForRange(Long id, String startDate,
         String endDate) {
-        LocalDate start = LocalDate.of(Integer.valueOf(startDate.substring(0, 4)), Integer.valueOf(startDate.substring(4, 6)), Integer.valueOf(startDate.substring(6, 8)));
-        LocalDate end = LocalDate.of(Integer.valueOf(endDate.substring(0, 4)), Integer.valueOf(endDate.substring(4, 6)), Integer.valueOf(endDate.substring(6, 8))).plusDays(1);
+        LocalDate start = LocalDate.of(Integer.valueOf(startDate.substring(0, 4)),
+            Integer.valueOf(startDate.substring(4, 6)), Integer.valueOf(startDate.substring(6, 8)));
+        LocalDate end = LocalDate.of(Integer.valueOf(endDate.substring(0, 4)),
+                Integer.valueOf(endDate.substring(4, 6)), Integer.valueOf(endDate.substring(6, 8)))
+            .plusDays(1);
 
         return
             queryFactory
                 .select(pastWork.id.count())
                 .from(pastWork)
                 .where(pastWork.user.id.eq(pastWork.user.id)
-                    ,pastWork.dateAimed.goe(pastWork.dateFinished)
+                    , pastWork.dateAimed.goe(pastWork.dateFinished)
                     , pastWork.dateFinished.between(
-                        LocalDateTime.of(start.getYear(), start.getMonth(), start.getDayOfMonth(), 04, 00, 00),
-                        LocalDateTime.of(end.getYear(), end.getMonth(), end.getDayOfMonth(), 04, 00, 00))
+                        LocalDateTime.of(start.getYear(), start.getMonth(), start.getDayOfMonth(),
+                            04, 00, 00),
+                        LocalDateTime.of(end.getYear(), end.getMonth(), end.getDayOfMonth(), 04, 00,
+                            00))
                 )
                 .fetchOne();
     }
-
-
 
 
 }
