@@ -4,8 +4,6 @@ import { useDrag } from "react-dnd"
 import useAnimation from "../../../hooks/custom/useAnimation"
 import { useClasses } from "../../../hooks/custom/useClasses"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
-// import CardBody from "../CardBody/CardBody"
-// import CardFooter from "../CardFooter/CardFooter"
 import CardHeader from "../CardHeader/CardHeader"
 import styles from "./SelectedTaskCard.module.css"
 
@@ -68,15 +66,7 @@ function SelectedTaskCard({ task, idx }) {
             data={task}
             deleteSelectedTaskList={close}
           />
-          {/* <div>{task.title}</div> */}
-          {/* <div className={`${styles[`selected-card-body-container`]}`}>
-
-            <div>{task.description}</div>
-
-          </div> */}
           <div>{task.businessHours}</div>
-          {/* <div>{task.categoryId}</div> */}
-          {/* <CardFooter /> */}
         </div>
       )}
     </>

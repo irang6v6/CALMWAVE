@@ -26,7 +26,6 @@
 
 .selected-card {
   background-color: rgba(100, 255, 255, 0.5);
-  /* background-color: rgba(144, 210, 111, 0.9); */
   color: black;
 }
 
@@ -39,9 +38,6 @@
   font-weight: 500;
 }
 
-/* .task-card-container.select {
-  box-shadow: 3px 3px 3px 3px rgba(12, 210, 189, 1);
-} */
 .task-card-container.hover.select {
   box-shadow: rgba(12, 210, 189, 1);
   transform: scale(103%);

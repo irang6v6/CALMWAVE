@@ -105,8 +105,6 @@ function PiechartDoneWorksBeforeAim(props) {
                 ]);
                 setDoneWorkTotalCount(Object.keys(result1.data).length);
                 setDoneBeforeAimCount(result2.data);
-                console.log(doneWorkTotalCount);
-                console.log(doneBeforeAimCount);
             } catch (error) {
               console.error(error);
             }

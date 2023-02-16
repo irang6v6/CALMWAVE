@@ -32,13 +32,11 @@
 }
 
 .delete-btn {
-  /* border: 1px solid #000; */
   padding: 3% 1%;
   width: 30%;
   border-radius: 10px;
   background-color: #ececec;
   color: black;
-  /* font-weight: 700; */
   text-align: center;
   cursor: pointer;
 }

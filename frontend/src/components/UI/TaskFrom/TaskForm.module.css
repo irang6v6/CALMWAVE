@@ -10,21 +10,14 @@
   background-color: rgb(9, 33, 53);
   display: flex;
   flex-direction: column;
-  /* align-items: center; */
   justify-content: center;
   font-size: 2.77rem;
   font-family: "Gowun Dodum", sans-serif;
   border-radius: 20px;
   border: 4px solid #ffffff;
   box-shadow: 10px 10px 10px rgba(255, 255, 255, 0.5);
-  /* text-align: center; */
   color: white;
-  /* overflow-y: scroll */
 }
-
-/* .task-form-container::-webkit-scrollbar {
-  display: none;
-} */
 
 .modal-close-button {
   position: absolute;
@@ -90,6 +83,4 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  /* justify-content: center; */
-  /* align-items: center; */
 }

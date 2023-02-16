@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux"
 import {
   AxiosGetCategory,
   categoryActions,
-  // categoryActions,
 } from "../../../store/category-slice"
 import styles from "./DeleteModalForm.module.css"
 import { closeModal } from "../../../store/door-store/modal-slice"
@@ -31,7 +30,7 @@ function DeleteModalForm({ cardType, cardId }) {
           dispatch(AxiosGetTodos())
         })
         .then(() => {
-          // 삭제되는 친구들ㅇ르 selectedTask에서 제외해줘야 함.
+          // 삭제되는 친구들을 selectedTask에서 제외해줘야 함.
           dispatch(selectedTaskActions.filteringAfterTaskDelete(formData.id))
           dispatch(todoActions.deleteTodo(formData.id))
           dispatch(calendarActions.deleteCalender(formData.id))
@@ -40,7 +39,7 @@ function DeleteModalForm({ cardType, cardId }) {
           dispatch(closeModal())
         })
         .catch((err) => {
-          console.log("이건 일 지우기 에러임")
+          console.log(err, "업무 삭제 에러")
         })
     } else {
       // category
@@ -58,7 +57,7 @@ function DeleteModalForm({ cardType, cardId }) {
           dispatch(categoryActions.changeSelected({ selectedCategoryId: null }))
         })
         .then(() => {
-          // 삭제되는 친구들ㅇ르 selectedTask에서 제외해줘야 함.
+          // 삭제되는 친구들을 selectedTask에서 제외해줘야 함.
           dispatch(
             selectedTaskActions.filteringAfterCategoryDelete(formData.id)
           )

@@ -42,7 +42,6 @@ function RoomResult() {
             <div className={`${styles[`text`]}`}>
               {data ? (
                 <div>
-                  {/* 추후에 시간 파싱 바꾸기 */}
                   목표시간{" "}
                   <span className={`${styles[`aimed-time`]}`}>
                     {data?.totalAimedTime / 3600} {"시간"}
@@ -88,15 +87,12 @@ function RoomResult() {
                         총업무시간: e.totalTime
                       }
                     })}
-                    // keys={["aimedTime", "totalTime"]}
                     keys={["목표시간", "총업무시간"]}
                     indexBy={"title"}
                     colors={{ scheme: "blues" }}
-                    // borderWidth={3}
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
                     valueFormat={(value) => `${Math.round(value/3600)}시간 ${Math.round(value % 3600 / 60)}분`}
-                    // sliceTooltip={}
                   />
                 </div>
                 <div className={`${styles[`graph-info`]}`}>
@@ -114,7 +110,6 @@ function RoomResult() {
                   <ResponsivePie
                     data={data?.pieChartByWork}
                     colors={{ scheme: "blues" }}
-                    // borderWidth={3}
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
                     valueFormat={(value) => `${Math.round(value / 0.6) / 100}분`}
@@ -144,7 +139,6 @@ function RoomResult() {
                   <ResponsivePie
                     data={data?.pieChartByCategory}
                     colors={{ scheme: "blues" }}
-                    // borderWidth={3}
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
                     valueFormat={(value) => `${Math.round(value / 0.6) / 100}분`}
