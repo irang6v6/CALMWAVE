@@ -11,7 +11,9 @@ import CateIcon from "../../../components/CateIcon/CateIcon"
 // import CalendarInfo from "../../../components/MyCalendar/CalendarInfo"
 // import NightSky from "../../../components/Canvas/NightSky/NightSky"
 import DoneWorksVisualization from "./DoneWorksVisualization"
-// import DoneCategoriesVisualization from "./DoneCategoriesVisualization"
+import DoneCategoriesVisualization from "./DoneCategoriesVisualization"
+import BarChartDoneWorksforThisWeek from './BarChartDoneWorksforThisWeek'
+import PieChartDoneWorksBeforeAim from './PiechartDoneWorksBeforeAim'
 // import { Bar } from '@nivo/bar';
 // import { ResponsivePie } from "@nivo/pie"
 // import { core } from "@nivo/core"
@@ -117,7 +119,10 @@ function UserInfo() {
           {/* <CalendarInfo/> */}
         </div>
       </div>
+
       <div className={`${styles["chart-wrap"]}`}>
+
+      <div className={`${styles["done-work"]}`}>
         <div className={`${styles["chart"]}`}>
           <h3>끝낸 업무 시각화</h3>
           <DoneWorksVisualization className={`${styles["chart1"]}`} />
@@ -125,7 +130,26 @@ function UserInfo() {
 
         <div className={`${styles["chart"]}`}>
           <h3>&nbsp;&nbsp;끝낸 카테고리 시각화</h3>
-          {/* <DoneCategoriesVisualization className={`${styles["chart1"]}`} /> */}
+          <DoneCategoriesVisualization className={`${styles["chart1"]}`} />
+        </div>
+      </div>
+
+        <div className={`${styles["chart"]}`}>
+          <h3>&nbsp;&nbsp;이번주 요일별 끝낸 업무 수</h3>
+          <BarChartDoneWorksforThisWeek/>
+        </div>
+
+        <div className={`${styles["done-work"]}`}>
+
+        <div className={`${styles["chart"]}`}>
+        <h3>&nbsp;&nbsp;이번주 목표시간 이전에 끝낸 업무 퍼센티지</h3>
+        <PieChartDoneWorksBeforeAim selected="이번주"/>
+        </div>
+
+        <div className={`${styles["chart"]}`}>
+        <h3>&nbsp;&nbsp;이번달 목표시간 이전에 끝낸 업무 퍼센티지</h3>
+        <PieChartDoneWorksBeforeAim selected="이번달"/>
+        </div>
         </div>
       </div>
     </div>

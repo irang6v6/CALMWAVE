@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react"
 import axios from "axios"
 import { ResponsivePie } from "@nivo/pie"
 
-function PiechartDoneWorksDateRange(props) {
+function PiechartDoneCategoriesDateRange(props) {
   const [works, setWork] = useState([])
-  // console.log(typeof props.selected)
+
   const selected = props.selected
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
-  // let startDate = ""
-  // let endDate = ""
 
   const today = new Date()
   const dayOfWeek = today.getDay()
@@ -121,6 +119,17 @@ function PiechartDoneWorksDateRange(props) {
 
   const totalMinutes = works.reduce((acc, work) => acc + work.totalTime, 0)
 
+  const sumByCateName = works.reduce((acc, work) => {
+    if (!acc[work.cateName]) {
+      acc[work.cateName] = { id: work.cateName, minutes: 0, value: 0 }
+    }
+    acc[work.cateName].minutes += work.totalTime
+    acc[work.cateName].value = Math.round(
+      (acc[work.cateName].minutes / totalMinutes) * 100
+    )
+    return acc
+  }, {})
+
   return (
     // chart height이 100%이기 때문이 chart를 덮는 마크업 요소에 height 설정
     <div style={{ width: "800px", height: "500px", margin: "0 auto" }}>
@@ -128,11 +137,8 @@ function PiechartDoneWorksDateRange(props) {
         /**
          * chart에 사용될 데이터
          */
-        data={works.map((work) => ({
-          id: work.id,
-          value: Math.round((work.totalTime / totalMinutes) * 100),
-          label: work.title,
-        }))}
+
+        data={Object.values(sumByCateName)}
         valueFormat={(value) => `${Number(value)}%`}
         /**
          * chart margin
@@ -186,6 +192,7 @@ function PiechartDoneWorksDateRange(props) {
          * label (pad에 표현되는 글씨) skip할 기준 각도
          */
         arcLabelsSkipAngle={10}
+        // arcLinkLabelsDiagonalLength={26}
         arcLabelsTextColor={{
           from: "color",
           modifiers: [["darker", 2]],
@@ -201,7 +208,6 @@ function PiechartDoneWorksDateRange(props) {
             },
           },
         }}
-        arcLinkLabel="label"
         /**
          * pad 클릭 이벤트
          */
@@ -239,4 +245,4 @@ function PiechartDoneWorksDateRange(props) {
   )
 }
 
-export default PiechartDoneWorksDateRange
+export default PiechartDoneCategoriesDateRange

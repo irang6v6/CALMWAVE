@@ -84,7 +84,7 @@ function PiechartDoneWorksToday() {
         /**
          * link label 색상
          */
-        arcLinkLabelsTextColor="#333333"
+        arcLinkLabelsTextColor={{ from: 'color', modifiers: [] }}
         /**
          * link label 연결되는 선 두께
          */
