@@ -21,7 +21,8 @@ const useApi = function () {
 
   const axiosRequest = useCallback(
     async (requestData, saveDataFunction) => {
-      setIsLoading(true)
+      setIsLoading(() => true)
+      setError(() => false)
       await axios(requestData)
         .then((res) => {
           console.log(res)

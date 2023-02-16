@@ -5,14 +5,43 @@ import CategoryTask from "./CategoryTask/CategoryTask"
 import { DndProvider } from "react-dnd"
 import { HTML5Backend } from "react-dnd-html5-backend"
 import NavIcon from "../../components/NavIcon/NavIcon"
-import { useDispatch } from "react-redux"
+import { useDispatch, useSelector } from "react-redux"
 import { AxiosGetCategory } from "../../store/category-slice"
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import axios from "axios"
 import { AxiosGetTodos } from "../../store/task-slice"
+import { useNavigate } from "react-router-dom"
 
 function Door(props) {
+  const navigate = useNavigate()
   const dispatch = useDispatch()
+  const id = useSelector((state) => state.user.userData?.id)
+  const [isLogin, setIsLogin] = useState(
+    id ? true : false || localStorage.getItem("Access") ? true : false
+  )
+  /* eslint-disable */
+  useEffect(
+    function () {
+      setIsLogin(() =>
+        id
+          ? true
+          : false ||
+            (localStorage.getItem("Access") && localStorage.getItem("Refresh"))
+          ? true
+          : false
+      )
+    },
+    [id]
+  )
+
+  useEffect(
+    function () {
+      if (!isLogin) {
+        navigate("/sign")
+      }
+    },
+    [isLogin]
+  )
 
   useEffect(
     function () {

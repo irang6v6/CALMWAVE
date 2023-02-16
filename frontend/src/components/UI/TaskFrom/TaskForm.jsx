@@ -14,6 +14,7 @@ import {
 import { todoActions } from "../../../store/todos-slice"
 import { calendarActions } from "../../../store/calendar-slice"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
+import { AiOutlineClose } from "react-icons/ai"
 
 function TaskForm() {
   const dispatch = useDispatch()
@@ -44,6 +45,11 @@ function TaskForm() {
   const submitHandler = function (event) {
     event.preventDefault()
     dispatch(modalActions.toggleIsLoading())
+    if (!titleInput) {
+      window.alert("제목을 입력해주세요")
+      dispatch(closeModal())
+      return
+    }
     if (isCreate) {
       axios({
         method: "post",
@@ -162,15 +168,23 @@ function TaskForm() {
     ]
   )
 
+  const onCloseModal = function () {
+    dispatch(closeModal())
+  }
+
   return (
     <div className={`${styles[`task-form-container`]}`}>
+      <AiOutlineClose
+        className={`${styles[`modal-close-button`]}`}
+        onClick={onCloseModal}
+      />
       <div className={`${styles[`header-text`]}`}>{FormTitle}</div>
       <form
         className={`${styles[`task-form-input-container`]}`}
         onSubmit={submitHandler}
       >
         <label htmlFor="task-title" className={`${styles[`body-text`]}`}>
-          Title
+          제목
         </label>
         <input
           ref={titleRef}
@@ -180,14 +194,14 @@ function TaskForm() {
           className={`${styles[`input-form`]}`}
         />
         <label htmlFor="task-description" className={`${styles[`body-text`]}`}>
-          Description
+          세부내용
         </label>
-        <input
+        <textarea
           ref={descriptionRef}
-          type="text"
           id="task-description"
+          rows={5}
           onChange={descriptionChangeHandler}
-          className={`${styles[`input-form`]}`}
+          className={`${styles[`input-form2`]}`}
         />
         <label htmlFor="task-date" className={`${styles[`body-text`]}`}>
           D-Day
@@ -201,7 +215,7 @@ function TaskForm() {
         />
 
         <label htmlFor="task-storypoint" className={`${styles[`body-text`]}`}>
-          Storypoint
+          목표시간
         </label>
         <input
           ref={storyPointRef}

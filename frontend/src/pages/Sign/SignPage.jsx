@@ -18,6 +18,9 @@ function SignPage({ pageRef }) {
   const [page1Class, setPage1Class] = useState(`${styles["page1"]}`)
   const [page2Class, setPage2Class] = useState(`${styles["page2"]}`)
 
+  const [toastMessage, setToastMessage] = useState("")
+  const [needToast, setNeedToast] = useState(false)
+
   useEffect(
     function () {
       if (loginOrSignup) {
@@ -80,20 +83,34 @@ function SignPage({ pageRef }) {
       // res로 { "result": "ok" } 가 온다
       async function (res) {
         if (res.data.result === "ok") {
+          setToastMessage(() => "회원가입 완료!\n로그인 해주세요!")
+          setNeedToast(() => true)
           toggleLoginOrSignup()
           resetAction()
         }
       }
     )
   }
+  // 에러 핸들링
   useEffect(
     function () {
-      if (loginError || signupError) {
-        console.log(loginError, signupError)
+      if (loginError) {
+        setToastMessage("로그인 실패!\n다시 시도해주세요!")
+        setNeedToast(() => true)
+      } else if (signupError) {
+        setToastMessage("회원가입 실패!\n다시 시도해주세요!")
+        setNeedToast(() => true)
+      } else {
+        setNeedToast(() => false)
       }
     },
     [loginError, signupError]
   )
+
+  const toastOffHandler = function () {
+    console.log("이거 실행 외않되 ㅠㅠ")
+    setNeedToast(() => false)
+  }
 
   return (
     <div ref={pageRef} className={`${styles["sign-container"]}`}>
@@ -115,6 +132,16 @@ function SignPage({ pageRef }) {
           />
         </div>
       </div>
+      {needToast && (
+        <div
+          className={`${styles[`toast-container`]}`}
+          onAnimationEnd={toastOffHandler}
+        >
+          <div className={styles[`toast-title`]}>알람</div>
+          <div>{toastMessage}</div>
+          <div className={styles[`toast-bottom`]}></div>
+        </div>
+      )}
     </div>
   )
 }

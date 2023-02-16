@@ -15,21 +15,33 @@ import { AxiosGetTodos } from "../../../store/task-slice"
 import { selectedTaskActions } from "../../../store/door-store/selected-task-slice"
 import CateIcon from "../../CateIcon/CateIcon"
 import CateIconArray from "../../CateIcon/CateIconArray"
+import { AiOutlineClose } from "react-icons/ai"
 
 function CategoryForm() {
   const dispatch = useDispatch()
   const { formData, isLoading, isCreate } = useSelector((state) => state.modal)
+  const categoryList = useSelector((state) => state.category.categoryList)
   const [titleRef] = [useRef(null)]
   const [colorRef] = [useRef(null)]
   const [titleInput, titleChangeHandler, titleSetTrigger] = useInput(titleRef)
   /* eslint-disable */
   const [colorInput, colorChangeHandler, colorSetTrigger] = useInput(colorRef)
-  const [icon, setIcon] = useState(0)
+  const [selectedIcon, setselectedIcon] = useState(0)
   const FormTitle = isCreate ? `카테고리 생성` : `카테고리 수정`
 
   const submitHandler = function (event) {
     event.preventDefault()
     if (isLoading) {
+      return
+    }
+    if (!titleInput) {
+      window.alert("제목을 입력해주세요")
+      dispatch(closeModal())
+      return
+    }
+    if (categoryList.every(item => item.title === titleInput && (!formData || item.id !== formData.id))) {
+      window.alert("동일한 제목을 사용할 수 없습니다")
+      dispatch(closeModal())
       return
     }
     if (isCreate && titleInput) {
@@ -39,7 +51,7 @@ function CategoryForm() {
         data: {
           cateName: `${titleInput}`,
           cateColor: `${colorInput}`,
-          cateIcon: `${icon}`,
+          cateIcon: `${selectedIcon}`,
           // cateOrder: 0,
         },
       })
@@ -59,7 +71,8 @@ function CategoryForm() {
           // dispatch(modalActions.toggleIsLoading())
         })
         .catch((err) => {
-          console.log(err, "<<<<<<<<<<<<")
+          window.alert("동일한 제목을 사용할 수 없습니다")
+          dispatch(closeModal())
           dispatch(modalActions.setNotLoading())
         })
     } else if (titleInput) {
@@ -68,7 +81,7 @@ function CategoryForm() {
         url: `/v1/category/update`,
         data: {
           cateColor: `${colorInput}`,
-          cateIcon: `${icon}`,
+          cateIcon: `${selectedIcon}`,
           cateName: `${titleInput}`,
           cateId: formData?.id,
           // cateOrder: 0,
@@ -91,7 +104,7 @@ function CategoryForm() {
                 ...formData,
                 cateColor: colorInput,
                 title: titleInput,
-                cateIcon: icon,
+                cateIcon: selectedIcon,
               },
             })
           )
@@ -111,20 +124,36 @@ function CategoryForm() {
     function () {
       titleSetTrigger(formData?.title || "")
       colorSetTrigger(formData?.cateColor || 0)
-      setIcon(formData?.category?.cateIcon || formData?.cateIcon || 0)
+      setselectedIcon(formData?.category?.cateIcon || formData?.cateIcon || 0)
     },
     [formData, titleSetTrigger]
   )
 
+  const onCloseModal = function () {
+    dispatch(closeModal())
+  }
+
+
   return (
     <div className={`${styles[`category-form-container`]}`}>
+
+      {/* 닫기 모달 */}
+      <AiOutlineClose
+            className={`${styles[`modal-close-button`]}`}
+            onClick={onCloseModal}
+          />
+
+      {/* 카테고리 생성 및 수정 header */}
       <div className={`${styles[`header-text`]}`}>{FormTitle}</div>
+
+      {/* 폼 시작 */}
       <form
         className={`${styles[`category-form-input-container`]}`}
         onSubmit={submitHandler}
       >
+
         <label htmlFor="category-title" className={`${styles[`body-text`]}`}>
-          title
+          제목
         </label>
         <input
           ref={titleRef}
@@ -133,9 +162,11 @@ function CategoryForm() {
           onChange={titleChangeHandler}
           className={`${styles[`input-form`]}`}
         />
+
         <label htmlFor="category-color" className={`${styles[`body-text`]}`}>
-          category color
+          색상
         </label>
+
         <select
           name="category-color-set"
           id="category-color"
@@ -150,13 +181,14 @@ function CategoryForm() {
           <option value="5"></option>
           <option value="6"></option>
         </select>
-        <div>
+
+        <div className={`${styles[`cate-icon`]}`}>
           <input type="hidden" />
           {CateIconArray.map((icon) => (
             <button
               key={icon.value}
-              onClick={() => setIcon(icon.value)}
-              className={`${styles[`icon-button`]}`}
+              onClick={(e) => { e.preventDefault(); setselectedIcon(icon.value);}}
+              className={`${styles[`icon-button`]} ${icon.value === selectedIcon ? styles.active : ""}`}
             >
               <CateIcon value={icon.value} />
             </button>

@@ -4,7 +4,7 @@ import { memo } from "react"
 function CardBody({ data, onClick }) {
   return (
     <div className={`${styles[`card-body-container`]}`} onClick={onClick}>
-      <div>세부내용 : {data.description}</div>
+      <div>{data.description ? `세부 내용 : ${data.description}` : ""}</div>
       <div>
         목표시간 :{" "}
         {data.storyPoint ? parseInt(data?.storyPoint) / 3600 : "미지정"}

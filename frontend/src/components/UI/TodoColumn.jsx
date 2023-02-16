@@ -2,11 +2,14 @@ import { useDrop } from "react-dnd"
 import { useSelector, useDispatch } from "react-redux"
 import styles from "./TodoColumn.module.css"
 import { todoActions } from "../../store/todos-slice"
+import useApi from "../../hooks/http/use-api"
+
 
 export default function TodoColumn({ children, className, title }) {
   const todos = useSelector((state) => state.todos.todos)
   const progress = useSelector((state) => state.todos.onProgress)
-
+  /* eslint-disable */
+  const [updateStatusLoading, updateStatusError, updateStatus] = useApi()
   const dispatch = useDispatch()
 
   const canMoveTodo = (title) => {
@@ -25,6 +28,25 @@ export default function TodoColumn({ children, className, title }) {
         })
       )
     )
+    if (hoverColumn === "Done") {
+      updateStatus({
+        method: "post",
+        url: "/v1/task/status",
+        data: {
+          workStatus: "DONE",
+          workId: dragItem.id,
+        },
+      })
+    } else if (hoverColumn === "To do") {
+      updateStatus({
+        method: "post",
+        url: "/v1/task/status",
+        data: {
+          workStatus: "TODO",
+          workId: dragItem.id,
+        },
+      })
+    }
   }
 
   const [, drop] = useDrop({

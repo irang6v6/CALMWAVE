@@ -68,7 +68,7 @@ function TestPage() {
       <div onClick={test}>테스트</div>
       {/* <div onClick={toggleHi}>하이 토글</div> */}
       <div style={{ display: "none" }}>
-        <img src={someImg} id={`test-logo`} />
+        {/* <img src={someImg} id={`test-logo`} /> */}
       </div>
       <SkyWithWave
         canvasWidth={canvasWidth}

@@ -6,8 +6,8 @@
   box-sizing: border-box;
   border-radius: 100%;
   background-color: rgba(230, 246, 255, 0.9);
-  width: 45vh;
-  height: 45vh;
+  width: 36vh;
+  height: 36vh;
   box-shadow: 3px 10px 5px 3px rgba(2, 45, 82, 0.2);
 }
 .logo-img {
@@ -26,7 +26,6 @@
 } */
 .logo-img:hover {
   transform: translate(0, -15px) scale(103%);
-  cursor: pointer;
 }
 
 /* .logo-calm-c {

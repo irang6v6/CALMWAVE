@@ -17,11 +17,11 @@
 
 .go-up {
   position: fixed;
-  z-index: 22;
+  z-index: 85;
   top: 90vh;
   left: 90vw;
   border-radius: 10px;
-  background-color: aquamarine;
+  background-color: #c6e5ff;
   padding: 15px;
   font-weight: 500;
 }

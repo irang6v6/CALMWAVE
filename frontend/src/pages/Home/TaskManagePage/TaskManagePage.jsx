@@ -1,10 +1,10 @@
 import styles from "./TaskManagePage.module.css"
 import React from "react"
-import alertimg from "../../../assets/alert.png"
 import cuteturtle from "../../../assets/cuteturtle.png"
 import stretching from "../../../assets/stretching.png"
 import angryface from "../../../assets/angryface.png"
 import { VscTriangleDown } from "react-icons/vsc"
+import { alertimg } from "../../../assets/alert.png"
 
 // scrollTrigger, refVal, goNext
 function TaskManagePage(props) {
@@ -48,7 +48,7 @@ function TaskManagePage(props) {
               그러다 거북이가 친구하자 하겠어요
             </div>
             <div className={`${styles["alert-box"]}`}>
-              허리피자! 허리 수술 6000만원
+              허리피자! 허리 수술 6,000만원
             </div>
             <div className={`${styles["alert-box"]}`}>
               띵동! 스트레칭 할 시간이예요 ~
