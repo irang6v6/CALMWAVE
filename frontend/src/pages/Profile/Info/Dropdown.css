@@ -3,16 +3,18 @@
   display: inline-block;
   margin-bottom: 4%;
   /* margin-top: 4%; */
+  font-family: 'Gowun Dodum', sans-serif;
 }
 
 .dropdown-toggle {
-  border: 1px solid #ccc;
+  border: 1px solid rgba(255, 255, 255);
   border-radius: 7px;
   padding: 5px 10px;
-  font-size: 14px;
+  font-size: 20px;
   line-height: 1;
   cursor: pointer;
-  background-color: #fff;
+  background-color: rgba(166, 250, 255, 0.25);
+  color: white;
 }
 
 .dropdown-toggle .arrow {
@@ -22,7 +24,7 @@
   margin-left: 5px;
   border-style: solid;
   border-width: 4px 4px 0 4px;
-  border-color: #555 transparent transparent transparent;
+  border-color: #ffffff transparent transparent transparent;
 }
 
 .dropdown-toggle .arrow.up {
@@ -35,12 +37,14 @@
   top: 100%;
   left: 0;
   z-index: 1;
+  border-radius: 7px;
   padding: 5px 0;
   margin: 0;
   list-style: none;
   background-color: #ffffff;
   color: black;
   border: 1px solid #ccc;
+  font-size: 20p;
 }
 
 .dropdown-menu li {

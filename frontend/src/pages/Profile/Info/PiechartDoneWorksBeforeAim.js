@@ -233,7 +233,7 @@ function PiechartDoneWorksBeforeAim(props) {
                      */
                     labels: {
                         text: {
-                            fontSize: 14,
+                            fontSize: 17,
                             fill: '#000000',
                         },
                     },
@@ -258,7 +258,7 @@ function PiechartDoneWorksBeforeAim(props) {
                         itemTextColor: '#999',
                         itemDirection: 'left-to-right',
                         itemOpacity: 1,
-                        symbolSize: 18,
+                        symbolSize: 20,
                         symbolShape: 'circle',
                         effects: [
                             {

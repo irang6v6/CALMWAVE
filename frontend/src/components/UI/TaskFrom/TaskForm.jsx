@@ -184,7 +184,7 @@ function TaskForm() {
         onSubmit={submitHandler}
       >
         <label htmlFor="task-title" className={`${styles[`body-text`]}`}>
-          Title
+          제목
         </label>
         <input
           ref={titleRef}
@@ -194,7 +194,7 @@ function TaskForm() {
           className={`${styles[`input-form`]}`}
         />
         <label htmlFor="task-description" className={`${styles[`body-text`]}`}>
-          Description
+          세부내용
         </label>
         <textarea
           ref={descriptionRef}
@@ -215,7 +215,7 @@ function TaskForm() {
         />
 
         <label htmlFor="task-storypoint" className={`${styles[`body-text`]}`}>
-          Storypoint
+          목표시간
         </label>
         <input
           ref={storyPointRef}

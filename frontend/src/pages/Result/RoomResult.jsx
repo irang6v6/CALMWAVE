@@ -64,7 +64,7 @@ function RoomResult() {
                   ) : (
                     <span className={`${styles[`aimed-time`]}`}>
                       {Math.floor(data?.todayTotalWorkTime % 60)}
-                      {"초"}
+                      {"초 "}
                     </span>
                   )}
                   집중하셨습니다.
@@ -104,7 +104,7 @@ function RoomResult() {
                 </div>
               </div>
             ) : (
-              <span></span>
+              <></>
             )}
 
             {/* 그래프 2 */}

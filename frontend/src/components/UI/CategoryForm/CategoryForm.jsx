@@ -153,7 +153,7 @@ function CategoryForm() {
       >
 
         <label htmlFor="category-title" className={`${styles[`body-text`]}`}>
-          title
+          제목
         </label>
         <input
           ref={titleRef}
@@ -164,7 +164,7 @@ function CategoryForm() {
         />
 
         <label htmlFor="category-color" className={`${styles[`body-text`]}`}>
-          category color
+          색상
         </label>
 
         <select
