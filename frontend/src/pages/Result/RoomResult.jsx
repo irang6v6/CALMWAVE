@@ -76,6 +76,8 @@ function RoomResult() {
                   indexBy={"title"}
                   colors={{ scheme: "blues" }}
                   borderWidth={3}
+                  enableArcLinkLabels={false}
+                  arcLabel={"id"}
                 />
               </div>
             ) : (
@@ -89,6 +91,8 @@ function RoomResult() {
                   data={data?.pieChartByWork}
                   colors={{ scheme: "blues" }}
                   borderWidth={3}
+                  enableArcLinkLabels={false}
+                  arcLabel={"id"}
                 />
               ) : (
                 <span></span>
@@ -102,6 +106,8 @@ function RoomResult() {
                   data={data?.pieChartByCategory}
                   colors={{ scheme: "blues" }}
                   borderWidth={3}
+                  enableArcLinkLabels={false}
+                  arcLabel={"id"}
                 />
               ) : (
                 <span></span>
