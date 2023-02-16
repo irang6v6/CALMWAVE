@@ -4,6 +4,7 @@ import cuteturtle from "../../../assets/cuteturtle.png"
 import stretching from "../../../assets/stretching.png"
 import angryface from "../../../assets/angryface.png"
 import { VscTriangleDown } from "react-icons/vsc"
+import { alertimg } from "../../../assets/alert.png"
 
 // scrollTrigger, refVal, goNext
 function TaskManagePage(props) {
