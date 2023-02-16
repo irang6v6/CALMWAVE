@@ -10,6 +10,11 @@ import axios from "axios"
 import CateIcon from "../../../components/CateIcon/CateIcon"
 // import CalendarInfo from "../../../components/MyCalendar/CalendarInfo"
 // import NightSky from "../../../components/Canvas/NightSky/NightSky"
+import DoneWorksVisualization from "./DoneWorksVisualization"
+// import DoneCategoriesVisualization from "./DoneCategoriesVisualization"
+// import { Bar } from '@nivo/bar';
+// import { ResponsivePie } from "@nivo/pie"
+// import { core } from "@nivo/core"
 
 function UserInfo() {
   const { categoryList } = useSelector((state) => state.category)
@@ -110,6 +115,17 @@ function UserInfo() {
 
         <div className={`${styles["calendar-info"]}`}>
           {/* <CalendarInfo/> */}
+        </div>
+      </div>
+      <div className={`${styles["chart-wrap"]}`}>
+        <div className={`${styles["chart"]}`}>
+          <h3>끝낸 업무 시각화</h3>
+          <DoneWorksVisualization className={`${styles["chart1"]}`} />
+        </div>
+
+        <div className={`${styles["chart"]}`}>
+          <h3>&nbsp;&nbsp;끝낸 카테고리 시각화</h3>
+          {/* <DoneCategoriesVisualization className={`${styles["chart1"]}`} /> */}
         </div>
       </div>
     </div>
