@@ -45,21 +45,16 @@ function BarChartDoneWorksforThisWeek() {
                     }).then((result1) => {
                         setWork(processData(result1.data));
                     }).catch((error) => {
-                        console.error(error);
                     });
 
                     axios.get("https://i8a105.p.ssafy.io/api/v1/data/mypage/done-works-cnt/today",
                     {
                     }).then((result2) => {
                         setTodayWorkCount(result2.data);
-                        //console.log(result2.data);
                     })
                     .catch((error) => {
-                        console.error(error);
                     });              
-                console.log(todayWorkCount);
             } catch (error) {
-              console.error(error);
             }
           };
       
@@ -87,11 +82,9 @@ function BarChartDoneWorksforThisWeek() {
 
     const handle = {
         barClick: (data) => {
-            console.log(data);
         },
 
         legendClick: (data) => {
-            console.log(data);
         },
     };
 

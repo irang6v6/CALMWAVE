@@ -8,8 +8,6 @@ import CardHeader from "../UI/CardHeader/CardHeader"
 import { AiFillCloseCircle, AiFillEdit } from "react-icons/ai"
 import {
   modalActions,
-  openCategoryModal,
-  openCategoryDeleteModal,
   openTaskDeleteModal,
   openTaskModal,
 } from "../../store/door-store/modal-slice"
@@ -42,7 +40,6 @@ export default function CalendarInfo({ todo, date }) {
 
   // 삭제모달 호출
   const openDeleteModal = function () {
-    // console.log(todo)
     const editedData = {
       id: todo.workId,
       title: todo.title,
@@ -71,29 +68,18 @@ export default function CalendarInfo({ todo, date }) {
     dispatch(openTaskModal())
   }
 
-  //   const selectDay = (selectedDate) => {
-  //     return todolist
-  //       .filter((todo) => todo.createdDate === selectedDate)
-  //       .map((todo, index) =>
-  //       <div key={todo.id}>{todo.title}<br/>{todo.finishedDate}</div>
-  //       )
-  //   }
 
   return (
     <div className="todo-box">
-      {/* <CardHeader data={todo} cardType={true} /> */}
       <div className="todo-content">
         <b>▶ {todo?.title}</b>
         <br />
         세부내용 : {todo?.description}
         <br />
         <br />
-        {/* 생성일자 : {todo?.dateCreated}<br/> */}
-        {/* 목표시간 : {storyPoints}<br/> */}
         목표시간 :{" "}
         {todo?.timeAimed ? parseInt(todo?.timeAimed / 3600) : "미지정"}
         <br />
-        {/* 목표일자 : {finalDate? `${finalDate} (${dDayLabel})`:`없음`} <br/> */}
         카테고리: {todo?.cateName}
         <br />
         {todo?.status === "DONE" ? (

@@ -24,7 +24,6 @@ export default function MyCalendar(props) {
     isError,
     selectedDate: RTKSelectedDate,
   } = useSelector((state) => state.calendar)
-  // console.log(todolist)
   useEffect(
     function () {
       const d = new Date(selectedDate)
@@ -46,15 +45,6 @@ export default function MyCalendar(props) {
     [RTKSelectedDate, dispatch]
   )
 
-  // console.log(todolist, "<<<<")
-
-  // 선택하고 생성한 투두 그 날짜에 추가되도록
-  // const selectedTodos = todolist.filter(todo => {
-  //   return (
-  //     moment(todo.createdDate).format("YYYY-MM-DD") === selectedDate ||
-  //     moment(todo.finishedDate).format("YYYY-MM-DD") === selectedDate
-  //   )
-  // })
 
   // 투두 생성 모달
   const openCreateTaskModal = function () {
@@ -79,7 +69,6 @@ export default function MyCalendar(props) {
           showNeighboringMonth={false}
           // 달력에 '일' 빼는 코드
           formatDay={(locale, date) =>
-            // date.toLocaleString("en", { day: "numeric" })
             moment(date).format("DD")
           }
           tileClassName={({ date }) => {
@@ -114,40 +103,8 @@ export default function MyCalendar(props) {
               <div className="nowork-text">등록된 업무가 없습니다.</div>
             )}
           </div>
-
-          {/* <div
-            className={`${styles[`create-task`]}`}
-            onClick={openCreateTaskModal}
-            >
-            <BsPlusLg className={`${styles[`play-icon`]}`} />
-          </div> */}
         </div>
       </div>
     </div>
   )
 }
-
-// .filter((todo) => {
-//   // todo?.createdDate?.slice(0, 10) ===
-//   // moment(date).format("YYYY-MM-DD")
-
-//   // moment(date).isBetween(
-//   //   moment(todo?.createdDate),
-//   //   moment(todo?.finishedDate),
-//   //   null,
-//   //   "[]"
-//   // )
-//   if (todo.finishedDate) {
-//     return (
-//       new Date(todo.createdDate).getDate() <=
-//         new Date(selectedDate).getDate() &&
-//       new Date(selectedDate).getDate() <=
-//         new Date(todo.finishedDate).getDate()
-//     )
-//   } else {
-//     return (
-//       new Date(todo.createdDate).toString() ===
-//       new Date(selectedDate).toString()
-//     )
-//   }
-// })
