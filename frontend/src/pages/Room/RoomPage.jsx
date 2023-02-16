@@ -32,8 +32,6 @@ export const RoomPage = () => {
   }, [todos])
 
   const backToHome = () => {
-    window.localStorage.removeItem("todo")
-    window.localStorage.removeItem("category")
     dispatch(todoActions.setProgress(false))
   }
 

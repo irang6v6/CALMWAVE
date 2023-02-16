@@ -26,10 +26,9 @@
   justify-content: center;
   align-items: center;
   padding: 5%;
-  font-family: 'Gowun Dodum', sans-serif;
+  font-family: "Gowun Dodum", sans-serif;
   /* background-color: rgba(255, 255, 255, 0.3); */
 }
-
 
 .result-container {
   height: 100%;
@@ -45,23 +44,39 @@
   border-radius: 8px;
 }
 
-.graph-wrap{
+.graph-wrap {
   display: flex;
   justify-content: space-between;
   width: 80%;
 }
 
+.graph-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .graph {
   height: 300px;
   width: 300px;
+  /* margin-left: 20px; */
+  /* margin-right: 20px; */
   /* margin-right: 130px; */
 }
+
+.graph-info {
+  color: white;
+  margin: 20px;
+  font-size: 1.5rem;
+}
+
 .text {
   color: white;
   font-size: 2rem;
 }
 
-.aimed-time{
+.aimed-time {
   font-weight: 700;
   font-size: 3rem;
 }
@@ -80,7 +95,7 @@
   transition: 0.4s;
 }
 
-.lets-go-home:hover{
+.lets-go-home:hover {
   background-color: rgba(163, 200, 255);
   color: white;
 }

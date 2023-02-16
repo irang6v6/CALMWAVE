@@ -9,9 +9,10 @@ import {
   AiFillEyeInvisible,
   AiFillVideoCamera,
 } from "react-icons/ai"
-import { GiTurtle } from "react-icons/gi"
+// import { GiTurtle } from "react-icons/gi"
+import { GiPianist, GiHighKick } from "react-icons/gi"
 import new_logo from "../../assets/new_logo.png"
-// import buttonAlarm from "../../assets/alarm/buttonalarm.mp3"
+import buttonAlarm from "../../assets/alarm/buttonalarm.mp3"
 import pinThree from "../../assets/alarm/pin3.mp3"
 
 const OPENVIDU_SERVER_URL = "https://i8a105.p.ssafy.io:8443/"
@@ -44,8 +45,11 @@ export default function Video(props) {
   //   left: 0,
   // })
   const [nowPosture, setNowPosture] = useState("normal")
+  const [postureAlarm, setPostureAlarm] = useState(true)
   const audioRef = useRef(null)
   const [badCnt, setBadCnt] = useState(0)
+  const [stretchingAlarm, setStretchingAlarm] = useState(true)
+  const [stretchingAlarmDelay, setStretchingAlarmDelay] = useState(60)
 
   // 최초 진입 시 세션 접속
   useEffect(() => {
@@ -78,21 +82,43 @@ export default function Video(props) {
   const prevNowPosture = useRef("normal")
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      if (
-        nowPosture !== "normal"
-        //  && nowPosture !== prevNowPosture.current
-      ) {
-        // console.log("ALARM")
-        prevNowPosture.current = nowPosture
-        audioRef.current.src = pinThree
-        audioRef.current.play()
+    if (postureAlarm && progress) {
+      const interval = setInterval(() => {
+        if (
+          nowPosture !== "normal"
+          //  && nowPosture !== prevNowPosture.current
+        ) {
+          // console.log("ALARM")
+          prevNowPosture.current = nowPosture
+          audioRef.current.src = pinThree
+          audioRef.current.play()
+        }
+      }, 30000)
+      return function () {
+        clearInterval(interval)
       }
-    }, 30000)
-    return function () {
-      clearInterval(interval)
     }
   }, [nowPosture])
+
+  useEffect(() => {
+    let timeoutId
+    let startTime = Date.now()
+
+    function stretchingInterval() {
+      if (progress && stretchingAlarm) {
+        if (Date.now() - startTime >= stretchingAlarmDelay * 60 * 1000) {
+          audioRef.current.src = buttonAlarm
+          audioRef.current.play()
+          startTime = Date.now()
+        }
+        timeoutId = setTimeout(stretchingInterval, 1000)
+      }
+    }
+    stretchingInterval()
+    return function () {
+      clearTimeout(timeoutId)
+    }
+  }, [progress, stretchingAlarmDelay, stretchingAlarm])
 
   const settingModel = async function () {
     const a = await tmPose.load(modelURL, metadataURL)
@@ -181,7 +207,7 @@ export default function Video(props) {
           frameIDs.push(aniId)
         }
       }, 1000)
-      
+
       return function () {
         let frameID
         if (frameIDs.length > 0) {
@@ -348,6 +374,14 @@ export default function Video(props) {
     setView(!view)
   }
 
+  const togglePostureAlarm = () => {
+    setPostureAlarm(!postureAlarm)
+  }
+
+  const toggleStretchingAlarm = () => {
+    setStretchingAlarm(!stretchingAlarm)
+  }
+
   // 카메라 변경 함수
   // async switchCamera() {
   //     try {
@@ -434,12 +468,34 @@ export default function Video(props) {
         ${progress && styles["info-container_focused"]}`}
         >
           <audio ref={audioRef} />
-          <GiTurtle
-            className={`${styles[`info-icon`]} ${
-              nowPosture !== "normal" && styles[`posture-info`]
-            }`}
-            // onClick={playAlarm}
-          />
+          <div className={`${styles[`post-alarm-container`]}`}>
+            자세 알람
+            <GiPianist
+              className={`${styles[`info-icon`]} ${
+                nowPosture !== "normal" && styles[`posture-info`]
+              }
+             ${!postureAlarm && styles[`posture-info-deact`]}`}
+              onClick={togglePostureAlarm}
+            />
+          </div>
+          <div className={`${styles[`stre-alarm-container`]}`}>
+            스트레칭 알람
+            <div className={`${styles[`stre-input-container`]}`}>
+              <input
+                type="number"
+                step="5"
+                value={stretchingAlarmDelay}
+                onChange={(e) => setStretchingAlarmDelay(e.target.value)}
+                className={`${styles[`alarm-input`]}`}
+              />
+              분
+            </div>
+              <GiHighKick
+                className={`${styles[`info-icon`]}
+             ${!stretchingAlarm && styles[`stre-info-deact`]}`}
+                onClick={toggleStretchingAlarm}
+              />
+          </div>
         </div>
       </div>
     </>
