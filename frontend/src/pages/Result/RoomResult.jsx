@@ -81,13 +81,22 @@ function RoomResult() {
               <div className={`${styles[`graph-box`]}`}>
                 <div className={`${styles[`graph`]}`}>
                   <ResponsiveRadar
-                    data={data?.radarChart}
-                    keys={["aimedTime", "totalTime"]}
+                    data={data?.radarChart.map((e) => {
+                      return {
+                        ...e,
+                        목표시간: e.aimedTime,
+                        총업무시간: e.totalTime
+                      }
+                    })}
+                    // keys={["aimedTime", "totalTime"]}
+                    keys={["목표시간", "총업무시간"]}
                     indexBy={"title"}
                     colors={{ scheme: "blues" }}
                     // borderWidth={3}
                     enableArcLinkLabels={false}
-                  arcLabel={"id"}
+                    arcLabel={"id"}
+                    valueFormat={(value) => `${Math.round(value/3600)}시간 ${Math.round(value % 3600 / 60)}분`}
+                    // sliceTooltip={}
                   />
                 </div>
                 <div className={`${styles[`graph-info`]}`}>
@@ -107,7 +116,17 @@ function RoomResult() {
                     colors={{ scheme: "blues" }}
                     // borderWidth={3}
                     enableArcLinkLabels={false}
-                  arcLabel={"id"}
+                    arcLabel={"id"}
+                    valueFormat={(value) => `${Math.round(value / 0.6) / 100}분`}
+                    innerRadius={0.3}
+                    cornerRadius={6}
+                    theme={{
+                      labels: {
+                        text: {
+                          fontSize: 14,
+                        },
+                      },
+                    }}
                   />
                 </div>
                 <div className={`${styles[`graph-info`]}`}>
@@ -127,7 +146,17 @@ function RoomResult() {
                     colors={{ scheme: "blues" }}
                     // borderWidth={3}
                     enableArcLinkLabels={false}
-                  arcLabel={"id"}
+                    arcLabel={"id"}
+                    valueFormat={(value) => `${Math.round(value / 0.6) / 100}분`}
+                    innerRadius={0.3}
+                    cornerRadius={6}
+                    theme={{
+                      labels: {
+                        text: {
+                          fontSize: 14,
+                        },
+                      },
+                    }}
                   />
                 </div>
                 <div className={`${styles[`graph-info`]}`}>
