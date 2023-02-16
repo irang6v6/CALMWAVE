@@ -51,6 +51,7 @@
   height: 35px;
   font-size: 1.2rem;
   word-break: break-all;
+  font-family: "Gowun Dodum", sans-serif;
 }
 
 .input-form2 {
@@ -60,6 +61,7 @@
   height: 70px;
   font-size: 1.2rem;
   word-break: break-all;
+  font-family: "Gowun Dodum", sans-serif;
 }
 
 .ok-btn {
