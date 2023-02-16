@@ -44,7 +44,6 @@ spring:
       hibernate:
         format_sql: true
         open-in-view: true
-        use_sql_comments: true
 
   logging.level:
     org.hibernate.SQL: debug
