@@ -85,6 +85,11 @@ public class WorkService {
         return list;
     }
 
+    public List<WorkResponseDoneDto> convertDone(List<Work> done) {
+        List<WorkResponseDoneDto> list = done.stream().map(m -> new WorkResponseDoneDto(m.getId(), m.getTitle(), m.getDescription(), m.getStatus(), m.getDateCreated(), m.getDateFinished(), m.getDateAimed(), m.getTimeAimed(), m.getWorkOrder(), workPeriodRepository.findTimediffByWorkId(m.getId()), new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder()))).collect(Collectors.toList());
+        return list;
+    }
+
     /**
      * work의 user와 token의 user가 동일한지 (업무의 주인이 맞는지)확인
      *
@@ -112,10 +117,7 @@ public class WorkService {
         }
     }
 
-    public List<WorkResponseDoneDto> convertDone(List<Work> done) {
-        List<WorkResponseDoneDto> list = done.stream().map(m -> new WorkResponseDoneDto(m.getId(), m.getTitle(), m.getDescription(), m.getStatus(), m.getDateCreated(), m.getDateFinished(), m.getDateAimed(), m.getTimeAimed(), m.getWorkOrder(), workPeriodRepository.findSumWorkTimeByUserId(m.getId()), new WorkCategoryDto(m.getWorkCate().getId(), m.getWorkCate().getCateName(), m.getWorkCate().getCateColor(), m.getWorkCate().getCateIcon(), m.getWorkCate().getCateOrder()))).collect(Collectors.toList());
-        return list;
-    }
+
 
     /**
      * calender에서 조회하는 날짜에 따른 work List 리턴
