@@ -58,8 +58,6 @@ function SignPage({ pageRef }) {
           dispatch(AxiosGetUser())
           // localStorage.setItem("isLogin", true)
           navigate("/")
-        } else {
-          console.log("ㅎㅇ")
         }
       }
     )
@@ -108,7 +106,6 @@ function SignPage({ pageRef }) {
   )
 
   const toastOffHandler = function () {
-    console.log("이거 실행 외않되 ㅠㅠ")
     setNeedToast(() => false)
   }
 

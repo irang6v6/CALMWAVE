@@ -19,7 +19,6 @@ import { AiOutlineClose } from "react-icons/ai"
 function TaskForm() {
   const dispatch = useDispatch()
   const categoryList = useSelector((state) => state.category.categoryList)
-  const { selectedTaskList } = useSelector((state) => state.doorstask)
   const { formData, isLoading, isCreate } = useSelector((state) => state.modal)
   const [titleRef, descriptionRef, dateRef, storyPointRef, categoryRef] = [
     useRef(null),
@@ -77,7 +76,6 @@ function TaskForm() {
           }, 400)
         })
         .catch((err) => {
-          console.log(err)
           dispatch(closeModal())
         })
     } else {
@@ -112,15 +110,6 @@ function TaskForm() {
               },
             })
           )
-          console.log("카테고리 리스트 : ", categoryList)
-          console.log("골라진 doorstask", selectedTaskList)
-          console.log("골라진 카테고리 인풋 : ", categoryInput)
-          console.log(
-            "골라진 id를 기반으로 고른 category : ",
-            categoryList.filter(
-              (cate) => cate.id === parseInt(categoryInput)
-            )[0]
-          )
         })
         .then(() => {
           const editedcateID = categoryInput || selectedCategoryId
@@ -144,7 +133,6 @@ function TaskForm() {
           }, 100)
         })
         .catch((err) => {
-          console.log(err)
           dispatch(closeModal())
         })
     }

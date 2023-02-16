@@ -33,7 +33,6 @@ function SelectedTaskCard({ task, idx }) {
     item: { idx, task }, // time
     end: (item, monitor) => {
       const dropResult = monitor.getDropResult()
-      console.log(dropResult)
       if (dropResult) {
         if (dropResult.title === "selectedTask") {
           return
@@ -47,7 +46,6 @@ function SelectedTaskCard({ task, idx }) {
   })
 
   const opacity = isDragging ? 0.6 : 1
-
 
   return (
     <>

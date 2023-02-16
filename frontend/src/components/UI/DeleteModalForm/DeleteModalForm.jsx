@@ -39,7 +39,7 @@ function DeleteModalForm({ cardType, cardId }) {
           dispatch(closeModal())
         })
         .catch((err) => {
-          console.log(err, "업무 삭제 에러")
+          // console.log(err, "업무 삭제 에러")
         })
     } else {
       // category
@@ -66,7 +66,7 @@ function DeleteModalForm({ cardType, cardId }) {
           dispatch(closeModal())
         })
         .catch((err) => {
-          console.log(err, "카테고리 삭제 에러")
+          // console.log(err, "카테고리 삭제 에러")
         })
     }
   }
@@ -75,18 +75,15 @@ function DeleteModalForm({ cardType, cardId }) {
     dispatch(closeModal())
   }
 
-
   return (
     <>
       <div className={`${styles[`delete-modal-container`]}`}>
-      <AiOutlineClose
-            className={`${styles[`modal-close-button`]}`}
-            onClick={onCloseModal}
-          />
+        <AiOutlineClose
+          className={`${styles[`modal-close-button`]}`}
+          onClick={onCloseModal}
+        />
 
-        <div className={`${styles[`recheck`]}`}>
-          삭제하시겠습니까?
-        </div>
+        <div className={`${styles[`recheck`]}`}>삭제하시겠습니까?</div>
         <div
           onClick={deleteCategoryTaskHandler}
           className={`${styles[`delete-btn`]}`}

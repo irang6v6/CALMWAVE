@@ -39,7 +39,12 @@ function CategoryForm() {
       dispatch(closeModal())
       return
     }
-    if (categoryList.every(item => item.title === titleInput && (!formData || item.id !== formData.id))) {
+    if (
+      categoryList.every(
+        (item) =>
+          item.title === titleInput && (!formData || item.id !== formData.id)
+      )
+    ) {
       window.alert("동일한 제목을 사용할 수 없습니다")
       dispatch(closeModal())
       return
@@ -115,7 +120,7 @@ function CategoryForm() {
         })
         .catch((err) => {
           dispatch(modalActions.toggleIsLoading())
-          console.log(err)
+          // console.log(err)
         })
     }
   }
@@ -133,15 +138,13 @@ function CategoryForm() {
     dispatch(closeModal())
   }
 
-
   return (
     <div className={`${styles[`category-form-container`]}`}>
-
       {/* 닫기 모달 */}
       <AiOutlineClose
-            className={`${styles[`modal-close-button`]}`}
-            onClick={onCloseModal}
-          />
+        className={`${styles[`modal-close-button`]}`}
+        onClick={onCloseModal}
+      />
 
       {/* 카테고리 생성 및 수정 header */}
       <div className={`${styles[`header-text`]}`}>{FormTitle}</div>
@@ -151,7 +154,6 @@ function CategoryForm() {
         className={`${styles[`category-form-input-container`]}`}
         onSubmit={submitHandler}
       >
-
         <label htmlFor="category-title" className={`${styles[`body-text`]}`}>
           제목
         </label>
@@ -187,8 +189,13 @@ function CategoryForm() {
           {CateIconArray.map((icon) => (
             <button
               key={icon.value}
-              onClick={(e) => { e.preventDefault(); setselectedIcon(icon.value);}}
-              className={`${styles[`icon-button`]} ${icon.value === selectedIcon ? styles.active : ""}`}
+              onClick={(e) => {
+                e.preventDefault()
+                setselectedIcon(icon.value)
+              }}
+              className={`${styles[`icon-button`]} ${
+                icon.value === selectedIcon ? styles.active : ""
+              }`}
             >
               <CateIcon value={icon.value} />
             </button>

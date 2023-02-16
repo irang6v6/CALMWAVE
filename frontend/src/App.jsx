@@ -7,7 +7,6 @@ import ProfilePage from "./pages/Profile/ProfilePage"
 // import GraphInfo from "./pages/Profile/GraphInfo/GraphInfo"
 import RoomResult from "./pages/Result/RoomResult"
 import SignParentPage from "./pages/Sign/SignParentPage"
-import TestPage from "./pages/TestPage"
 import NotFound from "./pages/NotFound/NotFound"
 import DoorParentPage from "./pages/Door/DoorParentPage"
 import axios from "axios"
@@ -39,7 +38,6 @@ function App() {
         <Route path={`/profile/:infoType`} element={<ProfilePage />} />
         <Route path={`/door`} element={<DoorParentPage />} />
         <Route path={`/manage`} element />
-        <Route path={`/test`} element={<TestPage />} />
         <Route path={`/oauth`} element={<OauthLoad />} />
         <Route path={`*`} element={<NotFound />} />
       </Routes>
