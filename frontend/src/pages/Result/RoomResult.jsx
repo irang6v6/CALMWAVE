@@ -129,7 +129,7 @@ function RoomResult() {
                     colors={{ scheme: "blues" }}
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
-                    arcLinkLabelsSkipAngle={10}
+                    arcLabelsSkipAngle={10}
                     valueFormat={(value) =>
                       `${Math.round(value / 0.6) / 100}분`
                     }
@@ -161,7 +161,7 @@ function RoomResult() {
                     colors={{ scheme: "blues" }}
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
-                    arcLinkLabelsSkipAngle={10}
+                    arcLabelsSkipAngle={10}
                     valueFormat={(value) =>
                       `${Math.round(value / 0.6) / 100}분`
                     }
