@@ -59,7 +59,19 @@
   border-radius: 20px;
   box-shadow: -10px 10px 10px 2px rgba(255, 255, 255, 0.5),
     -2px 0px 0px 0px #888;
-}
+    
+    opacity: 0;
+    animation-name: tackle;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+    animation-duration: 1.5s;
+  }
+  @keyframes tackle {
+    to {
+      transform: translate(0, 0);
+      opacity: 1;
+    }
+  }
 
 .close-btn {
   border: 1px solid #000;
