@@ -27,6 +27,10 @@ function RoomResult() {
     window.localStorage.removeItem("todo")
     window.localStorage.removeItem("category")
   }
+
+  const localData = JSON.parse(window.localStorage.getItem("todo"))
+  const doneData = localData?.filter(e=>e.column === "Done").length
+  
   return (
     <>
       <div className={`${styles[`canvas-container`]}`}>
@@ -72,16 +76,16 @@ function RoomResult() {
             </div>
             <div className={`${styles[`text`]}`}>
               <span className={`${styles[`aimed-time`]}`}>
-                {data?.numOfTotalWork} {"개 "}
+                {localData?.length} {"개 "}
               </span>
               의 업무를 선택하셨고 그 중
               <span className={`${styles[`aimed-time`]}`}>
                 {" "}
-                {data?.numOfDone} {"개, "}
+                {doneData} {"개, "}
               </span>
               <span className={`${styles[`aimed-time`]}`}>
                 {" "}
-                {data?.percentOfTodoAndDone} {"% "}
+                {parseInt(doneData / localData?.length * 100)} {"% "}
               </span>
               완료하셨습니다
             </div>
