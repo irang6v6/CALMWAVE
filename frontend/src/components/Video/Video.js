@@ -77,9 +77,7 @@ export default function Video(props) {
   useEffect(() => {
     if (postureAlarm && progress) {
       const interval = setInterval(() => {
-        if (
-          nowPosture !== "normal"
-        ) {
+        if (nowPosture !== "normal") {
           prevNowPosture.current = nowPosture
           audioRef.current.src = pinThree
           audioRef.current.play()
@@ -255,15 +253,15 @@ export default function Video(props) {
               .getUserMedia({
                 audioSource: false,
                 videoSource: undefined,
-                resolution: undefined, 
-                frameRate: 30, 
+                resolution: undefined,
+                frameRate: 30,
               })
               .then((mediaStream) => {
                 let newPublisher = newOV.initPublisher(`${user.nickname}`, {
                   audioSource: undefined,
-                  publishAudio: false, 
-                  publishVideo: true, 
-                  mirror: true, 
+                  publishAudio: false,
+                  publishVideo: true,
+                  mirror: true,
                   insertMode: "APPEND",
                 })
                 newPublisher.once("accessAllowed", () => {
@@ -419,7 +417,7 @@ export default function Video(props) {
             />
           </div>
           <div className={`${styles[`stre-alarm-container`]}`}>
-            스트레칭 알람
+            스트레칭 & 휴식 알람
             <div className={`${styles[`stre-input-container`]}`}>
               <input
                 type="number"
@@ -431,11 +429,11 @@ export default function Video(props) {
               />
               분
             </div>
-              <GiHighKick
-                className={`${styles[`info-icon`]}
+            <GiHighKick
+              className={`${styles[`info-icon`]}
              ${!stretchingAlarm && styles[`stre-info-deact`]}`}
-                onClick={toggleStretchingAlarm}
-              />
+              onClick={toggleStretchingAlarm}
+            />
           </div>
         </div>
       </div>
