@@ -102,7 +102,7 @@ function PiechartDoneWorksBeforeAim(props) {
           fontSize: "70px",
         }}
       >
-        {Math.round((doneBeforeAimCount / doneWorkTotalCount) * 100) + "%"}
+        {Math.round((doneBeforeAimCount / doneWorkTotalCount) * 100) || 0 + "%"}
       </text>
     )
   }
@@ -152,14 +152,17 @@ function PiechartDoneWorksBeforeAim(props) {
         data={[
           {
             id: "목표시간 전에 끝낸 업무",
-            value: Math.round((doneBeforeAimCount / doneWorkTotalCount) * 100),
+            value:
+              Math.round((doneBeforeAimCount / doneWorkTotalCount) * 100) || 0,
           },
           {
             id: "목표시간 전에 끝내지 못한 업무",
-            value: Math.round(
-              ((doneWorkTotalCount - doneBeforeAimCount) / doneWorkTotalCount) *
-                100
-            ),
+            value:
+              Math.round(
+                ((doneWorkTotalCount - doneBeforeAimCount) /
+                  doneWorkTotalCount) *
+                  100
+              ) || 0,
           },
         ]}
         /*
