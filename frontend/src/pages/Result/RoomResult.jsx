@@ -29,8 +29,8 @@ function RoomResult() {
   }
 
   const localData = JSON.parse(window.localStorage.getItem("todo"))
-  const doneData = localData?.filter(e=>e.column === "Done").length
-  
+  const doneData = localData?.filter((e) => e.column === "Done").length
+
   return (
     <>
       <div className={`${styles[`canvas-container`]}`}>
@@ -74,21 +74,25 @@ function RoomResult() {
                 <span></span>
               )}
             </div>
-            <div className={`${styles[`text`]}`}>
-              <span className={`${styles[`aimed-time`]}`}>
-                {localData?.length} {"개 "}
-              </span>
-              의 업무를 선택하셨고 그 중
-              <span className={`${styles[`aimed-time`]}`}>
-                {" "}
-                {doneData} {"개, "}
-              </span>
-              <span className={`${styles[`aimed-time`]}`}>
-                {" "}
-                {parseInt(doneData / localData?.length * 100)} {"% "}
-              </span>
-              완료하셨습니다
-            </div>
+            {doneData ? (
+              <div className={`${styles[`text`]}`}>
+                <span className={`${styles[`aimed-time`]}`}>
+                  {localData?.length} {"개 "}
+                </span>
+                의 업무를 선택하셨고 그 중
+                <span className={`${styles[`aimed-time`]}`}>
+                  {" "}
+                  {doneData} {"개, "}
+                </span>
+                <span className={`${styles[`aimed-time`]}`}>
+                  {" "}
+                  {parseInt((doneData / localData?.length) * 100)} {"% "}
+                </span>
+                완료하셨습니다
+              </div>
+            ) : (
+              <span></span>
+            )}
           </div>
 
           <div className={`${styles[`graph-wrap`]}`}>

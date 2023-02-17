@@ -83,7 +83,7 @@ export default function Video(props) {
           audioRef.current.play()
           callNotification("자세 알람", "바른 자세를 유지해봅시다!")
         }
-      }, 5000)
+      }, 30000)
       return function () {
         clearInterval(interval)
       }
