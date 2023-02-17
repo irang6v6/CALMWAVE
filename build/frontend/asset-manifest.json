@@ -1,0 +1,31 @@
+{
+  "files": {
+    "main.css": "/static/css/main.9a9d4537.css",
+    "main.js": "/static/js/main.7980114f.js",
+    "static/js/787.cda612ba.chunk.js": "/static/js/787.cda612ba.chunk.js",
+    "static/media/gologo.png": "/static/media/gologo.035af2d62dfa06a9cb0b.png",
+    "static/media/cuteturtle.png": "/static/media/cuteturtle.33106ec6bdc42f2d489c.png",
+    "static/media/favicon.ico": "/static/media/favicon.42b1b6bae5102f69ec0c.ico",
+    "static/media/doordoor.png": "/static/media/doordoor.75f956d365832824317d.png",
+    "static/media/roomresultimg.png": "/static/media/roomresultimg.d0149618f1f22ade4268.png",
+    "static/media/logo_imgonly.png": "/static/media/logo_imgonly.6ace325418069168caf3.png",
+    "static/media/bell.png": "/static/media/bell.a5d837ade9b1ab4b6df1.png",
+    "static/media/pomodoro.png": "/static/media/pomodoro.77f191b03a6bd5a51fdc.png",
+    "static/media/GTD.png": "/static/media/GTD.c557f7116aeec75d3dc5.png",
+    "static/media/award.png": "/static/media/award.f405175dfced41f9386f.png",
+    "static/media/pin3.mp3": "/static/media/pin3.d1bc22e7384e42a2349a.mp3",
+    "static/media/angryface.png": "/static/media/angryface.b812b049bfd456389ef4.png",
+    "static/media/buttonalarm.mp3": "/static/media/buttonalarm.64cac8ad9cc19b7082d6.mp3",
+    "static/media/stretching.png": "/static/media/stretching.704eeea4e5ab0afb1fcb.png",
+    "static/media/textlogo.png": "/static/media/textlogo.8d8dffd356e78385475d.png",
+    "static/media/reallogo.png": "/static/media/reallogo.2f6e4ecab5d65b7add3d.png",
+    "index.html": "/index.html",
+    "main.9a9d4537.css.map": "/static/css/main.9a9d4537.css.map",
+    "main.7980114f.js.map": "/static/js/main.7980114f.js.map",
+    "787.cda612ba.chunk.js.map": "/static/js/787.cda612ba.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.9a9d4537.css",
+    "static/js/main.7980114f.js"
+  ]
+}
