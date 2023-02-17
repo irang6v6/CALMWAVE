@@ -1,0 +1,43 @@
+.selected-task-card-container {
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 5px;
+  margin: 8px 12px 8px 12px;
+  background-color: rgba(70, 70, 70, 0.9);
+  color: white;
+  -webkit-user-drag: element;
+  transition: 0.4s;
+
+  animation: imhere;
+  animation-duration: 0.4s;
+}
+
+.selected-task-card-container.hover {
+  transform: scale(104%);
+}
+.selected-task-card-container.select {
+  transform: scale(0%);
+  transition: 0.3s;
+}
+.selected-task-card-container.hover.select {
+  transform: scale(0%);
+  transition: 0.3s;
+}
+
+.selected-card-body-container {
+  box-sizing: border-box;
+  /* border: solid 1px black; */
+  margin: 10px 8px 10px 8px;
+}
+
+@keyframes imhere {
+  from {
+    transform: scale(0%);
+  }
+  60% {
+    transform: scale(105%);
+  }
+  to {
+    transform: scale(100%);
+  }
+}

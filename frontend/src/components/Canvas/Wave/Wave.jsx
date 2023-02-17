@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { useCanvas } from "../../../hooks/custom/useCanvas"
 import { LightSource } from "./WaveBackground"
 import { Point } from "./WavePoint"
@@ -47,4 +48,4 @@ function Wave({ canvasWidth, canvasHeight, background }) {
   return <canvas ref={canvasRef} />
 }
 
-export default Wave
+export default memo(Wave)

@@ -1,0 +1,47 @@
+.category-card-container {
+  box-sizing: border-box;
+  background-color: rgba(111, 111, 111, 0.8);
+  /* background-color: rgba(255, 255, 255, 0.8); */
+  border-radius: 8px;
+  cursor: grab;
+  width: 100%;
+  margin: 4px 6px 12px 6px;
+  padding: 5px;
+  color: white;
+
+  transition: 0.4s;
+  -webkit-user-drag: element;
+
+  animation: imhere;
+  animation-duration: 0.4s;
+}
+
+.category-card-container.hover {
+  background-color: rgba(255, 255, 255, 0.5);
+  transform: scale(104%);
+}
+
+.category-card-container.select {
+  background-color: rgba(100, 255, 255, 0.5);
+  color: black;
+  transform: scale(101%);
+  /* color: white; */
+}
+.category-card-container.hover.select {
+  background-color: rgba(20, 255, 255, 0.5);
+  /* background-color: rgba(111, 111, 111, 0.8); */
+  color: black;
+  transform: scale(104%);
+}
+
+@keyframes imhere {
+  from {
+    transform: scale(0%);
+  }
+  60% {
+    transform: scale(105%);
+  }
+  to {
+    transform: scale(100%);
+  }
+}

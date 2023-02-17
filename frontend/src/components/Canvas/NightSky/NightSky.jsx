@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { useCanvas } from "../../../hooks/custom/useCanvas"
 import { SkyObject } from "./SkyObject"
 
@@ -6,18 +7,19 @@ function NightSky({ canvasWidth, canvasHeight, background }) {
     const gradient = ctx.createLinearGradient(
       0,
       0,
-      canvasWidth * 0.1,
+      canvasWidth * 0.0,
       canvasHeight
     )
-    gradient.addColorStop(0, `rgba(16, 19, 19, 1)`)
-    gradient.addColorStop(0.3, `rgba(28, 33, 33, 1)`)
-    gradient.addColorStop(0.77, `rgba(32, 38, 38, 1)`)
-    gradient.addColorStop(1, `rgba(54, 45, 30, 1)`)
+    gradient.addColorStop(0, `rgba(0, 25, 48, 1)`)
+    gradient.addColorStop(0.3, `rgba(0, 25, 48, 1)`)
+    gradient.addColorStop(0.77, `rgba(0, 25, 48, 1)`)
+    gradient.addColorStop(1, `rgba(39, 67, 94, 1)`)
     ctx.fillStyle = gradient
     ctx.fillRect(0, 0, canvasWidth, canvasHeight)
   }
   let stars = []
   let starfalls = [
+    new SkyObject(canvasWidth, canvasHeight),
     new SkyObject(canvasWidth, canvasHeight),
     new SkyObject(canvasWidth, canvasHeight),
     new SkyObject(canvasWidth, canvasHeight),
@@ -41,4 +43,4 @@ function NightSky({ canvasWidth, canvasHeight, background }) {
   return <canvas ref={canvasRef} />
 }
 
-export default NightSky
+export default memo(NightSky)

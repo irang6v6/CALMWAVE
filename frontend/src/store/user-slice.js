@@ -1,59 +1,107 @@
 import { createSlice } from "@reduxjs/toolkit"
+import axios from "axios"
+import { LOGOUTandRESETLOCALSTORAGE } from "./token-slice"
 
 const initialState = {
-  userId: "",
-  accessToken: "tokenExample",
-  refreshToken: "tokenExample",
+  isLoading: false,
+  isError: false,
   isLogin: false,
-  userNickname: "기본 값 닉네임",
-  description: "기본 자기 소개",
-  stretchingIntervalTime: 50,
-  OAuthType: "",
-  OAuthSub: "",
-  maximumWorkTime: 50,
-  faceInfo: {
-    neutral: 23,
-    happy: 385,
-    sad: 654,
-    angry: 700,
-    fearful: 888,
-    disgusted: 512,
-    surprised: 12,
+  userData: {
+    id: 0, // String일 수도 있음.
+    nickname: "",
+    username: "",
+    stretchingIntervalMin: 50, // 스트레칭 시간 Number
+    dateRegistered: "Date 형태인듯", // 데이트 형태
   },
-  workInfo: [],
-  turtleCount: 0,
-  deathCount: 12,
 }
 
 const UserSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    updateStretchingIntervalTime(state, action) {
-      state.stretchingIntervalTime = action.payload.stretchingIntervalTime
+    setIsLoading(state, action) {
+      state.isLoading = true
     },
-    updateFaceInfo(state, action) {
-      state.faceInfo = action.payload.faceInfo
+    setEndLoading(state, action) {
+      state.isLoading = false
     },
-    updateWorkInfo(state, action) {
-      // 이건 아직
+    setIsError(state, action) {
+      state.isError = true
     },
-    updateTurtleCount(state, action) {
-      state.turtleCount += 1
-      // state.turtleCount += action.payload.count // count는 status에 따라 넣어주면 될듯? 아니라면 그냥 1로만 해도 됨.
+    setNotError(state, action) {
+      state.isError = false
     },
-    updateDeathCount(state, action) {
-      state.deathCount += 1
-      state.deathCount += action.payload.count // count는 status에 따라 넣어주면 될듯? 아니라면 그냥 1로만 해도 됨.
+    changeUserData(state, action) {
+      state.userData = action.payload
     },
-    updateMaximunWorkTime(state, action) {
-      state.maximumWorkTime = action.payload.maximumWorkTime
+    resetUserData(state, action) {
+      state.userData = {}
+      state.isLogin = false
     },
-    updateLogin(state, action) {
-      state.isLogin = !state.isLogin
-    },
+    // updateStretchingIntervalTime(state, action) {
+    //   state.stretchingIntervalTime = action.payload.stretchingIntervalTime
+    // },
+    // updateFaceInfo(state, action) {
+    //   state.faceInfo = action.payload.faceInfo
+    // },
+    // updateWorkInfo(state, action) {
+    //   // 이건 아직
+    // },
+    // updateTurtleCount(state, action) {
+    //   state.turtleCount += 1
+    //   // state.turtleCount += action.payload.count // count는 status에 따라 넣어주면 될듯? 아니라면 그냥 1로만 해도 됨.
+    // },
+    // updateDeathCount(state, action) {
+    //   state.deathCount += 1
+    //   state.deathCount += action.payload.count // count는 status에 따라 넣어주면 될듯? 아니라면 그냥 1로만 해도 됨.
+    // },
+    // updateMaximunWorkTime(state, action) {
+    //   state.maximumWorkTime = action.payload.maximumWorkTime
+    // },
+    // updateLogin(state, action) {
+    //   state.isLogin = !state.isLogin
+    // },
   },
 })
+
+export const AxiosGetUser = function () {
+  return async function (dispatch) {
+    dispatch(userActions.setIsLoading())
+    axios({
+      method: "get",
+      url: "v1/user/userinfo",
+    })
+      .then((res) => {
+        dispatch(userActions.changeUserData(res.data))
+      })
+      .then((res) => {
+        dispatch(userActions.setEndLoading())
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+}
+
+export const AxiosLogout = function () {
+  return async function (dispatch) {
+    dispatch(userActions.setIsLoading())
+    axios({
+      method: "get",
+      url: "/v1/user/logout",
+    })
+      .then((res) => {
+        dispatch(LOGOUTandRESETLOCALSTORAGE())
+      })
+      .then(() => {
+        dispatch(userActions.resetUserData())
+        dispatch(userActions.setEndLoading())
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }
+}
 
 export const userActions = UserSlice.actions
 export default UserSlice.reducer

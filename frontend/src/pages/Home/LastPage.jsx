@@ -13,7 +13,7 @@ function LastPage(props) {
             </div>
 
             <div className={`${styles["btn-img-wrap"]}`}>
-                    <NavLink to={`/room`} className={`${styles["startbtn-wrap"]}`}>
+                    <NavLink to={`/door`} className={`${styles["startbtn-wrap"]}`}>
                     <img src={startbtn} alt="start" />
                     <h3>시작</h3>
                     </NavLink>

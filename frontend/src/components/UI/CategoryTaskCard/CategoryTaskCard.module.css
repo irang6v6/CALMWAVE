@@ -1,0 +1,56 @@
+.task-card-container {
+  box-sizing: border-box;
+  border-radius: 8px;
+  padding: 5px;
+  margin: 8px 12px 8px 12px;
+  background-color: rgba(99, 99, 99, 0.8);
+  color: white;
+  -webkit-user-drag: element;
+  transition: 0.4s;
+
+  animation: imhere;
+  animation-duration: 0.4s;
+  position: relative;
+}
+.done-card {
+  background-color: rgba(255, 255, 255, 0.13);
+  color: rgba(0, 0, 0, 0.5);
+}
+.done-tag {
+  position: absolute;
+  bottom: 6%;
+  right: 4%;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+.selected-card {
+  background-color: rgba(100, 255, 255, 0.5);
+  color: black;
+}
+
+.task-card-container.hover {
+  transform: scale(103%);
+}
+
+.task-card-container.hover.done-card {
+  color: rgba(0, 0, 0, 0.8);
+  font-weight: 500;
+}
+
+.task-card-container.hover.select {
+  box-shadow: rgba(12, 210, 189, 1);
+  transform: scale(103%);
+}
+
+@keyframes imhere {
+  from {
+    transform: scale(0%);
+  }
+  60% {
+    transform: scale(105%);
+  }
+  to {
+    transform: scale(100%);
+  }
+}

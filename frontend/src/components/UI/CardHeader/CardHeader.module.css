@@ -1,0 +1,75 @@
+.card-header-container {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 11px 13px 11px 13px;
+  font-size: 1.3rem;
+  font-weight: 800;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.card-header-header {
+  display: flex;
+  flex-direction: row;
+  max-width: 70%;
+}
+
+.card-header-lights {
+  min-height: 33px;
+  min-width: 33px;
+  box-sizing: border-box;
+  border-radius: 100%;
+  transition: 0.4s; 
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(100%);
+}
+
+.card-header-lights:hover {
+  transform: scale(104%);
+}
+
+.card-header-title {
+  box-sizing: border-box;
+  width: auto;
+  min-height: 33px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  text-shadow: 2px 2px 2px 2px;
+  white-space: nowrap;
+}
+
+.card-header-icon-container {
+  box-sizing: border-box;
+  min-height: 33px;
+  min-width: 66px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.card-header-icon {
+  box-sizing: border-box;
+  min-height: 24px;
+  min-width: 24px;
+  margin: 2px;
+  transition: 0.3s;
+  opacity: 0.9;
+}
+
+.card-header-icon:hover {
+  transform: scale(120%);
+  opacity: 1;
+  cursor: pointer;
+}
+
+.category-icon {
+  box-sizing: border-box;
+  min-height: 20px;
+  min-width: 20px;
+  margin: auto;
+  transition: 0.3s;
+  opacity: 0.9;
+}

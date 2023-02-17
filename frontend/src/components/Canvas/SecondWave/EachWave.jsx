@@ -15,7 +15,7 @@ export class EachWave {
     this.canvasHeight = canvasHeight
     this.ATTENUATION = 1
     this.centerX = canvasWidth / 2
-    this.centerY = canvasHeight / 1.88
+    this.centerY = canvasHeight / 5
     this.radius =
       canvasWidth / 48 > 48 ? 48 : canvasWidth / 48 < 24 ? 24 : canvasWidth / 48
   }

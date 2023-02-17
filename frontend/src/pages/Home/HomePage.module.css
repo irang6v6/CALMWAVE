@@ -17,13 +17,19 @@
 
 .go-up {
   position: fixed;
-  z-index: 22;
+  z-index: 85;
   top: 90vh;
   left: 90vw;
-  border-radius: 8px;
-  background-color: aquamarine;
+  border-radius: 10px;
+  background-color: #c6e5ff;
   padding: 15px;
+  font-weight: 500;
 }
 .go-up:hover {
   cursor: pointer;
+}
+
+.go-up-icon{
+  font-size: 1.5rem;
+  font-weight: 900;
 }

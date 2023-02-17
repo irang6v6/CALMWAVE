@@ -1,0 +1,146 @@
+@import url("https://fonts.googleapis.com/css2?family=Black+Han+Sans&family=Dancing+Script:wght@700&family=Do+Hyeon&family=Dokdo&family=Dongle:wght@700&family=East+Sea+Dokdo&family=Exo+2:wght@500&family=Gamja+Flower&family=Gothic+A1:wght@600;700&family=Gowun+Dodum&family=Hahmlet:wght@600&family=Heebo&family=Nanum+Brush+Script&family=Nanum+Pen+Script&family=PT+Sans:ital,wght@1,700&family=Stylish&family=Sunflower:wght@500;700&family=Ubuntu:ital,wght@0,300;0,400;0,500;1,400;1,500&family=Zeyada&display=swap");
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-color: rgb(243, 243, 243, 0);
+  background: #001930;
+  text-align: center;
+  /* border: 5px solid #ff0000; */
+  font-family: "Gowun Dodum", sans-serif;
+}
+
+.inner {
+  width: 80%;
+  /* height: 70%; */
+  /* border: 1px solid #7e3636; */
+  display: flex;
+  flex-direction: column;
+  /* justify-content:start; */
+  align-items: center;
+  /* border-radius: 36px; */
+  /* background-color: rgba(255, 255, 255, 0.5); */
+  /* transform: translateY(25px); */
+}
+
+.container p {
+  line-height: 200%;
+  font-size: 1.7rem;
+  color: white;
+  margin-bottom: 3%;
+}
+
+.door-img {
+  width: 90%;
+}
+
+.go-down {
+  box-sizing: border-box;
+  padding: 20px;
+  position: absolute;
+  top: 188%;
+  /* background-color: #0084ff; */
+  transform: translate(0, 0px);
+
+  /* animation-name: tongtong;
+  animation-duration: 0.6s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate; */
+}
+
+.go-down-icon {
+  width: 50px;
+  height: 50px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.go-down:hover {
+  cursor: pointer;
+}
+
+@keyframes tongtong {
+  to {
+    transform: translate(0, -10px) scale(100%);
+  }
+}
+.img-container {
+  /* background-color: aliceblue; */
+  padding: 70px 40px 30px 40px;
+  position: absolute;
+  top: 103%;
+  left: -8%;
+  width: 80%;
+  height: 73%;
+  perspective: 100vw;
+}
+.info-img {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 20px;
+  height: 100%;
+  width: fit-content;
+
+  box-shadow: -10px 10px 10px 2px rgba(255, 255, 255, 0.5),
+    -2px 0px 0px 0px #888;
+  border: solid white 3px;
+  border-radius: 8px;
+  z-index: 30;
+  opacity: 0;
+
+  animation-name: zidx-n-spin;
+  animation-fill-mode: forwards;
+  animation-duration: 1.3s;
+  animation-delay: 0.1s;
+  animation-direction: normal;
+  animation-timing-function: ease-in-out;
+}
+.dsc-container {
+  box-sizing: border-box;
+  height: 70vh;
+  width: 40%;
+  background-color: rgba(0, 16, 36, 0.5);
+  border-radius: 17px;
+  padding: 20px 25px 20px 25px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  line-height: 200%;
+  font-size: 1.7rem;
+  color: white;
+  margin-bottom: 3%;
+  z-index: 81;
+  position: absolute;
+  top: 115%;
+
+  left: 50%;
+
+  animation-name: shukshuk;
+  opacity: 0;
+  animation-duration: 1s;
+  animation-delay: 0.9s;
+  /* animation-iteration-count: infinite; */
+  animation-direction: normal;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes zidx-n-spin {
+  to {
+    transform: rotateY(30deg) scale(90%);
+    opacity: 1;
+    /* box-shadow: -10px 10px 10px 2px rgba(25, 25, 25, 0.2), -2px 0px 0px 0px #888; */
+    /* overflow: visible; */
+  }
+}
+
+@keyframes shukshuk {
+  to {
+    transform: translateX(5vw);
+    opacity: 1;
+  }
+}

@@ -27,6 +27,7 @@
 }
 
 .form-label {
+  color: rgb(197, 197, 197);
   font-weight: 700;
   font-size: 1.2rem;
   transition: 0.4s;
@@ -82,6 +83,7 @@
   margin: 8px auto 8px auto;
   padding: 10px 35px 10px 35px;
   justify-self: center;
+  height: 5.3vh;
 }
 
 .form-button:hover {
@@ -97,27 +99,119 @@
   align-items: center;
 }
 
+.email-dup-check-yet {
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: auto;
+  transition: 0.2s;
+  transform: translate(0, 4px);
+  color: rgb(2, 45, 82);
+
+  box-sizing: border-box;
+  border-radius: 5px;
+  background-color: rgba(222, 222, 222, 0.87);
+  padding: 3px 7px 3px 7px;
+}
+.email-dup-check-yet:hover {
+  cursor: pointer;
+  color: rgba(52, 105, 174);
+  transform: scale(105%) translate(-5px, 3px);
+}
+.email-dup-check-complete {
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: auto;
+  transition: 0.2s;
+  transform: translate(0, 4px);
+  color: rgb(2, 45, 82);
+
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 3px 7px 3px 7px;
+
+  pointer-events: none;
+  background-color: rgba(139, 213, 255, 0.9);
+}
+.email-dup-check-complete:hover {
+  transform: scale(105%) translate(-5px, 3px);
+}
+.email-dup-check-fail {
+  box-sizing: border-box;
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-left: auto;
+  transition: 0.2s;
+  transform: translate(0, 4px);
+  color: rgb(2, 45, 82);
+
+  box-sizing: border-box;
+  border-radius: 5px;
+  padding: 3px 7px 3px 7px;
+
+  background-color: rgba(255, 101, 103, 0.9);
+  cursor: pointer;
+}
+.email-dup-check-fail:hover {
+  transform: scale(105%) translate(-5px, 3px);
+}
+
 .change-button {
   font-size: 1.05rem;
   font-weight: 600;
   margin-left: auto;
   transition: 0.2s;
   transform: translate(0, 6px);
-  color: rgb(2, 45, 82);
+  color: rgb(226, 226, 226);
 }
 .change-button:hover {
   cursor: pointer;
-  color: rgba(52, 105, 174);
+  color: rgb(173, 208, 255);
   transform: scale(105%) translate(-1px, 5px);
 }
 
 .button-container {
   width: 15vw;
   height: 50px;
-  margin: 0 0 12px 0;
+  margin: 0 0 55px 0;
   box-sizing: border-box;
   padding: 10px 0 0 0;
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.button-invalid {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: none;
+  border-color: rgba(255, 255, 255, 0);
+  /* background-color: rgba(222, 222, 222, 0.95); */
+  background-color: rgba(253, 201, 33, 0.95);
+  transition: 0.5s;
+  width: 15vw;
+  margin: 8px 0 8px 0;
+  padding: 10px 35px 10px 35px;
+  cursor: pointer;
+  height: 5.3vh;
+}
+.button-invalid:hover {
+  transform: scale(105%);
+}
+
+.valid-message {
+  color: rgba(222, 222, 222, 0.95);
+  box-sizing: border-box;
+  margin: 10px 10px 10px 10px;
+  padding: 5px 0;
+  font-weight: 600;
+}
+.valid-message.valid {
+  color: #8bd5ff;
+}
+.valid-message.invalid {
+  color: #ff6567;
 }

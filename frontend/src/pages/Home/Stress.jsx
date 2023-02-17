@@ -1,23 +1,30 @@
 import styles from "./Stress.module.css"
+import { NavLink } from "react-router-dom"
 import React from "react"
-import angry from "../../assets/angry.png"
+import startbtn from "../../assets/last_start.png"
+import mypagebtn from "../../assets/last_mypage.png"
 
 function Stress(props) {
   return (
     <div ref={props.refVal} className={`${styles["container"]}`}>
       <div className={`${styles["inner"]}`}>
-        <h1>스트레스 관리</h1>
+        <h1>CALM WAVE 시작하기</h1>
         <div className={`${styles["img-wrap"]}`}>
-          <img src={angry} alt="임시이미지" />
-          <img src={angry} alt="임시이미지" />
-          <img src={angry} alt="임시이미지" />
+          <NavLink to={`/door`} className={`${styles[`shortcut-container`]}`}>
+            <img
+              src={startbtn}
+              alt="룸 입장"
+              className={`${styles[`enter-btn`]}`}
+            />
+          </NavLink>
+
+          <NavLink
+            to={`/profile`}
+            className={`${styles[`shortcut-container`]}`}
+          >
+            <img src={mypagebtn} alt="마이페이지" className={`${styles[`mypage-btn`]}`}/>
+          </NavLink>
         </div>
-        <p className={`${styles["smile-text"]}`}>
-          표정이 너무 안 좋아요, 잠시 리프레쉬 시간을 가져보는 것이 어떤가요?
-        </p>
-      </div>
-      <div className={`${styles["go-down"]}`} onClick={props.goNext}>
-        한 칸 아래로!
       </div>
     </div>
   )

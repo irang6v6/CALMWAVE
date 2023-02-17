@@ -4,8 +4,8 @@ import SignPage from "./SignPage"
 import styles from "./SignParentPage.module.css"
 import { useCustomWidthHeight } from "../../hooks/custom/useCustomWidthHeight"
 import { useRef } from "react"
-import SecondWave from "../../components/Canvas/SecondWave/SecondWave"
-import NavBar from "../../components/NavBar/NavBar"
+import NavIcon from "../../components/NavIcon/NavIcon"
+import SkyWithWave from "../../components/Canvas/SkyWithWave/SkyWithWave"
 
 function SignParentPage() {
   const [canvasWidth, setCanvasWidth] = useState(0)
@@ -22,17 +22,9 @@ function SignParentPage() {
   useCustomWidthHeight(pageRef) //, setCanvasWidth, setCanvasHeight
   return (
     <>
-      <NavBar />
+      <NavIcon />
       <div className={`${styles["wave-container"]}`}>
-        <SecondWave
-          canvasHeight={canvasHeight}
-          canvasWidth={canvasWidth}
-          background={`rgba(255, 255, 255, 1)`}
-          FstColor={`rgba(76, 230, 184, 0.88)`}
-          SndColor={`rgba(153, 214, 234, 0.7)`}
-          TrdColor={`rgba(29, 88, 164, 0.66)`}
-          innerColor={`rgb(134, 197, 255)`}
-        />
+        <SkyWithWave canvasHeight={canvasHeight} canvasWidth={canvasWidth} />
       </div>
       <SignPage pageRef={pageRef} />
     </>

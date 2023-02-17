@@ -18,8 +18,9 @@
   transition: 0.4s;
 }
 .form-label {
+  color: rgb(197, 197, 197);
   font-weight: 700;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   transition: 0.4s;
   margin: 10px 0 0 0;
 }
@@ -68,13 +69,34 @@
   cursor: pointer;
   border-color: rgba(255, 255, 255, 0);
   background-color: rgba(253, 201, 33, 0.95);
-  transition: 0.4s;
+  transition: 0.5s;
   width: 15vw;
   margin: 8px auto 8px auto;
   padding: 10px 35px 10px 35px;
+  height: 5.3vh;
+}
+.button-invalid {
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  box-sizing: border-box;
+  border-radius: 6px;
+  border: none;
+  border-color: rgba(255, 255, 255, 0);
+  /* background-color: rgba(222, 222, 222, 0.95); */
+  background-color: rgba(253, 201, 33, 0.95);
+  transition: 0.5s;
+  width: 15vw;
+  margin: 8px 0 8px 0;
+  padding: 10px 35px 10px 35px;
+  cursor: pointer;
+  height: 5.3vh;
 }
 
 .form-button:hover {
+  transform: scale(105%);
+}
+.button-invalid:hover {
   transform: scale(105%);
 }
 .input-container {
@@ -101,6 +123,7 @@
 }
 
 .change-button {
+  color: rgb(226, 226, 226);
   font-size: 1.1rem;
   font-weight: 600;
   margin-left: auto;
@@ -109,32 +132,46 @@
 }
 .change-button:hover {
   cursor: pointer;
-  color: rgba(52, 105, 174);
+  color: rgb(173, 208, 255);
   transform: scale(105%) translate(-1px, 5px);
 }
 
 .social-container {
   margin: 10px;
-  padding: 0;
+  padding: 10px;
   outline: none;
   display: flex;
   flex-direction: row;
-  width: 50%;
+  width: 15vw;
   transition: 0.3s;
+  box-sizing: border-box;
+  background-color: rgba(253, 201, 33, 0.88);
+  border-radius: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  height: 5.3vh;
+  padding: 10px 35px 10px 35px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
 }
 
 .social-image {
   margin-left: auto;
   margin-right: auto;
-  width: 15%;
+  /* width: 40%; */
+  height: 100%;
   cursor: pointer;
   transform: scale(105%);
   overflow: visible;
   transition: 0.3s;
 }
-.social-image:hover {
+.social-login-txt {
+  width: 62%;
+}
+.social-container:hover {
   cursor: pointer;
-  transform: scale(130%);
+  transform: scale(110%);
 }
 
 .button-container {
@@ -146,4 +183,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.valid-message {
+  color: rgba(222, 222, 222, 0.95);
+  box-sizing: border-box;
+  margin: 10px 10px 10px 10px;
+  padding: 5px 0;
+  font-weight: 600;
+}
+.valid-message.valid {
+  color: #8bd5ff;
+}
+.valid-message.invalid {
+  color: #ff6567;
 }

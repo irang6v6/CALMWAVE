@@ -1,3 +1,4 @@
+import { memo } from "react"
 import { useCanvas } from "../../../hooks/custom/useCanvas"
 import { BackgroundSource, LandNCloud, Star } from "./Planet"
 
@@ -30,4 +31,4 @@ function Earth({ canvasWidth, canvasHeight, background }) {
   return <canvas ref={canvasRef} />
 }
 
-export default Earth
+export default memo(Earth)
