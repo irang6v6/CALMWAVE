@@ -28,7 +28,7 @@ public interface WorkRepository extends JpaRepository<Work, Long> {
      * @param searchDate
      * @return
      */
-    @Query("SELECT new com.ssafy.calmwave.dto.WorkCalenderDto(w.id, w.workCate.id, wc.cateName, w.title, w.description, w.status, w.dateCreated, w.dateAimed, w.timeAimed) "
+    @Query("SELECT DISTINCT new com.ssafy.calmwave.dto.WorkCalenderDto(w.id, w.workCate.id, wc.cateName, w.title, w.description, w.status, w.dateCreated, w.dateAimed, w.timeAimed) "
             + "FROM Work w "
             + "JOIN WorkCategory wc ON w.workCate.cateName = wc.cateName "
             + "WHERE w.user.id = :userId "
@@ -41,7 +41,7 @@ public interface WorkRepository extends JpaRepository<Work, Long> {
      * @param searchDate
      * @return
      */
-    @Query("SELECT new com.ssafy.calmwave.dto.WorkCalenderDto(pw.id, pw.workCate.id, wc.cateName, pw.title, pw.description, pw.status, pw.dateCreated, pw.dateAimed, pw.timeAimed) "
+    @Query("SELECT DISTINCT new com.ssafy.calmwave.dto.WorkCalenderDto(pw.id, pw.workCate.id, wc.cateName, pw.title, pw.description, pw.status, pw.dateCreated, pw.dateAimed, pw.timeAimed) "
             + "FROM PastWork pw "
             + "JOIN WorkCategory wc ON pw.workCate.cateName = wc.cateName "
             + "WHERE pw.user.id = :userId "
