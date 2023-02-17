@@ -19,7 +19,6 @@ function RoomResult() {
       method: "get",
       url: `/v1/data/result`,
     }).then((res) => {
-      console.log(res.data)
       setData(res.data)
     })
   }, [])
@@ -112,6 +111,7 @@ function RoomResult() {
                     colors={{ scheme: "blues" }}
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
+                    arcLinkLabelsSkipAngle={10}
                     valueFormat={(value) => `${Math.round(value / 0.6) / 100}분`}
                     innerRadius={0.3}
                     cornerRadius={6}
@@ -141,6 +141,7 @@ function RoomResult() {
                     colors={{ scheme: "blues" }}
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
+                    arcLinkLabelsSkipAngle={10}
                     valueFormat={(value) => `${Math.round(value / 0.6) / 100}분`}
                     innerRadius={0.3}
                     cornerRadius={6}
