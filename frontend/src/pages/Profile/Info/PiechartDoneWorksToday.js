@@ -14,7 +14,6 @@ function PiechartDoneWorksToday() {
         })
         setWork(result.data)
       } catch (error) {
-        console.error(error)
       }
     }
 
@@ -23,11 +22,9 @@ function PiechartDoneWorksToday() {
 
   const handle = {
     padClick: (data) => {
-      console.log(data)
     },
 
     legendClick: (data) => {
-      console.log(data)
     },
   }
 

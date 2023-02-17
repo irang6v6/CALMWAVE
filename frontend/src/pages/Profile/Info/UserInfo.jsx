@@ -14,9 +14,6 @@ import DoneWorksVisualization from "./DoneWorksVisualization"
 import DoneCategoriesVisualization from "./DoneCategoriesVisualization"
 import BarChartDoneWorksforThisWeek from './BarChartDoneWorksforThisWeek'
 import PieChartDoneWorksBeforeAim from './PiechartDoneWorksBeforeAim'
-// import { Bar } from '@nivo/bar';
-// import { ResponsivePie } from "@nivo/pie"
-// import { core } from "@nivo/core"
 
 function UserInfo() {
   const { categoryList } = useSelector((state) => state.category)
@@ -71,7 +68,8 @@ function UserInfo() {
   }
 
   return (
-    <div className={`${styles[`routercontainer1`]}`}>
+    // <div className={`${styles[`routercontainer1`]}`}>
+      <>
       <div className={`${styles[`myinfo-box`]}`}>
         <div className={`${styles[`info-text`]}`}>
           <h2> My Profile </h2>
@@ -152,7 +150,8 @@ function UserInfo() {
         </div>
         </div>
       </div>
-    </div>
+    </>
+    // </div>
   )
 }
 

@@ -15,7 +15,6 @@ function PiechartDoneCategoriesToday() {
             })
             setWork(result.data);
         } catch (error) {
-            console.error(error);
         }
     };
 
@@ -24,11 +23,9 @@ function PiechartDoneCategoriesToday() {
 
     const handle = {
         padClick: (data) => {
-            console.log(data);
         },
 
         legendClick: (data) => {
-            console.log(data);
         },
     };
 

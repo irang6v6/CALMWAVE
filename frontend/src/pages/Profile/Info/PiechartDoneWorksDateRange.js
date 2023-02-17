@@ -4,12 +4,10 @@ import { ResponsivePie } from "@nivo/pie"
 
 function PiechartDoneWorksDateRange(props) {
   const [works, setWork] = useState([])
-  // console.log(typeof props.selected)
   const selected = props.selected
   const [startDate, setStartDate] = useState("")
   const [endDate, setEndDate] = useState("")
-  // let startDate = ""
-  // let endDate = ""
+
 
   const today = new Date()
   const dayOfWeek = today.getDay()
@@ -101,7 +99,6 @@ function PiechartDoneWorksDateRange(props) {
           const combinedResults = [...result1.data, ...result2.data]
           setWork(combinedResults)
         } catch (error) {
-          console.error(error)
         }
       }
 
@@ -111,11 +108,9 @@ function PiechartDoneWorksDateRange(props) {
 
   const handle = {
     padClick: (data) => {
-      console.log(data)
     },
 
     legendClick: (data) => {
-      console.log(data)
     },
   }
 
@@ -217,7 +212,7 @@ function PiechartDoneWorksDateRange(props) {
             translateX: 0,
             translateY: 56,
             itemsSpacing: 0,
-            itemWidth: 150,
+            itemWidth: 100,
             itemHeight: 18,
             itemTextColor: "#999",
             itemDirection: "left-to-right",
