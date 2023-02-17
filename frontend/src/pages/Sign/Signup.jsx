@@ -331,7 +331,6 @@ function Signup(props) {
   }
   const onInputEmailHandler = function () {
     if (emailDupValid) {
-      console.log(emailDupValid, "<<")
       return
     }
     setUseremail(() => emailRef.current.value)

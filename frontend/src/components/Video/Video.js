@@ -24,7 +24,6 @@ const metadataURL =
   "https://teachablemachine.withgoogle.com/models/5kCzQ3Epp/metadata.json"
 
 let frameIDs = []
-// let intervalIDs = []
 
 export default function Video(props) {
   const user = useSelector((state) => state.user.userData)
@@ -38,12 +37,6 @@ export default function Video(props) {
 
   const [model, setModel] = useState(null)
   const [webcam, setWebcam] = useState(null)
-  // const [posture, setPosture] = useState({
-  //   normal: 0,
-  //   tilted: 0,
-  //   turtle: 0,
-  //   left: 0,
-  // })
   const [nowPosture, setNowPosture] = useState("normal")
   const [postureAlarm, setPostureAlarm] = useState(true)
   const audioRef = useRef(null)
@@ -84,11 +77,7 @@ export default function Video(props) {
   useEffect(() => {
     if (postureAlarm && progress) {
       const interval = setInterval(() => {
-        if (
-          nowPosture !== "normal"
-          //  && nowPosture !== prevNowPosture.current
-        ) {
-          // console.log("ALARM")
+        if (nowPosture !== "normal") {
           prevNowPosture.current = nowPosture
           audioRef.current.src = pinThree
           audioRef.current.play()
@@ -133,7 +122,6 @@ export default function Video(props) {
     if (props.videoRef.current) {
       w = props.videoRef.current.offsetWidth
       h = props.videoRef.current.offsetHeight
-      // console.log(w, h)
     }
     const wc = await new tmPose.Webcam(w || 300, h || 200, true)
     setWebcam(() => wc)
@@ -142,10 +130,7 @@ export default function Video(props) {
   const loop = async function (timestamp) {
     if (props.videoRef.current && webcam) {
       sizeSet()
-      // await webcam.update()
       predict()
-      // await webcam.setup()
-      // await webcam.play()
     }
   }
 
@@ -186,23 +171,12 @@ export default function Video(props) {
           }
         })
         setNowPosture((oldPosture) => rtPosture.className)
-        // console.log(`자세 : ${nowPosture}, 몇프레임째(600당 10초) : ${badCnt}`)
       }
     }
   }
 
   useEffect(
     function () {
-      // function loop(timestamp) {
-      //   if (props.videoRef.current && webcam) {
-      //     sizeSet()
-      //     predict()
-      //   }
-      //   if (frameIDs.length > 0) {
-      //     const aniId = window.requestAnimationFrame(loop)
-      //     frameIDs.push(aniId)
-      //   }
-      // }
       setTimeout(function () {
         if (props.videoRef.current) {
           const aniId = window.requestAnimationFrame(loop)
@@ -225,7 +199,6 @@ export default function Video(props) {
     function () {
       if (nowPosture !== "normal" && nowPosture !== "left" && badCnt > 6000) {
         setBadCnt(() => 0)
-        console.log("아따 자세 안좋당께 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<")
         // 액시오스 요청
         const requestPosture = nowPosture
         axios({
@@ -234,11 +207,8 @@ export default function Video(props) {
           data: {
             className: requestPosture,
           },
-        }).then(() => {
-          console.log("안좋은 자세 ㅎㅇ")
         })
       } else if (nowPosture === "left" && badCnt > 54000) {
-        console.log("워메 자리를 얼마나 비우능교")
         // 액시오스 요청
         axios({
           method: "post",
@@ -246,8 +216,6 @@ export default function Video(props) {
           data: {
             className: "left",
           },
-        }).then(() => {
-          console.log("자리비움 호잇호잇")
         })
       }
       return function () {
@@ -283,18 +251,17 @@ export default function Video(props) {
             // 화면 가져오기
             newOV
               .getUserMedia({
-                audioSource: false, // The source of audio. If undefined default microphone
-                videoSource: undefined, // The source of video. If undefined default webcam
-                // resolution: "640x480", // The resolution of your video
-                resolution: undefined, // The resolution of your video
-                frameRate: 30, // The frame rate of your video
+                audioSource: false,
+                videoSource: undefined,
+                resolution: undefined,
+                frameRate: 30,
               })
               .then((mediaStream) => {
                 let newPublisher = newOV.initPublisher(`${user.nickname}`, {
                   audioSource: undefined,
-                  publishAudio: false, // Whether you want to start publishing with your audio unmuted or not
-                  publishVideo: true, // Whether you want to start publishing with your video enabled or not
-                  mirror: true, // Whether to mirror your local video or not
+                  publishAudio: false,
+                  publishVideo: true,
+                  mirror: true,
                   insertMode: "APPEND",
                 })
                 newPublisher.once("accessAllowed", () => {
@@ -389,42 +356,6 @@ export default function Video(props) {
     notification(title, body)
   }
 
-  // 카메라 변경 함수
-  // async switchCamera() {
-  //     try {
-  //         const devices = await this.OV.getDevices()
-  //         var videoDevices = devices.filter(device => device.kind === 'videoinput');
-
-  //         if (videoDevices && videoDevices.length > 1) {
-
-  //             var newVideoDevice = videoDevices.filter(device => device.deviceId !== this.state.currentVideoDevice.deviceId)
-
-  //             if (newVideoDevice.length > 0) {
-  //                 // Creating a new publisher with specific videoSource
-  //                 // In mobile devices the default and first camera is the front one
-  //                 var newPublisher = this.OV.initPublisher(undefined, {
-  //                     videoSource: newVideoDevice[0].deviceId,
-  //                     publishAudio: true,
-  //                     publishVideo: true,
-  //                     mirror: true
-  //                 });
-
-  //                 //newPublisher.once("accessAllowed", () => {
-  //                 await this.state.session.unpublish(this.state.mainStreamManager)
-
-  //                 await this.state.session.publish(newPublisher)
-  //                 this.setState({
-  //                     currentVideoDevice: newVideoDevice[0],
-  //                     mainStreamManager: newPublisher,
-  //                     publisher: newPublisher,
-  //                 });
-  //             }
-  //         }
-  //     } catch (e) {
-  //         console.error(e);
-  //     }
-  // }
-
   return (
     <>
       <div className={`${styles[`empty`]}`}>empty</div>
@@ -486,7 +417,7 @@ export default function Video(props) {
             />
           </div>
           <div className={`${styles[`stre-alarm-container`]}`}>
-            스트레칭 알람
+            스트레칭 & 휴식 알람
             <div className={`${styles[`stre-input-container`]}`}>
               <input
                 type="number"
@@ -498,11 +429,11 @@ export default function Video(props) {
               />
               분
             </div>
-              <GiHighKick
-                className={`${styles[`info-icon`]}
+            <GiHighKick
+              className={`${styles[`info-icon`]}
              ${!stretchingAlarm && styles[`stre-info-deact`]}`}
-                onClick={toggleStretchingAlarm}
-              />
+              onClick={toggleStretchingAlarm}
+            />
           </div>
         </div>
       </div>

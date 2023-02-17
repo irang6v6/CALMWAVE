@@ -99,7 +99,6 @@ function PiechartDoneCategoriesDateRange(props) {
           const combinedResults = [...result1.data, ...result2.data]
           setWork(combinedResults)
         } catch (error) {
-          console.error(error)
         }
       }
 
@@ -109,11 +108,9 @@ function PiechartDoneCategoriesDateRange(props) {
 
   const handle = {
     padClick: (data) => {
-      console.log(data)
     },
 
     legendClick: (data) => {
-      console.log(data)
     },
   }
 

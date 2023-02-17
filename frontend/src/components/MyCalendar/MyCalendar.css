@@ -21,11 +21,11 @@
   background-color: rgb(223, 242, 255);
   /* border: 1px solid #000; */
   border-radius: 30px;
-  /* border: 5px solid #8edbff; */
+  /* border: 5px solid #868db3; */
   color: #222;
   font-family: Arial, Helvetica, sans-serif;
   line-height: 1.125em;
-  /* box-shadow: 3px 3px 3px 3px rgb(184, 184, 184); */
+  box-shadow: 5px 5px 5px 5px rgba(34, 93, 141, 0.8);
   margin-right: 10%;
   margin-top: 8%;
 }
@@ -321,8 +321,9 @@ abbr[title] {
   /* padding-bottom: 5%; */
   border-radius: 10px;
   background-color: #fff;
-  margin-bottom: 10px;
-  box-shadow: 3px 3px 3px 3px rgb(180, 180, 180);
+  margin-bottom: 3%;
+  box-shadow: 3px 3px 3px 3px rgba(150, 150, 150, 0.7);
+  /* box-shadow: 5px 5px 5px 5px rgba(34, 93, 141, 0.8) */
 }
 
 .todo-content {
@@ -330,6 +331,9 @@ abbr[title] {
 
 .nowork-text {
   color: white;
+  /* border: 1px solid #000; */
+  font-size: 1.2rem;
+  margin-top: 20%;
 }
 
 .card-header-icon {

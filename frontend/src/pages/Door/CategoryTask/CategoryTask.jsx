@@ -40,7 +40,6 @@ function CategoryTask(props) {
   }, [])
 
   const originalTaskList = useSelector((state) => state.task.taskList)
-  // console.log(originalTaskList)
 
   const selectAll = function () {
     setSelectedState(() => null)
@@ -97,9 +96,7 @@ function CategoryTask(props) {
 
   return (
     <>
-      <div className={`${styles[`door-title-container`]}`}>
-        업무
-      </div>
+      <div className={`${styles[`door-title-container`]}`}>업무</div>
       <div className={`${styles[`epic-task-container`]}`}>
         <div className={`${styles[`door-tab-container`]}`}>
           <div className={AlltabClasses} onClick={selectAll}>

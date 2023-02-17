@@ -60,12 +60,6 @@ function EnterPage(props) {
                 to={isLogin ? "/door" : "/sign"}
                 className={`${styles[`shortcut-container`]}`}
               >
-                {/* <AiFillPlayCircle className={`${styles[`icons`]}`} /> */}
-                {/* <img
-                  src={startbtn}
-                  alt="룸 입장"
-                  className={`${styles[`enter-btn`]}`}
-                /> */}
                 <div className={`${styles[`enterbtn`]}`}>
                   <BsFillCaretRightFill className={`${styles[`start-icon`]}`}/>
                   START
@@ -76,12 +70,6 @@ function EnterPage(props) {
                 to={isLogin ? "/profile" : "/sign"}
                 className={styles["shortcut-container"]}
               >
-                {/* <AiFillInfoCircle className={`${styles[`icons`]}`} /> */}
-                {/* <img
-                  src={mypagebtn}
-                  alt="마이페이지"
-                  className={`${styles[`enter-btn`]}`}
-                /> */}
                 <div className={`${styles[`enterbtn`]}`}>
                   <GiHamburgerMenu className={`${styles[`mypage-icon`]}`}/>
                   MYPAGE

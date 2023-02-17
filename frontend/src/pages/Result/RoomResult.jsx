@@ -19,7 +19,6 @@ function RoomResult() {
       method: "get",
       url: `/v1/data/result`,
     }).then((res) => {
-      console.log(res.data)
       setData(res.data)
     })
   }, [])
@@ -28,7 +27,6 @@ function RoomResult() {
     window.localStorage.removeItem("todo")
     window.localStorage.removeItem("category")
   }
-
   return (
     <>
       <div className={`${styles[`canvas-container`]}`}>
@@ -42,7 +40,6 @@ function RoomResult() {
             <div className={`${styles[`text`]}`}>
               {data ? (
                 <div>
-                  {/* 추후에 시간 파싱 바꾸기 */}
                   목표시간{" "}
                   <span className={`${styles[`aimed-time`]}`}>
                     {data?.totalAimedTime / 3600} {"시간"}
@@ -73,6 +70,21 @@ function RoomResult() {
                 <span></span>
               )}
             </div>
+            <div className={`${styles[`text`]}`}>
+              <span className={`${styles[`aimed-time`]}`}>
+                {data?.numOfTotalWork} {"개 "}
+              </span>
+              의 업무를 선택하셨고 그 중
+              <span className={`${styles[`aimed-time`]}`}>
+                {" "}
+                {data?.numOfDone} {"개, "}
+              </span>
+              <span className={`${styles[`aimed-time`]}`}>
+                {" "}
+                {data?.percentOfTodoAndDone} {"% "}
+              </span>
+              완료하셨습니다
+            </div>
           </div>
 
           <div className={`${styles[`graph-wrap`]}`}>
@@ -85,18 +97,19 @@ function RoomResult() {
                       return {
                         ...e,
                         목표시간: e.aimedTime,
-                        총업무시간: e.totalTime
+                        총업무시간: e.totalTime,
                       }
                     })}
-                    // keys={["aimedTime", "totalTime"]}
                     keys={["목표시간", "총업무시간"]}
                     indexBy={"title"}
                     colors={{ scheme: "blues" }}
-                    // borderWidth={3}
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
-                    valueFormat={(value) => `${Math.round(value/3600)}시간 ${Math.round(value % 3600 / 60)}분`}
-                    // sliceTooltip={}
+                    valueFormat={(value) =>
+                      `${Math.round(value / 3600)}시간 ${Math.round(
+                        (value % 3600) / 60
+                      )}분`
+                    }
                   />
                 </div>
                 <div className={`${styles[`graph-info`]}`}>
@@ -114,10 +127,12 @@ function RoomResult() {
                   <ResponsivePie
                     data={data?.pieChartByWork}
                     colors={{ scheme: "blues" }}
-                    // borderWidth={3}
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
-                    valueFormat={(value) => `${Math.round(value / 0.6) / 100}분`}
+                    arcLinkLabelsSkipAngle={10}
+                    valueFormat={(value) =>
+                      `${Math.round(value / 0.6) / 100}분`
+                    }
                     innerRadius={0.3}
                     cornerRadius={6}
                     theme={{
@@ -144,10 +159,12 @@ function RoomResult() {
                   <ResponsivePie
                     data={data?.pieChartByCategory}
                     colors={{ scheme: "blues" }}
-                    // borderWidth={3}
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
-                    valueFormat={(value) => `${Math.round(value / 0.6) / 100}분`}
+                    arcLinkLabelsSkipAngle={10}
+                    valueFormat={(value) =>
+                      `${Math.round(value / 0.6) / 100}분`
+                    }
                     innerRadius={0.3}
                     cornerRadius={6}
                     theme={{

@@ -72,21 +72,42 @@
 }
 
 .alert-img {
-  width: 70%;
+  width: 50%;
   /* height: 80%; */
-  transform: translate(0, 10px);
+  /* transform: translate(0, 10px); */
   opacity: 0;
-  animation-name: floating;
+  animation-name: bellbell;
   animation-delay: 0.1s;
   animation-fill-mode: forwards;
-  animation-duration: 1.2s;
+  animation-duration: 0.8s;
+}
+@keyframes bellbell {
+  20%,
+  40%,
+  60%,
+  80% {
+    transform: skewX(-11deg) skewY(11deg);
+    opacity: 1;
+  }
+  10%,
+  30%,
+  50%,
+  70%,
+  90% {
+    transform: skewX(11deg) skewY(-11deg);
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 .alert-text {
+  box-sizing: border-box;
   color: white;
-  position: absolute;
-  bottom: 15%;
-  font-size: 1.4rem;
+  /* position: absolute; */
+  bottom: 35% 0 0 0;
+  font-size: 1.5rem;
   text-shadow: -2px 0px rgb(0, 0, 0), 0px 2px rgb(0, 0, 0), 2px 0px rgb(0, 0, 0),
     0px -2px rgb(0, 0, 0);
 
@@ -111,14 +132,17 @@
 
 .turtle-img {
   width: 20%;
+  animation: bellbell 0.7s forwards 1.4s;
 }
 
 .stretcing-img {
   width: 30%;
+  animation: bellbell 0.7s forwards 2s;
 }
 
 .angry-img {
   width: 20%;
+  animation: bellbell 0.7s forwards 2.6s;
 }
 
 .right-box {

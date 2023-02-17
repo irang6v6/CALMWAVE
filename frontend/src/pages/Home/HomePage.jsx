@@ -40,6 +40,9 @@ function HomePage() {
   const [alarmScroll, setAlarmScroll] = useState(
     window.scrollY >= canvasHeight * 2.4
   )
+  const [resultScroll, setResultScroll] = useState(
+    window.scrollY >= canvasHeight * 2.4
+  )
   const scrollInfoManageHandler = useCallback(
     function () {
       if (window.scrollY >= canvasHeight * 0.4) {
@@ -64,10 +67,18 @@ function HomePage() {
     function () {
       if (window.scrollY >= window.innerHeight * 2.4) {
         setAlarmScroll(() => true)
-        console.log("보여랏")
-      } else if (window.scrollY <= window.innerHeight * 1.1) {
+      } else if (window.scrollY <= window.innerHeight * 2.1) {
         setAlarmScroll(() => false)
-        console.log("사라져랏")
+      }
+    },
+    [scrollY]
+  )
+  const scrollResultHandler = useCallback(
+    function () {
+      if (window.scrollY >= window.innerHeight * 3.4) {
+        setResultScroll(() => true)
+      } else if (window.scrollY <= window.innerHeight * 3.1) {
+        setResultScroll(() => false)
       }
     },
     [scrollY]
@@ -98,6 +109,15 @@ function HomePage() {
       }
     },
     [scrollAlarmHandler]
+  )
+  useEffect(
+    function () {
+      window.addEventListener("scroll", scrollResultHandler)
+      return function () {
+        window.removeEventListener("scroll", scrollResultHandler)
+      }
+    },
+    [scrollResultHandler]
   )
 
   const pageRef = useRef(null)
@@ -180,7 +200,7 @@ function HomePage() {
           goNext={goStreching}
           scrollTrigger={alarmScroll}
         />
-        <ResultPage refVal={stretchRef} />
+        <ResultPage refVal={stretchRef} scrollTrigger={resultScroll} />
         <div className={`${styles["go-up"]}`} onClick={goUp}>
           TOP
         </div>

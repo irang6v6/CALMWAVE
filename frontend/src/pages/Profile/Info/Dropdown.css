@@ -15,6 +15,7 @@
   cursor: pointer;
   background-color: rgba(166, 250, 255, 0.25);
   color: white;
+  font-family: 'Gowun Dodum', sans-serif;
 }
 
 .dropdown-toggle .arrow {
@@ -29,22 +30,23 @@
 
 .dropdown-toggle .arrow.up {
   border-width: 0 4px 4px 4px;
-  border-color: transparent transparent #555 transparent;
+  border-color: transparent transparent #ffffff transparent;
 }
 
 .dropdown-menu {
   position: absolute;
   top: 100%;
   left: 0;
+  width: 100%;
   z-index: 1;
-  border-radius: 7px;
+  /* border-radius: 7px; */
   padding: 5px 0;
   margin: 0;
   list-style: none;
   background-color: #ffffff;
   color: black;
   border: 1px solid #ccc;
-  font-size: 20p;
+  font-size: 20px;
 }
 
 .dropdown-menu li {

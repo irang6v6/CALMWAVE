@@ -1,7 +1,7 @@
 import styles from "./CardHeader.module.css"
 import { AiFillCloseCircle, AiFillEdit } from "react-icons/ai"
 import { memo } from "react"
-import { useDispatch } from "react-redux" // , useSelector
+import { useDispatch } from "react-redux"
 import {
   modalActions,
   openCategoryModal,
@@ -13,8 +13,6 @@ import CateIcon from "../../CateIcon/CateIcon"
 
 function CardHeader({ data, cardType, deleteSelectedTaskList }) {
   const dispatch = useDispatch()
-  // const { isModal, isTask, isDelete, isLoading, isError, formData } =
-  //   useSelector((state) => state.modal)
   const openModal = function (e) {
     e.stopPropagation()
     dispatch(modalActions.setFormData({ data }))
@@ -34,11 +32,9 @@ function CardHeader({ data, cardType, deleteSelectedTaskList }) {
       deleteSelectedTaskList()
       return
     } else if (cardType) {
-      // dispatch(modalActions.setIsTask())
       dispatch(modalActions.setFormData({ data }))
       dispatch(openTaskDeleteModal())
     } else {
-      // dispatch(modalActions.setIsCategory())
       dispatch(modalActions.setFormData({ data }))
       dispatch(openCategoryDeleteModal())
     }
