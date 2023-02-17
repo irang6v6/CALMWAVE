@@ -27,7 +27,6 @@ function RoomResult() {
     window.localStorage.removeItem("todo")
     window.localStorage.removeItem("category")
   }
-
   return (
     <>
       <div className={`${styles[`canvas-container`]}`}>
@@ -71,6 +70,21 @@ function RoomResult() {
                 <span></span>
               )}
             </div>
+            <div className={`${styles[`text`]}`}>
+              <span className={`${styles[`aimed-time`]}`}>
+                {data?.numOfTotalWork} {"개 "}
+              </span>
+              의 업무를 선택하셨고 그 중
+              <span className={`${styles[`aimed-time`]}`}>
+                {" "}
+                {data?.numOfDone} {"개, "}
+              </span>
+              <span className={`${styles[`aimed-time`]}`}>
+                {" "}
+                {data?.percentOfTodoAndDone} {"% "}
+              </span>
+              완료하셨습니다
+            </div>
           </div>
 
           <div className={`${styles[`graph-wrap`]}`}>
@@ -83,7 +97,7 @@ function RoomResult() {
                       return {
                         ...e,
                         목표시간: e.aimedTime,
-                        총업무시간: e.totalTime
+                        총업무시간: e.totalTime,
                       }
                     })}
                     keys={["목표시간", "총업무시간"]}
@@ -91,7 +105,11 @@ function RoomResult() {
                     colors={{ scheme: "blues" }}
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
-                    valueFormat={(value) => `${Math.round(value/3600)}시간 ${Math.round(value % 3600 / 60)}분`}
+                    valueFormat={(value) =>
+                      `${Math.round(value / 3600)}시간 ${Math.round(
+                        (value % 3600) / 60
+                      )}분`
+                    }
                   />
                 </div>
                 <div className={`${styles[`graph-info`]}`}>
@@ -112,7 +130,9 @@ function RoomResult() {
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
                     arcLinkLabelsSkipAngle={10}
-                    valueFormat={(value) => `${Math.round(value / 0.6) / 100}분`}
+                    valueFormat={(value) =>
+                      `${Math.round(value / 0.6) / 100}분`
+                    }
                     innerRadius={0.3}
                     cornerRadius={6}
                     theme={{
@@ -142,7 +162,9 @@ function RoomResult() {
                     enableArcLinkLabels={false}
                     arcLabel={"id"}
                     arcLinkLabelsSkipAngle={10}
-                    valueFormat={(value) => `${Math.round(value / 0.6) / 100}분`}
+                    valueFormat={(value) =>
+                      `${Math.round(value / 0.6) / 100}분`
+                    }
                     innerRadius={0.3}
                     cornerRadius={6}
                     theme={{

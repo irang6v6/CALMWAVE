@@ -99,3 +99,10 @@
   width: auto;
   min-height: 40px;
 }
+
+.result-time {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
