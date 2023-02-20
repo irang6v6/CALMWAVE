@@ -1,75 +1,111 @@
 # 🌊 **Calm Wave**
+
 (프로젝트 정보)
 
 <br>
 
 ## 👇 **Calm Wave 시연 영상**
+
 ...
 
 <br>
 
 ## 📅 **프로젝트 진행 기간**
+
 2023/01/09(월) ~ <br>
 SSAFY 8기 2학기 공통프로젝트
 
 <br>
 
 ## **기획 배경**
+
 ...
 
 <br>
 
 ## **Calm Wave 서비스 화면**
+
 ### **기능**
+
 [사진]
 
 <br>
 
 ## **주요 기능**
+
 ...
 
 <br>
 
 ## **아키텍처**
+
 ...
 
 <br>
 
 ## **기술 스택**
-### **Front**
-...
+
+### **📚Front**
+
+<img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
+<img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
+<img src="https://img.shields.io/badge/javascript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black"> 
+<br>
+
+<img src="https://img.shields.io/badge/react-61DAFB?style=for-the-badge&logo=react&logoColor=black"> 
+<img src="https://img.shields.io/badge/react router-CA4245?style=for-the-badge&logo=react&logoColor=black"> 
+<img src="https://img.shields.io/badge/node.js-339933?style=for-the-badge&logo=Node.js&logoColor=white">
+<img src="https://img.shields.io/badge/Redux-764ABC?style=for-the-badge&logo=Redux&logoColor=white">
+<br>
+
 
 <br>
 
 ### **Back**
-...
+
+<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> 
+<img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
+<img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=apachetomcat&logoColor=white">
+<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white">
+<br>
+<img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white"> <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
+<img src="https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=NGINX&logoColor=white">
+
 
 <br>
 
 ### **기타**
-...
 
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> 
+<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 <br>
 
 ## **협업 툴**
-...
+<img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=git&logoColor=white">
 
 <br>
 
 ## **프로젝트 파일 구조**
+
 ### **Frontend**
+
 ...
+
 ### **Backend**
+
 ...
 
 <br>
 
 ## **프로젝트 산출물**
+
 ...
 
 <br>
 
 ## **Git 커밋 메시지 컨벤션**
+
 - `Feat` : 새로운 기능 추가
 - `Modify` : 기존 기능 수정
 - `Fix` : 버그 수정
@@ -88,7 +124,9 @@ ex) **[BE] Feat: 관심지역 알림 ON/OFF 기능 추가(#123)**
 <br>
 
 ## **Git 브랜치 컨벤션**
+
 ![git_strategy](https://user-images.githubusercontent.com/52191425/212794379-54373f74-67f6-4ec9-ace0-723e8de33c31.png)
+
 - `main`
     - 배포 가능한 상태의 결과물 올리는 브랜치
 - `develop`
@@ -97,21 +135,24 @@ ex) **[BE] Feat: 관심지역 알림 ON/OFF 기능 추가(#123)**
 - `feature`
     - 개별 기능 구현 브랜치
     - 기능 개발 완료 시 삭제
-    - 네이밍 규칙 
-      - feature/FE or BE/기능이름
-      - 예) feature/FE/login
-<br><br>
+    - 네이밍 규칙
+        - feature/FE or BE/기능이름
+        - 예) feature/FE/login
+          <br><br>
 - **feature 브랜치가 완성되면 develop 브랜치로 merge request를 통해 merge한다.**<br>
-⇒ merge request가 요청되면, 모든 팀원들이 코드 리뷰를 하여 안전하게 merge한다.
+  ⇒ merge request가 요청되면, 모든 팀원들이 코드 리뷰를 하여 안전하게 merge한다.
 
 <br>
 
 ## **팀원 역할 분배**
+
 ### **Frontend**
+
 - 윤서용
 - 조한이
 - 한기현
 
 ### **Backend**
+
 - 남이랑
 - 양주연
