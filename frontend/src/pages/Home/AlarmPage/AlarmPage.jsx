@@ -15,8 +15,8 @@ function AlarmPage(props) {
     <>
       <div className={`${styles[`canvas-container`]}`}>
         <Wave
-          canvasHeight={height}
-          canvasWidth={width}
+          canvasHeight={props?.backHeight}
+          canvasWidth={props?.backWidth}
           background={`#001930`}
         />
       </div>

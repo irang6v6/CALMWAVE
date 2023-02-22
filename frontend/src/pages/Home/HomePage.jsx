@@ -199,6 +199,8 @@ function HomePage() {
           refVal={todoRef}
           goNext={goStreching}
           scrollTrigger={alarmScroll}
+          backWidth={canvasWidth}
+          backHeight={canvasHeight}
         />
         <ResultPage refVal={stretchRef} scrollTrigger={resultScroll} />
         <div className={`${styles["go-up"]}`} onClick={goUp}>

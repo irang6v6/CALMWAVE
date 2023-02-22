@@ -1,7 +1,12 @@
 .canvas-container {
-  width: 100vw;
+  box-sizing: border-box;
+  /* padding: 0; */
+  /* margin: 0; */
+  /* outline: none; */
+  overflow: hidden;
+  width: 100%;
   height: 100vh;
-  z-index: -20;
+  z-index: -10;
   position: absolute;
 }
 
