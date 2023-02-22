@@ -12,8 +12,10 @@ import {
 import { useNotification } from "../../hooks/custom/useNotification"
 import { GiPianist, GiHighKick } from "react-icons/gi"
 import new_logo from "../../assets/new_logo.png"
-import buttonAlarm from "../../assets/alarm/buttonalarm.mp3"
-import pinThree from "../../assets/alarm/pin3.mp3"
+// import buttonAlarm from "../../assets/alarm/buttonalarm.mp3"
+import buttonAlarm from "../../assets/alarm/stretching.m4a"
+// import pinThree from "../../assets/alarm/pin3.mp3"
+import pinThree from "../../assets/alarm/posture.m4a"
 
 const OPENVIDU_SERVER_URL = "https://i8a105.p.ssafy.io:8443/"
 const OPENVIDU_SERVER_SECRET = "WAVES"
@@ -83,7 +85,7 @@ export default function Video(props) {
           audioRef.current.play()
           callNotification("자세 알람", "바른 자세를 유지해봅시다!")
         }
-      }, 5000)
+      }, 8000)
       return function () {
         clearInterval(interval)
       }
