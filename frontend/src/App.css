@@ -4,6 +4,9 @@ body {
   outline: 0;
   box-sizing: border-box;
 }
+body::-webkit-scrollbar {
+  display: none;
+}
 .app {
   width: 100vw;
   padding: 0;
