@@ -1,25 +1,27 @@
-# 🌊 **Calm Wave**
+# 🌊 **Calm Wave - WebRTC 기반 업무 관리 및 자세 교정 서비스**
 
-(프로젝트 정보)
+![reallogo](https://user-images.githubusercontent.com/52191425/220856785-3b80f676-b7e5-4a4e-ae6d-d264d2324e27.png)
+![main](https://user-images.githubusercontent.com/52191425/220856552-e17f7172-0c63-4cd0-afbe-ee8057dddd91.gif)
+
+- 오래 앉아서 일하는 사람들을 위한 업무 시간 관리 및 자세 교정 서비스
+- 무자각성을 지향하는 Calm Tech로 유저의 생활에 조용히 스며들어 도움을 줍니다.
+- 사용자의 업무 태도 및 습관을 WebRTC 기술을 이용해 수집 후 분석하여,
+  더 나은 업무를 위한 개인화된 솔루션을 제공합니다.
+- 사용자의 자세를 교정하고 일정 시간마다 스트레칭을 권유하는 등 개인의 업무환경에 도움을 줍니다.
 
 <br>
 
-## 👇 **Calm Wave 시연 영상**
+## 🎬 **Calm Wave 시연 영상**
 
-...
+[<img src="https://img.shields.io/badge/Link-0085DE?style=for-the-badge&logo=YouTube&logoColor=white">](https://drive.google.com/file/d/16C9Lg_xMNVv9vWsGIXMjhe2ciYe5wq5c/view?usp=sharing)
+
 
 <br>
 
 ## 📅 **프로젝트 진행 기간**
 
-2023/01/09(월) ~ <br>
+2023/01/09(월) ~ 2023/02/17(금) <br>
 SSAFY 8기 2학기 공통프로젝트
-
-<br>
-
-## **기획 배경**
-
-...
 
 <br>
 
@@ -28,12 +30,6 @@ SSAFY 8기 2학기 공통프로젝트
 ### **기능**
 
 [사진]
-
-<br>
-
-## **주요 기능**
-
-...
 
 <br>
 
@@ -63,7 +59,7 @@ SSAFY 8기 2학기 공통프로젝트
 
 ### **Back**
 
-<img src="https://img.shields.io/badge/java-007396?style=for-the-badge&logo=java&logoColor=white"> 
+<img src="https://img.shields.io/badge/java 11-FF0000?style=for-the-badge&logo=OpenJDK&logoColor=white"> 
 <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
 <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=apachetomcat&logoColor=white">
 <img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white">
