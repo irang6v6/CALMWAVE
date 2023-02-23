@@ -89,6 +89,10 @@ function CategoryTask(props) {
   )
 
   const openCreateTaskModal = function () {
+    if (!selectedCategoryId) {
+      window.alert("카테고리를 설정해주세요")
+      return
+    }
     dispatch(modalActions.resetFormData())
     dispatch(modalActions.setIsCreate())
     dispatch(openTaskModal())
