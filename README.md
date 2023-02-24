@@ -1,9 +1,9 @@
 # 🌊 **CALM WAVE - WebRTC 기반 업무 관리 및 자세 교정 서비스**
 
 <div align=center>
-<img width="80%" src="https://user-images.githubusercontent.com/52191425/221072324-3ac256eb-ed71-4e0d-ab6b-f88150ea05fb.gif"/>
-<br>
-<img width="50%" src="https://user-images.githubusercontent.com/52191425/220856785-3b80f676-b7e5-4a4e-ae6d-d264d2324e27.png"/>
+<img width="60%" src="https://user-images.githubusercontent.com/52191425/221072324-3ac256eb-ed71-4e0d-ab6b-f88150ea05fb.gif"/>
+<br><br>
+<img width="40%" src="https://user-images.githubusercontent.com/52191425/220856785-3b80f676-b7e5-4a4e-ae6d-d264d2324e27.png"/>
 </div>
 
 <br>
@@ -36,29 +36,52 @@ SSAFY 8기 2학기 공통프로젝트
 ### **메인 페이지**
 <div align=center>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221072324-3ac256eb-ed71-4e0d-ab6b-f88150ea05fb.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221072324-3ac256eb-ed71-4e0d-ab6b-f88150ea05fb.gif"/>
 
 </div>
 
 <br>
 
-### **업무 선택 페이지**
+### **로그인 페이지**
+<div align=center>
+
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221100063-b17cfcea-eec3-4e17-af75-da5e6e3a9fb0.gif"/>
+
+**로그인 성공**
+
+<br>
+
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221100171-94fdb418-f77a-48ff-972c-15dd32901eb9.gif"/>
+
+**로그인 실패**
+
+<br>
+
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221101863-1afe3c19-711d-456a-91b7-76b71bfc6274.gif"/>
+
+**구글 로그인**
+
+</div>
+
+<br>
+
+### **업무 계획 페이지**
 
 <div align=center>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221076364-fd173b3d-82e3-4f45-9cd8-b6b68f578054.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221076364-fd173b3d-82e3-4f45-9cd8-b6b68f578054.gif"/>
 
 **업무 카테고리 추가**
 
 <br>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221076725-cbfa6883-0249-4540-9148-14183d76afa5.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221076725-cbfa6883-0249-4540-9148-14183d76afa5.gif"/>
 
 **업무 추가**
 
 <br>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221076859-4f42c436-20cc-4fa7-8fa9-6679272c2e97.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221076859-4f42c436-20cc-4fa7-8fa9-6679272c2e97.gif"/>
 
 **업무 선택 및 시작**
 
@@ -70,75 +93,74 @@ SSAFY 8기 2학기 공통프로젝트
 
 <div align=center>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221076986-d65f795d-4031-408a-8fd0-6ebd618f3774.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221076986-d65f795d-4031-408a-8fd0-6ebd618f3774.gif"/>
 
 **진행 중인 업무 선택**
 
 <br>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221077166-6532e310-e92d-4782-9c39-ad3679f5be34.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221077166-6532e310-e92d-4782-9c39-ad3679f5be34.gif"/>
 
 **자세 교정 알람**
 
 <br>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221077341-f041e30d-1212-4100-af35-7ef6b9fe6932.gif"/>
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221077351-a5baf4ae-cefa-48e1-9a57-f90f3f64b081.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221077341-f041e30d-1212-4100-af35-7ef6b9fe6932.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221077351-a5baf4ae-cefa-48e1-9a57-f90f3f64b081.gif"/>
 
 **스트레칭 & 휴식 알람**
 
 <br>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221077725-440ab244-43f7-460a-8094-ddf7e3d577ef.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221077725-440ab244-43f7-460a-8094-ddf7e3d577ef.gif"/>
 
 **끝낸 업무 저장 및 종료**
 
 <br>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221077946-5d6da519-345a-4c76-a0fa-953cc086fd5b.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221077946-5d6da519-345a-4c76-a0fa-953cc086fd5b.gif"/>
 
 **업무 결과 페이지**
 
 </div>
 
+<br>
+
 ### **마이페이지**
 
 <div align=center>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221078081-0b2b00f4-576a-4a90-a410-5319baced8d4.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221078081-0b2b00f4-576a-4a90-a410-5319baced8d4.gif"/>
 
 **프로필**
 
 <br>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221078338-f68f1b58-587e-41c5-9b85-aaf0c2dd90ec.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221078338-f68f1b58-587e-41c5-9b85-aaf0c2dd90ec.gif"/>
 
 **업무 캘린더**
 
 <br>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221078468-dd829985-b16e-4f2f-b179-db3dfe1211d0.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221078468-dd829985-b16e-4f2f-b179-db3dfe1211d0.gif"/>
 
 **업무 분포 그래프**
 
 <br>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221079009-01b68b12-cb5c-4cb1-baf7-afd7f4402303.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221079009-01b68b12-cb5c-4cb1-baf7-afd7f4402303.gif"/>
 
 **주간 완료 업무 그래프**
 
 <br>
 
-<img width="95%" src="https://user-images.githubusercontent.com/52191425/221079138-3af0bfae-db77-43fe-b929-279b72c5e447.gif"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221079138-3af0bfae-db77-43fe-b929-279b72c5e447.gif"/>
 
 **목표 일정 달성 비율 그래프**
 
-
 </div>
 
-
 <br>
-
 
 
 ## 🔧 **아키텍처**
@@ -185,20 +207,8 @@ SSAFY 8기 2학기 공통프로젝트
 <img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
 <br>
 
-## **협업 툴**
+### **협업 툴**
 <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=git&logoColor=white">
-
-<br>
-
-## **프로젝트 파일 구조**
-
-### **Frontend**
-
-...
-
-### **Backend**
-
-...
 
 <br>
 
