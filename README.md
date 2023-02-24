@@ -1,7 +1,14 @@
-# 🌊 **Calm Wave - WebRTC 기반 업무 관리 및 자세 교정 서비스**
+# 🌊 **CALM WAVE - WebRTC 기반 업무 관리 및 자세 교정 서비스**
 
-![reallogo](https://user-images.githubusercontent.com/52191425/220856785-3b80f676-b7e5-4a4e-ae6d-d264d2324e27.png)
-![main](https://user-images.githubusercontent.com/52191425/220856552-e17f7172-0c63-4cd0-afbe-ee8057dddd91.gif)
+<div align=center>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/221072324-3ac256eb-ed71-4e0d-ab6b-f88150ea05fb.gif"/>
+<br>
+<img width="50%" src="https://user-images.githubusercontent.com/52191425/220856785-3b80f676-b7e5-4a4e-ae6d-d264d2324e27.png"/>
+</div>
+
+<br>
+
+## 💡 **CALM WAVE 소개**
 
 - 오래 앉아서 일하는 사람들을 위한 업무 시간 관리 및 자세 교정 서비스
 - 무자각성을 지향하는 Calm Tech로 유저의 생활에 조용히 스며들어 도움을 줍니다.
@@ -11,7 +18,7 @@
 
 <br>
 
-## 🎬 **Calm Wave 시연 영상**
+## 🎬 **CALM WAVE 시연 영상**
 
 [<img src="https://img.shields.io/badge/Link-0085DE?style=for-the-badge&logo=YouTube&logoColor=white">](https://drive.google.com/file/d/16C9Lg_xMNVv9vWsGIXMjhe2ciYe5wq5c/view?usp=sharing)
 
@@ -20,20 +27,121 @@
 
 ## 📅 **프로젝트 진행 기간**
 
-2023/01/09(월) ~ 2023/02/17(금) <br>
+**2023/01/09(월) ~ 2023/02/17(금) <br>**
 SSAFY 8기 2학기 공통프로젝트
 
 <br>
 
-## **Calm Wave 서비스 화면**
+## 💻 **Calm Wave 서비스 화면**
+### **메인 페이지**
+<div align=center>
 
-### **기능**
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221072324-3ac256eb-ed71-4e0d-ab6b-f88150ea05fb.gif"/>
 
-[사진]
+</div>
 
 <br>
 
-## **아키텍처**
+### **업무 선택 페이지**
+
+<div align=center>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221076364-fd173b3d-82e3-4f45-9cd8-b6b68f578054.gif"/>
+
+**업무 카테고리 추가**
+
+<br>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221076725-cbfa6883-0249-4540-9148-14183d76afa5.gif"/>
+
+**업무 추가**
+
+<br>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221076859-4f42c436-20cc-4fa7-8fa9-6679272c2e97.gif"/>
+
+**업무 선택 및 시작**
+
+<br>
+
+</div>
+
+### **업무 진행 페이지**
+
+<div align=center>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221076986-d65f795d-4031-408a-8fd0-6ebd618f3774.gif"/>
+
+**진행 중인 업무 선택**
+
+<br>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221077166-6532e310-e92d-4782-9c39-ad3679f5be34.gif"/>
+
+**자세 교정 알람**
+
+<br>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221077341-f041e30d-1212-4100-af35-7ef6b9fe6932.gif"/>
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221077351-a5baf4ae-cefa-48e1-9a57-f90f3f64b081.gif"/>
+
+**스트레칭 & 휴식 알람**
+
+<br>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221077725-440ab244-43f7-460a-8094-ddf7e3d577ef.gif"/>
+
+**끝낸 업무 저장 및 종료**
+
+<br>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221077946-5d6da519-345a-4c76-a0fa-953cc086fd5b.gif"/>
+
+**업무 결과 페이지**
+
+</div>
+
+### **마이페이지**
+
+<div align=center>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221078081-0b2b00f4-576a-4a90-a410-5319baced8d4.gif"/>
+
+**프로필**
+
+<br>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221078338-f68f1b58-587e-41c5-9b85-aaf0c2dd90ec.gif"/>
+
+**업무 캘린더**
+
+<br>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221078468-dd829985-b16e-4f2f-b179-db3dfe1211d0.gif"/>
+
+**업무 분포 그래프**
+
+<br>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221079009-01b68b12-cb5c-4cb1-baf7-afd7f4402303.gif"/>
+
+**주간 완료 업무 그래프**
+
+<br>
+
+<img width="95%" src="https://user-images.githubusercontent.com/52191425/221079138-3af0bfae-db77-43fe-b929-279b72c5e447.gif"/>
+
+**목표 일정 달성 비율 그래프**
+
+
+</div>
+
+
+<br>
+
+
+
+## 🔧 **아키텍처**
 
 ...
 
