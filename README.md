@@ -165,7 +165,7 @@ SSAFY 8기 2학기 공통프로젝트
 
 ## 🔧 **아키텍처**
 
-...
+<img width="100%" src="https://user-images.githubusercontent.com/52191425/221501807-a4bca382-ef78-4bb9-8ef0-74e67be777c3.png"/>
 
 <br>
 
@@ -189,31 +189,44 @@ SSAFY 8기 2학기 공통프로젝트
 
 ### **Back**
 
-<img src="https://img.shields.io/badge/java 11-FF0000?style=for-the-badge&logo=OpenJDK&logoColor=white"> 
+<img src="https://img.shields.io/badge/java 11-FF0000?style=for-the-badge&logo=OpenJDK&logoColor=white">
+<img src="https://img.shields.io/badge/Spring Boot-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white">
+<img src="https://img.shields.io/badge/Spring Data JPA-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white">
+<br>
+<img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-badge&logo=SpringSecurity&logoColor=white">
+<img src="https://img.shields.io/badge/queryDSL-4479A1?style=for-the-badge&logoColor=white"> 
+<img src="https://img.shields.io/badge/swagger-85EA2D?style=for-the-badge&logo=Swagger&logoColor=white">
+<br>
+<img src="https://img.shields.io/badge/OAuth2-E34F26?style=for-the-badge&logoColor=white">
+<img src="https://img.shields.io/badge/JWT-E61587?style=for-the-badge&logoColor=white">
 <img src="https://img.shields.io/badge/mysql-4479A1?style=for-the-badge&logo=mysql&logoColor=white"> 
 <img src="https://img.shields.io/badge/redis-DC382D?style=for-the-badge&logo=apachetomcat&logoColor=white">
-<img src="https://img.shields.io/badge/SpringBoot-6DB33F?style=for-the-badge&logo=SpringBoot&logoColor=white">
+
 <br>
-<img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white"> <img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
+
+### **CICD**
+<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white">
+<img src="https://img.shields.io/badge/Docker-2496ED?style=for-the-badge&logo=Docker&logoColor=white">
+<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/gitlab-FC6D26?style=for-the-badge&logo=gitlab&logoColor=white">
+<br>
+<img src="https://img.shields.io/badge/Jenkins-D24939?style=for-the-badge&logo=Jenkins&logoColor=white">
 <img src="https://img.shields.io/badge/NGINX-009639?style=for-the-badge&logo=NGINX&logoColor=white">
 
 
 <br>
 
 ### **기타**
-
-<img src="https://img.shields.io/badge/amazonaws-232F3E?style=for-the-badge&logo=amazonaws&logoColor=white"> 
-<img src="https://img.shields.io/badge/github-181717?style=for-the-badge&logo=github&logoColor=white">
-<img src="https://img.shields.io/badge/git-F05032?style=for-the-badge&logo=git&logoColor=white">
-<br>
+<img src="https://img.shields.io/badge/OpenVidu-FFD400?style=for-the-badge&logoColor=white">
+<img src="https://img.shields.io/badge/Teachable Machine-2496ED?style=for-the-badge&logoColor=white">
 
 ### **협업 툴**
 <img src="https://img.shields.io/badge/jira-0052CC?style=for-the-badge&logo=git&logoColor=white">
+<img src="https://img.shields.io/badge/Mattermost-0058CC?style=for-the-badge&logo=Mattermost&logoColor=white">
 
 <br>
 
 ## **프로젝트 산출물**
-
 ...
 
 <br>
