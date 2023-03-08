@@ -29,6 +29,8 @@
 
 **2023/01/09(월) ~ 2023/02/17(금) <br>**
 SSAFY 8기 2학기 공통프로젝트
+<br>
+우수 프로젝트 수상 🏆
 
 <br>
 
@@ -163,15 +165,21 @@ SSAFY 8기 2학기 공통프로젝트
 <br>
 
 
-## 🔧 **아키텍처**
+## 🏗️ **아키텍처**
 
 <img width="100%" src="https://user-images.githubusercontent.com/52191425/221501807-a4bca382-ef78-4bb9-8ef0-74e67be777c3.png"/>
 
 <br>
 
-## **기술 스택**
+## 🗃️ **ERD**
 
-### **📚Front**
+<img width="100%" src="https://user-images.githubusercontent.com/52191425/223615901-ea4b5efe-40fa-4338-872f-49a1c5dd15af.png"/>
+
+<br>
+
+## 🛠️ **기술 스택**
+
+### **Front**
 
 <img src="https://img.shields.io/badge/html5-E34F26?style=for-the-badge&logo=html5&logoColor=white"> 
 <img src="https://img.shields.io/badge/css-1572B6?style=for-the-badge&logo=css3&logoColor=white"> 
@@ -226,12 +234,17 @@ SSAFY 8기 2학기 공통프로젝트
 
 <br>
 
-## **프로젝트 산출물**
-...
+## 📚 **프로젝트 산출물**
+
+- [기능 명세서](https://docs.google.com/spreadsheets/d/1LJWp10l55WSav7c_ZgmGGtJ5U0w4zq0SYePQb5vVUXo/edit?usp=sharing)
+- [와이어프레임](https://www.figma.com/file/TPjuF89O7YfECOmuBcvW87/%EA%B3%B5%ED%86%B5?node-id=0%3A1&t=0gHPZWdAfukhLuso-1)
+- [덤프데이터](./exec/Dump20230217.sql)
+- [포팅 메뉴얼](./exec/포팅메뉴얼_CALMWAVE.pdf)
+- [발표자료](./exec/최종 발표/최종 발표 제출용.pdf)
 
 <br>
 
-## **Git 커밋 메시지 컨벤션**
+## ✔ **Git 커밋 메시지 컨벤션**
 
 - `Feat` : 새로운 기능 추가
 - `Modify` : 기존 기능 수정
@@ -250,7 +263,7 @@ ex) **[BE] Feat: 관심지역 알림 ON/OFF 기능 추가(#123)**
 
 <br>
 
-## **Git 브랜치 컨벤션**
+## ✔ **Git 브랜치 컨벤션**
 
 ![git_strategy](https://user-images.githubusercontent.com/52191425/212794379-54373f74-67f6-4ec9-ace0-723e8de33c31.png)
 
@@ -271,15 +284,15 @@ ex) **[BE] Feat: 관심지역 알림 ON/OFF 기능 추가(#123)**
 
 <br>
 
-## **팀원 역할 분배**
+## 👥 **팀원 역할 분배**
 
 ### **Frontend**
 
-- 윤서용
-- 조한이
-- 한기현
+- 윤서용 - 업무 기능, WebRTC & Room, Alarm & DnD, 로직 최적화
+- 조한이 - 캘린더 기능, CSS Style, 디자인, Profile Page
+- 한기현 - 회원 기능, Canvas & Animation Door Page, Modal 틀, Teachable Machine
 
 ### **Backend**
 
-- 남이랑
-- 양주연
+- 남이랑 - JWT 유저 인증 구현, 회원 및 업무 API, Spring Security, Spring Data JPA 적용
+- 양주연 - 팀장, DevOps, 시각화 API, QueryDSL 적용
