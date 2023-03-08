@@ -173,7 +173,7 @@ SSAFY 8기 2학기 공통프로젝트
 
 ## 🗃️ **ERD**
 
-<img width="100%" src="https://user-images.githubusercontent.com/52191425/223615901-ea4b5efe-40fa-4338-872f-49a1c5dd15af.png"/>
+<img width="80%" src="https://user-images.githubusercontent.com/52191425/223615901-ea4b5efe-40fa-4338-872f-49a1c5dd15af.png"/>
 
 <br>
 
